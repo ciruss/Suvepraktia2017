@@ -50,6 +50,7 @@ function ConfrmSelect() {
 			for(var j=0; j<y2; j++) {
 				matrix[i][j] = undefined;
 				console.log(matrix[i][j]);
+				//CreateInput();
 			}
 		}
 		
@@ -59,9 +60,13 @@ function ConfrmSelect() {
 	
 }
 
+//https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_text_create
+
+//http://stackoverflow.com/questions/4035966/create-a-html-table-where-each-tr-is-a-form
 function CreateInput() {
 	var x = document.createElement("INPUT");
+	x.setAttribute("id", "inputmatrix");
 	x.setAttribute("type", "text");
 	document.body.appendChild(x);
-	
 }
+//https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_document_createelement2

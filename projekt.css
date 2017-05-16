@@ -1,3 +1,10 @@
+/*
+#id <-- ID põhjal
+.class <-- klassi põhjal
+element <-- elemendi põjal
+
+*/
+
 .YdropdownContent{
     display: none;
     position: absolute;
@@ -5,3 +12,11 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 .show {display:block;}
+
+
+#inputmatrix{
+	/*display: block;*/ /*<-- Paneb kastid üksteise alla*/
+	margin-left: 5px;
+	margin-bottom: 5px;
+	width: 30px;
+}
