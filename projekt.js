@@ -41,6 +41,15 @@ function ConfrmSelect() {
 			for(var j=0; j<y1; j++) {
 				matrix[i][j] = undefined;
 				console.log(matrix[i][j]);
+				CreateInput();
+			}
+		}
+		
+		for(var i=0; i<x2; i++) {
+			matrix[i] = [];
+			for(var j=0; j<y2; j++) {
+				matrix[i][j] = undefined;
+				console.log(matrix[i][j]);
 			}
 		}
 		
@@ -50,11 +59,9 @@ function ConfrmSelect() {
 	
 }
 
-
-
-
-
-
-
-
-
+function CreateInput() {
+	var x = document.createElement("INPUT");
+	x.setAttribute("type", "text");
+	document.body.appendChild(x);
+	
+}
