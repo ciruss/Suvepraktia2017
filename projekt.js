@@ -19,10 +19,42 @@ window.onclick = function(event) {
 }
 */
 //Välja printimiseks
+var x1, x2, y1, y2;
+var matrix = [];
+
 function ConfrmSelect() {
-    var x = document.getElementById("XSelect").value;
-    document.getElementById("test").innerHTML = x;
+    x1 = document.getElementById("XSelect1").value;
+    //document.getElementById("test").innerHTML = x;
+	y1 = document.getElementById("YSelect1").value;
+    //document.getElementById("test2").innerHTML = y;
 	
-	var y = document.getElementById("YSelect").value;
-    document.getElementById("test2").innerHTML = y;
+	x2 = document.getElementById("XSelect2").value;
+	y2 = document.getElementById("YSelect2").value;
+	
+	if(y1 == x2){
+		//http://stackoverflow.com/questions/966225/how-can-i-create-a-two-dimensional-array-in-javascript
+		console.log("Saab arvutada");
+		
+		//ei ole kindel, kas teeb maatriksid õigesti.
+		for(var i=0; i<x1; i++) {
+			matrix[i] = [];
+			for(var j=0; j<y1; j++) {
+				matrix[i][j] = undefined;
+				console.log(matrix[i][j]);
+			}
+		}
+		
+	} else {
+		console.log("Ei saa arvutada");
+	}
+	
 }
+
+
+
+
+
+
+
+
+
