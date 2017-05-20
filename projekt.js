@@ -24,9 +24,7 @@ var matrix = [];
 
 function ConfrmSelect() {
     x1 = document.getElementById("XSelect1").value;
-    //document.getElementById("test").innerHTML = x;
 	y1 = document.getElementById("YSelect1").value;
-    //document.getElementById("test2").innerHTML = y;
 	
 	x2 = document.getElementById("XSelect2").value;
 	y2 = document.getElementById("YSelect2").value;
@@ -34,7 +32,6 @@ function ConfrmSelect() {
 	if(y1 == x2){
 		//http://stackoverflow.com/questions/966225/how-can-i-create-a-two-dimensional-array-in-javascript
 		console.log("Saab arvutada");
-		
 		//ei ole kindel, kas teeb maatriksid õigesti.
 		for(var i=0; i<x1; i++) {
 			matrix[i] = [];
@@ -54,7 +51,7 @@ function ConfrmSelect() {
 			}
 		}
 		
-		CreateTableInput(x1);
+		CreateTableInput(x1, x2);
 		
 	} else {
 		console.log("Ei saa arvutada");
@@ -62,14 +59,60 @@ function ConfrmSelect() {
 	
 }
 
-function CreateTableInput(){
-	var table = "<table>";
-	//table = table + "<tr><th>" + "Mänigja nimi" + "</th><th>" + "Tulemus" + "</th><tr>";
+function CreateTableInput(x1, x2){
+	/*var table = "<table>";
 	for (var i=0; i<x1; i++) {
 		table = table + "<tr><td>" + "<input>" + "</td><td>" + "<input>" + "</td></tr>"; 
 	}
 	table = table + "</table>";
-	document.getElementById('InputTable').innerHTML = table;	
+	document.getElementById('InputTable1').innerHTML = table;
+
+	
+	table = "<table>";
+	//table = table + "<tr><th>" + "Mänigja nimi" + "</th><th>" + "Tulemus" + "</th><tr>";
+	for (var i=0; i<x2; i++) {
+		table = table + "<tr><td>" + "<input>" + "</td><td>" + "<input>" + "</td></tr>"; 
+	}
+	table = table + "</table>";
+	document.getElementById('InputTable2').innerHTML = table;	
+	*/
+
+
+//NII TEEB DÜNAAMILISELT KASTE AGA EI OLE INPUT KASTE
+var body = document.getElementsByTagName("body")[0];
+ 
+  // creates a <table> element and a <tbody> element
+  var tbl = document.createElement("table");
+  var tblBody = document.createElement("tbody");
+ 
+  // creating all cells
+  for (var i = 0; i < x1; i++) {
+    // creates a table row
+    var row = document.createElement("tr");
+    for (var j = 0; j < x2; j++) {	  
+		//var x = document.createElement("INPUT");
+		//x.setAttribute("id", "inputmatrix");
+		//x.setAttribute("type", "text");
+		//document.body.appendChild(x);
+		
+		//var cell = document.createElement("td");
+		var cell = document.createElement("INPUT");
+		cell.setAttribute("id", "inputmatrix");
+		cell.setAttribute("type", "text");
+		//var cellText = document.createTextNode("cell in row "+i+", column "+j);
+		//cell.appendChild(cellText);
+		row.appendChild(cell);
+
+    }
+    // add the row to the end of the table body
+    tblBody.appendChild(row);
+  }
+  // put the <tbody> in the <table>
+  tbl.appendChild(tblBody);
+  // appends <table> into <body>
+  body.appendChild(tbl);
+  // sets the border attribute of tbl to 2;
+  tbl.setAttribute("border", "2");
 }
 
 
@@ -82,20 +125,7 @@ function CreateTableInput(){
 	var x = document.createElement("INPUT");
 	x.setAttribute("id", "inputmatrix");
 	x.setAttribute("type", "text");
-	document.body.appendChild(x);	
-	
-	
-    var tableID = "ticketCreate";
-    var table = document.getElementById(tableID);
-    var rowCount = x1;
-	
-	var row = table.insertRow(rowCount);
-	var cell1 = row.insertCell(0);
-	var element1 = document.createElement('input');
-	element1.type="text";
-	cell1.appendChild(element1);
-	row.insertCell(1);
-	row.insertCell(2);
+	document.body.appendChild(x);
 	*/	
 //}
 //https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_document_createelement2
