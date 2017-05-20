@@ -41,7 +41,7 @@ function ConfrmSelect() {
 			for(var j=0; j<y1; j++) {
 				matrix[i][j] = undefined;
 				console.log(matrix[i][j]);
-				CreateInput();
+				//CreateInput(x1);
 			}
 		}
 		
@@ -54,19 +54,48 @@ function ConfrmSelect() {
 			}
 		}
 		
+		CreateTableInput(x1);
+		
 	} else {
 		console.log("Ei saa arvutada");
 	}
 	
 }
 
+function CreateTableInput(){
+	var table = "<table>";
+	//table = table + "<tr><th>" + "Mänigja nimi" + "</th><th>" + "Tulemus" + "</th><tr>";
+	for (var i=0; i<x1; i++) {
+		table = table + "<tr><td>" + "<input>" + "</td><td>" + "<input>" + "</td></tr>"; 
+	}
+	table = table + "</table>";
+	document.getElementById('InputTable').innerHTML = table;	
+}
+
+
 //https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_text_create
 
+//function CreateInput() {
 //http://stackoverflow.com/questions/4035966/create-a-html-table-where-each-tr-is-a-form
-function CreateInput() {
+
+	/*
 	var x = document.createElement("INPUT");
 	x.setAttribute("id", "inputmatrix");
 	x.setAttribute("type", "text");
-	document.body.appendChild(x);
-}
+	document.body.appendChild(x);	
+	
+	
+    var tableID = "ticketCreate";
+    var table = document.getElementById(tableID);
+    var rowCount = x1;
+	
+	var row = table.insertRow(rowCount);
+	var cell1 = row.insertCell(0);
+	var element1 = document.createElement('input');
+	element1.type="text";
+	cell1.appendChild(element1);
+	row.insertCell(1);
+	row.insertCell(2);
+	*/	
+//}
 //https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_document_createelement2
