@@ -20,7 +20,10 @@ window.onclick = function(event) {
 */
 //Välja printimiseks
 var x1, x2, y1, y2;
-var matrix = [];
+//var matrix = [];
+var inputBoxvalue1;
+var inputBoxvalue2;
+var IDCounter = 0;
 
 function ConfrmSelect() {
     x1 = document.getElementById("XSelect1").value;
@@ -33,6 +36,7 @@ function ConfrmSelect() {
 		//http://stackoverflow.com/questions/966225/how-can-i-create-a-two-dimensional-array-in-javascript
 		console.log("Saab arvutada");
 		//ei ole kindel, kas teeb maatriksid õigesti.
+		/*
 		for(var i=0; i<x1; i++) {
 			matrix[i] = [];
 			for(var j=0; j<y1; j++) {
@@ -50,6 +54,7 @@ function ConfrmSelect() {
 				//CreateInput();
 			}
 		}
+		*/
 		
 		CreateTableInput1();
 		CreateTableInput2();
@@ -83,17 +88,19 @@ function CreateTableInput1(){
 	var tbl = document.createElement("table");
 	var tblBody = document.createElement("tbody");
 	// creating all cells
-	for (var i = 0; i < x1; i++) {
+	for(var i=0; i<x1; i++) {
 	// creates a table row
 		var row = document.createElement("tr");
-		for (var j = 0; j < x2; j++) {	  
+		for (var j=0; j<x2; j++) {
+			IDCounter++;
+			//console.log(IDCounter);
 			//var x = document.createElement("INPUT");
 			//x.setAttribute("id", "inputmatrix");
 			//x.setAttribute("type", "text");
 			//document.body.appendChild(x);
 			//var cell = document.createElement("td");
 			var cell = document.createElement("INPUT");
-			cell.setAttribute("id", "inputmatrix");
+			cell.setAttribute("id", "inputmatrix" + IDCounter);
 			cell.setAttribute("type", "text");
 			//var cellText = document.createTextNode("cell in row "+i+", column "+j);
 			//cell.appendChild(cellText);
@@ -112,14 +119,16 @@ function CreateTableInput1(){
 
 
 function CreateTableInput2(){
+	IDCounter = 30;
 	var InputTable2 = document.getElementById("InputTable2");
 	var tbl = document.createElement("table");
 	var tblBody = document.createElement("tbody");
-	for (var i = 0; i < x1; i++) {
+	for(var i=0; i<x1; i++) {
 		var row = document.createElement("tr");
-		for (var j = 0; j < x2; j++) {	  
+		for(var j=0; j<x2; j++) {
+			IDCounter++;
 			var cell = document.createElement("INPUT");
-			cell.setAttribute("id", "inputmatrix");
+			cell.setAttribute("id", "inputmatrix" + IDCounter);
 			cell.setAttribute("type", "text");
 			row.appendChild(cell);
 		}
@@ -129,6 +138,27 @@ function CreateTableInput2(){
 	InputTable2.appendChild(tbl);
 }
 
+//EI TEA KAS ON KÕIGE OPTIMAALSEM VÄÄRTUSE SAAMISE VIIS
+function Calculate(){
+	IDCounter = 0;
+	for(var i=0; i<x1; i++) {
+		for(var j=0; j<y1; j++) {
+			IDCounter++;
+			console.log("IDCOUNTER1: "+IDCounter);
+			inputBoxvalue1 = document.getElementById("inputmatrix" + IDCounter).value;
+			console.log("inputBoxvalue1: "+inputBoxvalue1);
+		}
+	}
+	IDCounter = 30;
+	for(var i=0; i<x2; i++) {
+		for(var j=0; j<y2; j++) {
+			IDCounter++;
+			console.log("IDCOUNTER2: "+IDCounter);
+			inputBoxvalue2 = document.getElementById("inputmatrix" + IDCounter).value;
+			console.log("inputBoxvalue2: "+inputBoxvalue2);
+		}
+	}
+}
 
 //function CreateInput() {
 	/*
