@@ -51,7 +51,8 @@ function ConfrmSelect() {
 			}
 		}
 		
-		CreateTableInput(x1, x2);
+		CreateTableInput1();
+		CreateTableInput2();
 		
 	} else {
 		console.log("Ei saa arvutada");
@@ -59,7 +60,7 @@ function ConfrmSelect() {
 	
 }
 
-function CreateTableInput(x1, x2){
+function CreateTableInput1(){
 	/*var table = "<table>";
 	for (var i=0; i<x1; i++) {
 		table = table + "<tr><td>" + "<input>" + "</td><td>" + "<input>" + "</td></tr>"; 
@@ -76,51 +77,60 @@ function CreateTableInput(x1, x2){
 	table = table + "</table>";
 	document.getElementById('InputTable2').innerHTML = table;	
 	*/
-
-
-//NII TEEB DÜNAAMILISELT KASTE AGA EI OLE INPUT KASTE
-var body = document.getElementsByTagName("body")[0];
- 
-  // creates a <table> element and a <tbody> element
-  var tbl = document.createElement("table");
-  var tblBody = document.createElement("tbody");
- 
-  // creating all cells
-  for (var i = 0; i < x1; i++) {
-    // creates a table row
-    var row = document.createElement("tr");
-    for (var j = 0; j < x2; j++) {	  
-		//var x = document.createElement("INPUT");
-		//x.setAttribute("id", "inputmatrix");
-		//x.setAttribute("type", "text");
-		//document.body.appendChild(x);
-		
-		//var cell = document.createElement("td");
-		var cell = document.createElement("INPUT");
-		cell.setAttribute("id", "inputmatrix");
-		cell.setAttribute("type", "text");
-		//var cellText = document.createTextNode("cell in row "+i+", column "+j);
-		//cell.appendChild(cellText);
-		row.appendChild(cell);
-
-    }
-    // add the row to the end of the table body
-    tblBody.appendChild(row);
-  }
-  // put the <tbody> in the <table>
-  tbl.appendChild(tblBody);
-  // appends <table> into <body>
-  body.appendChild(tbl);
-  // sets the border attribute of tbl to 2;
-  tbl.setAttribute("border", "2");
+	
+	var InputTable1 = document.getElementById("InputTable1");
+	// creates a <table> element and a <tbody> element
+	var tbl = document.createElement("table");
+	var tblBody = document.createElement("tbody");
+	// creating all cells
+	for (var i = 0; i < x1; i++) {
+	// creates a table row
+		var row = document.createElement("tr");
+		for (var j = 0; j < x2; j++) {	  
+			//var x = document.createElement("INPUT");
+			//x.setAttribute("id", "inputmatrix");
+			//x.setAttribute("type", "text");
+			//document.body.appendChild(x);
+			//var cell = document.createElement("td");
+			var cell = document.createElement("INPUT");
+			cell.setAttribute("id", "inputmatrix");
+			cell.setAttribute("type", "text");
+			//var cellText = document.createTextNode("cell in row "+i+", column "+j);
+			//cell.appendChild(cellText);
+			row.appendChild(cell);
+		}
+		// add the row to the end of the table body
+		tblBody.appendChild(row);
+	}
+	// put the <tbody> in the <table>
+	tbl.appendChild(tblBody);
+	// appends <table> into InputTable1
+	InputTable1.appendChild(tbl);
+	// sets the border attribute of tbl to 2;
+	//tbl.setAttribute("border", "2");
 }
 
 
-//https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_text_create
+function CreateTableInput2(){
+	var InputTable2 = document.getElementById("InputTable2");
+	var tbl = document.createElement("table");
+	var tblBody = document.createElement("tbody");
+	for (var i = 0; i < x1; i++) {
+		var row = document.createElement("tr");
+		for (var j = 0; j < x2; j++) {	  
+			var cell = document.createElement("INPUT");
+			cell.setAttribute("id", "inputmatrix");
+			cell.setAttribute("type", "text");
+			row.appendChild(cell);
+		}
+		tblBody.appendChild(row);
+	}
+	tbl.appendChild(tblBody);
+	InputTable2.appendChild(tbl);
+}
+
 
 //function CreateInput() {
-//http://stackoverflow.com/questions/4035966/create-a-html-table-where-each-tr-is-a-form
-
 	/*
 	var x = document.createElement("INPUT");
 	x.setAttribute("id", "inputmatrix");
@@ -128,4 +138,3 @@ var body = document.getElementsByTagName("body")[0];
 	document.body.appendChild(x);
 	*/	
 //}
-//https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_document_createelement2
