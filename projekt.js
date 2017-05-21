@@ -20,7 +20,11 @@ window.onclick = function(event) {
 */
 //Välja printimiseks
 var x1, x2, y1, y2;
-//var matrix = [];
+var matrix = [];
+var matrix1 = [];
+var matrix2 = [];
+var answerMatrix1 = [];
+var answerMatrix2 = [];
 var inputBoxvalue1;
 var inputBoxvalue2;
 var IDCounter = 0;
@@ -61,6 +65,7 @@ function ConfrmSelect() {
 		
 	} else {
 		console.log("Ei saa arvutada");
+		alert("Arvutada ei saa. Muuda maaatriksi suurusi.");
 	}
 	
 }
@@ -140,25 +145,78 @@ function CreateTableInput2(){
 
 //EI TEA KAS ON KÕIGE OPTIMAALSEM VÄÄRTUSE SAAMISE VIIS
 function Calculate(){
+	
+	for(var i=0; i<x1; i++) {
+		matrix[i] = [];
+		for(var j=0; j<y1; j++) {
+			matrix[i][j] = undefined;
+			console.log(matrix[i][j]);
+			//CreateInput(x1);
+		}
+	}
+	
 	IDCounter = 0;
 	for(var i=0; i<x1; i++) {
 		for(var j=0; j<y1; j++) {
 			IDCounter++;
-			console.log("IDCOUNTER1: "+IDCounter);
-			inputBoxvalue1 = document.getElementById("inputmatrix" + IDCounter).value;
-			console.log("inputBoxvalue1: "+inputBoxvalue1);
+			//console.log("IDCOUNTER1: "+IDCounter);
+			//inputBoxvalue1 = document.getElementById("inputmatrix" + IDCounter).value;
+			matrix[i][j] = document.getElementById("inputmatrix" + IDCounter).value;
+			console.log("Maatriks: "+matrix[i][j] + "; I:" + i + "; J:"+j);
+			//console.log("inputBoxvalue1: "+inputBoxvalue1);
+			//matrix1.push(inputBoxvalue1);
+			/*
+			MAATRIKS PEAKS OLEMA KUJUL (2x2)
+			1 2
+			3 4
+			*/
 		}
 	}
+	console.log("Esimene maatriks: "+matrix1);
 	IDCounter = 30;
 	for(var i=0; i<x2; i++) {
 		for(var j=0; j<y2; j++) {
 			IDCounter++;
-			console.log("IDCOUNTER2: "+IDCounter);
+			//console.log("IDCOUNTER2: "+IDCounter);
 			inputBoxvalue2 = document.getElementById("inputmatrix" + IDCounter).value;
-			console.log("inputBoxvalue2: "+inputBoxvalue2);
+			//console.log("inputBoxvalue2: "+inputBoxvalue2);
+			matrix2.push(inputBoxvalue2);
+			//var test+IDCounter = inputBoxvalue2;
+			//console.log("MUUTUJA TEST+IDCOUNTER"+ window["test"+IDCounter]);
 		}
 	}
+	console.log("Teine maatriks: " + matrix2);
+	
+	//http://jsfiddle.net/xW7d8/
+	
+	/*
+	answerMatrix1 =
+	answerMatrix2 = 
+	
+	
+	for(var i=0; i<x1; i++) {
+		for(var j=0; j<x2; j++) {
+			var test = (matrix1[i]*matrix2[j]) + (matrix1[i]*matrix2[j]);
+			console.log("TEST VASTUS TSÜKLI SEES: " + test);
+		}
+	}
+	
+	var test = (matrix1[0]*matrix2[0]) + (matrix1[1]*matrix2[2]);
+	console.log("TEST VASTUS: "+test);
+	*/
+	
+	
+	//https://www.youtube.com/watch?v=x7zua7fhyIw
+	//ASI MIDA VÕIK IMITEERIDA---->https://mkaz.tech/math/javascript-linear-algebra-calculator/
+	
 }
+
+/* 2x2 maatriksi arvutamine
+(inputmatrix1*inputmatrix31)+(inputmatrix2*inputmatrix33)	(inputmatrix1*inputmatrix32)+(inputmatrix2*inputmatrix34)
+(inputmatrix3*inputmatrix31)+(inputmatrix4*inputmatrix33)	(inputmatrix3*inputmatrix32)+(inputmatrix4*inputmatrix34)
+*/
+
+
 
 //function CreateInput() {
 	/*
