@@ -29,6 +29,8 @@ var inputBoxvalue1;
 var inputBoxvalue2;
 var IDCounter = 0;
 
+
+
 function ConfrmSelect() {
     x1 = document.getElementById("XSelect1").value;
 	y1 = document.getElementById("YSelect1").value;
@@ -125,7 +127,7 @@ function CreateTableInput1(){
 
 function CreateTableInput2(){
 	IDCounter = 30;
-	var InputTable2 = document.getElementById("InputTable2");
+	//var InputTable2 = document.getElementById("InputTable2");
 	var tbl = document.createElement("table");
 	var tblBody = document.createElement("tbody");
 	for(var i=0; i<x1; i++) {
@@ -209,6 +211,34 @@ function Calculate(){
 	//https://www.youtube.com/watch?v=x7zua7fhyIw
 	//ASI MIDA VÕIK IMITEERIDA---->https://mkaz.tech/math/javascript-linear-algebra-calculator/
 	
+}
+
+function Delete(){
+	console.log("KUSTUTA");
+	
+	var tables = document.getElementsByTagName("TABLE");
+	for (var i=tables.length-1; i>=0;i-=1){
+		if (tables[i]){
+			tables[i].parentNode.removeChild(tables[i]);
+		}
+	}
+	
+		
+	//document.getElementById("InputTable1").deleteRow(0);
+	
+	/*
+	var table = document.getElementById("InputTable1");
+	var rowCount = table.rows.length;
+	console.log("rowCount: "+rowCount);
+	for(var i=0; i<x1; i++) {
+		//for(var i=0; i<x2; i++) {
+		//while(table.rows.length > 0) {
+		  table.deleteRow(i);
+		  console.log("KUSTUTA TSÜKLI SEES");
+		//}
+		}
+	}
+	*/
 }
 
 /* 2x2 maatriksi arvutamine
