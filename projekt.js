@@ -213,11 +213,13 @@ function Calculate(){
 	
 }
 
+/*
 function Delete(){
 	console.log("KUSTUTA");
 	
 	var tables = document.getElementsByTagName("TABLE");
 	for (var i=tables.length-1; i>=0;i-=1){
+		console.log(tables[i]);
 		if (tables[i]){
 			tables[i].parentNode.removeChild(tables[i]);
 		}
@@ -239,7 +241,8 @@ function Delete(){
 		}
 	}
 	*/
-}
+//}
+
 
 /* 2x2 maatriksi arvutamine
 (inputmatrix1*inputmatrix31)+(inputmatrix2*inputmatrix33)	(inputmatrix1*inputmatrix32)+(inputmatrix2*inputmatrix34)
