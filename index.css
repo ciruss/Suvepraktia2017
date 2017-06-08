@@ -1,0 +1,53 @@
+h1 {
+	color: #272788
+	transition: margin-left .5s;
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	transform: translate(-50%, -50%); 
+	text-align: center;
+	font-size:60px;
+}
+
+body {
+	background-color: #f4f6f7;
+	font-family:Arial;
+}
+
+.optionButtons {
+	background-color: #272788;
+	color: white;
+	padding: 15px 32px;
+	text-decoration: none;
+	display: inline-block;
+	margin: 4px 8px;
+	cursor: pointer;
+	width:250px;
+	height:50px;
+	text-align:center;
+	border-radius:6px;
+	font-size:35px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.20), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+.optionButtons:hover {
+    background-color: #221a54; 
+    color: white;
+}
+
+.optionsContainer{
+	transition: margin-left .5s;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%); 
+	text-align: center;
+	display:flex;
+}
+
+.wrap {
+	text-align: left;
+}

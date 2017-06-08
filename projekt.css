@@ -2,21 +2,224 @@
 #id <-- ID põhjal
 .class <-- klassi põhjal
 element <-- elemendi põjal
-
 */
+
+body {
+	font-family:verdana;
+	margin: 5px;
+    padding: 5px;
+	background-color:#ffffff;
+}
+
+h1 {
+	color:#004080;
+}
+
+#optionButtons {
+    background-color:#004080;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+	margin:10px;
+}
+
+button {
+   /* background-color:#004080;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+	margin:10px;
+	*/
+
+	background-color: #272788;
+	color: white;
+	padding: 5px 20px;
+	text-decoration: none;
+	display: inline-block;
+	margin: 4px 8px;
+	cursor: pointer;
+
+	text-align:center;
+	border-radius:6px;
+
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.20), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+button:hover {
+    background-color: #221a54; 
+    color: white;
+}
+
+form {
+	color:grey;
+}
+
+input {
+	margin-bottom: 5px;
+	width:30px;
+	margin-left:5px;
+	color:black;
+	background-color:#FFFFFF;
+	display:inline-block;
+	float:left;
+	border-style:solid;
+}
+
+tbody {
+	width:650px;
+    margin-left:20px;
+	display:inline-block;
+	float:left;
+	clear:left;
+}
 
 /*
-.YdropdownContent{
-    display: none;
-    position: absolute;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+#matrixContainer {
+	position: relative;
+	width: 1500px;
+	height: 200px;
+	border:none;
 }
-.show {display:block;}
+
+#matrix1Container {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	border:none;
+}
+
+#matrix2Container {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	border:none;
+}
+
+#matrixAnswerContainer {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	border:none;
+}
+
+#matrixFinalAnswerContainer {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	border:none;
+}
 */
 
-table  input{
-	margin-left: 5px;
-	margin-bottom: 5px;
-	width: 30px;
+.wrap {
+	text-align: left;
+}
+
+.resp {
+	display: inline-block; text-align: left; width: 21%; margin-right: 1%;
+}
+
+.resp.fixed {
+	width: 100px; margin-right: 10px;
+}
+
+.matrixAnswerInput {
+	width: 110px;
+}
+/*
+#exerciseMatrixContainer {
+	position: relative;
+	width:1500px;
+	height: 200px;
+	border:none;
+}
+
+#exerciseMatrix1Container {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	border: none;
+}
+
+#exerciseMatrix2Container {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	border:none;
+}
+
+#exerciseMatrixAnswerContainer {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	border:none;
+}
+
+#exerciseMatrixPreAnswerContainer {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	border: none;
+}
+*/
+
+#gameStats {
+	/*background-color: white;*/
+	color:  #272788;
+	padding: 15px 32px;
+	text-decoration: none;
+	/*display: inline-block;*/
+	margin: 4px 4px;
+	width:280px;
+	height:120px;
+	text-align:left;
+	border-radius:6px;
+	font-size:20px;
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.20), 0 17px 50px 0 rgba(0,0,0,0.19);
+	/*position: absolute;
+	right: 10%;
+	top:10%*/
+}
+
+scoreTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even){
+	background-color: #f2f2f2
+}
+
+#checkAndRestart {
+	visibility: hidden;
+}
+
+#checkAndRestartRandom {
+	visibility: hidden;
+}
+
+#resetScore {
+	visibility: hidden;
+}
+
+#startNewGame {
+	visibility: hidden;
+}
+
+#justForDevs {
+	visibility: hidden;
 }

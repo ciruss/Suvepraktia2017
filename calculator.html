@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PROJEKT</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="projekt.css">
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.2/math.min.js"></script>
+		<script src="calculator.js"></script>
+	</head>
+	<body>
+		<button type="button" onclick="location.href='index.html'">Tagasi</button>
+		<!-- X on rida ja Y on veerg -->
+		<!-- MAATRIKSITE KALKULAATOR -->
+
+		<h1>Kalkulaator</h1>
+		
+		<form>
+			Esimene
+			<select id="m1x">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+			
+			<select id="m1y">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+		</form>
+		
+		<form>
+			Teine
+			<select id="m2x">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+			
+			<select id="m2y">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+		</form>
+		
+		<button type="button" onclick="generateMatrix()">Genereeri maatriksid</button>
+		
+		<!--<div id="matrixContainer">-->
+		<div class="wrapper">
+			<!-- maatriksid arvude sisestuseks -->
+			<div id="matrix1Container" class="resp" ><table id="matrix1"></table></div>
+			<div id="matrix2Container" class="resp" ><table id="matrix2"></table></div>
+			<!-- maatriksid vastuste genereerimiseks -->
+			<div id="matrixAnswerContainer" class="resp" ><table id="matrixAnswer"></table></div>
+			<div id="matrixFinalAnswerContainer" class="resp" ><table id="matrixFinalAnswer"></table></div> <br>
+		</div>
+		<!--</div>-->
+		   
+		<button id="checkAnswer" type="button" onclick="calculateMatrix()">Arvuta maatriksi vastus</button>
+
+		<br><br><br>
+	</body>
+</html>
