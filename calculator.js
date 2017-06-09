@@ -7,7 +7,11 @@ var m1x, m1y, m2x, m2y;
 
 // **** ÜLDINE FUNKTSIOON MAATRIKSITE GENEREERIMISEKS ****
 function generateMatrix() {
-	document.getElementById("checkAnswer").style.visibility = "visible";
+    //et kastid jälle nähtavale ilmuks
+    document.getElementById("checkAnswer").style.display = "block";
+    document.getElementById("calculateNext").style.display = "block";
+    document.getElementById("matrix1Container").style.display = "inline";
+    document.getElementById("matrix2Container").style.display = "inline";
 
 	m1x = document.getElementById("m1x").value;
 	m1y = document.getElementById("m1y").value;
@@ -185,7 +189,25 @@ function createMatrixFinalAnswer() {
 // **** KÄIVITAB ARVUTAMISE ****
 function calculateMatrix() {
 	calculateMatrixAnswer();
-	calculateMatrixFinalAnswer();
+    calculateMatrixFinalAnswer();
+    document.getElementById("matrixAnswerContainer").style.display = "block"
+    document.getElementById("matrixFinalAnswerContainer").style.display = "block";
+    document.getElementById("checkAnswer").style.display = "none";
+
+}
+//sama mis eelmine, aga peidab eelmise lahenduse ja  nupud
+function calculateNextMatrix() {
+    calculateMatrixAnswer();
+    calculateMatrixFinalAnswer();
+    document.getElementById("matrixAnswerContainer").style.display = "none"
+    document.getElementById("matrixFinalAnswerContainer").style.display = "none";
+    document.getElementById("matrix1Container").style.display = "none";
+    document.getElementById("matrix2Container").style.display = "none";
+    document.getElementById("checkAnswer").style.display = "none";
+    document.getElementById("calculateNext").style.display = "none";
+
+
+
 }
 
 // **** GENEREERIB VAHETULEMUSE ****

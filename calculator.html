@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 	<head>
 		<title>PROJEKT</title>
@@ -8,65 +8,80 @@
 		<script src="calculator.js"></script>
 	</head>
 	<body>
-		<button type="button" onclick="location.href='index.html'">Tagasi</button>
+        <div class="headNav">
+          <h1>Kalkulaator</h1>
+        <button type="button" onclick="location.href='index.html'">Tagasi</button>
+            </div>
+        
 		<!-- X on rida ja Y on veerg -->
 		<!-- MAATRIKSITE KALKULAATOR -->
 
-		<h1>Kalkulaator</h1>
 		
-		<form>
-			Esimene
-			<select id="m1x">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-			</select>
-			
-			<select id="m1y">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-			</select>
-		</form>
-		
-		<form>
-			Teine
-			<select id="m2x">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-			</select>
-			
-			<select id="m2y">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-			</select>
-		</form>
-		
-		<button type="button" onclick="generateMatrix()">Genereeri maatriksid</button>
-		
-		<!--<div id="matrixContainer">-->
-		<div class="wrapper">
-			<!-- maatriksid arvude sisestuseks -->
-			<div id="matrix1Container" class="resp" ><table id="matrix1"></table></div>
-			<div id="matrix2Container" class="resp" ><table id="matrix2"></table></div>
-			<!-- maatriksid vastuste genereerimiseks -->
-			<div id="matrixAnswerContainer" class="resp" ><table id="matrixAnswer"></table></div>
-			<div id="matrixFinalAnswerContainer" class="resp" ><table id="matrixFinalAnswer"></table></div> <br>
-		</div>
-		<!--</div>-->
-		   
-		<button id="checkAnswer" type="button" onclick="calculateMatrix()">Arvuta maatriksi vastus</button>
+        <div id="instructions">
+            <p>
+                <h3>Maatriksite korrutamine</h3>
+                Vastuse arvutamiseks vali kõigepealt maatriksite suurused ning seejärel täida lahtrid.
+                <br> Programm kuvab maatriksite vastuse koos vahearvutustega.
+            </p>
+        </div>
 
-		<br><br><br>
-	</body>
+        <form class="tooltip">
+            <span class="tooltiptext">vali esimese maatriksi suurus</span>
+                Esimene
+                <select id="m1x">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                <select id="m1y">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </form>
+
+            <form class="tooltip">
+                <span class="tooltiptext">vali teise maatriksi suurus</span>
+                Teine
+                <select id="m2x">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                <select id="m2y">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </form>
+
+            <button type="button" id="generateMatrixBtn" onclick="generateMatrix()">Genereeri maatriksid</button>
+
+            <!--<div id="matrixContainer">-->
+            <div class="wrapper">
+                
+                <!-- maatriksid arvude sisestuseks -->
+                <div id="matrix1Container" class="resp"><table id="matrix1"></table></div>
+                <div id="matrix2Container" class="resp"><table id="matrix2"></table></div>
+                <!-- maatriksid vastuste genereerimiseks -->
+                <div id="matrixAnswerContainer" class="resp"><table id="matrixAnswer"></table></div>
+                <div id="matrixFinalAnswerContainer" class="resp"><table id="matrixFinalAnswer"></table></div> <br>
+            </div>
+            <!--</div>-->
+
+            <button id="checkAnswer" type="button" onclick="calculateMatrix()">Arvuta maatriksi vastus</button>
+        <button id="calculateNext" type="button" onclick="calculateNextMatrix()">uued maatriksid </button>
+
+            <br><br><br>
+</body>
 </html>
