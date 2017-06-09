@@ -1,7 +1,76 @@
-var mx, my;
+// **** GLOBAALSED MUUTUJAD ****
 
+// muutujad maatriksi suuruste jaoks
+var matrixSize;
+
+// muutujad determinantide jaoks
 var detNumbers = [];
+var detValues = "";
 var inversionCount = 0;
+
+// muutuja permutatsioonide tabeli jaoks
+var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+
+
+
+
+// **** ÜLDINE FUNKTSIOON MAATRIKSI GENEREERIMISEKS ****
+
+function generateMatrixForDeterminant() {
+
+	matrixSize = document.getElementById("determinant").value;
+	var matrixForDeterminant = document.getElementById("matrixForDeterminant");
+
+	if (matrixForDeterminant) {
+		
+		matrixForDeterminant.innerHTML = "";
+		createMatrixForDeterminant();
+
+	} else {
+		createMatrixForDeterminant();
+	}
+}
+
+
+// **** FUNKTSIOON, MIS GENEREERIB ESIMESE MAATRIKSI ****
+
+function createMatrixForDeterminant() {
+
+	var matrixDeterminantContainer = document.getElementById("matrixDeterminantContainer");
+	var mWidth = 42 * matrixSize;
+	var mHeight = 28 * matrixSize;
+	matrixDeterminantContainer.style.width = mWidth + "px";
+	matrixDeterminantContainer.style.height = mHeight + "px";
+
+	var matrixForDeterminant = document.getElementById("matrixForDeterminant");
+	var tableBody = document.createElement("tbody");
+
+	for (var i = 0; i < matrixSize; i++) {
+		var row = document.createElement("tr");
+
+		for (var j = 0; j < matrixSize; j++) {
+			var rowId = i + 1;
+			var colId = j + 1;
+			var cell = document.createElement("input");
+			cell.setAttribute("id", "a" + rowId + colId);
+			cell.setAttribute("type", "text");
+			row.appendChild(cell);
+		}
+		tableBody.appendChild(row);
+	}
+	matrixForDeterminant.appendChild(tableBody);
+}
+
+
+
+
+
+
+
+
+// ||||| ----- ----- ----- ----- DETERMINANTIDE KALKULAATORI OSA ----- ----- ----- ----- |||||
+
+// **** FUNKTSIOON ÕIGE PERMUTATSIOONIDE FUNKTSIOONI KÄIVITAMISEKS ****
 
 function calculateDeterminant() {
 	
@@ -22,22 +91,15 @@ function calculateDeterminant() {
 	if(determinant === "2") {
 		determinantFor2();
 	}
-	
-	
 }
 
-
-
-
-
-
-
-
-
-
-
+// **** FUNKTSIOONID PERMUTATSIOONIDE GENEREERIMISEKS ****
 
 function determinantFor2() {
+	
+	var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+	var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
+	var matrixPermutationTableString = permutationTableHead;
 	
 	// esimene tsükkel, mis määrab ära esimese numbri
 	for(var i = 0; i < 2; i++) {
@@ -46,6 +108,7 @@ function determinantFor2() {
 		
 		var detNumbers2 = [1, 2];
 		var detNumbersTemp = [];
+		var detValuesTemp = "";
 		
 		
 		// teine tsükkel, mis määrab ära teise numbri
@@ -63,23 +126,40 @@ function determinantFor2() {
 		
 		
 		// siia inversioonid
-			for(var i1 = 0; i1 < 2; i1++) {
-				if(detNumbersTemp[i1] > detNumbersTemp[i1+1]) {
-					inversionCount++;
-				}
+		for(var i1 = 0; i1 < 2; i1++) {
+			if(detNumbersTemp[i1] > detNumbersTemp[i1+1]) {
+				inversionCount++;
 			}
-			
-			console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount);
-			
-			detNumbers.push(detNumbersTemp);
-			detNumbersTemp = [];
-			inversionCount = 0;
+		}
+		
+		
+		var cellValue1 = document.getElementById("a1" + detNumbersTemp[0]).value;
+		var cellValue2 = document.getElementById("a2" + detNumbersTemp[1]).value;
+		
+		if(inversionCount % 2 === 0) {
+			detValuesTemp += " + " + cellValue1 + "*" + cellValue2;
+			detValues += detValuesTemp;
+		} else {
+			detValuesTemp += " - " + cellValue1 + "*" + cellValue2;
+			detValues += detValuesTemp;
+		}
+		
+		var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
+		matrixPermutationTableString += permutationTableRow;
+		
+		console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
+		
+		detNumbers.push(detNumbersTemp);
+		detNumbersTemp = [];
+		detValuesTemp = "";
+		inversionCount = 0;
 	}
+	detValues = detValues.slice(3, detValues.length);
+	console.log("vahetulemus: " + detValues);
+	detValues = "";
+	matrixPermutationTable.innerHTML = matrixPermutationTableString;
+	matrixPermutationTableString = "";
 }
-
-
-
-
 
 function determinantFor3() {
 	
@@ -90,6 +170,7 @@ function determinantFor3() {
 		
 		var detNumbers3 = [1, 2, 3];
 		var detNumbersTemp = [];
+		var detValuesTemp = "";
 		
 		
 		// teine tsükkel, mis määrab ära teise numbri
@@ -131,19 +212,30 @@ function determinantFor3() {
 				}
 			}
 			
-			console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount);
+			var cellValue1 = document.getElementById("a1" + detNumbersTemp[0]).value;
+			var cellValue2 = document.getElementById("a2" + detNumbersTemp[1]).value;
+			var cellValue3 = document.getElementById("a3" + detNumbersTemp[2]).value;
+			
+			if(inversionCount % 2 === 0) {
+				detValuesTemp += " + " + cellValue1 + "*" + cellValue2 + "*" + cellValue3;
+				detValues += detValuesTemp;
+			} else {
+				detValuesTemp += " - " + cellValue1 + "*" + cellValue2 + "*" + cellValue3;
+				detValues += detValuesTemp;
+			}
+			
+			console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
 			
 			detNumbers.push(detNumbersTemp);
 			detNumbersTemp = [];
+			detValuesTemp = "";
 			inversionCount = 0;
 		}
 	}
+	detValues = detValues.slice(3, detValues.length);
+	console.log("vahetulemus: " + detValues);
+	detValues = "";
 }
-
-
-
-
-
 
 function determinantFor4() {
 	
@@ -230,8 +322,6 @@ function determinantFor4() {
 		}
 	}
 }
-
-
 
 function determinantFor5() {
 	
@@ -338,3 +428,26 @@ function determinantFor5() {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
