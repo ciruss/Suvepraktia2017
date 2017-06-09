@@ -1,1 +1,0 @@
-# Suvepraktia2017
