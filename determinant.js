@@ -163,6 +163,10 @@ function determinantFor2() {
 
 function determinantFor3() {
 	
+	var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+	var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
+	var matrixPermutationTableString = permutationTableHead;
+	
 	// esimene tsükkel, mis määrab ära esimese numbri
 	for(var i = 0; i < 3; i++) {
 		
@@ -194,7 +198,6 @@ function determinantFor3() {
 				for(var n1 = 0; n1 < 2; n1++) {
 					detNumbers1[n1] = detNumbers2[n1];
 				}
-				
 				detNumbers1.splice(j, 1);
 				detNumbersTemp = [detNumbers3[i], detNumbers2[j], detNumbers1[k]];
 			}
@@ -224,6 +227,9 @@ function determinantFor3() {
 				detValues += detValuesTemp;
 			}
 			
+			var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
+			matrixPermutationTableString += permutationTableRow;
+			
 			console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
 			
 			detNumbers.push(detNumbersTemp);
@@ -235,9 +241,15 @@ function determinantFor3() {
 	detValues = detValues.slice(3, detValues.length);
 	console.log("vahetulemus: " + detValues);
 	detValues = "";
+	matrixPermutationTable.innerHTML = matrixPermutationTableString;
+	matrixPermutationTableString = "";
 }
 
 function determinantFor4() {
+	
+	var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+	var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
+	var matrixPermutationTableString = permutationTableHead;
 	
 	// esimene tsükkel, mis määrab ära esimese numbri
 	for(var i = 0; i < 4; i++) {
@@ -245,9 +257,8 @@ function determinantFor4() {
 		//console.log("tsykkel 1 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
 		
 		var detNumbers4 = [1, 2, 3, 4];
-		var detN4 = detNumbers4.toString();
-		
 		var detNumbersTemp = [];
+		var detValuesTemp = "";
 		
 		
 		// teine tsükkel, mis määrab ära teise numbri
@@ -259,10 +270,7 @@ function determinantFor4() {
 			for(var n3 = 0; n3 < 4; n3++) {
 				detNumbers3[n3] = detNumbers4[n3];
 			}
-			
 			detNumbers3.splice(i, 1);
-			var detN3 = detNumbers3.toString();
-			
 			
 			// kolmas tsükkel, mis määrab ära kolmanda numbri
 			for(var k = 0; k < 2; k++) {
@@ -273,10 +281,7 @@ function determinantFor4() {
 				for(var n2 = 0; n2 < 3; n2++) {
 					detNumbers2[n2] = detNumbers3[n2];
 				}
-				
 				detNumbers2.splice(j, 1);
-				var detN2 = detNumbers2.toString();
-				
 				
 				// neljas tsükkel, mis määrab ära neljanda numbri
 				for(var l = 0; l < 1; l++) {
@@ -287,9 +292,7 @@ function determinantFor4() {
 					for(n1 = 0; n1 < 2; n1++) {
 						detNumbers1[n1] = detNumbers2[n1];
 					}
-					
 					detNumbers1.splice(k, 1);
-					var detN1 = detNumbers1.toString();
 					detNumbersTemp = [detNumbers4[i], detNumbers3[j], detNumbers2[k], detNumbers1[l]];
 				}
 				
@@ -313,17 +316,43 @@ function determinantFor4() {
 					}
 				}
 				
-				console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount);
+				var cellValue1 = document.getElementById("a1" + detNumbersTemp[0]).value;
+				var cellValue2 = document.getElementById("a2" + detNumbersTemp[1]).value;
+				var cellValue3 = document.getElementById("a3" + detNumbersTemp[2]).value;
+				var cellValue4 = document.getElementById("a4" + detNumbersTemp[3]).value;
+				
+				if(inversionCount % 2 === 0) {
+					detValuesTemp += " + " + cellValue1 + "*" + cellValue2 + "*" + cellValue3 + "*" + cellValue4;
+					detValues += detValuesTemp;
+				} else {
+					detValuesTemp += " - " + cellValue1 + "*" + cellValue2 + "*" + cellValue3 + "*" + cellValue4;
+					detValues += detValuesTemp;
+				}
+				
+				var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
+				matrixPermutationTableString += permutationTableRow;
+				
+				console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
 				
 				detNumbers.push(detNumbersTemp);
 				detNumbersTemp = [];
+				detValuesTemp = "";
 				inversionCount = 0;
 			}
 		}
 	}
+	detValues = detValues.slice(3, detValues.length);
+	console.log("vahetulemus: " + detValues);
+	detValues = "";
+	matrixPermutationTable.innerHTML = matrixPermutationTableString;
+	matrixPermutationTableString = "";
 }
 
 function determinantFor5() {
+	
+	var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+	var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
+	var matrixPermutationTableString = permutationTableHead;
 	
 	// esimene tsükkel, mis määrab ära esimese numbri
 	for(var i = 0; i < 5; i++) {
@@ -331,9 +360,8 @@ function determinantFor5() {
 		//console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
 		
 		var detNumbers5 = [1, 2, 3, 4, 5];
-		var detN5 = detNumbers5.toString();
-		
 		var detNumbersTemp = [];
+		var detValuesTemp = "";
 		
 		
 		// teine tsükkel, mis määrab ära teise numbri
@@ -345,9 +373,7 @@ function determinantFor5() {
 			for(var n4 = 0; n4 < 5; n4++) {
 				detNumbers4[n4] = detNumbers5[n4];
 			}
-			
 			detNumbers4.splice(i, 1);
-			var detN4 = detNumbers4.toString();
 			
 			// kolmas tsükkel, mis määrab ära kolmanda numbri
 			for(var k = 0; k < 3; k++) {
@@ -358,9 +384,7 @@ function determinantFor5() {
 				for(var n3 = 0; n3 < 4; n3++) {
 					detNumbers3[n3] = detNumbers4[n3];
 				}
-				
 				detNumbers3.splice(j, 1);
-				var detN3 = detNumbers3.toString();
 				
 				// neljas tsükkel, mis määrab ära neljanda numbri
 				for(var l = 0; l < 2; l++) {
@@ -371,9 +395,7 @@ function determinantFor5() {
 					for(n2 = 0; n2 < 3; n2++) {
 						detNumbers2[n2] = detNumbers3[n2];
 					}
-					
 					detNumbers2.splice(k, 1);
-					var detN2 = detNumbers2.toString();
 					
 					// viies tsükkel, mis määrab ära viienda numbri
 					for(var m = 0; m < 1; m++) {
@@ -384,10 +406,7 @@ function determinantFor5() {
 					for(n1 = 0; n1 < 2; n1++) {
 						detNumbers1[n1] = detNumbers2[n1];
 					}
-					
 					detNumbers1.splice(l, 1);
-					var detN1 = detNumbers1.toString();
-					
 					detNumbersTemp = [detNumbers5[i], detNumbers4[j], detNumbers3[k], detNumbers2[l], detNumbers1[m]];
 					
 					
@@ -416,17 +435,39 @@ function determinantFor5() {
 						}
 					}
 					
-					console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount);
+					var cellValue1 = document.getElementById("a1" + detNumbersTemp[0]).value;
+					var cellValue2 = document.getElementById("a2" + detNumbersTemp[1]).value;
+					var cellValue3 = document.getElementById("a3" + detNumbersTemp[2]).value;
+					var cellValue4 = document.getElementById("a4" + detNumbersTemp[3]).value;
+					var cellValue5 = document.getElementById("a5" + detNumbersTemp[4]).value;
+					
+					if(inversionCount % 2 === 0) {
+						detValuesTemp += " + " + cellValue1 + "*" + cellValue2 + "*" + cellValue3 + "*" + cellValue4 + "*" + cellValue5;
+						detValues += detValuesTemp;
+					} else {
+						detValuesTemp += " - " + cellValue1 + "*" + cellValue2 + "*" + cellValue3 + "*" + cellValue4 + "*" + cellValue5;
+						detValues += detValuesTemp;
+					}
+					
+					var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
+					matrixPermutationTableString += permutationTableRow;
+					
+					console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
 					
 					detNumbers.push(detNumbersTemp);
 					detNumbersTemp = [];
+					detValuesTemp = "";
 					inversionCount = 0;
-					
 					}
 				}
 			}
 		}
 	}
+	detValues = detValues.slice(3, detValues.length);
+	console.log("vahetulemus: " + detValues);
+	detValues = "";
+	matrixPermutationTable.innerHTML = matrixPermutationTableString;
+	matrixPermutationTableString = "";
 }
 
 
