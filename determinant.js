@@ -20,13 +20,20 @@ function generateMatrixForDeterminant() {
 
 	matrixSize = document.getElementById("determinant").value;
 	var matrixForDeterminant = document.getElementById("matrixForDeterminant");
+	var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 
 	if (matrixForDeterminant) {
 		
 		matrixForDeterminant.innerHTML = "";
+		matrixPermutationTable.innerHTML = "";
+		matrixDeterminantAnswer.innerHTML = "";
 		createMatrixForDeterminant();
 
 	} else {
+		
+		matrixPermutationTable.innerHTML = "";
+		matrixDeterminantAnswer.innerHTML = "";
 		createMatrixForDeterminant();
 	}
 }
@@ -98,6 +105,7 @@ function calculateDeterminant() {
 function determinantFor2() {
 	
 	var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 	var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
 	var matrixPermutationTableString = permutationTableHead;
 	
@@ -156,6 +164,10 @@ function determinantFor2() {
 	}
 	detValues = detValues.slice(3, detValues.length);
 	console.log("vahetulemus: " + detValues);
+	
+	var matrixDetAnswer = math.eval(detValues);
+	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
+	matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
 	detValues = "";
 	matrixPermutationTable.innerHTML = matrixPermutationTableString;
 	matrixPermutationTableString = "";
@@ -164,6 +176,7 @@ function determinantFor2() {
 function determinantFor3() {
 	
 	var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 	var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
 	var matrixPermutationTableString = permutationTableHead;
 	
@@ -240,6 +253,10 @@ function determinantFor3() {
 	}
 	detValues = detValues.slice(3, detValues.length);
 	console.log("vahetulemus: " + detValues);
+	
+	var matrixDetAnswer = math.eval(detValues);
+	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
+	matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
 	detValues = "";
 	matrixPermutationTable.innerHTML = matrixPermutationTableString;
 	matrixPermutationTableString = "";
@@ -248,6 +265,7 @@ function determinantFor3() {
 function determinantFor4() {
 	
 	var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 	var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
 	var matrixPermutationTableString = permutationTableHead;
 	
@@ -343,6 +361,10 @@ function determinantFor4() {
 	}
 	detValues = detValues.slice(3, detValues.length);
 	console.log("vahetulemus: " + detValues);
+	
+	var matrixDetAnswer = math.eval(detValues);
+	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
+	matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
 	detValues = "";
 	matrixPermutationTable.innerHTML = matrixPermutationTableString;
 	matrixPermutationTableString = "";
@@ -351,6 +373,7 @@ function determinantFor4() {
 function determinantFor5() {
 	
 	var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+	// var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 	var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
 	var matrixPermutationTableString = permutationTableHead;
 	
@@ -465,6 +488,10 @@ function determinantFor5() {
 	}
 	detValues = detValues.slice(3, detValues.length);
 	console.log("vahetulemus: " + detValues);
+	
+	var matrixDetAnswer = math.eval(detValues);
+	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
+	matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
 	detValues = "";
 	matrixPermutationTable.innerHTML = matrixPermutationTableString;
 	matrixPermutationTableString = "";
