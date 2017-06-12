@@ -6,6 +6,13 @@
 		<link rel="stylesheet" type="text/css" href="projekt.css">
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.2/math.min.js"></script>
 		<script src="calculator.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <style>
+                #math {
+                display: none
+                }
+        </style>
 	</head>
 	<body>
         <div class="headNav">
@@ -15,7 +22,7 @@
         
 		<!-- X on rida ja Y on veerg -->
 		<!-- MAATRIKSITE KALKULAATOR -->
-        
+
 
 		
         <div id="instructions">
@@ -85,5 +92,7 @@
 		<button id="negativeNumber" type="button" onclick="negativeNumber()">Kas on negatiivne arv?</button>
 
             <br><br><br>
+            <div id="math">$$$$</div>
+	        <div id="display"></div>
 </body>
 </html>
