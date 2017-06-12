@@ -40,15 +40,15 @@ function generateMatrix() {
 
 			createMatrix1();
 			createMatrix2();
-			createMatrixAnswer();
-			createMatrixFinalAnswer();
+			calculateMatrixSum();
+			calculateMatrixFinalSum();
 
 		} else {
 
 			createMatrix1();
 			createMatrix2();
-			createMatrixAnswer();
-			createMatrixFinalAnswer();
+			calculateMatrixSum();
+			calculateMatrixFinalSum();
 		}
 	} else {
 		console.log("Ei saa arvutada");
@@ -123,82 +123,104 @@ function createMatrix2() {
 		tableBody.appendChild(row);
 	}
 	matrix2.appendChild(tableBody);
+
 }
 
-// **** FUNKTSIOON, MIS GENEREERIB VAHEPEALSE VASTUSE MAATRIKSI ****
-function createMatrixAnswer() {
+//Loendab esimeses maatriksis olevad arvud kokku, ning viib mathJax kujule
+function matrix1Values() {
 
-	var matrixAnswerContainer = document.getElementById("matrixAnswerContainer");
-	var mAnswerWidth = 42 * m2y * 3;
-	var mAnswerHeight = 28 * m1x;
 
-	var m1Width = 42 * m1y;
-	var m2Width = 42 * m2y;
-	var mAnswerPosition = m1Width + m2Width + 30;
 
-	matrixAnswerContainer.style.width = mAnswerWidth + "px";
-	matrixAnswerContainer.style.height = mAnswerHeight + "px";
-	matrixAnswerContainer.style.left = mAnswerPosition + "px";
+ var answerString = "";
+	var table = document.getElementById('matrix1');
+        for (var r = 0, n = table.rows.length; r < n; r++) {
+			if(r>=1){
+			
+			var strLength = answerString.length;
+			answerString = (answerString.slice(0, strLength - 1));
+			answerString +="\\\\\\\\";
+			}
+            for (var c = 0;c < m1y; c++){
+				var rowId = r + 1;
+				var colId = c + 1;
+				if(c<m1y){
+				var Cell = document.getElementById("a" + rowId + colId).value + "&";
+				answerString += Cell;
+				}else if(c==m1y){
+				var Cell = document.getElementById("a" + rowId + colId).value;
+				answerString += Cell;
+				
+				
 
-	var matrixAnswer = document.getElementById("matrixAnswer");
-	var tableBody = document.createElement("tbody");
+				}
+           }
+	 }
+	 var strLength = answerString.length;
+	answerString = (answerString.slice(0, strLength - 1));
+	return answerString;
+ }
 
-	for (var i = 0; i < m1x; i++) {
-		var row = document.createElement("tr");
+ //Viib teises maatriksis olevad arvud MatJax kujule
 
-		for (var j = 0; j < m2y; j++) {
-			var rowId = i + 1;
-			var colId = j + 1;
-			var cell = document.createElement("input");
-			cell.setAttribute("id", "c" + rowId + colId);
-			cell.setAttribute("class", "matrixAnswerInput");
-			cell.setAttribute("type", "text");
-			row.appendChild(cell);
-		}
-		tableBody.appendChild(row);
-	}
-	matrixAnswer.appendChild(tableBody);
+ function matrix2Values() {
+var answerString = "";
+	var table = document.getElementById('matrix2');
+        for (var r = 0, n = table.rows.length; r < n; r++) {
+			if(r>=1){
+			var strLength = answerString.length;
+			answerString = (answerString.slice(0, strLength - 1));
+			answerString +="\\\\\\\\";
+			};
+		
+            for (var c = 0; c < m2y; c++){
+				var rowId = r + 1;
+				var colId = c + 1; 
+				if(c<m2y){
+				var Cell = document.getElementById("b" + rowId + colId).value + "&";
+				answerString+=Cell;
+				}
+				else if(c==m2y){
+				var Cell = document.getElementById("b" + rowId + colId).value;
+				answerString+=Cell;
+
+				
+				}
+				
+			}
+			
+	 }
+	var strLength = answerString.length;
+	answerString = (answerString.slice(0, strLength - 1));
+	return answerString;
+ }
+
+function createMatrix3() {
+	var mathDiv = document.getElementById('math');
+    var displayDiv = document.getElementById('display');
+
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"math"]);
+    MathJax.Hub.Queue(function() {
+		var math = MathJax.Hub.getAllJax("MathDiv")[0];
+		var i = matrix1Values();
+		var j = matrix2Values();
+		var k = calculateMatrixSum();
+		var l = calculateMatrixFinalSum();
+		MathJax.Hub.Queue(["Text", math, "\\begin{bmatrix}"+ i +"\\end{bmatrix} \\times \\begin{bmatrix}"+j+"\\end{bmatrix} = \\begin{bmatrix}"+ k +"\\end{bmatrix} = \\begin{bmatrix}"+ l +"\\end{bmatrix}"]);
+        //\\begin{bmatrix} {"+i+"}&{"+j+"}&0\\\\0&{"+i+"}&{"+j+"}\\\\{"+j+"}&0&{"+i+"}\\\end{bmatrix}
+		MathJax.Hub.Queue(function() {
+		displayDiv.innerHTML = mathDiv.innerHTML;
+		});
+	});
 }
 
-// **** FUNKTSIOON, MIS GENEREERIB LÕPLIKU VASTUSE MAATRIKSI ****
-function createMatrixFinalAnswer() {
 
-	var matrixFinalAnswerContainer = document.getElementById("matrixFinalAnswerContainer");
-	var mFinalAnswerWidth = 42 * m2y;
-	var mFinalAnswerHeight = 28 * m1x;
-
-	var m1Width = 42 * m1y;
-	var m2Width = 42 * m2y;
-	var mAnswerWidth = 42 * m2y * 3;
-	var mFinalAnswerPosition = m1Width + m2Width + mAnswerWidth + 40;
-
-	matrixFinalAnswerContainer.style.width = mFinalAnswerWidth + "px";
-	matrixFinalAnswerContainer.style.height = mFinalAnswerHeight + "px";
-	matrixFinalAnswerContainer.style.left = mFinalAnswerPosition + "px";
-
-	var matrixFinalAnswer = document.getElementById("matrixFinalAnswer");
-	var tableBody = document.createElement("tbody");
-
-	for (var i = 0; i < m1x; i++) {
-		var row = document.createElement("tr");
-
-		for (var j = 0; j < m2y; j++) {
-			var rowId = i + 1;
-			var colId = j + 1;
-			var cell = document.createElement("input");
-			cell.setAttribute("id", "d" + rowId + colId);
-			cell.setAttribute("type", "text");
-			row.appendChild(cell);
-		}
-		tableBody.appendChild(row);
-	}
-	matrixFinalAnswer.appendChild(tableBody);
-}
 
 // **** KÄIVITAB ARVUTAMISE ****
 function calculateMatrix() {
-	calculateMatrixAnswer();
-    calculateMatrixFinalAnswer();
+	calculateMatrixSum();
+    calculateMatrixFinalSum();
+	createMatrix3();
+
     document.getElementById("matrixAnswerContainer").style.display = "block"
     document.getElementById("matrixFinalAnswerContainer").style.display = "block";
     document.getElementById("checkAnswer").style.display = "none";
@@ -206,8 +228,10 @@ function calculateMatrix() {
 }
 //sama mis eelmine, aga peidab eelmise lahenduse ja  nupud
 function calculateNextMatrix() {
-    calculateMatrixAnswer();
-    calculateMatrixFinalAnswer();
+    calculateMatrixSum();
+    calculateMatrixFinalSum();
+	createMatrix3();
+
     document.getElementById("matrixAnswerContainer").style.display = "none"
     document.getElementById("matrixFinalAnswerContainer").style.display = "none";
     document.getElementById("matrix1Container").style.display = "none";
@@ -217,68 +241,97 @@ function calculateNextMatrix() {
 }
 
 // **** GENEREERIB VAHETULEMUSE ****
-function calculateMatrixAnswer() {
+function calculateMatrixSum() {
+	
+	var c = 1;
+	var finalString="";
+	
+	for(var x = 1; x <= m1x; x++) {
+			if(x>=2){
+			var strLength = finalString.length;
+			finalString = (finalString.slice(0, strLength - 3));
+			finalString +="\\\\\\\\";
+			};
+		
+		for(var y = 1; y <= m2y; y++) {
 
-    var c = 1;
+			if(y>=2){
+				var strLength = finalString.length;
+				finalString = finalString.slice(0,strLength -3);
+				finalString += "&";
+			};
+			var matrixAnswerString = "";
+			
+			for(var i = 0; i < m1y; i++) {
+				
+				var a = document.getElementById("a"+x+c).value;
+				var b = document.getElementById("b"+c+y).value;
+				matrixAnswerString += a + "*" + b + " + ";
 
-    for (var x = 1; x <= m1x; x++) {
+				
+				c++;
+			}
+			finalString += matrixAnswerString;
+			
+				
+			c = 1;
 
-        for (var y = 1; y <= m2y; y++) {
+		
+		}
+	}
+	var strLength = finalString.length;
+	finalString = finalString.slice(0, strLength - 3);
 
-            var matrixAnswer = document.getElementById("c" + x + y);
-            var matrixAnswerString = "";
-
-            for (var i = 0; i < m1y; i++) {
-                (function () {
-
-                    var a = document.getElementById("a" + x + c).value;
-                    var b = document.getElementById("b" + c + y).value;
-                    matrixAnswerString += a + "*" + b + " + ";
-
-                    var aID = "a" + x + c;
-                    var bID = "b" + c + y;
-                    var cID = "c" + x + y;
-                    highlighter(aID, bID, cID)
-                    c++;
-
-                }
-                    ())
-            }
-
-            var strLength = matrixAnswerString.length;
-            matrixAnswer.value = matrixAnswerString.slice(0, strLength - 3);
-            
-            c = 1;
-        }
-
-    }
-
+	return finalString;
 }
 
+
 // **** ARVUTAB MAATRIKSI VÄÄRTUSE ****
-function calculateMatrixFinalAnswer() {
-
+function calculateMatrixFinalSum() {
+	
 	var c = 1;
+	var finalString = "";
+	
+	for(var x = 1; x <= m1x; x++) {
+		if(x>=2){
+			var strLength = finalString.length;
 
-	for (var x = 1; x <= m1x; x++) {
+			finalString +="\\\\\\\\";
+			};
+		
+		for(var y = 1; y <= m2y; y++) {
 
-		for (var y = 1; y <= m2y; y++) {
+			if(y>=2){
+				var strLength = finalString.length;
 
-			var matrixAnswer = document.getElementById("d" + x + y);
+				finalString += "&";
+			};
+
 			var matrixAnswerString = "";
-
-			for (var i = 0; i < m1y; i++) {
-				var a = document.getElementById("a" + x + c).value;
-				var b = document.getElementById("b" + c + y).value;
+			
+			for(var i = 0; i < m1y; i++) {
+				
+				var a = document.getElementById("a"+x+c).value;
+				var b = document.getElementById("b"+c+y).value;
 				matrixAnswerString += a + "*" + b + " + ";
 				c++;
 			}
 			var strLength = matrixAnswerString.length;
 			matrixAnswer.value = math.eval(matrixAnswerString.slice(0, strLength - 3));
+			finalString += matrixAnswer.value;
+
 			c = 1;
 		}
+
 	}
+
+	var strLength = finalString.length;
+
+
+	return finalString;
 }
+
+
 
 // **** LASEB SISESTADA AINULT NUMBREID JA ÜHE KALDKRIIPSU, ET SAAKS SISESTADA MURDE ****
 /*
