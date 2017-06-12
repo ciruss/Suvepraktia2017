@@ -233,6 +233,10 @@ tbody {
     display: none;
 }
 
+#negativeNumber {
+	display: none;
+}
+
 scoreTable {
     border-collapse: collapse;
     width: 100%;

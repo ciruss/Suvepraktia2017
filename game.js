@@ -235,6 +235,8 @@ function createExerciseMatrixPreAnswer() {
 			cell.setAttribute("id", "Ed" + rowId + colId);
 			cell.setAttribute("class", "matrixAnswerInput");
 			cell.setAttribute("type", "text");
+			cell.setAttribute("onkeypress", "return validate(this, event)");
+			//cell.setAttribute("oninput", "checkLength(2,this)");
 			row.appendChild(cell);
 		}
 		tableBody.appendChild(row);
@@ -268,6 +270,7 @@ function createExerciseMatrixAnswer() {
 			var cell = document.createElement("input");
 			cell.setAttribute("id", "Ec" + rowId + colId);
 			cell.setAttribute("type", "text");
+			cell.setAttribute("onkeypress", "return validate(this, event)");
 			row.appendChild(cell);
 		}
 		tableBody.appendChild(row);
@@ -539,6 +542,7 @@ function startTimer(secs) {
 	timeInSecs = parseInt(secs) - 1;
 	ticker = setInterval("tick()", 1000); // every second
 }
+
 function tick() {
 	var secs = timeInSecs;
 	if (secs >= 0) {
@@ -557,5 +561,46 @@ function tick() {
 		resetScore();
 		clearInterval(ticker)
 	}
-
 }
+
+// **** KONTROLLIB SISESTUST *****
+function validate(elementRef, event) {
+	var keyCodeEntered = (event.which) ? event.which : (window.event.keyCode) ? window.event.keyCode : -1;
+		console.log(event.keyCode);
+		if ((keyCodeEntered >= 48) && (keyCodeEntered <= 57) || (keyCodeEntered === 8)) {
+			return true;
+		} else if (keyCodeEntered == 47) {
+			if ((elementRef.value) && (elementRef.value.indexOf('/') >= 0)) {
+				return false;
+			} else {
+				return true;
+			}
+		} else if (keyCodeEntered == 32) {
+			//while(){
+				
+			/*
+			console.log(elementRef.value);
+			if ((elementRef.value) && (elementRef.value.indexOf(' ') >= 0)) {
+				return false;
+			} else {
+				return true;
+			}
+			*/
+			
+		}
+	return false;
+}
+
+/*
+// **** KONTROLLIB PIKKUST SISESTAMISEL****
+function checkLength(len,ele){
+	var fieldLength = ele.value.length;
+	if(fieldLength <= len){
+		return true;
+	} else {
+		var str = ele.value;
+		str = str.substring(0, str.length - 1);
+		ele.value = str;
+	}
+}
+*/

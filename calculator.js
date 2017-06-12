@@ -7,11 +7,13 @@ var m1x, m1y, m2x, m2y;
 
 // **** ÜLDINE FUNKTSIOON MAATRIKSITE GENEREERIMISEKS ****
 function generateMatrix() {
-    //et kastid jälle nähtavale ilmuks
-    document.getElementById("checkAnswer").style.display = "block";
+   
+   //et kastid jälle nähtavale ilmuks
+    document.getElementById("checkAnswer").style.display = "block";	
     document.getElementById("calculateNext").style.display = "block";
     document.getElementById("matrix1Container").style.display = "inline";
     document.getElementById("matrix2Container").style.display = "inline";
+	document.getElementById("negativeNumber").style.display = "block";
 
 	m1x = document.getElementById("m1x").value;
 	m1y = document.getElementById("m1y").value;
@@ -76,6 +78,10 @@ function createMatrix1() {
 			var cell = document.createElement("input");
 			cell.setAttribute("id", "a" + rowId + colId);
 			cell.setAttribute("type", "text");
+			cell.setAttribute("onkeypress", "validate(event)");
+			//cell.setAttribute("pattern", "\d");
+			//cell.setAttribute("onkeypress", "return validate(this, event)");//<--TÖÖTAB
+			cell.setAttribute("maxlength", "10");
 			row.appendChild(cell);
 		}
 		tableBody.appendChild(row);
@@ -109,6 +115,9 @@ function createMatrix2() {
 			var cell = document.createElement("input");
 			cell.setAttribute("id", "b" + rowId + colId);
 			cell.setAttribute("type", "text");
+			cell.setAttribute("onkeypress", "validate(event)");
+			//cell.setAttribute("onkeypress", "return validate(this, event)");//<--TÖÖTAB
+			cell.setAttribute("maxlength", "10");
 			row.appendChild(cell);
 		}
 		tableBody.appendChild(row);
@@ -205,34 +214,45 @@ function calculateNextMatrix() {
     document.getElementById("matrix2Container").style.display = "none";
     document.getElementById("checkAnswer").style.display = "none";
     document.getElementById("calculateNext").style.display = "none";
-
-
-
 }
 
 // **** GENEREERIB VAHETULEMUSE ****
 function calculateMatrixAnswer() {
 
-	var c = 1;
+    var c = 1;
 
-	for (var x = 1; x <= m1x; x++) {
+    for (var x = 1; x <= m1x; x++) {
 
-		for (var y = 1; y <= m2y; y++) {
+        for (var y = 1; y <= m2y; y++) {
 
-			var matrixAnswer = document.getElementById("c" + x + y);
-			var matrixAnswerString = "";
+            var matrixAnswer = document.getElementById("c" + x + y);
+            var matrixAnswerString = "";
 
-			for (var i = 0; i < m1y; i++) {
-				var a = document.getElementById("a" + x + c).value;
-				var b = document.getElementById("b" + c + y).value;
-				matrixAnswerString += a + "*" + b + " + ";
-				c++;
-			}
-			var strLength = matrixAnswerString.length;
-			matrixAnswer.value = matrixAnswerString.slice(0, strLength - 3);
-			c = 1;
-		}
-	}
+            for (var i = 0; i < m1y; i++) {
+                (function () {
+
+                    var a = document.getElementById("a" + x + c).value;
+                    var b = document.getElementById("b" + c + y).value;
+                    matrixAnswerString += a + "*" + b + " + ";
+
+                    var aID = "a" + x + c;
+                    var bID = "b" + c + y;
+                    var cID = "c" + x + y;
+                    highlighter(aID, bID, cID)
+                    c++;
+
+                }
+                    ())
+            }
+
+            var strLength = matrixAnswerString.length;
+            matrixAnswer.value = matrixAnswerString.slice(0, strLength - 3);
+            
+            c = 1;
+        }
+
+    }
+
 }
 
 // **** ARVUTAB MAATRIKSI VÄÄRTUSE ****
@@ -258,4 +278,91 @@ function calculateMatrixFinalAnswer() {
 			c = 1;
 		}
 	}
+}
+
+// **** LASEB SISESTADA AINULT NUMBREID JA ÜHE KALDKRIIPSU, ET SAAKS SISESTADA MURDE ****
+/*
+function validate(elementRef, event) {
+	var keyCodeEntered = (event.which) ? event.which : (window.event.keyCode) ? window.event.keyCode : -1;
+		console.log(event.keyCode);
+		if ((keyCodeEntered >= 48) && (keyCodeEntered <= 57) || (keyCodeEntered === 8)) {
+			return true;
+		} else if (keyCodeEntered == 47) {
+			if ((elementRef.value) && (elementRef.value.indexOf('/') >= 0)) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	return false;
+}
+*/
+
+
+/*
+
+function validate(evt) {
+	var theEvent = evt || window.event;
+	var key = theEvent.keyCode || theEvent.which;
+	key = String.fromCharCode( key );
+	var regex = /^[0-9]*\/?[0-9]*$/;
+	//([0-9]+(\.[0-9]+)?)
+	//var regex = /\d+\.\d+/;
+	
+	console.log(evt.target);
+	if(key==="/" && evt.target.value.indexOf('/') != -1){
+		theEvent.returnValue = false;
+			if(theEvent.preventDefault) theEvent.preventDefault();
+	}
+	
+	if( !regex.test(key) ) {
+		theEvent.returnValue = false;
+			if(theEvent.preventDefault) theEvent.preventDefault();
+	}
+	
+}
+*/
+
+
+// uus  
+function validate(evt) {
+key = evt.key
+	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"]
+   if(allowed.indexOf(evt.key) == -1){   
+	   evt.preventDefault()
+   }
+}
+function negativeNumber(){
+	for (var i = 0; i < m1x; i++) {
+		for (var j = 0; j < m1y; j++) {
+			var rowId = i + 1;
+			var colId = j + 1;
+			var boxID = ("a" + rowId + colId);
+			console.log(boxID);
+			var number = document.getElementById("a" + rowId + colId).value;
+			parseInt(number);
+			console.log("Sisend: "+number);
+			
+			if(number<0){
+				console.log("Number on väiksem");
+			} else {
+				console.log("Number on suurem");
+			}		
+			
+		}
+	}
+}
+
+
+
+function highlighter(aID, bID, cID) {
+    document.getElementById(cID).addEventListener("mouseover", function () {
+        document.getElementById(aID).style.backgroundColor = "yellow";
+        document.getElementById(bID).style.backgroundColor = "yellow";
+    })
+    document.getElementById(cID).addEventListener("mouseleave", function () {
+        document.getElementById(aID).style.backgroundColor = "";
+        document.getElementById(bID).style.backgroundColor = "";
+    })
+
 }
