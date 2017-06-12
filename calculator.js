@@ -298,9 +298,7 @@ function validate(elementRef, event) {
 }
 */
 
-
 /*
-
 function validate(evt) {
 	var theEvent = evt || window.event;
 	var key = theEvent.keyCode || theEvent.which;
@@ -324,7 +322,6 @@ function validate(evt) {
 */
 
 
-// uus  
 function validate(evt) {
 key = evt.key
 	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"]
@@ -332,6 +329,8 @@ key = evt.key
 	   evt.preventDefault()
    }
 }
+
+
 function negativeNumber(){
 	for (var i = 0; i < m1x; i++) {
 		for (var j = 0; j < m1y; j++) {
