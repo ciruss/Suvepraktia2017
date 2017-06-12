@@ -253,9 +253,7 @@ function calculateMatrixAnswer() {
             
             c = 1;
         }
-
     }
-
 }
 
 // **** ARVUTAB MAATRIKSI VÄÄRTUSE ****
@@ -282,47 +280,6 @@ function calculateMatrixFinalAnswer() {
 		}
 	}
 }
-
-// **** LASEB SISESTADA AINULT NUMBREID JA ÜHE KALDKRIIPSU, ET SAAKS SISESTADA MURDE ****
-/*
-function validate(elementRef, event) {
-	var keyCodeEntered = (event.which) ? event.which : (window.event.keyCode) ? window.event.keyCode : -1;
-		console.log(event.keyCode);
-		if ((keyCodeEntered >= 48) && (keyCodeEntered <= 57) || (keyCodeEntered === 8)) {
-			return true;
-		} else if (keyCodeEntered == 47) {
-			if ((elementRef.value) && (elementRef.value.indexOf('/') >= 0)) {
-				return false;
-			} else {
-				return true;
-			}
-		}
-	return false;
-}
-*/
-
-/*
-function validate(evt) {
-	var theEvent = evt || window.event;
-	var key = theEvent.keyCode || theEvent.which;
-	key = String.fromCharCode( key );
-	var regex = /^[0-9]*\/?[0-9]*$/;
-	//([0-9]+(\.[0-9]+)?)
-	//var regex = /\d+\.\d+/;
-	
-	console.log(evt.target);
-	if(key==="/" && evt.target.value.indexOf('/') != -1){
-		theEvent.returnValue = false;
-			if(theEvent.preventDefault) theEvent.preventDefault();
-	}
-	
-	if( !regex.test(key) ) {
-		theEvent.returnValue = false;
-			if(theEvent.preventDefault) theEvent.preventDefault();
-	}
-	
-}
-*/
 
 
 function checkInputSequenceA(){
@@ -352,8 +309,8 @@ function checkInputSequenceA(){
 }
 
 function checkInputSequenceB(){
-	for (var i = 0; i < m1x; i++) {
-		for (var j = 0; j < m1y; j++) {
+	for (var i = 0; i < m2x; i++) {
+		for (var j = 0; j < m2y; j++) {
 			var rowId = i + 1;
 			var colId = j + 1;
 			var numberB = document.getElementById("b" + rowId + colId).value;
@@ -381,18 +338,6 @@ function checkInputSequenceB(){
 function validate(evt) {
 	key = evt.key;
 	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
-
-	/*
-	for (var i = 0; i < m1x; i++) {
-		for (var j = 0; j < m1y; j++) {
-			var rowId = i + 1;
-			var colId = j + 1;
-			var numberA = document.getElementById("a" + rowId + colId).value;
-			var dashA = (numberA.match(/-/g) || []).length;
-		}
-	}
-	*/
-	
 	if(allowed.indexOf(evt.key) == -1){
 		evt.preventDefault();
 		console.log("EI LUBA");
@@ -400,13 +345,12 @@ function validate(evt) {
 	if(evt.key === "/" && evt.target.value.indexOf('/') != -1){
 		evt.preventDefault();
 	}
-	
-	/*
-	if(evt.key === "-" && dashA > 1){
-		evt.preventDefault();
-	}
-	*/
-	
+	if(evt.key==="-"){
+		console.log("EVENT TARGET VALUE: "+ evt.target.value.length);
+		if(evt.target.value.length > 1){
+			evt.preventDefault();
+		}
+	}	
 }
 
 
@@ -419,5 +363,4 @@ function highlighter(aID, bID, cID) {
         document.getElementById(aID).style.backgroundColor = "";
         document.getElementById(bID).style.backgroundColor = "";
     })
-
 }

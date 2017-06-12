@@ -537,5 +537,10 @@ function validate(evt) {
 	if(evt.key === "/" && evt.target.value.indexOf('/') != -1){
 		evt.preventDefault();
 	}
-	
+	if(evt.key==="-"){
+		console.log("EVENT TARGET VALUE: "+ evt.target.value.length);
+		if(evt.target.value.length > 1){
+			evt.preventDefault();
+		}
+	}
 }
