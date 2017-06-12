@@ -128,6 +128,24 @@ function createMatrix2() {
 
 }
 
+function createMatrix3() {
+	var mathDiv = document.getElementById('math');
+    var displayDiv = document.getElementById('display');
+
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"math"]);
+    MathJax.Hub.Queue(function() {
+		var math = MathJax.Hub.getAllJax("MathDiv")[0];
+		var i = matrix1Values();
+		var j = matrix2Values();
+		var k = calculateMatrixSum();
+		var l = calculateMatrixFinalSum();
+		MathJax.Hub.Queue(["Text", math, "\\begin{bmatrix}"+ i +"\\end{bmatrix} \\times \\begin{bmatrix}"+j+"\\end{bmatrix} = \\begin{bmatrix}"+ k +"\\end{bmatrix} = \\begin{bmatrix}"+ l +"\\end{bmatrix}"]);
+        //\\begin{bmatrix} {"+i+"}&{"+j+"}&0\\\\0&{"+i+"}&{"+j+"}\\\\{"+j+"}&0&{"+i+"}\\\end{bmatrix}
+		MathJax.Hub.Queue(function() {
+		displayDiv.innerHTML = mathDiv.innerHTML;
+		});
+	});
+}
 //Loendab esimeses maatriksis olevad arvud kokku, ning viib mathJax kujule
 function matrix1Values() {
 
@@ -204,6 +222,7 @@ var answerString = "";
 function calculateMatrix() {
 	calculateMatrixSum();
     calculateMatrixFinalSum();
+	createMatrix3();
 
     document.getElementById("matrixAnswerContainer").style.display = "block"
     document.getElementById("matrixFinalAnswerContainer").style.display = "block";
@@ -214,6 +233,7 @@ function calculateMatrix() {
 function calculateNextMatrix() {
     calculateMatrixSum();
     calculateMatrixFinalSum();
+	createMatrix3();
 
     document.getElementById("matrixAnswerContainer").style.display = "none"
     document.getElementById("matrixFinalAnswerContainer").style.display = "none";
