@@ -6,7 +6,6 @@ var m1x, m1y, m2x, m2y;
 // maatriksite sisendite muutujad
 var mistakeA = false;
 var mistakeB = false;
-var mistakesBoth = 0;
 // ||||| ----- ----- ----- ----- MAATRIKSITE KALKULAATORI OSA ----- ----- ----- ----- |||||
 
 // **** ÜLDINE FUNKTSIOON MAATRIKSITE GENEREERIMISEKS ****
@@ -15,8 +14,8 @@ var mistakesBoth = 0;
 function generateMatrix() {
    
    //et kastid jälle nähtavale ilmuks
-    document.getElementById("checkAnswer").style.display = "none";	
-    document.getElementById("calculateNext").style.display = "none";
+    document.getElementById("checkAnswer").style.display = "block";	
+    document.getElementById("calculateNext").style.display = "block";
     document.getElementById("matrix1Container").style.display = "inline";
     document.getElementById("matrix2Container").style.display = "inline";
 
@@ -24,8 +23,6 @@ function generateMatrix() {
 	m1y = document.getElementById("m1y").value;
 	m2x = document.getElementById("m2x").value;
 	m2y = document.getElementById("m2y").value;
-
-	//test = m1x * m1y;
 	
 	var m1 = document.getElementById("matrix1");
 	var m2 = document.getElementById("matrix2");
@@ -152,34 +149,27 @@ function createMatrix3() {
 }
 //Loendab esimeses maatriksis olevad arvud kokku, ning viib mathJax kujule
 function matrix1Values() {
-
-
-
- var answerString = "";
+	var answerString = "";
 	var table = document.getElementById('matrix1');
         for (var r = 0, n = table.rows.length; r < n; r++) {
 			if(r>=1){
-			
-			var strLength = answerString.length;
-			answerString = (answerString.slice(0, strLength - 1));
-			answerString +="\\\\\\\\";
+				var strLength = answerString.length;
+				answerString = (answerString.slice(0, strLength - 1));
+				answerString +="\\\\\\\\";
 			}
             for (var c = 0;c < m1y; c++){
 				var rowId = r + 1;
 				var colId = c + 1;
 				if(c<m1y){
-				var Cell = document.getElementById("a" + rowId + colId).value + "&";
-				answerString += Cell;
-				}else if(c==m1y){
-				var Cell = document.getElementById("a" + rowId + colId).value;
-				answerString += Cell;
-				
-				
-
+					var Cell = document.getElementById("a" + rowId + colId).value + "&";
+					answerString += Cell;
+				} else if(c==m1y) {
+					var Cell = document.getElementById("a" + rowId + colId).value;
+					answerString += Cell;
 				}
            }
 	 }
-	 var strLength = answerString.length;
+	var strLength = answerString.length;
 	answerString = (answerString.slice(0, strLength - 1));
 	return answerString;
  }
@@ -187,48 +177,46 @@ function matrix1Values() {
  //Viib teises maatriksis olevad arvud MatJax kujule
 
  function matrix2Values() {
-var answerString = "";
+	var answerString = "";
 	var table = document.getElementById('matrix2');
-        for (var r = 0, n = table.rows.length; r < n; r++) {
-			if(r>=1){
+	for (var r = 0, n = table.rows.length; r < n; r++) {
+		if(r>=1){
 			var strLength = answerString.length;
 			answerString = (answerString.slice(0, strLength - 1));
 			answerString +="\\\\\\\\";
-			};
-		
-            for (var c = 0; c < m2y; c++){
-				var rowId = r + 1;
-				var colId = c + 1; 
-				if(c<m2y){
-					var Cell = document.getElementById("b" + rowId + colId).value + "&";
-					answerString+=Cell;
-				}
-				else if(c==m2y){
+		};
+		for (var c = 0; c < m2y; c++){
+			var rowId = r + 1;
+			var colId = c + 1; 
+			if(c<m2y){
+				var Cell = document.getElementById("b" + rowId + colId).value + "&";
+				answerString+=Cell;
+			} else if(c==m2y) {
 				var Cell = document.getElementById("b" + rowId + colId).value;
 				answerString+=Cell;
-				}
 			}
-	 }
+		}
+	}
 	var strLength = answerString.length;
 	answerString = (answerString.slice(0, strLength - 1));
 	return answerString;
  }
 
-
-
-
-
 // **** KÄIVITAB ARVUTAMISE ****
 function calculateMatrix() {
-	calculateMatrixSum();
-    calculateMatrixFinalSum();
-	createMatrix3();
+	if(mistakeA === false && mistakeB === false){
+		document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
+	} else {
+		calculateMatrixSum();
+		calculateMatrixFinalSum();
+		createMatrix3();
 
-    document.getElementById("matrixAnswerContainer").style.display = "block"
-    document.getElementById("matrixFinalAnswerContainer").style.display = "block";
-    document.getElementById("checkAnswer").style.display = "none";
-
+		document.getElementById("matrixAnswerContainer").style.display = "block"
+		document.getElementById("matrixFinalAnswerContainer").style.display = "block";
+		document.getElementById("checkAnswer").style.display = "none";
+	}
 }
+
 //sama mis eelmine, aga peidab eelmise lahenduse ja  nupud
 function calculateNextMatrix() {
     calculateMatrixSum();
@@ -251,13 +239,12 @@ function calculateMatrixSum() {
 	
 	for(var x = 1; x <= m1x; x++) {
 			if(x>=2){
-			var strLength = finalString.length;
-			finalString = (finalString.slice(0, strLength - 3));
-			finalString +="\\\\\\\\";
+				var strLength = finalString.length;
+				finalString = (finalString.slice(0, strLength - 3));
+				finalString +="\\\\\\\\";
 			};
 		
 		for(var y = 1; y <= m2y; y++) {
-
 			if(y>=2){
 				var strLength = finalString.length;
 				finalString = finalString.slice(0,strLength -3);
@@ -266,20 +253,14 @@ function calculateMatrixSum() {
 			var matrixAnswerString = "";
 			
 			for(var i = 0; i < m1y; i++) {
-				
 				var a = document.getElementById("a"+x+c).value;
 				var b = document.getElementById("b"+c+y).value;
 				matrixAnswerString += a + "*" + b + " + ";
-
-				
 				c++;
 			}
 			finalString += matrixAnswerString;
-			
-				
-			c = 1;
 
-		
+			c = 1;
 		}
 	}
 	var strLength = finalString.length;
@@ -298,22 +279,17 @@ function calculateMatrixFinalSum() {
 	for(var x = 1; x <= m1x; x++) {
 		if(x>=2){
 			var strLength = finalString.length;
-
 			finalString +="\\\\\\\\";
-			};
-		
+		};
 		for(var y = 1; y <= m2y; y++) {
-
 			if(y>=2){
 				var strLength = finalString.length;
-
 				finalString += "&";
 			};
 
 			var matrixAnswerString = "";
 			
 			for(var i = 0; i < m1y; i++) {
-				
 				var a = document.getElementById("a"+x+c).value;
 				var b = document.getElementById("b"+c+y).value;
 				matrixAnswerString += a + "*" + b + " + ";
@@ -325,12 +301,8 @@ function calculateMatrixFinalSum() {
 
 			c = 1;
 		}
-
 	}
-
 	var strLength = finalString.length;
-
-
 	return finalString;
 }
 
@@ -365,8 +337,6 @@ function checkInputSequenceA(){
 	}
 	if(mistakeA === true && mistakeB === true){
 		console.log("vigu ei ole");
-		document.getElementById("checkAnswer").style.display = "block";	
-		document.getElementById("calculateNext").style.display = "block";
 		document.getElementById("mistakeNotification").style.display = "none";	
 	} else {
 		console.log("vigu on")
@@ -404,8 +374,6 @@ function checkInputSequenceB(){
 	}
 	if(mistakeB === true && mistakeA === true){
 		console.log("Vigu ei ole");
-		document.getElementById("checkAnswer").style.display = "block";	
-		document.getElementById("calculateNext").style.display = "block";
 		document.getElementById("mistakeNotification").style.display = "none";		
 	} else {
 		console.log("Vigu on")

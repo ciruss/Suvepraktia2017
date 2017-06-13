@@ -11,6 +11,8 @@ var inversionCount = 0;
 // muutuja permutatsioonide tabeli jaoks
 var matrixPermutationTable = document.getElementById("matrixPermutationTable");
 
+var mistakes = false;
+
 
 // **** ÜLDINE FUNKTSIOON MAATRIKSI GENEREERIMISEKS ****
 
@@ -70,34 +72,32 @@ function createMatrixForDeterminant() {
 }
 
 
-
-
-
-
-
-
 // ||||| ----- ----- ----- ----- DETERMINANTIDE KALKULAATORI OSA ----- ----- ----- ----- |||||
 
 // **** FUNKTSIOON ÕIGE PERMUTATSIOONIDE FUNKTSIOONI KÄIVITAMISEKS ****
 
 function calculateDeterminant() {
-	
-	var determinant = document.getElementById("determinant").value;
-	
-	if(determinant === "4") {
-		determinantFor4();
-	}
-	
-	if(determinant === "5") {
-		determinantFor5();
-	}
-	
-	if(determinant === "3") {
-		determinantFor3();
-	}
-	
-	if(determinant === "2") {
-		determinantFor2();
+	if(mistakes === false){
+		document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
+	} else {
+		document.getElementById("mistakeNotification").style.display = "none";
+		var determinant = document.getElementById("determinant").value;
+		
+		if(determinant === "4") {
+			determinantFor4();
+		}
+		
+		if(determinant === "5") {
+			determinantFor5();
+		}
+		
+		if(determinant === "3") {
+			determinantFor3();
+		}
+		
+		if(determinant === "2") {
+			determinantFor2();
+		}
 	}
 }
 
@@ -487,6 +487,7 @@ function determinantFor5() {
 			}
 		}
 	}
+	
 	detValues = detValues.slice(3, detValues.length);
 	console.log("vahetulemus: " + detValues);
 	
@@ -508,6 +509,7 @@ function checkInputSequence(){
 				console.log("See kast on tühi");
 				var inputColor = document.getElementById("a" + rowId + colId);
 				inputColor.style.backgroundColor = "";
+				mistakes = false
 			} else {
 				var regex = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var found = regex.test(number);
@@ -515,12 +517,23 @@ function checkInputSequence(){
 				if(found === false){
 					var inputColor = document.getElementById("a" + rowId + colId);
 					inputColor.style.backgroundColor = "red";
+					mistakes = false;
+					document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
 				} else {
 					var inputColor = document.getElementById("a" + rowId + colId);
 					inputColor.style.backgroundColor = "";
+					mistakes = true
 				}
 			}
 		}
+	}
+	if(mistakes === true){
+		console.log("Vigu ei olnud");
+		//document.getElementById("checkAnswerDeterminant").style.display = "block"
+		//document.getElementById("newDeterminant").style.display = "block"
+		document.getElementById("mistakeNotification").style.display = "block"
+	} else {
+		console.log("vigu on");
 	}
 }
 
