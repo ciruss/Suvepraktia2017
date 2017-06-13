@@ -162,53 +162,82 @@ function matrix1Values() {
 			
 			var strLength = answerString.length;
 			answerString = (answerString.slice(0, strLength - 1));
-			answerString +="\\\\\\\\";
+			answerString +="\\\\";
 			}
             for (var c = 0;c < m1y; c++){
 				var rowId = r + 1;
 				var colId = c + 1;
-				if(c<m1y){
-				var Cell = document.getElementById("a" + rowId + colId).value + "&";
-				answerString += Cell;
-				}else if(c==m1y){
 				var Cell = document.getElementById("a" + rowId + colId).value;
-				answerString += Cell;
+				var str = Cell;
+				var pos = str.indexOf("/");
+				if(Cell.charAt(pos)==="/"){
+					var stringLength = Cell.length;
+					var String1 = Cell;
+					var start = str.slice(0, pos);
+					start = "\\frac {"+start+"}";
+					var end = Cell;
+					var afterSlash = str.substr(str.indexOf("/") + 1);
+					end = "{" + afterSlash + "}&";
+					Cell = start + end;
+					answerString += Cell;
+				}
+				else {
+				var Cell = document.getElementById("a" + rowId + colId).value + "&";
+				answerString +=Cell;
+				}
 				
 				
 
-				}
+				
            }
 	 }
 	 var strLength = answerString.length;
 	answerString = (answerString.slice(0, strLength - 1));
+	console.log(answerString);
 	return answerString;
  }
 
  //Viib teises maatriksis olevad arvud MatJax kujule
 
  function matrix2Values() {
-var answerString = "";
+	var answerString = "";
 	var table = document.getElementById('matrix2');
         for (var r = 0, n = table.rows.length; r < n; r++) {
 			if(r>=1){
 			var strLength = answerString.length;
 			answerString = (answerString.slice(0, strLength - 1));
-			answerString +="\\\\\\\\";
+			answerString +="\\\\";
 			};
 		
             for (var c = 0; c < m2y; c++){
 				var rowId = r + 1;
 				var colId = c + 1; 
-				if(c<m2y){
-					var Cell = document.getElementById("b" + rowId + colId).value + "&";
-					answerString+=Cell;
-				}
-				else if(c==m2y){
 				var Cell = document.getElementById("b" + rowId + colId).value;
-				answerString+=Cell;
+				var str = Cell;
+				var pos = str.indexOf("/");
+				if(Cell.charAt(pos)==="/"){
+					var stringLength = Cell.length;
+					var String1 = Cell;
+					var start = str.slice(0, pos);
+					start = "\\frac {"+start+"}";
+					var end = Cell;
+					var afterSlash = str.substr(str.indexOf("/") + 1);
+					end = "{" + afterSlash + "}&";
+					Cell = start + end;
+					console.log("Cell");
+					console.log(Cell);
+					answerString += Cell;
 				}
+				else {
+				var Cell = document.getElementById("b" + rowId + colId).value + "&";
+				answerString +=Cell;
+				}
+
+				
+				}
+				
 			}
-	 }
+			
 	var strLength = answerString.length;
 	answerString = (answerString.slice(0, strLength - 1));
 	return answerString;
@@ -253,7 +282,7 @@ function calculateMatrixSum() {
 			if(x>=2){
 			var strLength = finalString.length;
 			finalString = (finalString.slice(0, strLength - 3));
-			finalString +="\\\\\\\\";
+			finalString +="\\\\";
 			};
 		
 		for(var y = 1; y <= m2y; y++) {
@@ -266,9 +295,34 @@ function calculateMatrixSum() {
 			var matrixAnswerString = "";
 			
 			for(var i = 0; i < m1y; i++) {
-				
+
+
 				var a = document.getElementById("a"+x+c).value;
+				var str = a;
+				var pos = str.indexOf("/");
+					if(a.charAt(pos)==="/"){
+					var stringLength = a.length;
+					var String1 = a;
+					var start = str.slice(0, pos);
+					start = "\\frac {"+start+"}";
+					var end = a;
+					var afterSlash = str.substr(str.indexOf("/") + 1);
+					end = "{" + afterSlash + "}";
+					a = start + end;
+				}
 				var b = document.getElementById("b"+c+y).value;
+				var str = b;
+				var pos1 = str.indexOf("/");
+					if(b.charAt(pos1)==="/"){
+					var stringLength = b.length;
+					var String1 = b;
+					var start = str.slice(0, pos1);
+					start = "\\frac {"+start+"}";
+					var end = b;
+					var afterSlash = str.substr(str.indexOf("/") + 1);
+					end = "{" + afterSlash + "}";
+					b = start + end;
+				}
 				matrixAnswerString += a + "*" + b + " + ";
 
 				
@@ -289,6 +343,7 @@ function calculateMatrixSum() {
 }
 
 
+
 // **** ARVUTAB MAATRIKSI VÄÄRTUSE ****
 function calculateMatrixFinalSum() {
 	
@@ -299,7 +354,7 @@ function calculateMatrixFinalSum() {
 		if(x>=2){
 			var strLength = finalString.length;
 
-			finalString +="\\\\\\\\";
+			finalString +="\\\\";
 			};
 		
 		for(var y = 1; y <= m2y; y++) {
@@ -315,13 +370,26 @@ function calculateMatrixFinalSum() {
 			for(var i = 0; i < m1y; i++) {
 				
 				var a = document.getElementById("a"+x+c).value;
+
 				var b = document.getElementById("b"+c+y).value;
 				matrixAnswerString += a + "*" + b + " + ";
 				c++;
 			}
+
 			var strLength = matrixAnswerString.length;
-			matrixAnswer.value = math.eval(matrixAnswerString.slice(0, strLength - 3));
-			finalString += matrixAnswer.value;
+			matrixAnswer.value =math.eval(matrixAnswerString.slice(0, strLength - 3));
+			var a = matrixAnswer.value;
+			var abc = math.fraction(a);
+			abc = math.fraction({n: abc.n, d: abc.d});
+			if(abc.d === 1){
+				finalString += abc.n;
+			} else {
+			var reduction = reduce(abc.n,abc.d);
+			var numerator = "\\frac {"+abc.n+"}";
+			var denominator = "{" + abc.d + "}";
+			answerString = numerator + denominator;
+			finalString += answerString;
+			}
 
 			c = 1;
 		}
@@ -333,6 +401,15 @@ function calculateMatrixFinalSum() {
 
 	return finalString;
 }
+
+function reduce(numerator,denominator){
+  var gcd = function gcd(a,b){
+    return b ? gcd(b, a%b) : a;
+  };
+  gcd = gcd(numerator,denominator);
+  return [numerator/gcd, denominator/gcd];
+}
+
 
 
 function checkInputSequenceA(){
