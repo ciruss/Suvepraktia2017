@@ -73,11 +73,11 @@
                 </select>
             </form>
 
-            <button type="button" id="generateMatrixBtn" onclick="generateMatrix()">Genereeri maatriksid</button>
+            <button type="button" id="generateMatrixBtn" onclick="generateMatrix()">Genereeri maatriksid</button> <br>
+			<div id="mistakeNotification"></div>
 
             <!--<div id="matrixContainer">-->
             <div class="wrapper">
-                
                 <!-- maatriksid arvude sisestuseks -->
                 <div id="matrix1Container" class="resp"><table id="matrix1"></table></div>
                 <div id="matrix2Container" class="resp"><table id="matrix2"></table></div>
@@ -88,8 +88,7 @@
             <!--</div>-->
 
         <button id="checkAnswer" type="button" onclick="calculateMatrix()">Arvuta maatriksi vastus</button>
-        <button id="calculateNext" type="button" onclick="calculateNextMatrix()">uued maatriksid </button>
-		<button id="negativeNumber" type="button" onclick="negativeNumber()">Kas on negatiivne arv?</button>
+        <button id="calculateNext" type="button" onclick="calculateNextMatrix()">Uued maatriksid </button>
 
             <br><br><br>
             <div id="math">$$$$</div>
