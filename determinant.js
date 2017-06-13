@@ -12,8 +12,6 @@ var inversionCount = 0;
 var matrixPermutationTable = document.getElementById("matrixPermutationTable");
 
 
-
-
 // **** ÜLDINE FUNKTSIOON MAATRIKSI GENEREERIMISEKS ****
 
 function generateMatrixForDeterminant() {
@@ -526,19 +524,18 @@ function checkInputSequence(){
 	}
 }
 
-
 function validate(evt) {
 	key = evt.key;
 	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
 	if(allowed.indexOf(evt.key) == -1){
 		evt.preventDefault();
-		console.log("EI LUBA");
+		//console.log("EI LUBA");
 	}
 	if(evt.key === "/" && evt.target.value.indexOf('/') != -1){
 		evt.preventDefault();
 	}
 	if(evt.key==="-"){
-		console.log("EVENT TARGET VALUE: "+ evt.target.value.length);
+		//console.log("EVENT TARGET VALUE: "+ evt.target.value.length);
 		if(evt.target.value.length > 1){
 			evt.preventDefault();
 		}

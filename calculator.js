@@ -4,15 +4,17 @@
 var m1x, m1y, m2x, m2y;
 
 // maatriksite sisendite muutujad
-//var allowedChar = 0;
+var mistakeA = false;
+var mistakeB = false;
+var mistakesBoth = 0;
 // ||||| ----- ----- ----- ----- MAATRIKSITE KALKULAATORI OSA ----- ----- ----- ----- |||||
 
 // **** ÜLDINE FUNKTSIOON MAATRIKSITE GENEREERIMISEKS ****
 function generateMatrix() {
    
    //et kastid jälle nähtavale ilmuks
-    document.getElementById("checkAnswer").style.display = "block";	
-    document.getElementById("calculateNext").style.display = "block";
+    document.getElementById("checkAnswer").style.display = "none";	
+    document.getElementById("calculateNext").style.display = "none";
     document.getElementById("matrix1Container").style.display = "inline";
     document.getElementById("matrix2Container").style.display = "inline";
 
@@ -21,6 +23,8 @@ function generateMatrix() {
 	m2x = document.getElementById("m2x").value;
 	m2y = document.getElementById("m2y").value;
 
+	//test = m1x * m1y;
+	
 	var m1 = document.getElementById("matrix1");
 	var m2 = document.getElementById("matrix2");
 	var mA = document.getElementById("matrixAnswer");
@@ -81,8 +85,6 @@ function createMatrix1() {
 			cell.setAttribute("type", "text");
 			cell.setAttribute("onkeypress", "validate(event)");
 			cell.setAttribute("onblur", "checkInputSequenceA()");
-			//cell.setAttribute("pattern", "\d");
-			//cell.setAttribute("onkeypress", "return validate(this, event)");//<--TÖÖTAB
 			cell.setAttribute("maxlength", "10");
 			row.appendChild(cell);
 		}
@@ -119,7 +121,6 @@ function createMatrix2() {
 			cell.setAttribute("type", "text");
 			cell.setAttribute("onkeypress", "validate(event)");
 			cell.setAttribute("onblur", "checkInputSequenceB()");
-			//cell.setAttribute("onkeypress", "return validate(this, event)");//<--TÖÖTAB
 			cell.setAttribute("maxlength", "10");
 			row.appendChild(cell);
 		}
@@ -209,7 +210,7 @@ function calculateMatrix() {
 }
 //sama mis eelmine, aga peidab eelmise lahenduse ja  nupud
 function calculateNextMatrix() {
-    calculateMatrixAnswer();
+	calculateMatrixAnswer();
     calculateMatrixFinalAnswer();
     document.getElementById("matrixAnswerContainer").style.display = "none"
     document.getElementById("matrixFinalAnswerContainer").style.display = "none";
@@ -283,8 +284,8 @@ function calculateMatrixFinalAnswer() {
 
 
 function checkInputSequenceA(){
-	for (var i = 0; i < m1x; i++) {
-		for (var j = 0; j < m1y; j++) {
+	for (var i=0; i<m1x; i++) {
+		for (var j=0; j<m1y; j++) {
 			var rowId = i + 1;
 			var colId = j + 1;
 			var numberA = document.getElementById("a" + rowId + colId).value;
@@ -292,6 +293,7 @@ function checkInputSequenceA(){
 				console.log("See kast on tühi");
 				var inputColorA = document.getElementById("a" + rowId + colId);
 				inputColorA.style.backgroundColor = "";
+				mistakeA = false;
 			} else {
 				var regexA = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var foundA = regexA.test(numberA);
@@ -299,12 +301,22 @@ function checkInputSequenceA(){
 				if(foundA === false){
 					var inputColorA = document.getElementById("a" + rowId + colId);
 					inputColorA.style.backgroundColor = "red";
+					mistakeA = false;
+					document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
 				} else {
 					var inputColorA = document.getElementById("a" + rowId + colId);
 					inputColorA.style.backgroundColor = "";
+					mistakeA = true;
 				}
 			}
 		}
+	}
+	if(mistakeA === true && mistakeB === true){
+		console.log("vigu ei ole");
+		document.getElementById("checkAnswer").style.display = "block";	
+		document.getElementById("calculateNext").style.display = "block";	
+	} else {
+		console.log("vigu on")
 	}
 }
 
@@ -318,6 +330,7 @@ function checkInputSequenceB(){
 				console.log("See kast on tühi");
 				var inputColorB = document.getElementById("b" + rowId + colId);
 				inputColorB.style.backgroundColor = "";
+				mistakeB = false;
 			} else {
 				var regexB = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var foundB = regexB.test(numberB);
@@ -325,28 +338,38 @@ function checkInputSequenceB(){
 				if(foundB === false){
 					var inputColorB = document.getElementById("b" + rowId + colId);
 					inputColorB.style.backgroundColor = "red";
+					mistakeB = false;
+					document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
 				} else {
 					var inputColorB = document.getElementById("b" + rowId + colId);
 					inputColorB.style.backgroundColor = "";
+					mistakeB = true;
 				}
 			}
+			
 		}
 	}
+	if(mistakeB === true && mistakeA === true){
+		console.log("Vigu ei ole");
+		document.getElementById("checkAnswer").style.display = "block";	
+		document.getElementById("calculateNext").style.display = "block";	
+	} else {
+		console.log("Vigu on")
+	}
 }
-
 
 function validate(evt) {
 	key = evt.key;
 	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
 	if(allowed.indexOf(evt.key) == -1){
 		evt.preventDefault();
-		console.log("EI LUBA");
+		//console.log("EI LUBA");
 	}
 	if(evt.key === "/" && evt.target.value.indexOf('/') != -1){
 		evt.preventDefault();
 	}
 	if(evt.key==="-"){
-		console.log("EVENT TARGET VALUE: "+ evt.target.value.length);
+		//console.log("EVENT TARGET VALUE: "+ evt.target.value.length);
 		if(evt.target.value.length > 1){
 			evt.preventDefault();
 		}
