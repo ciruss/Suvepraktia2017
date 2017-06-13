@@ -200,18 +200,14 @@ var answerString = "";
 				var rowId = r + 1;
 				var colId = c + 1; 
 				if(c<m2y){
-				var Cell = document.getElementById("b" + rowId + colId).value + "&";
-				answerString+=Cell;
+					var Cell = document.getElementById("b" + rowId + colId).value + "&";
+					answerString+=Cell;
 				}
 				else if(c==m2y){
 				var Cell = document.getElementById("b" + rowId + colId).value;
 				answerString+=Cell;
-
-				
 				}
-				
 			}
-			
 	 }
 	var strLength = answerString.length;
 	answerString = (answerString.slice(0, strLength - 1));
@@ -370,7 +366,8 @@ function checkInputSequenceA(){
 	if(mistakeA === true && mistakeB === true){
 		console.log("vigu ei ole");
 		document.getElementById("checkAnswer").style.display = "block";	
-		document.getElementById("calculateNext").style.display = "block";	
+		document.getElementById("calculateNext").style.display = "block";
+		document.getElementById("mistakeNotification").style.display = "none";	
 	} else {
 		console.log("vigu on")
 	}
@@ -408,7 +405,8 @@ function checkInputSequenceB(){
 	if(mistakeB === true && mistakeA === true){
 		console.log("Vigu ei ole");
 		document.getElementById("checkAnswer").style.display = "block";	
-		document.getElementById("calculateNext").style.display = "block";	
+		document.getElementById("calculateNext").style.display = "block";
+		document.getElementById("mistakeNotification").style.display = "none";		
 	} else {
 		console.log("Vigu on")
 	}
