@@ -20,10 +20,10 @@ function generateMatrix() {
     document.getElementById("matrix1Container").style.display = "inline";
     document.getElementById("matrix2Container").style.display = "inline";
 
-	m1x = document.getElementById("m1x").value;
-	m1y = document.getElementById("m1y").value;
-	m2x = document.getElementById("m2x").value;
-	m2y = document.getElementById("m2y").value;
+	m1x = parseInt(document.getElementById("m1x").value);
+	m1y = parseInt(document.getElementById("m1y").value);
+	m2x = parseInt(document.getElementById("m2x").value);
+	m2y = parseInt(document.getElementById("m2y").value);
 
 	//test = m1x * m1y;
 	
@@ -510,10 +510,15 @@ function validate(evt) {
 
 
 
+
+var matrix1Array = [];
+var matrix2Array = [];
+var matrixPreAnswerArray = [];
+
 function highlighter() {
 	
-	
-	
+	var tableCells = document.getElementsByClassName("mjx-mtd");
+	var startpoint = tableCells.length / 2;
 	
 	
 	
