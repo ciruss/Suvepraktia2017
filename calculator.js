@@ -508,13 +508,37 @@ function validate(evt) {
 }
 
 
-function highlighter(aID, bID, cID) {
-    document.getElementById(cID).addEventListener("mouseover", function () {
-        document.getElementById(aID).style.backgroundColor = "yellow";
-        document.getElementById(bID).style.backgroundColor = "yellow";
-    })
-    document.getElementById(cID).addEventListener("mouseleave", function () {
-        document.getElementById(aID).style.backgroundColor = "";
-        document.getElementById(bID).style.backgroundColor = "";
-    })
+
+
+function highlighter() {
+	
+	
+	
+	
+	
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
