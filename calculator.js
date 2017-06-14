@@ -127,7 +127,6 @@ function createMatrix2() {
 			cell.setAttribute("type", "text");
 			cell.setAttribute("onkeypress", "validate(event)");
 			cell.setAttribute("onblur", "checkInputSequenceB()");
-			//cell.setAttribute("onkeypress", "return validate(this, event)");//<--TÖÖTAB
 			cell.setAttribute("maxlength", "10");
 			row.appendChild(cell);
 		}
