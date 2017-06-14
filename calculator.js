@@ -5,13 +5,19 @@ var m1x, m1y, m2x, m2y;
 // maatriksite sisendite muutujad
 var mistakeA = false;
 var mistakeB = false;
-var mistakesBoth = 0;
 // ||||| ----- ----- ----- ----- MAATRIKSITE KALKULAATORI OSA ----- ----- ----- ----- |||||
 
 // **** ÜLDINE FUNKTSIOON MAATRIKSITE GENEREERIMISEKS ****
 
 //123
 function generateMatrix() {
+	mistakeA = false;
+	mistakeB = false;
+	
+	//console.log("generateMatrix mistakeA: "+mistakeA);
+	//console.log("generateMatrix mistakeB: "+mistakeB);
+	
+	document.getElementById("mistakeNotification").style.display = "none";
    
    //et kastid jälle nähtavale ilmuks
     document.getElementById("checkAnswer").style.display = "block";	
@@ -20,18 +26,18 @@ function generateMatrix() {
     document.getElementById("matrix2Container").style.display = "inline";
 	
 
-	m1x = document.getElementById("m1x").value;
-	m1y = document.getElementById("m1y").value;
-	m2x = document.getElementById("m2x").value;
-	m2y = document.getElementById("m2y").value;
-
+	m1x = parseInt(document.getElementById("m1x").value);
+	m1y = parseInt(document.getElementById("m1y").value);
+	m2x = parseInt(document.getElementById("m2x").value);
+	m2y = parseInt(document.getElementById("m2y").value);
+	
 	var m1 = document.getElementById("matrix1");
 	var m2 = document.getElementById("matrix2");
 	var mA = document.getElementById("matrixAnswer");
 	var mFA = document.getElementById("matrixFinalAnswer");
 
 	if (m1y === m2x) {
-
+		
 		console.log("Saab arvutada");
 		console.log("Esimene maatriks on m1x x m1y (" + m1x + " x " + m1y + ")");
 		console.log("Teine maatriks on m2x x m2y (" + m2x + " x " + m2y + ")");
@@ -120,7 +126,7 @@ function createMatrix2() {
 			cell.setAttribute("id", "b" + rowId + colId);
 			cell.setAttribute("type", "text");
 			cell.setAttribute("onkeypress", "validate(event)");
-			//cell.setAttribute("onkeypress", "return validate(this, event)");//<--TÖÖTAB
+			cell.setAttribute("onblur", "checkInputSequenceB()");
 			cell.setAttribute("maxlength", "10");
 			row.appendChild(cell);
 		}
@@ -249,14 +255,22 @@ function matrix1Values() {
 
 // **** KÄIVITAB ARVUTAMISE ****
 function calculateMatrix() {
-	calculateMatrixSum();
-    calculateMatrixFinalSum();
-	createMatrix3();
-
+	if(mistakeA === false || mistakeB === false){
+		document.getElementById("mistakeNotification").style.display = "inline";
+		document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
+		console.log("calculateMatrix IF mistakeA: "+mistakeA);
+		console.log("calculateMatrix IF mistakeB: "+mistakeB);
+	} else {
+		calculateMatrixSum();
+		calculateMatrixFinalSum();
+		createMatrix3();
+		mistakeA = false;
+		mistakeB = false;
     document.getElementById("matrixAnswerContainer").style.display = "none"
     document.getElementById("matrixFinalAnswerContainer").style.display = "none";
     document.getElementById("checkAnswer").style.display = "none";
 
+}
 }
 //sama mis eelmine, aga peidab eelmise lahenduse ja  nupud
 function calculateNextMatrix() {
@@ -349,7 +363,7 @@ function calculateMatrixFinalSum() {
 	var c = 1;
 	var finalString = "";
 	
-	for(var x = 1; x <= m1x; x++) {
+	for (var x = 1; x <= m1x; x++) {
 		if(x>=2){
 			var strLength = finalString.length;
 
@@ -369,7 +383,6 @@ function calculateMatrixFinalSum() {
 			for(var i = 0; i < m1y; i++) {
 				
 				var a = document.getElementById("a"+x+c).value;
-
 				var b = document.getElementById("b"+c+y).value;
 				matrixAnswerString += a + "*" + b + " + ";
 				c++;
@@ -419,34 +432,34 @@ function checkInputSequenceA(){
 			var colId = j + 1;
 			var numberA = document.getElementById("a" + rowId + colId).value;
 			if(numberA == ""){
-				console.log("See kast on tühi");
+				//console.log("Kast A on tühi");
 				var inputColorA = document.getElementById("a" + rowId + colId);
 				inputColorA.style.backgroundColor = "";
 				mistakeA = false;
 			} else {
 				var regexA = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var foundA = regexA.test(numberA);
-				console.log(foundA);
+				//console.log("Kast A: "+foundA);
 				if(foundA === false){
 					var inputColorA = document.getElementById("a" + rowId + colId);
 					inputColorA.style.backgroundColor = "red";
 					mistakeA = false;
+					document.getElementById("mistakeNotification").style.display = "inline";
 					document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
 				} else {
 					var inputColorA = document.getElementById("a" + rowId + colId);
 					inputColorA.style.backgroundColor = "";
 					mistakeA = true;
+					document.getElementById("mistakeNotification").style.display = "none";
 				}
 			}
 		}
 	}
 	if(mistakeA === true && mistakeB === true){
-		console.log("vigu ei ole");
-		document.getElementById("checkAnswer").style.display = "block";	
-		document.getElementById("calculateNext").style.display = "block";
+		//console.log("vigu ei ole");
 		document.getElementById("mistakeNotification").style.display = "none";	
 	} else {
-		console.log("vigu on")
+		//console.log("vigu on")
 	}
 }
 
@@ -459,64 +472,61 @@ function checkInputSequenceB(){
 			var rowId = i + 1;
 			var colId = j + 1;
 			var numberB = document.getElementById("b" + rowId + colId).value;
+			console.log(numberB);
 			if(numberB == ""){
-				console.log("See kast on tühi");
+				console.log("Kast B on tühi");
 				var inputColorB = document.getElementById("b" + rowId + colId);
 				inputColorB.style.backgroundColor = "";
 				mistakeB = false;
 			} else {
 				var regexB = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var foundB = regexB.test(numberB);
-				console.log(foundB);
+				console.log("Kast B: "+foundB);
 				if(foundB === false){
 					var inputColorB = document.getElementById("b" + rowId + colId);
 					inputColorB.style.backgroundColor = "red";
 					mistakeB = false;
+					document.getElementById("mistakeNotification").style.display = "inline";
 					document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
 				} else {
 					var inputColorB = document.getElementById("b" + rowId + colId);
 					inputColorB.style.backgroundColor = "";
 					mistakeB = true;
+					document.getElementById("mistakeNotification").style.display = "none";
 				}
 			}
 			
 		}
 	}
 	if(mistakeB === true && mistakeA === true){
-		console.log("Vigu ei ole");
-		document.getElementById("checkAnswer").style.display = "block";	
-		document.getElementById("calculateNext").style.display = "block";
+		//console.log("Vigu ei ole");
 		document.getElementById("mistakeNotification").style.display = "none";		
 	} else {
-		console.log("Vigu on")
+		//console.log("Vigu on")
 	}
 }
 
 
-
 // **** LASEB SISESTADA AINULT NUMBREID JA ÜHE KALDKRIIPSU, ET SAAKS SISESTADA MURDE ****
-
-
-
 
 function validate(evt) {
 	key = evt.key;
 	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
 	if(allowed.indexOf(evt.key) == -1){
 		evt.preventDefault();
-		//console.log("EI LUBA");
+		console.log("EI LUBA");
 	}
-	if(evt.key === "/" && evt.target.value.indexOf('/') != -1){
+	// PRAEGUNE
+	if(evt.key === "/" && evt.target.value.indexOf('/') != -1) {
 		evt.preventDefault();
 	}
-	if(evt.key==="-"){
+	if(evt.key==="-") {
 		//console.log("EVENT TARGET VALUE: "+ evt.target.value.length);
-		if(evt.target.value.length > 1){
+		if(evt.target.value.length > 3){
 			evt.preventDefault();
 		}
-	}	
+	}
 }
-
 
 
 
@@ -530,9 +540,4 @@ function highlighter() {
 	var tableCells = document.getElementsByClassName("mjx-mtd");
 	var startpoint = tableCells.length / 2;
 	
-	
-	
-	
-	
 }
-
