@@ -3,7 +3,7 @@
 	<head>
 		<title>Maatriksite korrutamine</title>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="projekt.css">
+		<link rel="stylesheet" type="text/css" href="calculator.css">
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.2/math.min.js"></script>
 		<script src="calculator.js"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
@@ -17,14 +17,14 @@
 	<body>
         <div class="headNav">
           <h1>Kalkulaator</h1>
-        <button type="button" onclick="location.href='index.html'">Tagasi</button>
+        <button type="button" class="btn" onclick="location.href='index.html'">Tagasi</button>
             </div>
         
 		<!-- X on rida ja Y on veerg -->
 		<!-- MAATRIKSITE KALKULAATOR -->
 
 
-		
+		<div id="pageContent">
         <div id="instructions">
             <p>
                 <h3>Maatriksite korrutamine</h3>
@@ -32,7 +32,7 @@
                 <br> Programm kuvab maatriksite vastuse koos vahearvutustega.
             </p>
         </div>
-
+<div id="selectMatrices">
         <form class="tooltip">
             <span class="tooltiptext">vali esimese maatriksi suurus</span>
                 Esimene
@@ -73,11 +73,12 @@
                 </select>
             </form>
 
-            <button type="button" id="generateMatrixBtn" onclick="generateMatrix()">Genereeri maatriksid</button> <br>
-			<div id="mistakeNotification"></div>
-
+            <button type="button" class="btn" id="generateMatrixBtn" onclick="generateMatrix()">Genereeri maatriksid</button>
+</div>
+<div id="mistakeNotification"></div>
             <!--<div id="matrixContainer">-->
             <div class="wrapper">
+                
                 <!-- maatriksid arvude sisestuseks -->
                 <div id="matrix1Container" class="resp"><table id="matrix1"></table></div>
                 <div id="matrix2Container" class="resp"><table id="matrix2"></table></div>
@@ -86,13 +87,15 @@
                 <div id="matrixFinalAnswerContainer" class="resp"><table id="matrixFinalAnswer"></table></div> <br>
             </div>
             <!--</div>-->
-
-        <button id="checkAnswer" type="button" onclick="calculateMatrix()">Arvuta maatriksi vastus</button>
-        <button id="calculateNext" type="button" onclick="calculateNextMatrix()">Uued maatriksid </button>
-		<button id="highlight" type="button" onclick="highlighter()">Highlighter</button>
-
+<div id="btnContainer">
+        <button id="checkAnswer" class="btn" type="button" onclick="calculateMatrix()">Arvuta maatriksi vastus</button>
+        <button id="calculateNext" class="btn" type="button" onclick="calculateNextMatrix()">Uued maatriksid </button>
+		<button id="highlight" type="button" class="btn" onclick="highlighter()">Highlighter</button>
+		
+</div>
             <br><br><br>
             <div id="math">$$$$</div>
 	        <div id="display"></div>
+            </div>
 </body>
 </html>

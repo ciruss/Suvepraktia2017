@@ -3,14 +3,14 @@
 	<head>
 		<title>PROJEKT</title>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="projekt.css">
+		<link rel="stylesheet" type="text/css" href="game.css">
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.2/math.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="game.js"></script>
 	</head>
 	<body>
 		<div class="headNav">
-		<button class="gameButton" type="button" onclick="location.href='index.html'">Tagasi</button>
+		<button  type="button" class="btn" onclick="location.href='index.html'">Tagasi</button>
         <h1>Mäng</h1>
 		</div>
 		<!-- MAATRIKSITE MÄNG -->
@@ -24,9 +24,9 @@
 			<div id="TotalSum">MAATRIKSEID KOKKU: 0</div>
 		</div>
 		
-		<button id="beginGame" type="button" onclick="setPlayerName()">Mängi</button> <br>
-		<button id="checkAndRestartRandom" type="button" onclick="checkMatrixAnswersRandom()">Kontrolli vastust</button>
-		<button id="justForDevs" type="button" onclick="justForDevsMatrixAnswers()">Täida vastused</button>
+		<button id="beginGame" class="btn" type="button" onclick="setPlayerName()">Mängi</button> <br>
+		<button id="checkAndRestartRandom" class="btn" type="button" onclick="checkMatrixAnswersRandom()">Kontrolli vastust</button>
+		<button id="justForDevs" class="btn" type="button" onclick="justForDevsMatrixAnswers()">Täida vastused</button>
 		
 			<!-- maatriksid, kus arvud ette antud -->
 			<div class="wrapper">
@@ -37,6 +37,5 @@
 				<div id="exerciseMatrixAnswerContainer" class="resp" ><table id="exerciseMatrixAnswer"></table></div>
 			</div>
 		<!--RANDOMI VASTUSE KONTROLLIMINE-->
-		
 	</body>
 </html>

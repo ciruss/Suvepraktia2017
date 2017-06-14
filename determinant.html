@@ -3,30 +3,30 @@
 	<head>
 		<title>Determinantide arvutamine</title>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="projekt.css">
+		<link rel="stylesheet" type="text/css" href="determinant.css">
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.2/math.min.js"></script>
 		<script src="determinant.js"></script>
 	</head>
 	<body>
         <div class="headNav">
-          <h1>Kalkulaator</h1>
-        <button type="button" onclick="location.href='index.html'">Tagasi</button>
+          <h1>Determinandid</h1>
+        <button type="button" id="backToMain" class="btn" onclick="location.href='index.html'">Tagasi</button>
             </div>
         
 		
 		<!-- DETERMINANTIDE KALKULAATOR -->
 
-		
+<div id="pageContent">
         <div id="instructions">
             <p>
                 <h3>Determinantide arvutamine</h3>
-                ... ... tekst ... ...
-                <br> ... tekst ...
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in turpis vel enim molestie hendrerit non a eros. Integer vitae est ut eros tempus efficitur. Cras interdum odio neque, vitae viverra sem iaculis mollis.
+                <br> 
             </p>
         </div>
 		
-		<form class="tooltip">
-			<span class="tooltiptext">vali ruutmaatriksi suurus</span>
+		<form class="tooltip" id="selectFormSize" >
+			<span class="tooltiptext">Vali ruutmaatriksi suurus</span>
 			Determinandi järk
 			<select id="determinant">
 				<option value="2">2</option>
@@ -35,35 +35,34 @@
 				<option value="5">5</option>
 			</select>
 		</form>
+		
+		<div id="mistakeNotification"></div>	
 
-		<button type="button" onclick="generateMatrixForDeterminant()">Genereeri maatriks</button>
-			
-			
 		<!--<div id="matrixContainer">-->
-		<div class="wrapper">
-			
-			<!-- maatriksid arvude sisestuseks -->
-			<div id="matrixDeterminantContainer" class="resp"><table id="matrixForDeterminant"></table></div>
+		<div  id="matrixInput">
+		<!-- maatriksid arvude sisestuseks -->
+		<h5 id="answerHeadline" >vastus</h5>
+		<div id="matrixDeterminantContainer" class="resp"><table id="matrixForDeterminant"></table></div>
+        
+		<div id="matrixDeterminantAnswer" class="resp"></div>
+		
 		</div>
 		<!--</div>-->
-
-		<button id="checkAnswerDeterminant" type="button" onclick="calculateDeterminant()">Leia determinant </button>
-
-		<br><br><br>
+        <div id="btnContainer">
+	    <button type="button" class="btn" onclick="generateMatrixForDeterminant()">Genereeri maatriks</button>
+		<button id="checkAnswerDeterminant" class="btn" type="button" onclick="calculateDeterminant()">Leia determinant </button>
+        <button id="showCalculations" class="btn" type="button" onclick="displayTable()">Kuva vahetulemused </button>
+		<button id="newDeterminant"  class="btn" type="button" onclick="newCalculation()">Uus determinant </button>
 		
-		<div class="wrapper">
+		</div>
+		<br>
+		<div  id="determinantTable">
 			
 			<!-- maatriksid arvude sisestuseks -->
 			<div id="matrixPermutationTableContainer" class="resp"><table id="matrixPermutationTable"></table></div>
 			
-			<div id="matrixDeterminantAnswer" class="resp"></div>
-			
 		</div>
 		
-		
-		
-		
-		
-		
+</div>	
 </body>
 </html>
