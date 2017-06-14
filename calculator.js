@@ -15,6 +15,9 @@ function generateMatrix() {
 	mistakeA = false;
 	mistakeB = false;
 	
+	//console.log("generateMatrix mistakeA: "+mistakeA);
+	//console.log("generateMatrix mistakeB: "+mistakeB);
+	
 	document.getElementById("mistakeNotification").style.display = "none";
    
    //et kastid jälle nähtavale ilmuks
@@ -34,7 +37,7 @@ function generateMatrix() {
 	var mFA = document.getElementById("matrixFinalAnswer");
 
 	if (m1y === m2x) {
-
+		
 		console.log("Saab arvutada");
 		console.log("Esimene maatriks on m1x x m1y (" + m1x + " x " + m1y + ")");
 		console.log("Teine maatriks on m2x x m2y (" + m2x + " x " + m2y + ")");
@@ -241,7 +244,6 @@ function matrix1Values() {
 
 // **** KÄIVITAB ARVUTAMISE ****
 function calculateMatrix() {
-	
 	if(mistakeA === false || mistakeB === false){
 		document.getElementById("mistakeNotification").style.display = "inline";
 		document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
@@ -350,7 +352,7 @@ function calculateMatrixFinalSum() {
 	var c = 1;
 	var finalString = "";
 	
-	for(var x = 1; x <= m1x; x++) {
+	for (var x = 1; x <= m1x; x++) {
 		if(x>=2){
 			var strLength = finalString.length;
 			finalString +="\\\\\\\\";
@@ -365,7 +367,6 @@ function calculateMatrixFinalSum() {
 			
 			for(var i = 0; i < m1y; i++) {
 				var a = document.getElementById("a"+x+c).value;
-
 				var b = document.getElementById("b"+c+y).value;
 				matrixAnswerString += a + "*" + b + " + ";
 				c++;
@@ -408,23 +409,25 @@ function checkInputSequenceA(){
 			var colId = j + 1;
 			var numberA = document.getElementById("a" + rowId + colId).value;
 			if(numberA == ""){
-				console.log("Kast A on tühi");
+				//console.log("Kast A on tühi");
 				var inputColorA = document.getElementById("a" + rowId + colId);
 				inputColorA.style.backgroundColor = "";
 				mistakeA = false;
 			} else {
 				var regexA = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var foundA = regexA.test(numberA);
-				//console.log(foundA);
+				//console.log("Kast A: "+foundA);
 				if(foundA === false){
 					var inputColorA = document.getElementById("a" + rowId + colId);
 					inputColorA.style.backgroundColor = "red";
 					mistakeA = false;
+					document.getElementById("mistakeNotification").style.display = "inline";
 					document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
 				} else {
 					var inputColorA = document.getElementById("a" + rowId + colId);
 					inputColorA.style.backgroundColor = "";
 					mistakeA = true;
+					document.getElementById("mistakeNotification").style.display = "none";
 				}
 			}
 		}
@@ -444,23 +447,25 @@ function checkInputSequenceB(){
 			var colId = j + 1;
 			var numberB = document.getElementById("b" + rowId + colId).value;
 			if(numberB == ""){
-				console.log("Kast B on tühi");
+				//console.log("Kast B on tühi");
 				var inputColorB = document.getElementById("b" + rowId + colId);
 				inputColorB.style.backgroundColor = "";
 				mistakeB = false;
 			} else {
 				var regexB = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var foundB = regexB.test(numberB);
-				//console.log(foundB);
+				//console.log("Kast B: "+foundB);
 				if(foundB === false){
 					var inputColorB = document.getElementById("b" + rowId + colId);
 					inputColorB.style.backgroundColor = "red";
 					mistakeB = false;
+					document.getElementById("mistakeNotification").style.display = "inline";
 					document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
 				} else {
 					var inputColorB = document.getElementById("b" + rowId + colId);
 					inputColorB.style.backgroundColor = "";
 					mistakeB = true;
+					document.getElementById("mistakeNotification").style.display = "none";
 				}
 			}
 			

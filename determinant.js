@@ -17,6 +17,8 @@ var mistakes = false;
 // **** ÜLDINE FUNKTSIOON MAATRIKSI GENEREERIMISEKS ****
 
 function generateMatrixForDeterminant() {
+	
+	document.getElementById("mistakeNotification").style.display = "none";
 
 	matrixSize = document.getElementById("determinant").value;
 	var matrixForDeterminant = document.getElementById("matrixForDeterminant");
@@ -77,7 +79,9 @@ function createMatrixForDeterminant() {
 // **** FUNKTSIOON ÕIGE PERMUTATSIOONIDE FUNKTSIOONI KÄIVITAMISEKS ****
 
 function calculateDeterminant() {
+	
 	if(mistakes === false){
+		document.getElementById("mistakeNotification").style.display = "inline";
 		document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
 	} else {
 		document.getElementById("mistakeNotification").style.display = "none";
@@ -98,6 +102,8 @@ function calculateDeterminant() {
 		if(determinant === "2") {
 			determinantFor2();
 		}
+		
+		mistakes = false;
 	}
 }
 
@@ -518,22 +524,24 @@ function checkInputSequence(){
 					var inputColor = document.getElementById("a" + rowId + colId);
 					inputColor.style.backgroundColor = "red";
 					mistakes = false;
+					document.getElementById("mistakeNotification").style.display = "inline";
 					document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
 				} else {
 					var inputColor = document.getElementById("a" + rowId + colId);
 					inputColor.style.backgroundColor = "";
+					document.getElementById("mistakeNotification").style.display = "none";
 					mistakes = true
 				}
 			}
 		}
 	}
 	if(mistakes === true){
-		console.log("Vigu ei olnud");
+		//console.log("Vigu ei olnud");
 		//document.getElementById("checkAnswerDeterminant").style.display = "block"
 		//document.getElementById("newDeterminant").style.display = "block"
 		document.getElementById("mistakeNotification").style.display = "block"
 	} else {
-		console.log("vigu on");
+		//console.log("vigu on");
 	}
 }
 
@@ -544,12 +552,13 @@ function validate(evt) {
 		evt.preventDefault();
 		//console.log("EI LUBA");
 	}
-	if(evt.key === "/" && evt.target.value.indexOf('/') != -1){
+	// PRAEGUNE
+	if(evt.key === "/" && evt.target.value.indexOf('/') != -1) {
 		evt.preventDefault();
 	}
-	if(evt.key==="-"){
+	if(evt.key==="-") {
 		//console.log("EVENT TARGET VALUE: "+ evt.target.value.length);
-		if(evt.target.value.length > 1){
+		if(evt.target.value.length > 3){
 			evt.preventDefault();
 		}
 	}
