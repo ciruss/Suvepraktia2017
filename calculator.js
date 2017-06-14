@@ -12,6 +12,10 @@ var mistakeB = false;
 
 //123
 function generateMatrix() {
+	mistakeA = false;
+	mistakeB = false;
+	
+	document.getElementById("mistakeNotification").style.display = "none";
    
    //et kastid jälle nähtavale ilmuks
     document.getElementById("checkAnswer").style.display = "block";	
@@ -19,10 +23,10 @@ function generateMatrix() {
     document.getElementById("matrix1Container").style.display = "inline";
     document.getElementById("matrix2Container").style.display = "inline";
 
-	m1x = document.getElementById("m1x").value;
-	m1y = document.getElementById("m1y").value;
-	m2x = document.getElementById("m2x").value;
-	m2y = document.getElementById("m2y").value;
+	m1x = parseInt(document.getElementById("m1x").value);
+	m1y = parseInt(document.getElementById("m1y").value);
+	m2x = parseInt(document.getElementById("m2x").value);
+	m2y = parseInt(document.getElementById("m2y").value);
 	
 	var m1 = document.getElementById("matrix1");
 	var m2 = document.getElementById("matrix2");
@@ -224,17 +228,12 @@ function matrix1Values() {
 					console.log("Cell");
 					console.log(Cell);
 					answerString += Cell;
+				} else {
+					var Cell = document.getElementById("b" + rowId + colId).value + "&";
+					answerString +=Cell;
 				}
-				else {
-				var Cell = document.getElementById("b" + rowId + colId).value + "&";
-				answerString +=Cell;
-				}
-
-				
-				}
-				
 			}
-			
+		}
 	var strLength = answerString.length;
 	answerString = (answerString.slice(0, strLength - 1));
 	return answerString;
@@ -244,7 +243,10 @@ function matrix1Values() {
 function calculateMatrix() {
 	
 	if(mistakeA === false || mistakeB === false){
+		document.getElementById("mistakeNotification").style.display = "inline";
 		document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
+		console.log("calculateMatrix IF mistakeA: "+mistakeA);
+		console.log("calculateMatrix IF mistakeB: "+mistakeB);
 	} else {
 		calculateMatrixSum();
 		calculateMatrixFinalSum();
@@ -253,6 +255,12 @@ function calculateMatrix() {
 		document.getElementById("matrixAnswerContainer").style.display = "none"
 		document.getElementById("matrixFinalAnswerContainer").style.display = "none";
 		document.getElementById("checkAnswer").style.display = "block";
+		
+		mistakeA = false;
+		mistakeB = false;
+		
+		console.log("calculateMatrix ELSE mistakeA: "+mistakeA);
+		console.log("calculateMatrix ELSE mistakeB: "+mistakeB);
 	}
 }
 
@@ -297,7 +305,7 @@ function calculateMatrixSum() {
 				var a = document.getElementById("a"+x+c).value;
 				var str = a;
 				var pos = str.indexOf("/");
-					if(a.charAt(pos)==="/"){
+				if(a.charAt(pos)==="/"){
 					var stringLength = a.length;
 					var String1 = a;
 					var start = str.slice(0, pos);
@@ -310,7 +318,7 @@ function calculateMatrixSum() {
 				var b = document.getElementById("b"+c+y).value;
 				var str = b;
 				var pos1 = str.indexOf("/");
-					if(b.charAt(pos1)==="/"){
+				if(b.charAt(pos1)==="/"){
 					var stringLength = b.length;
 					var String1 = b;
 					var start = str.slice(0, pos1);
@@ -386,14 +394,12 @@ function calculateMatrixFinalSum() {
 }
 
 function reduce(numerator,denominator){
-  var gcd = function gcd(a,b){
-    return b ? gcd(b, a%b) : a;
-  };
-  gcd = gcd(numerator,denominator);
-  return [numerator/gcd, denominator/gcd];
+	var gcd = function gcd(a,b){
+		return b ? gcd(b, a%b) : a;
+	};
+	gcd = gcd(numerator,denominator);
+	return [numerator/gcd, denominator/gcd];
 }
-
-
 
 function checkInputSequenceA(){
 	for (var i=0; i<m1x; i++) {
@@ -402,7 +408,7 @@ function checkInputSequenceA(){
 			var colId = j + 1;
 			var numberA = document.getElementById("a" + rowId + colId).value;
 			if(numberA == ""){
-				console.log("See kast on tühi");
+				console.log("Kast A on tühi");
 				var inputColorA = document.getElementById("a" + rowId + colId);
 				inputColorA.style.backgroundColor = "";
 				mistakeA = false;
@@ -438,7 +444,7 @@ function checkInputSequenceB(){
 			var colId = j + 1;
 			var numberB = document.getElementById("b" + rowId + colId).value;
 			if(numberB == ""){
-				//console.log("See kast on tühi");
+				console.log("Kast B on tühi");
 				var inputColorB = document.getElementById("b" + rowId + colId);
 				inputColorB.style.backgroundColor = "";
 				mistakeB = false;
@@ -475,7 +481,6 @@ function validate(evt) {
 		evt.preventDefault();
 		//console.log("EI LUBA");
 	}
-	
 	// PRAEGUNE
 	if(evt.key === "/" && evt.target.value.indexOf('/') != -1) {
 		evt.preventDefault();
@@ -488,14 +493,11 @@ function validate(evt) {
 	}
 }
 
+var matrix1Array = [];
+var matrix2Array = [];
+var matrixPreAnswerArray = [];
 
-function highlighter(aID, bID, cID) {
-    document.getElementById(cID).addEventListener("mouseover", function () {
-        document.getElementById(aID).style.backgroundColor = "yellow";
-        document.getElementById(bID).style.backgroundColor = "yellow";
-    })
-    document.getElementById(cID).addEventListener("mouseleave", function () {
-        document.getElementById(aID).style.backgroundColor = "";
-        document.getElementById(bID).style.backgroundColor = "";
-    })
+function highlighter() {
+	var tableCells = document.getElementsByClassName("mjx-mtd");
+	var startpoint = tableCells.length / 2;	
 }
