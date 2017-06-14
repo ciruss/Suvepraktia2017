@@ -11,6 +11,7 @@ var inversionCount = 0;
 // muutuja permutatsioonide tabeli jaoks
 var matrixPermutationTable = document.getElementById("matrixPermutationTable");
 
+var mistakes = false;
 
 // **** ÜLDINE FUNKTSIOON MAATRIKSI GENEREERIMISEKS ****
 
@@ -61,18 +62,15 @@ function createMatrixForDeterminant() {
 			var cell = document.createElement("input");
 			cell.setAttribute("id", "a" + rowId + colId);
 			cell.setAttribute("type", "text");
+			cell.setAttribute("onkeypress", "validate(event)");
+			cell.setAttribute("onblur", "checkInputSequence()");
+			cell.setAttribute("maxlength", "10");
 			row.appendChild(cell);
 		}
 		tableBody.appendChild(row);
 	}
 	matrixForDeterminant.appendChild(tableBody);
 }
-
-
-
-
-
-
 
 
 // ||||| ----- ----- ----- ----- DETERMINANTIDE KALKULAATORI OSA ----- ----- ----- ----- |||||
@@ -112,6 +110,7 @@ function calculateDeterminant() {
 	document.getElementById("answerHeadline").style.display="inline-block";
 	
 	
+}
 }
 
 // **** FUNKTSIOONID PERMUTATSIOONIDE GENEREERIMISEKS ****
@@ -522,7 +521,6 @@ function newCalculation(){
 }
 
 
-
 function checkInputSequence(){
 	for (var i = 0; i < matrixSize; i++) {
 		for (var j = 0; j < matrixSize; j++) {
@@ -533,6 +531,7 @@ function checkInputSequence(){
 				console.log("See kast on tühi");
 				var inputColor = document.getElementById("a" + rowId + colId);
 				inputColor.style.backgroundColor = "";
+				mistakes = false
 			} else {
 				var regex = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var found = regex.test(number);
@@ -581,26 +580,3 @@ function validate(evt) {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

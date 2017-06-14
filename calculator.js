@@ -5,7 +5,6 @@ var m1x, m1y, m2x, m2y;
 // maatriksite sisendite muutujad
 var mistakeA = false;
 var mistakeB = false;
-var mistakesBoth = 0;
 // ||||| ----- ----- ----- ----- MAATRIKSITE KALKULAATORI OSA ----- ----- ----- ----- |||||
 
 // **** ÜLDINE FUNKTSIOON MAATRIKSITE GENEREERIMISEKS ****
@@ -127,6 +126,7 @@ function createMatrix2() {
 			cell.setAttribute("id", "b" + rowId + colId);
 			cell.setAttribute("type", "text");
 			cell.setAttribute("onkeypress", "validate(event)");
+			cell.setAttribute("onblur", "checkInputSequenceB()");
 			//cell.setAttribute("onkeypress", "return validate(this, event)");//<--TÖÖTAB
 			cell.setAttribute("maxlength", "10");
 			row.appendChild(cell);
@@ -256,7 +256,6 @@ function matrix1Values() {
 
 // **** KÄIVITAB ARVUTAMISE ****
 function calculateMatrix() {
-<<<<<<< HEAD
 	if(mistakeA === false || mistakeB === false){
 		document.getElementById("mistakeNotification").style.display = "inline";
 		document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
@@ -266,16 +265,13 @@ function calculateMatrix() {
 		calculateMatrixSum();
 		calculateMatrixFinalSum();
 		createMatrix3();
-=======
-	calculateMatrixSum();
-    calculateMatrixFinalSum();
-	createMatrix3();
->>>>>>> d986bf8ab4d12e17e4c0e141791f9282baf0adc7
-
+		mistakeA = false;
+		mistakeB = false;
     document.getElementById("matrixAnswerContainer").style.display = "none"
     document.getElementById("matrixFinalAnswerContainer").style.display = "none";
     document.getElementById("checkAnswer").style.display = "none";
 
+}
 }
 //sama mis eelmine, aga peidab eelmise lahenduse ja  nupud
 function calculateNextMatrix() {
@@ -437,22 +433,14 @@ function checkInputSequenceA(){
 			var colId = j + 1;
 			var numberA = document.getElementById("a" + rowId + colId).value;
 			if(numberA == ""){
-<<<<<<< HEAD
 				//console.log("Kast A on tühi");
-=======
-				console.log("See kast on tühi");
->>>>>>> d986bf8ab4d12e17e4c0e141791f9282baf0adc7
 				var inputColorA = document.getElementById("a" + rowId + colId);
 				inputColorA.style.backgroundColor = "";
 				mistakeA = false;
 			} else {
 				var regexA = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var foundA = regexA.test(numberA);
-<<<<<<< HEAD
 				//console.log("Kast A: "+foundA);
-=======
-				console.log(foundA);
->>>>>>> d986bf8ab4d12e17e4c0e141791f9282baf0adc7
 				if(foundA === false){
 					var inputColorA = document.getElementById("a" + rowId + colId);
 					inputColorA.style.backgroundColor = "red";
@@ -469,12 +457,10 @@ function checkInputSequenceA(){
 		}
 	}
 	if(mistakeA === true && mistakeB === true){
-		console.log("vigu ei ole");
-		document.getElementById("checkAnswer").style.display = "block";	
-		document.getElementById("calculateNext").style.display = "block";
+		//console.log("vigu ei ole");
 		document.getElementById("mistakeNotification").style.display = "none";	
 	} else {
-		console.log("vigu on")
+		//console.log("vigu on")
 	}
 }
 
@@ -487,23 +473,16 @@ function checkInputSequenceB(){
 			var rowId = i + 1;
 			var colId = j + 1;
 			var numberB = document.getElementById("b" + rowId + colId).value;
+			console.log(numberB);
 			if(numberB == ""){
-<<<<<<< HEAD
-				//console.log("Kast B on tühi");
-=======
-				console.log("See kast on tühi");
->>>>>>> d986bf8ab4d12e17e4c0e141791f9282baf0adc7
+				console.log("Kast B on tühi");
 				var inputColorB = document.getElementById("b" + rowId + colId);
 				inputColorB.style.backgroundColor = "";
 				mistakeB = false;
 			} else {
 				var regexB = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var foundB = regexB.test(numberB);
-<<<<<<< HEAD
-				//console.log("Kast B: "+foundB);
-=======
-				console.log(foundB);
->>>>>>> d986bf8ab4d12e17e4c0e141791f9282baf0adc7
+				console.log("Kast B: "+foundB);
 				if(foundB === false){
 					var inputColorB = document.getElementById("b" + rowId + colId);
 					inputColorB.style.backgroundColor = "red";
@@ -521,40 +500,34 @@ function checkInputSequenceB(){
 		}
 	}
 	if(mistakeB === true && mistakeA === true){
-		console.log("Vigu ei ole");
-		document.getElementById("checkAnswer").style.display = "block";	
-		document.getElementById("calculateNext").style.display = "block";
+		//console.log("Vigu ei ole");
 		document.getElementById("mistakeNotification").style.display = "none";		
 	} else {
-		console.log("Vigu on")
+		//console.log("Vigu on")
 	}
 }
 
 
-
 // **** LASEB SISESTADA AINULT NUMBREID JA ÜHE KALDKRIIPSU, ET SAAKS SISESTADA MURDE ****
-
-
-
 
 function validate(evt) {
 	key = evt.key;
 	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
 	if(allowed.indexOf(evt.key) == -1){
 		evt.preventDefault();
-		//console.log("EI LUBA");
+		console.log("EI LUBA");
 	}
-	if(evt.key === "/" && evt.target.value.indexOf('/') != -1){
+	// PRAEGUNE
+	if(evt.key === "/" && evt.target.value.indexOf('/') != -1) {
 		evt.preventDefault();
 	}
-	if(evt.key==="-"){
+	if(evt.key==="-") {
 		//console.log("EVENT TARGET VALUE: "+ evt.target.value.length);
-		if(evt.target.value.length > 1){
+		if(evt.target.value.length > 3){
 			evt.preventDefault();
 		}
-	}	
+	}
 }
-
 
 
 
@@ -568,9 +541,4 @@ function highlighter() {
 	var tableCells = document.getElementsByClassName("mjx-mtd");
 	var startpoint = tableCells.length / 2;
 	
-	
-	
-	
-	
 }
-
