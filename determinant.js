@@ -19,6 +19,7 @@ var mistakes = false;
 function generateMatrixForDeterminant() {
 	
 	document.getElementById("mistakeNotification").style.display = "none";
+	document.getElementById("answerHeadline").style.display = "none";
 	document.getElementById("checkAnswerDeterminant").style.display = "inline-block";
 	
 	matrixSize = document.getElementById("determinant").value;
@@ -80,7 +81,6 @@ function createMatrixForDeterminant() {
 // **** FUNKTSIOON �IGE PERMUTATSIOONIDE FUNKTSIOONI K�IVITAMISEKS ****
 
 function calculateDeterminant() {
-
 	
 	if(mistakes === false){
 		document.getElementById("mistakeNotification").style.display = "inline";
@@ -164,7 +164,7 @@ function determinantFor2() {
 		var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
 		matrixPermutationTableString += permutationTableRow;
 		
-		console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
+		//console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
 		
 		detNumbers.push(detNumbersTemp);
 		detNumbersTemp = [];
@@ -172,7 +172,7 @@ function determinantFor2() {
 		inversionCount = 0;
 	}
 	detValues = detValues.slice(3, detValues.length);
-	console.log("vahetulemus: " + detValues);
+	//console.log("vahetulemus: " + detValues);
 	
 	var matrixDetAnswer = math.eval(detValues);
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
@@ -252,7 +252,7 @@ function determinantFor3() {
 			var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
 			matrixPermutationTableString += permutationTableRow;
 			
-			console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
+			//console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
 			
 			detNumbers.push(detNumbersTemp);
 			detNumbersTemp = [];
@@ -261,7 +261,7 @@ function determinantFor3() {
 		}
 	}
 	detValues = detValues.slice(3, detValues.length);
-	console.log("vahetulemus: " + detValues);
+	//console.log("vahetulemus: " + detValues);
 	
 	var matrixDetAnswer = math.eval(detValues);
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
@@ -359,7 +359,7 @@ function determinantFor4() {
 				var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
 				matrixPermutationTableString += permutationTableRow;
 				
-				console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
+				//console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
 				
 				detNumbers.push(detNumbersTemp);
 				detNumbersTemp = [];
@@ -369,7 +369,7 @@ function determinantFor4() {
 		}
 	}
 	detValues = detValues.slice(3, detValues.length);
-	console.log("vahetulemus: " + detValues);
+	//console.log("vahetulemus: " + detValues);
 	
 	var matrixDetAnswer = math.eval(detValues);
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
@@ -484,7 +484,7 @@ function determinantFor5() {
 					var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
 					matrixPermutationTableString += permutationTableRow;
 					
-					console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
+					//console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
 					
 					detNumbers.push(detNumbersTemp);
 					detNumbersTemp = [];
@@ -497,7 +497,7 @@ function determinantFor5() {
 	}
 	
 	detValues = detValues.slice(3, detValues.length);
-	console.log("vahetulemus: " + detValues);
+	//console.log("vahetulemus: " + detValues);
 	
 	var matrixDetAnswer = math.eval(detValues);
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
@@ -521,14 +521,14 @@ function checkInputSequence(){
 			var colId = j + 1;
 			var number = document.getElementById("a" + rowId + colId).value;
 			if(number == ""){
-				console.log("See kast on tühi");
+				//console.log("See kast on tühi");
 				var inputColor = document.getElementById("a" + rowId + colId);
 				inputColor.style.backgroundColor = "";
 				mistakes = false
 			} else {
 				var regex = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var found = regex.test(number);
-				console.log(found);
+				//console.log(found);
 				if(found === false){
 					var inputColor = document.getElementById("a" + rowId + colId);
 					inputColor.style.backgroundColor = "red";

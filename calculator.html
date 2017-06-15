@@ -8,14 +8,9 @@
 		<script src="calculator.js"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        <style>
-			#math {
-			display: none
-			}
-        </style>
-	</head>
-	
+	</head>	
 	<body>
+	
 		<div class="topnav">
 			<a href="index.html">Pealehele</a>
 			<a class="active" href="calculator.html">Maatriksite korrutamine</a>
@@ -40,18 +35,17 @@
 			<h1>Kalkulaator</h1>
 		</div>
 		-->
-		<div class="main">
 			<div id="pageContent">
 				<div id="instructions">
 					<p>
 						<h3>Maatriksite korrutamine</h3>
-						Vastuse arvutamiseks vali kõigepealt maatriksite suurused ning seejärel täida lahtrid.
-						<br> Programm kuvab maatriksite vastuse koos vahearvutustega.
+						Vastuse arvutamiseks vali kõigepealt maatriksi suurus ning seejärel täida lahtrid. <br>Peale
+						lahtrite täitmist saab leida determinandi ning programm kuvab tabelina vahetulemused.
 					</p>
 				</div>
 				<div id="selectMatrices">
 					<form class="tooltip">
-						<span class="tooltiptext">vali esimese maatriksi suurus</span>
+						<span class="tooltiptext">Vali esimese maatriksi suurus</span>
 						Esimene
 						<select id="m1x">
 							<option value="1">1</option>
@@ -71,7 +65,7 @@
 					</form>
 
 					<form class="tooltip">
-					<span class="tooltiptext">vali teise maatriksi suurus</span>
+					<span class="tooltiptext">Vali teise maatriksi suurus</span>
 					Teine
 					<select id="m2x">
 						<option value="1">1</option>
@@ -90,7 +84,7 @@
 					</select>
 					</form>
 
-					<button type="button" class="btn" id="generateMatrixBtn" onclick="generateMatrix()">Genereeri maatriksid</button>
+					<button type="button" class="btn btn1" id="generateMatrixBtn" onclick="generateMatrix()">Genereeri maatriksid</button>
 				</div>
 				<div id="mistakeNotification"></div>
 				<!--<div id="matrixContainer">-->
@@ -105,14 +99,18 @@
 				</div>
 				<!--</div>-->
 				<div id="btnContainer">
-					<button id="checkAnswer" class="btn" type="button" onclick="calculateMatrix()">Arvuta maatriksi vastus</button>
+					<button id="checkAnswer" class="btn btn1" type="button" onclick="calculateMatrix()">Arvuta maatriksi vastus</button>
 					<!--<button id="calculateNext" class="btn" type="button" onclick="calculateNextMatrix()">Uued maatriksid </button>-->
-					<button id="highlight" type="button" class="btn" onclick="highlighter()">Highlighter</button>
+					<!--<button id="highlight" class="btn btn1" type="button" onclick="highlighter()">Highlighter</button>-->
 				</div>
 				<br><br><br>
 				<div id="math">$$$$</div>
-				<div id="display" onload="loadingScreen()"></div>
+				<div id="display"></div>
+				
 			</div>
-		</div>
-</body>
+			
+			
+			<div id="loader" class="loader"></div>
+			
+	</body>
 </html>

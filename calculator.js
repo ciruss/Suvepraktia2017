@@ -20,10 +20,9 @@ function generateMatrix() {
 	document.getElementById("mistakeNotification").style.display = "none";
    
    //et kastid jälle nähtavale ilmuks
-    document.getElementById("checkAnswer").style.display = "block";	
-    //document.getElementById("calculateNext").style.display = "block";
-    document.getElementById("matrix1Container").style.display = "inline";
-    document.getElementById("matrix2Container").style.display = "inline";
+    //document.getElementById("checkAnswer").style.display = "block";	
+   // document.getElementById("matrix1Container").style.display = "inline";
+   // document.getElementById("matrix2Container").style.display = "inline";
 	
 
 	m1x = parseInt(document.getElementById("m1x").value);
@@ -35,6 +34,9 @@ function generateMatrix() {
 	var m2 = document.getElementById("matrix2");
 	var mA = document.getElementById("matrixAnswer");
 	var mFA = document.getElementById("matrixFinalAnswer");
+	
+	
+	
 
 	if (m1y === m2x) {
 		
@@ -72,11 +74,11 @@ function generateMatrix() {
 function createMatrix1() {
 
 	var matrix1Container = document.getElementById("matrix1Container");
-	var m1Width = 42 * m1y;
+	/*var m1Width = 42 * m1y;
 	var m1Height = 28 * m1x;
 	matrix1Container.style.width = m1Width + "px";
 	matrix1Container.style.height = m1Height + "px";
-
+*/
 	var matrix1 = document.getElementById("matrix1");
 	var tableBody = document.createElement("tbody");
 
@@ -103,7 +105,7 @@ function createMatrix1() {
 function createMatrix2() {
 
 	var matrix2Container = document.getElementById("matrix2Container");
-	var m2Width = 42 * m2y;
+/*	var m2Width = 42 * m2y;
 	var m2Height = 28 * m2x;
 
 	var m1Width = 42 * m1y;
@@ -112,7 +114,7 @@ function createMatrix2() {
 	matrix2Container.style.width = m2Width + "px";
 	matrix2Container.style.height = m2Height + "px";
 	matrix2Container.style.left = m2Position + "px";
-
+*/
 	var matrix2 = document.getElementById("matrix2");
 	var tableBody = document.createElement("tbody");
 
@@ -127,6 +129,7 @@ function createMatrix2() {
 			cell.setAttribute("type", "text");
 			cell.setAttribute("onkeypress", "validate(event)");
 			cell.setAttribute("onblur", "checkInputSequenceB()");
+			//cell.setAttribute("onkeypress", "return validate(this, event)");//<--TÖÖTAB
 			cell.setAttribute("maxlength", "10");
 			row.appendChild(cell);
 		}
@@ -151,14 +154,19 @@ function createMatrix3() {
         //\\begin{bmatrix} {"+i+"}&{"+j+"}&0\\\\0&{"+i+"}&{"+j+"}\\\\{"+j+"}&0&{"+i+"}\\\end{bmatrix}
 		MathJax.Hub.Queue(function() {
 		displayDiv.innerHTML = mathDiv.innerHTML;
+		
+	
+		
+		
 		});
+		
+		
+		
+	
 	});
 }
 //Loendab esimeses maatriksis olevad arvud kokku, ning viib mathJax kujule
 function matrix1Values() {
-
-
-
  var answerString = "";
 	var table = document.getElementById('matrix1');
         for (var r = 0, n = table.rows.length; r < n; r++) {
@@ -168,6 +176,8 @@ function matrix1Values() {
 			answerString = (answerString.slice(0, strLength - 1));
 			answerString +="\\\\";
 			}
+			
+
             for (var c = 0;c < m1y; c++){
 				var rowId = r + 1;
 				var colId = c + 1;
@@ -194,11 +204,17 @@ function matrix1Values() {
 
 				
            }
+		   
+		 
+	
+	
 	 }
 	 var strLength = answerString.length;
 	answerString = (answerString.slice(0, strLength - 1));
 	console.log(answerString);
 	return answerString;
+	
+
  }
 
   //Viib teises maatriksis olevad arvud MatJax kujule
@@ -240,12 +256,23 @@ function matrix1Values() {
 				
 				}
 				
+
+				
 			}
 			
 	var strLength = answerString.length;
 	answerString = (answerString.slice(0, strLength - 1));
 	return answerString;
- }
+	
+	
+}
+ 
+
+
+
+
+
+
 
 // **** KÄIVITAB ARVUTAMISE ****
 function calculateMatrix() {
@@ -258,29 +285,13 @@ function calculateMatrix() {
 		calculateMatrixSum();
 		calculateMatrixFinalSum();
 		createMatrix3();
-		document.getElementById("matrixAnswerContainer").style.display = "none"
-		document.getElementById("matrixFinalAnswerContainer").style.display = "none";
-		//mistakeA = false;
-		//mistakeB = false;
-		//document.getElementById("checkAnswer").style.display = "none";
-	}
-}
-
-//sama mis eelmine, aga peidab eelmise lahenduse ja  nupud
-/*
-function calculateNextMatrix() {
-    calculateMatrixSum();
-    calculateMatrixFinalSum();
-	createMatrix3();
-
+	
     document.getElementById("matrixAnswerContainer").style.display = "none"
     document.getElementById("matrixFinalAnswerContainer").style.display = "none";
-    document.getElementById("matrix1Container").style.display = "none";
-    document.getElementById("matrix2Container").style.display = "none";
-    document.getElementById("checkAnswer").style.display = "none";
-    document.getElementById("calculateNext").style.display = "none";
+    //document.getElementById("checkAnswer").style.display = "none";
+
 }
-*/
+}
 
 // **** GENEREERIB VAHETULEMUSE ****
 function calculateMatrixSum() {
@@ -383,7 +394,7 @@ function calculateMatrixFinalSum() {
 				matrixAnswerString += a + "*" + b + " + ";
 				c++;
 			}
-
+			
 			var strLength = matrixAnswerString.length;
 			matrixAnswer.value =math.eval(matrixAnswerString.slice(0, strLength - 3));
 			var a = matrixAnswer.value;
@@ -414,11 +425,11 @@ function calculateMatrixFinalSum() {
 
 
 function reduce(numerator,denominator){
-	var gcd = function gcd(a,b){
-		return b ? gcd(b, a%b) : a;
-	};
-	gcd = gcd(numerator,denominator);
-	return [numerator/gcd, denominator/gcd];
+  var gcd = function gcd(a,b){
+    return b ? gcd(b, a%b) : a;
+  };
+  gcd = gcd(numerator,denominator);
+  return [numerator/gcd, denominator/gcd];
 }
 
 function checkInputSequenceA(){
@@ -428,14 +439,14 @@ function checkInputSequenceA(){
 			var colId = j + 1;
 			var numberA = document.getElementById("a" + rowId + colId).value;
 			if(numberA == ""){
-				console.log("Kast A on tühi");
+				//console.log("Kast A on tühi");
 				var inputColorA = document.getElementById("a" + rowId + colId);
-				inputColorA.style.backgroundColor = "";
+				inputColorA.style.backgroundColor = "yellow";
 				mistakeA = false;
 			} else {
 				var regexA = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var foundA = regexA.test(numberA);
-				console.log("Kast A: "+foundA);
+				//console.log("Kast A: "+foundA);
 				if(foundA === false){
 					var inputColorA = document.getElementById("a" + rowId + colId);
 					inputColorA.style.backgroundColor = "red";
@@ -452,12 +463,14 @@ function checkInputSequenceA(){
 		}
 	}
 	if(mistakeA === true && mistakeB === true){
-		console.log("A: vigu ei ole");
+		//console.log("vigu ei ole");
 		document.getElementById("mistakeNotification").style.display = "none";	
 	} else {
-		console.log("A: vigu on")
+		//console.log("vigu on")
 	}
 }
+
+
 
 
 function checkInputSequenceB(){
@@ -466,10 +479,11 @@ function checkInputSequenceB(){
 			var rowId = i + 1;
 			var colId = j + 1;
 			var numberB = document.getElementById("b" + rowId + colId).value;
+			console.log(numberB);
 			if(numberB == ""){
 				console.log("Kast B on tühi");
 				var inputColorB = document.getElementById("b" + rowId + colId);
-				inputColorB.style.backgroundColor = "";
+				inputColorB.style.backgroundColor = "yellow";
 				mistakeB = false;
 			} else {
 				var regexB = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
@@ -492,12 +506,14 @@ function checkInputSequenceB(){
 		}
 	}
 	if(mistakeB === true && mistakeA === true){
-		console.log("B: vigu ei ole");
+		//console.log("Vigu ei ole");
 		document.getElementById("mistakeNotification").style.display = "none";		
 	} else {
-		console.log("B: vigu on")
+		//console.log("Vigu on")
 	}
 }
+
+
 
 
 // **** LASEB SISESTADA AINULT NUMBREID JA ÜHE KALDKRIIPSU, ET SAAKS SISESTADA MURDE ****
@@ -522,12 +538,16 @@ function validate(evt) {
 	*/
 }
 
+var matrix1Array;
+var matrix2Array;
+var matrixPreAnswerArray;
 
-var matrix1Array = [[null]];
-var matrix2Array = [[null]];
-var matrixPreAnswerArray = [[null]];
 
 function highlighter() {
+	
+matrix1Array = [[null]];
+matrix2Array = [[null]];
+matrixPreAnswerArray = [[null]];
 	
 	var tableCells = document.getElementsByClassName("mjx-mtd");
 	var startpoint = tableCells.length / 2;
@@ -615,8 +635,8 @@ function highlight(aID, bID, cID) {
 	var tableCells = document.getElementsByClassName("mjx-mtd");
 	
     tableCells[cID].addEventListener("mouseover", function () {
-        tableCells[aID].style.color = "red";
-        tableCells[bID].style.color = "red";
+        tableCells[aID].style.color = "#f2cc10";
+        tableCells[bID].style.color = "#f2cc10";
     });
 	
     tableCells[cID].addEventListener("mouseleave", function () {
@@ -625,5 +645,3 @@ function highlight(aID, bID, cID) {
     });
 
 }
-
-
