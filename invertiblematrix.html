@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Determinantide arvutamine</title>
+		<title>Pöördmaatriks</title>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="determinant.css">
+		<link rel="stylesheet" type="text/css" href="invertiblematrix.css">
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.2/math.min.js"></script>
-		<script src="determinant.js"></script>
+		<!-- <script src="calculator.js"></script> -->
+		<script src="invertiblematrix.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+		<style>
+			#math {
+				display: none
+			}
+        </style>
 	</head>
 	
 	<body>
         <div class="headNav">
-			<h1>Determinandid</h1>
+			<h1>Pöördmaatriks</h1>
 			<button type="button" class="btn" onclick="location.href='index.html'">Pealehele</button>
 			<button type="button" class="btn" onclick="location.href='calculator.html'">Maatriksite korrutamine</button>
-			<button type="button" class="btn" onclick="location.href='invertiblematrix.html'">Pöördmaatriks</button>
+			<button type="button" class="btn" onclick="location.href='determinant.html'">Determinandid</button>
         </div>
 
 		<!-- DETERMINANTIDE KALKULAATOR -->
@@ -21,7 +29,7 @@
 		<div id="pageContent">
 			<div id="instructions">
 				<p>
-					<h3>Determinantide arvutamine</h3>
+					<h3>Pöördmaatriksite arvutamine</h3>
 						"Kuidas lehtede kasutada"
 					<br> 
 				</p>
@@ -29,8 +37,8 @@
 				
 			<form class="tooltip" id="selectFormSize" >
 				<span class="tooltiptext">Vali ruutmaatriksi suurus</span>
-				Determinandi järk
-				<select id="determinant">
+				Maatriksi järk
+				<select id="invertibleMatrixSize">
 					<option value="2">2</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
@@ -44,21 +52,21 @@
 			<div  id="matrixInput">
 				<!-- maatriksid arvude sisestuseks -->
 				<h5 id="answerHeadline" >vastus</h5>
-				<div id="matrixDeterminantContainer" class="resp"><table id="matrixForDeterminant"></table></div>
+				<div id="matrixInvertibleMContainer" class="resp"><table id="matrixForInvertibleM"></table></div>
 				<div id="matrixDeterminantAnswer" class="resp"></div>
 			</div>
 			<!--</div>-->
 			<div id="btnContainer">
-				<button type="button" class="btn" onclick="generateMatrixForDeterminant()">Genereeri maatriks</button>
+				<button type="button" class="btn" onclick="generateMatrixForInvertibleM()">Genereeri maatriks</button>
 				<button id="checkAnswerDeterminant" class="btn" type="button" onclick="calculateDeterminant()">Leia determinant </button>
-				<button id="showCalculations" class="btn" type="button" onclick="displayTable()">Kuva vahetulemused </button>
-				<button id="newDeterminant"  class="btn" type="button" onclick="newCalculation()">Uus determinant </button>
+				<!-- <button id="newDeterminant"  class="btn" type="button" onclick="newCalculation()">Uus determinant </button> -->
 			</div>
 			<br>
-			<div id="determinantTable">
-				<!-- maatriksid arvude sisestuseks -->
-				<div id="matrixPermutationTableContainer" class="resp"><table id="matrixPermutationTable"></table></div>
-			</div>
 		</div>	
 	</body>
 </html>
+
+
+
+
+

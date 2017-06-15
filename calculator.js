@@ -472,16 +472,16 @@ function checkInputSequenceB(){
 			var rowId = i + 1;
 			var colId = j + 1;
 			var numberB = document.getElementById("b" + rowId + colId).value;
-			//console.log(numberB);
+			console.log(numberB);
 			if(numberB == ""){
-				//console.log("Kast B on tühi");
+				console.log("Kast B on tühi");
 				var inputColorB = document.getElementById("b" + rowId + colId);
 				inputColorB.style.backgroundColor = "";
 				mistakeB = false;
 			} else {
 				var regexB = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var foundB = regexB.test(numberB);
-				//console.log("Kast B: "+foundB);
+				console.log("Kast B: "+foundB);
 				if(foundB === false){
 					var inputColorB = document.getElementById("b" + rowId + colId);
 					inputColorB.style.backgroundColor = "red";
@@ -514,7 +514,7 @@ function validate(evt) {
 	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
 	if(allowed.indexOf(evt.key) == -1){
 		evt.preventDefault();
-		//console.log("EI LUBA");
+		console.log("EI LUBA");
 	}
 	// PRAEGUNE
 	if(evt.key === "/" && evt.target.value.indexOf('/') != -1) {
@@ -527,10 +527,6 @@ function validate(evt) {
 		}
 	}
 }
-
-
-
-
 
 
 
@@ -581,14 +577,14 @@ function highlighter() {
 		matrixRow = [null];
 	}
 	
-	/* console.log("startpoint: " + startpoint);
+	console.log("startpoint: " + startpoint);
 	console.log("rowStartpoint: " + rowStartpoint);
 	console.log("answerStartpoint: " + answerStartpoint);
 	console.log(matrix1Array);
 	console.log(matrix2Array);
 	console.log(matrixPreAnswerArray);
-	 */
-
+	
+	
 	
     var c = 1;
 	
@@ -598,19 +594,19 @@ function highlighter() {
 				
                 (function() {
 					
-					//console.log("1 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-					//console.log("c: " + c + " , x: " + x + " , y: " + y);
+					console.log("1 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
+					console.log("c: " + c + " , x: " + x + " , y: " + y);
                     var aID = matrix1Array[x][c];
-					//console.log("2 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-					//console.log("c: " + c + " , x: " + x + " , y: " + y);
+					console.log("2 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
+					console.log("c: " + c + " , x: " + x + " , y: " + y);
                     var bID = matrix2Array[c][y];
-					//console.log("3 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-					//console.log("c: " + c + " , x: " + x + " , y: " + y);
+					console.log("3 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
+					console.log("c: " + c + " , x: " + x + " , y: " + y);
                     var cID = matrixPreAnswerArray[x][y];
 					
 					highlight(aID, bID, cID);
 					
-					//console.log("4 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
+					console.log("4 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
 					
                     c++;
                 }
@@ -637,6 +633,3 @@ function highlight(aID, bID, cID) {
     });
 
 }
-
-
-
