@@ -5,25 +5,18 @@ var m1x, m1y, m2x, m2y;
 // maatriksite sisendite muutujad
 var mistakeA = false;
 var mistakeB = false;
+//hilight muutujad
+var matrix1Array;
+var matrix2Array;
+var matrixPreAnswerArray;
+
 // ||||| ----- ----- ----- ----- MAATRIKSITE KALKULAATORI OSA ----- ----- ----- ----- |||||
-
 // **** ÜLDINE FUNKTSIOON MAATRIKSITE GENEREERIMISEKS ****
-
-//123
 function generateMatrix() {
 	mistakeA = false;
 	mistakeB = false;
 	
-	//console.log("generateMatrix mistakeA: "+mistakeA);
-	//console.log("generateMatrix mistakeB: "+mistakeB);
-	
 	document.getElementById("mistakeNotification").style.display = "none";
-   
-   //et kastid jälle nähtavale ilmuks
-    //document.getElementById("checkAnswer").style.display = "block";	
-   // document.getElementById("matrix1Container").style.display = "inline";
-   // document.getElementById("matrix2Container").style.display = "inline";
-	
 
 	m1x = parseInt(document.getElementById("m1x").value);
 	m1y = parseInt(document.getElementById("m1y").value);
@@ -35,31 +28,20 @@ function generateMatrix() {
 	var mA = document.getElementById("matrixAnswer");
 	var mFA = document.getElementById("matrixFinalAnswer");
 	
-	
-	
-
-	if (m1y === m2x) {
-		
-		console.log("Saab arvutada");
-		console.log("Esimene maatriks on m1x x m1y (" + m1x + " x " + m1y + ")");
-		console.log("Teine maatriks on m2x x m2y (" + m2x + " x " + m2y + ")");
-
-		if (m1 && m2 && mA && mFA) {
-
+	if(m1y === m2x){
+		if(m1 && m2 && mA && mFA){
 			m1.innerHTML = "";
 			m2.innerHTML = "";
 			mA.innerHTML = "";
 			mFA.innerHTML = "";
 
-			createMatrix1();
-			createMatrix2();
+			createMatrix();
+			//createMatrix2();
 			calculateMatrixSum();
 			calculateMatrixFinalSum();
-
 		} else {
-
-			createMatrix1();
-			createMatrix2();
+			createMatrix();
+			//createMatrix2();
 			calculateMatrixSum();
 			calculateMatrixFinalSum();
 		}
@@ -67,54 +49,61 @@ function generateMatrix() {
 		console.log("Ei saa arvutada");
 		alert("Ei saa genereerida, muuda maatriksite suuruseid!");
 	}
-
 }
 
 // **** FUNKTSIOON, MIS GENEREERIB ESIMESE MAATRIKSI ****
-function createMatrix1() {
+function createMatrix() {
 
 	var matrix1Container = document.getElementById("matrix1Container");
-	/*var m1Width = 42 * m1y;
-	var m1Height = 28 * m1x;
-	matrix1Container.style.width = m1Width + "px";
-	matrix1Container.style.height = m1Height + "px";
-*/
 	var matrix1 = document.getElementById("matrix1");
 	var tableBody = document.createElement("tbody");
 
-	for (var i = 0; i < m1x; i++) {
+	for (var i=0; i<m1x; i++) {
 		var row = document.createElement("tr");
-
-		for (var j = 0; j < m1y; j++) {
+		
+		for (var j=0; j<m1y; j++) {
 			var rowId = i + 1;
 			var colId = j + 1;
 			var cell = document.createElement("input");
 			cell.setAttribute("id", "a" + rowId + colId);
 			cell.setAttribute("type", "text");
 			cell.setAttribute("onkeypress", "validate(event)");
-			cell.setAttribute("onblur", "checkInputSequenceA()");
+			cell.setAttribute("onblur", "checkInputSequence()");
 			cell.setAttribute("maxlength", "10");
 			row.appendChild(cell);
 		}
 		tableBody.appendChild(row);
 	}
 	matrix1.appendChild(tableBody);
+	
+	var matrix2Container = document.getElementById("matrix2Container");
+	var matrix2 = document.getElementById("matrix2");
+	var tableBody = document.createElement("tbody");
+
+	for (var i=0; i<m2x; i++) {
+		var row = document.createElement("tr");
+
+		for (var j=0; j<m2y; j++) {
+			var rowId = i + 1;
+			var colId = j + 1;
+			var cell = document.createElement("input");
+			cell.setAttribute("id", "b" + rowId + colId);
+			cell.setAttribute("type", "text");
+			cell.setAttribute("onkeypress", "validate(event)");
+			cell.setAttribute("onblur", "checkInputSequence()");
+			cell.setAttribute("maxlength", "10");
+			row.appendChild(cell);
+		}
+		tableBody.appendChild(row);
+	}
+	matrix2.appendChild(tableBody);
 }
 
 // **** FUNKTSIOON, MIS GENEREERIB TEISE MAATRIKSI ****
+/*
 function createMatrix2() {
 
 	var matrix2Container = document.getElementById("matrix2Container");
-/*	var m2Width = 42 * m2y;
-	var m2Height = 28 * m2x;
-
-	var m1Width = 42 * m1y;
-	var m2Position = m1Width + 20;
-
-	matrix2Container.style.width = m2Width + "px";
-	matrix2Container.style.height = m2Height + "px";
-	matrix2Container.style.left = m2Position + "px";
-*/
 	var matrix2 = document.getElementById("matrix2");
 	var tableBody = document.createElement("tbody");
 
@@ -129,15 +118,14 @@ function createMatrix2() {
 			cell.setAttribute("type", "text");
 			cell.setAttribute("onkeypress", "validate(event)");
 			cell.setAttribute("onblur", "checkInputSequenceB()");
-			//cell.setAttribute("onkeypress", "return validate(this, event)");//<--TÖÖTAB
 			cell.setAttribute("maxlength", "10");
 			row.appendChild(cell);
 		}
 		tableBody.appendChild(row);
 	}
 	matrix2.appendChild(tableBody);
-
 }
+*/
 
 function createMatrix3() {
 	var mathDiv = document.getElementById('math');
@@ -153,38 +141,29 @@ function createMatrix3() {
 		MathJax.Hub.Queue(["Text", math, "\\begin{bmatrix}"+ i +"\\end{bmatrix} \\times \\begin{bmatrix}"+j+"\\end{bmatrix} = \\begin{bmatrix}"+ k +"\\end{bmatrix} = \\begin{bmatrix}"+ l +"\\end{bmatrix}"]);
         //\\begin{bmatrix} {"+i+"}&{"+j+"}&0\\\\0&{"+i+"}&{"+j+"}\\\\{"+j+"}&0&{"+i+"}\\\end{bmatrix}
 		MathJax.Hub.Queue(function() {
-		displayDiv.innerHTML = mathDiv.innerHTML;
-		
-	
-		
-		
-		});
-		
-		
-		
-	
+			displayDiv.innerHTML = mathDiv.innerHTML;
+			highlighter();
+		});	
 	});
 }
+
 //Loendab esimeses maatriksis olevad arvud kokku, ning viib mathJax kujule
 function matrix1Values() {
- var answerString = "";
+	var answerString = "";
 	var table = document.getElementById('matrix1');
-        for (var r = 0, n = table.rows.length; r < n; r++) {
-			if(r>=1){
-			
-			var strLength = answerString.length;
-			answerString = (answerString.slice(0, strLength - 1));
-			answerString +="\\\\";
+        for (var r=0, n=table.rows.length; r<n; r++) {
+			if(r >= 1){
+				var strLength = answerString.length;
+				answerString = (answerString.slice(0, strLength - 1));
+				answerString +="\\\\";
 			}
-			
-
-            for (var c = 0;c < m1y; c++){
+            for (var c=0; c<m1y; c++) {
 				var rowId = r + 1;
 				var colId = c + 1;
 				var Cell = document.getElementById("a" + rowId + colId).value;
 				var str = Cell;
 				var pos = str.indexOf("/");
-				if(Cell.charAt(pos)==="/"){
+				if(Cell.charAt(pos) === "/"){
 					var stringLength = Cell.length;
 					var String1 = Cell;
 					var start = str.slice(0, pos);
@@ -194,48 +173,35 @@ function matrix1Values() {
 					end = "{" + afterSlash + "}&";
 					Cell = start + end;
 					answerString += Cell;
-				}
-				else {
-				var Cell = document.getElementById("a" + rowId + colId).value + "&";
-				answerString +=Cell;
-				}
-				
-				
-
-				
+				} else {
+					var Cell = document.getElementById("a" + rowId + colId).value + "&";
+					answerString +=Cell;
+				}				
            }
-		   
-		 
-	
-	
 	 }
-	 var strLength = answerString.length;
+	var strLength = answerString.length;
 	answerString = (answerString.slice(0, strLength - 1));
-	console.log(answerString);
+	console.log("Vastus: "+answerString);
 	return answerString;
-	
-
  }
 
-  //Viib teises maatriksis olevad arvud MatJax kujule
-
- function matrix2Values() {
+ //Viib teises maatriksis olevad arvud MatJax kujule
+function matrix2Values() {
 	var answerString = "";
 	var table = document.getElementById('matrix2');
-        for (var r = 0, n = table.rows.length; r < n; r++) {
-			if(r>=1){
-			var strLength = answerString.length;
-			answerString = (answerString.slice(0, strLength - 1));
-			answerString +="\\\\";
-			};
-		
-            for (var c = 0; c < m2y; c++){
+        for (var r=0, n=table.rows.length; r<n; r++) {
+			if(r >= 1){
+				var strLength = answerString.length;
+				answerString = (answerString.slice(0, strLength - 1));
+				answerString +="\\\\";
+			};		
+            for (var c=0; c<m2y; c++){
 				var rowId = r + 1;
 				var colId = c + 1; 
 				var Cell = document.getElementById("b" + rowId + colId).value;
 				var str = Cell;
 				var pos = str.indexOf("/");
-				if(Cell.charAt(pos)==="/"){
+				if(Cell.charAt(pos) === "/"){
 					var stringLength = Cell.length;
 					var String1 = Cell;
 					var start = str.slice(0, pos);
@@ -247,33 +213,17 @@ function matrix1Values() {
 					console.log("Cell");
 					console.log(Cell);
 					answerString += Cell;
-				}
-				else {
-				var Cell = document.getElementById("b" + rowId + colId).value + "&";
-				answerString +=Cell;
-				}
-
-				
-				}
-				
-
-				
-			}
-			
+				} else {
+					var Cell = document.getElementById("b" + rowId + colId).value + "&";
+					answerString +=Cell;
+				}				
+			}		
+		}
 	var strLength = answerString.length;
 	answerString = (answerString.slice(0, strLength - 1));
 	return answerString;
-	
-	
 }
  
-
-
-
-
-
-
-
 // **** KÄIVITAB ARVUTAMISE ****
 function calculateMatrix() {
 	if(mistakeA === false || mistakeB === false){
@@ -285,43 +235,39 @@ function calculateMatrix() {
 		calculateMatrixSum();
 		calculateMatrixFinalSum();
 		createMatrix3();
+		
+		console.log("calculateMatrix ELSE mistakeA: "+mistakeA);
+		console.log("calculateMatrix ELSE mistakeB: "+mistakeB);
 	
-    document.getElementById("matrixAnswerContainer").style.display = "none"
-    document.getElementById("matrixFinalAnswerContainer").style.display = "none";
-    //document.getElementById("checkAnswer").style.display = "none";
-
-}
+		document.getElementById("matrixAnswerContainer").style.display = "none"
+		document.getElementById("matrixFinalAnswerContainer").style.display = "none";
+	}
 }
 
 // **** GENEREERIB VAHETULEMUSE ****
 function calculateMatrixSum() {
-	
 	var c = 1;
 	var finalString="";
 	
-	for(var x = 1; x <= m1x; x++) {
-			if(x>=2){
-			var strLength = finalString.length;
-			finalString = (finalString.slice(0, strLength - 3));
-			finalString +="\\\\";
+	for (var x=1; x<=m1x; x++) {
+			if(x >= 2){
+				var strLength = finalString.length;
+				finalString = (finalString.slice(0, strLength - 3));
+				finalString +="\\\\";
 			};
-		
-		for(var y = 1; y <= m2y; y++) {
-
-			if(y>=2){
+		for (var y=1; y<=m2y; y++) {
+			if(y >= 2){
 				var strLength = finalString.length;
 				finalString = finalString.slice(0,strLength -3);
 				finalString += "&";
 			};
 			var matrixAnswerString = "";
 			
-			for(var i = 0; i < m1y; i++) {
-
-
+			for (var i=0; i<m1y; i++) {
 				var a = document.getElementById("a"+x+c).value;
 				var str = a;
 				var pos = str.indexOf("/");
-					if(a.charAt(pos)==="/"){
+				if(a.charAt(pos) === "/"){
 					var stringLength = a.length;
 					var String1 = a;
 					var start = str.slice(0, pos);
@@ -334,7 +280,7 @@ function calculateMatrixSum() {
 				var b = document.getElementById("b"+c+y).value;
 				var str = b;
 				var pos1 = str.indexOf("/");
-					if(b.charAt(pos1)==="/"){
+				if(b.charAt(pos1) === "/"){
 					var stringLength = b.length;
 					var String1 = b;
 					var start = str.slice(0, pos1);
@@ -344,57 +290,40 @@ function calculateMatrixSum() {
 					end = "{" + afterSlash + "}";
 					b = start + end;
 				}
-				matrixAnswerString += a + "*" + b + " + ";
-
-				
+				matrixAnswerString += a + "*" + b + " + ";				
 				c++;
 			}
 			finalString += matrixAnswerString;
-			
-				
 			c = 1;
-
-		
 		}
 	}
 	var strLength = finalString.length;
 	finalString = finalString.slice(0, strLength - 3);
-
 	return finalString;
 }
 
-
 // **** ARVUTAB MAATRIKSI VÄÄRTUSE ****
-function calculateMatrixFinalSum() {
-	
+function calculateMatrixFinalSum() {	
 	var c = 1;
 	var finalString = "";
 	
-	for (var x = 1; x <= m1x; x++) {
-		if(x>=2){
+	for (var x=1; x<=m1x; x++) {
+		if(x >= 2){
 			var strLength = finalString.length;
-
 			finalString +="\\\\";
-			};
-		
-		for(var y = 1; y <= m2y; y++) {
-
-			if(y>=2){
+		};
+		for (var y=1; y<=m2y; y++) {
+			if(y >= 2){
 				var strLength = finalString.length;
-
 				finalString += "&";
 			};
-
 			var matrixAnswerString = "";
-			
-			for(var i = 0; i < m1y; i++) {
-				
+			for (var i=0; i<m1y; i++) {
 				var a = document.getElementById("a"+x+c).value;
 				var b = document.getElementById("b"+c+y).value;
 				matrixAnswerString += a + "*" + b + " + ";
 				c++;
 			}
-			
 			var strLength = matrixAnswerString.length;
 			matrixAnswer.value =math.eval(matrixAnswerString.slice(0, strLength - 3));
 			var a = matrixAnswer.value;
@@ -403,50 +332,45 @@ function calculateMatrixFinalSum() {
 			if(abc.d === 1){
 				finalString += abc.n;
 			} else {
-			var reduction = reduce(abc.n,abc.d);
-			var numerator = "\\frac {"+abc.n+"}";
-			var denominator = "{" + abc.d + "}";
-			answerString = numerator + denominator;
-			finalString += answerString;
+				var reduction = reduce(abc.n,abc.d);
+				var numerator = "\\frac {"+abc.n+"}";
+				var denominator = "{" + abc.d + "}";
+				answerString = numerator + denominator;
+				finalString += answerString;
 			}
-
 			c = 1;
 		}
-
 	}
-
 	var strLength = finalString.length;
-
-
 	return finalString;
 }
 
-
-
-
 function reduce(numerator,denominator){
-  var gcd = function gcd(a,b){
-    return b ? gcd(b, a%b) : a;
-  };
-  gcd = gcd(numerator,denominator);
-  return [numerator/gcd, denominator/gcd];
+	var gcd = function gcd(a,b){
+		return b ? gcd(b, a%b) : a;
+	};
+	gcd = gcd(numerator,denominator);
+	return [numerator/gcd, denominator/gcd];
 }
 
-function checkInputSequenceA(){
+function checkInputSequence(){
+	checkA:
 	for (var i=0; i<m1x; i++) {
 		for (var j=0; j<m1y; j++) {
 			var rowId = i + 1;
 			var colId = j + 1;
 			var numberA = document.getElementById("a" + rowId + colId).value;
+			console.log(numberA);
 			if(numberA == ""){
-				//console.log("Kast A on tühi");
+				console.log("Kast A on tühi");
 				var inputColorA = document.getElementById("a" + rowId + colId);
-				inputColorA.style.backgroundColor = "yellow";
+				inputColorA.style.backgroundColor = "";
 				mistakeA = false;
+				break checkA;
 			} else {
 				var regexA = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var foundA = regexA.test(numberA);
-				//console.log("Kast A: "+foundA);
+				console.log("Kast A: "+foundA);
 				if(foundA === false){
 					var inputColorA = document.getElementById("a" + rowId + colId);
 					inputColorA.style.backgroundColor = "red";
@@ -462,18 +386,8 @@ function checkInputSequenceA(){
 			}
 		}
 	}
-	if(mistakeA === true && mistakeB === true){
-		//console.log("vigu ei ole");
-		document.getElementById("mistakeNotification").style.display = "none";	
-	} else {
-		//console.log("vigu on")
-	}
-}
-
-
-
-
-function checkInputSequenceB(){
+	
+	checkB:
 	for (var i = 0; i < m2x; i++) {
 		for (var j = 0; j < m2y; j++) {
 			var rowId = i + 1;
@@ -482,9 +396,11 @@ function checkInputSequenceB(){
 			console.log(numberB);
 			if(numberB == ""){
 				console.log("Kast B on tühi");
-				var inputColorB = document.getElementById("b" + rowId + colId);
-				inputColorB.style.backgroundColor = "yellow";
 				mistakeB = false;
+				console.log("checkInputSequenceB Tühi kast: "+mistakeB);
+				var inputColorB = document.getElementById("b" + rowId + colId);
+				inputColorB.style.backgroundColor = "";
+				break checkB;
 			} else {
 				var regexB = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var foundB = regexB.test(numberB);
@@ -505,16 +421,61 @@ function checkInputSequenceB(){
 			
 		}
 	}
+	
+	console.log("Lõpus mistakeB: "+mistakeB);
+	console.log("Lõpus mistakeA: "+mistakeA);
 	if(mistakeB === true && mistakeA === true){
-		//console.log("Vigu ei ole");
 		document.getElementById("mistakeNotification").style.display = "none";		
-	} else {
-		//console.log("Vigu on")
+	}
+	
+	if(mistakeA === true && mistakeB === true){
+		document.getElementById("mistakeNotification").style.display = "none";	
 	}
 }
 
-
-
+/*
+function checkInputSequenceB(){	
+	checkB:
+	for (var i = 0; i < m2x; i++) {
+		for (var j = 0; j < m2y; j++) {
+			var rowId = i + 1;
+			var colId = j + 1;
+			var numberB = document.getElementById("b" + rowId + colId).value;
+			console.log(numberB);
+			if(numberB == ""){
+				console.log("Kast B on tühi");
+				mistakeB = false;
+				console.log("checkInputSequenceB Tühi kast: "+mistakeB);
+				var inputColorB = document.getElementById("b" + rowId + colId);
+				inputColorB.style.backgroundColor = "";
+				break checkB;
+			} else {
+				var regexB = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
+				var foundB = regexB.test(numberB);
+				console.log("Kast B: "+foundB);
+				if(foundB === false){
+					var inputColorB = document.getElementById("b" + rowId + colId);
+					inputColorB.style.backgroundColor = "red";
+					mistakeB = false;
+					document.getElementById("mistakeNotification").style.display = "inline";
+					document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
+				} else {
+					var inputColorB = document.getElementById("b" + rowId + colId);
+					inputColorB.style.backgroundColor = "";
+					mistakeB = true;
+					document.getElementById("mistakeNotification").style.display = "none";
+				}
+			}
+			
+		}
+	}
+	console.log("Lõpus mistakeB: "+mistakeB);
+	console.log("Lõpus mistakeA: "+mistakeA);
+	if(mistakeB === true && mistakeA === true){
+		document.getElementById("mistakeNotification").style.display = "none";		
+	}
+}
+*/
 
 // **** LASEB SISESTADA AINULT NUMBREID JA ÜHE KALDKRIIPSU, ET SAAKS SISESTADA MURDE ****
 function validate(evt) {
@@ -524,30 +485,15 @@ function validate(evt) {
 		evt.preventDefault();
 		console.log("EI LUBA");
 	}
-	// PRAEGUNE
 	if(evt.key === "/" && evt.target.value.indexOf('/') != -1) {
 		evt.preventDefault();
 	}
-	/*
-	if(evt.key==="-") {
-		//console.log("EVENT TARGET VALUE: "+ evt.target.value.length);
-		if(evt.target.value.length > 3){
-			evt.preventDefault();
-		}
-	}
-	*/
 }
 
-var matrix1Array;
-var matrix2Array;
-var matrixPreAnswerArray;
-
-
 function highlighter() {
-	
-matrix1Array = [[null]];
-matrix2Array = [[null]];
-matrixPreAnswerArray = [[null]];
+	matrix1Array = [[null]];
+	matrix2Array = [[null]];
+	matrixPreAnswerArray = [[null]];
 	
 	var tableCells = document.getElementsByClassName("mjx-mtd");
 	var startpoint = tableCells.length / 2;
@@ -560,8 +506,8 @@ matrixPreAnswerArray = [[null]];
 	var matrixRow = [null];
 	
 	// esimene maatriks
-	for(var i = 0; i < matrix1Column; i++) {
-		for(var j = 0; j < m1y; j++) {
+	for (var i=0; i<matrix1Column; i++) {
+		for (var j=0; j<m1y; j++) {
 			matrixRow.push(rowStartpoint);
 			rowStartpoint++;
 		}
@@ -570,8 +516,8 @@ matrixPreAnswerArray = [[null]];
 	}
 	
 	// teine maatriks
-	for(var i = 0; i < matrix2Column; i++) {
-		for(var j = 0; j < m2y; j++) {
+	for (var i=0; i<matrix2Column; i++) {
+		for (var j=0; j<m2y; j++) {
 			matrixRow.push(rowStartpoint);
 			rowStartpoint++;
 		}
@@ -580,8 +526,8 @@ matrixPreAnswerArray = [[null]];
 	}
 	
 	// vahevastuste maatriks
-	for(var i = 0; i < matrix1Column; i++) {
-		for(var j = 0; j < m2y; j++) {
+	for (var i=0; i<matrix1Column; i++) {
+		for (var j=0; j<m2y; j++) {
 			matrixRow.push(rowStartpoint);
 			rowStartpoint++;
 		}
@@ -589,23 +535,20 @@ matrixPreAnswerArray = [[null]];
 		matrixRow = [null];
 	}
 	
-	/* console.log("startpoint: " + startpoint);
+	/*
+	console.log("startpoint: " + startpoint);
 	console.log("rowStartpoint: " + rowStartpoint);
 	console.log("answerStartpoint: " + answerStartpoint);
 	console.log(matrix1Array);
 	console.log(matrix2Array);
 	console.log(matrixPreAnswerArray);
 	 */
-
-	
-    var c = 1;
-	
-    for (var x = 1; x <= m1x; x++) {
-        for (var y = 1; y <= m2y; y++) {
-            for (var i = 0; i < m1y; i++) {
-				
+	 
+    var c = 1;	
+    for (var x=1; x<=m1x; x++) {
+        for (var y=1; y<=m2y; y++) {
+            for (var i=0; i<m1y; i++) {
                 (function() {
-					
 					//console.log("1 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
 					//console.log("c: " + c + " , x: " + x + " , y: " + y);
                     var aID = matrix1Array[x][c];
@@ -615,11 +558,8 @@ matrixPreAnswerArray = [[null]];
 					//console.log("3 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
 					//console.log("c: " + c + " , x: " + x + " , y: " + y);
                     var cID = matrixPreAnswerArray[x][y];
-					
 					highlight(aID, bID, cID);
-					
 					//console.log("4 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-					
                     c++;
                 }
 				());
@@ -629,9 +569,7 @@ matrixPreAnswerArray = [[null]];
 	}
 }
 	
-	
 function highlight(aID, bID, cID) {
-	
 	var tableCells = document.getElementsByClassName("mjx-mtd");
 	
     tableCells[cID].addEventListener("mouseover", function () {
@@ -643,5 +581,4 @@ function highlight(aID, bID, cID) {
         tableCells[aID].style.color = "black";
         tableCells[bID].style.color = "black";
     });
-
 }
