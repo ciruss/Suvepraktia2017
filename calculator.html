@@ -15,10 +15,12 @@
         </style>
 	</head>
 	<body>
-        <div class="headNav">
-          <h1>Kalkulaator</h1>
-        <button type="button" class="btn" onclick="location.href='index.html'">Tagasi</button>
-            </div>
+    	<div class="topnav">
+			<a href="game.html">Harjutusmäng</a>
+			<a class="active" href="calculator.html">Maatriksite korrutamine</a>
+			<a href="determinant.html">Determinandid</a>
+			<a href="invertiblematrix.html">Pöördmaatriks</a>
+		</div>
         
 		<!-- X on rida ja Y on veerg -->
 		<!-- MAATRIKSITE KALKULAATOR -->
@@ -75,7 +77,8 @@
 
             <button type="button" class="btn" id="generateMatrixBtn" onclick="generateMatrix()">Genereeri maatriksid</button>
 </div>
-            <!--<div id="matrixContainer">-->
+ <div id="mistakeNotification"></div>          
+ <!--<div id="matrixContainer">-->
             <div class="wrapper">
                 
                 <!-- maatriksid arvude sisestuseks -->
@@ -83,15 +86,14 @@
                 <div id="matrix2Container" class="resp"><table id="matrix2"></table></div>
                 <!-- maatriksid vastuste genereerimiseks -->
                 <div id="matrixAnswerContainer" class="resp"><table id="matrixAnswer"></table></div>
-                <div id="matrixFinalAnswerContainer" class="resp"><table id="matrixFinalAnswer"></table></div> <br>
+                <div id="matrixFinalAnswerContainer" class="resp"><table id="matrixFinalAnswer"></table></div>
             </div>
             <!--</div>-->
 <div id="btnContainer">
-        <button id="checkAnswer" class="btn" type="button" onclick="calculateMatrix()">Arvuta maatriksi vastus</button>
-        <button id="calculateNext" class="btn" type="button" onclick="calculateNextMatrix()">uued maatriksid </button>
-		<button id="highlight" type="button" class="btn" onclick="highlighter()">Highlighter</button>
-		
+					<button id="checkAnswerDeterminant" class="btn" type="button" onclick="calculateMatrix()">kuva vastus </button>
+					<button id="highlight" type="button" class="btn" onclick="highlighter()">Highlighter</button>
 </div>
+				
             <br><br><br>
             <div id="math">$$$$</div>
 	        <div id="display"></div>
