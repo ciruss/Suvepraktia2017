@@ -9,13 +9,15 @@
 		<script src="game.js"></script>
 	</head>
 	<body>
-		<div class="headNav">
-		<button  type="button" class="btn" onclick="location.href='index.html'">Tagasi</button>
-        <h1>Mäng</h1>
+		    	<div class="topnav">
+			<a href="game.html">Harjutusmäng</a>
+			<a class="active" href="calculator.html">Maatriksite korrutamine</a>
+			<a href="determinant.html">Determinandid</a>
+			<a href="invertiblematrix.html">Pöördmaatriks</a>
 		</div>
 		<!-- MAATRIKSITE MÄNG -->
 		
-		
+		<div id="pageContent">
 		<div id="gameStats">
 			<div id="playerName">MÄNGIJA:</div>
 			<div id="stopper">AEG: 60</div>
@@ -37,6 +39,6 @@
 				<div id="exerciseMatrixAnswerContainer" class="resp" ><table id="exerciseMatrixAnswer"></table></div>
 			</div>
 		<!--RANDOMI VASTUSE KONTROLLIMINE-->
-		
+		</div>
 	</body>
 </html>

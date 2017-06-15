@@ -8,11 +8,8 @@
 		<script src="calculator.js"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        <style>
-                #math {
-                display: none
-                }
-        </style>
+		<link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet"> 
+       
 	</head>
 	<body>
     	<div class="topnav">
@@ -35,6 +32,7 @@
             </p>
         </div>
 <div id="selectMatrices">
+<div id="selectors">
         <form class="tooltip">
             <span class="tooltiptext">vali esimese maatriksi suurus</span>
                 Esimene
@@ -74,7 +72,7 @@
                     <option value="5">5</option>
                 </select>
             </form>
-
+</div>
             <button type="button" class="btn" id="generateMatrixBtn" onclick="generateMatrix()">Genereeri maatriksid</button>
 </div>
  <div id="mistakeNotification"></div>          
@@ -94,9 +92,10 @@
 					<button id="highlight" type="button" class="btn" onclick="highlighter()">Highlighter</button>
 </div>
 				
-            <br><br><br>
-            <div id="math">$$$$</div>
-	        <div id="display"></div>
+           
+            
             </div>
+			<div id="math">$$$$</div>
+	        <div id="display"></div>
 </body>
 </html>
