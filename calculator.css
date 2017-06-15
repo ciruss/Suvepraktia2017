@@ -154,10 +154,11 @@ input {
      justify-content:space-around;
      white-space:normal;
 }
+
 #MathJax-Element-1-Frame{
     position:absolute;
     display:flex;
-	
+	justify-content:flex-start;
     overflow:scroll;
     padding:35px;   
     
@@ -211,8 +212,9 @@ input {
 	#display{
         position:absolute;
         width:80%;
-        top:75%;
+        top:85%;
 		left:10%;
+		
 		
    
 	}
@@ -221,5 +223,6 @@ input {
 		 
         
 	}
-#selectors{}
-  
+#selectors >*{
+  padding-right:20px;
+}

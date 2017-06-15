@@ -34,6 +34,9 @@ function generateMatrix() {
 	var m2 = document.getElementById("matrix2");
 	var mA = document.getElementById("matrixAnswer");
 	var mFA = document.getElementById("matrixFinalAnswer");
+	
+	
+	
 
 	if (m1y === m2x) {
 		
@@ -151,14 +154,19 @@ function createMatrix3() {
         //\\begin{bmatrix} {"+i+"}&{"+j+"}&0\\\\0&{"+i+"}&{"+j+"}\\\\{"+j+"}&0&{"+i+"}\\\end{bmatrix}
 		MathJax.Hub.Queue(function() {
 		displayDiv.innerHTML = mathDiv.innerHTML;
+		
+	
+		
+		
 		});
+		
+		
+		
+	
 	});
 }
 //Loendab esimeses maatriksis olevad arvud kokku, ning viib mathJax kujule
 function matrix1Values() {
-
-
-
  var answerString = "";
 	var table = document.getElementById('matrix1');
         for (var r = 0, n = table.rows.length; r < n; r++) {
@@ -168,6 +176,8 @@ function matrix1Values() {
 			answerString = (answerString.slice(0, strLength - 1));
 			answerString +="\\\\";
 			}
+			
+
             for (var c = 0;c < m1y; c++){
 				var rowId = r + 1;
 				var colId = c + 1;
@@ -194,11 +204,17 @@ function matrix1Values() {
 
 				
            }
+		   
+		 
+	
+	
 	 }
 	 var strLength = answerString.length;
 	answerString = (answerString.slice(0, strLength - 1));
 	console.log(answerString);
 	return answerString;
+	
+
  }
 
   //Viib teises maatriksis olevad arvud MatJax kujule
@@ -240,12 +256,17 @@ function matrix1Values() {
 				
 				}
 				
+
+				
 			}
 			
 	var strLength = answerString.length;
 	answerString = (answerString.slice(0, strLength - 1));
 	return answerString;
- }
+	
+	
+}
+ 
 
 
 
@@ -264,11 +285,10 @@ function calculateMatrix() {
 		calculateMatrixSum();
 		calculateMatrixFinalSum();
 		createMatrix3();
-		mistakeA = false;
-		mistakeB = false;
+	
     document.getElementById("matrixAnswerContainer").style.display = "none"
     document.getElementById("matrixFinalAnswerContainer").style.display = "none";
-    document.getElementById("checkAnswer").style.display = "none";
+    //document.getElementById("checkAnswer").style.display = "none";
 
 }
 }
@@ -387,7 +407,7 @@ function calculateMatrixFinalSum() {
 				matrixAnswerString += a + "*" + b + " + ";
 				c++;
 			}
-
+			
 			var strLength = matrixAnswerString.length;
 			matrixAnswer.value =math.eval(matrixAnswerString.slice(0, strLength - 3));
 			var a = matrixAnswer.value;

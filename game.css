@@ -1,16 +1,9 @@
-/*
-#id <-- ID põhjal
-.class <-- klassi põhjal
-element <-- elemendi põjal
-*/
 
-@import url("projekt.css");
-body {
-    font-family: verdana;
 
-    background-color: #ffffff;
+*{
+     
+	font-family: 'Overpass', sans-serif;
 }
-
 
 .btn {
     box-shadow: 0 5px 10px 0 rgba(0,0,0,0.20), 0 17px 50px 0 rgba(0,0,0,0.19);
@@ -49,7 +42,6 @@ input {
     color: black;
     background-color: #FFFFFF;
     display: inline-block;
-    float: left;
     border-style: solid;
 }
 
@@ -135,23 +127,111 @@ tr:nth-child(even) {
 			color: white;
 		}
 
-	#pageContent{
-    width: 70%;
-    height: 70%;
-    background-color: #ffffff;
-    position: absolute;
-    display:flex;
-    flex-direction:column;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-   
-}
+
  .wrapper{
 
+    height:180px;
     margin:20px;
     display:flex;
-    justify-content:space-between;
+	flex-direction:row;
+
+  
     box-shadow: 0 5px 5px 0 rgba(0,0,0,0.10), 0 10px 40px 0 rgba(0,0,0,0.19);
     border-radius:10px; 
+
  }
+ 
+ 
+#gameBts{
+	display:flex;
+	justify-content:center;
+	flex-direction:row;
+	     white-space:normal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+#id <-- ID põhjal
+.class <-- klassi põhjal
+element <-- elemendi põjal
+*/
+
+
+
+h1 {
+	color:#004080;
+}
+
+
+
+
+form {
+	color:grey;
+}
+
+
+
+tbody {
+	width:650px;
+  
+	display:inline-block;
+
+}
+
+
+
+
+.matrixAnswerInput {
+	max-width: 110px;
+}
+
+
+
+th, td {
+	text-align: left;
+	padding: 8px;
+}
+
+
+
+
