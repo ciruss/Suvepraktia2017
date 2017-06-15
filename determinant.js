@@ -19,7 +19,8 @@ var mistakes = false;
 function generateMatrixForDeterminant() {
 	
 	document.getElementById("mistakeNotification").style.display = "none";
-
+	document.getElementById("checkAnswerDeterminant").style.display = "inline-block";
+	
 	matrixSize = document.getElementById("determinant").value;
 	var matrixForDeterminant = document.getElementById("matrixForDeterminant");
 	var matrixPermutationTable = document.getElementById("matrixPermutationTable");
@@ -103,15 +104,10 @@ function calculateDeterminant() {
 		if(determinant === "2") {
 			determinantFor2();
 		}
-		
-		mistakes = false;
-
-	document.getElementById("showCalculations").style.display="inline-block";
-	document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
-	document.getElementById("answerHeadline").style.display="inline-block";
-	
-	
-}
+		document.getElementById("showCalculations").style.display="inline-block";
+		document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
+		document.getElementById("answerHeadline").style.display="inline-block";
+	}
 }
 // **** FUNKTSIOONID PERMUTATSIOONIDE GENEREERIMISEKS ****
 
@@ -511,6 +507,12 @@ function determinantFor5() {
 	matrixPermutationTableString = "";
 }
 
+function displayTable(){
+	document.getElementById("determinantTable").style.display="block";
+	document.getElementById("checkAnswerDeterminant").style.display="inline-block";
+	document.getElementById("showCalculations").style.display="none";
+	//document.getElementById("newDeterminant").style.display="block";
+}
 
 function checkInputSequence(){
 	for (var i = 0; i < matrixSize; i++) {
@@ -564,10 +566,12 @@ function validate(evt) {
 	if(evt.key === "/" && evt.target.value.indexOf('/') != -1) {
 		evt.preventDefault();
 	}
+	/*
 	if(evt.key==="-") {
 		//console.log("EVENT TARGET VALUE: "+ evt.target.value.length);
 		if(evt.target.value.length > 3){
 			evt.preventDefault();
 		}
 	}
+	*/
 }

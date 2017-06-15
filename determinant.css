@@ -1,21 +1,35 @@
+/*
+#id <-- ID põhjal
+.class <-- klassi põhjal
+element <-- elemendi põjal
+*/
+
+
 @import url("projekt.css");
 
-.headNav{
-     padding: 30px;
-     width:100%;
-     height:30px;
-   
-} 
+#checkAnswerDeterminant {
+	display: none;
+}
 
-*{
+#showCalculations {
+	display: none;
+}
+
+.headNav {
+	padding: 30px;
+	width:100%;
+	height:30px;
+}
+
+* {
     box-sizing: border-box;
 }
  
-body{
+body {
 
 }
 
-#pageContent{
+#pageContent {
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -26,9 +40,12 @@ body{
     border-radius:6px;
     top: 50%;
     left: 50%;
-   
-
 }
+
+.btn1 {
+	width: 130px;
+}
+
 h1 {
     text-align: center;
     color: #004080;
@@ -43,7 +60,7 @@ h3 {
     color: #004080;
 }
 
-#instructions{
+#instructions {
     overflow: hidden;
     font-size: 20px;
     text-align: center;
@@ -52,8 +69,6 @@ h3 {
     transition: opacity 0.5s ease-in-out;
     padding:50 100 0 100;
 }
-
-
 
 .tooltip {
     position: relative;
@@ -94,16 +109,15 @@ h3 {
         opacity: 1;
     }
 
-    #selectFormSize{
-   
-    text-align: center;
-    
-}
-
-#btnContainer{
-     display: flex;
-     justify-content:space-evenly;
-     white-space:normal;
+    #selectFormSize {
+		text-align: center;
+	}
+	
+#btnContainer {
+	display: flex;
+	/*display: none;*/
+	justify-content:space-evenly;
+	white-space:normal;
 }
 
 
@@ -127,31 +141,26 @@ tbody {
       
 }
 
-
-
 th, td {
     text-align: left;
     padding: 8px;
 }
-th{
+
+th {
    background-color: #272788;  
     color:#ffffff;
 }
 
-
-#determinantTable{
+#determinantTable {
 	display:none;
-  transition: margin-left .5s;
+	transition: margin-left .5s;
 }
 
-
-
-table#matrixPermutationTable {
+table #matrixPermutationTable {
     margin: auto;
 }
 
-
-#matrixDeterminantAnswer{
+#matrixDeterminantAnswer {
     order: 3;
     margin: auto;
     text-align:center;
@@ -159,21 +168,18 @@ table#matrixPermutationTable {
     display:none; 
 }
 
-#answerHeadline{
-    
+#answerHeadline {
     order: 2;
     margin: auto;
     display:none;
 }
 
-
-#matrixDeterminantContainer{
-order: 1;
-margin: auto;   
-  
+#matrixDeterminantContainer {
+	order: 1;
+	margin: auto;
 }
 
-#matrixInput{
+#matrixInput {
     display: flex;
     justify-content: center;
     flex-direction:row;
@@ -181,3 +187,28 @@ margin: auto;
     box-shadow: 0 5px 10px 0 rgba(0,0,0,0.20), 0 17px 50px 0 rgba(0,0,0,0.19);
     border-radius:10px;   
 }
+
+		.topnav {
+			overflow: hidden;
+			background-color: #004080;
+		}
+
+		.topnav a {
+		  float: left;
+		  display: block;
+		  color: #f2f2f2;
+		  text-align: center;
+		  padding: 14px 16px;
+		  text-decoration: none;
+		  font-size: 17px;
+		}
+
+		.topnav a:hover {
+		  background-color: #eaf0f9;
+		  color: black;
+		}
+
+		.topnav a.active {
+			background-color: #221a54;
+			color: white;
+		}
