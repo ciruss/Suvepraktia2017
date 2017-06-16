@@ -22,8 +22,6 @@ var Em1x, Em1y, Em2x, Em2y;
 var a = [[null, null, null]];
 var b = [[null, null, null]];
 
-var matrixCellValue;
-var matrixCellValuePreAnswers;
 // ||||| ----- ----- ----- ----- MAATRIKSITE HARJUTAMISE OSA ----- ----- ----- ----- |||||
 
 //mängija nime küsimine
@@ -237,8 +235,8 @@ function createExerciseMatrixPreAnswer() {
 			cell.setAttribute("id", "Ed" + rowId + colId);
 			cell.setAttribute("class", "matrixAnswerInput");
 			cell.setAttribute("type", "text");
-			cell.setAttribute("onkeypress", "validate(event)");
-			//cell.setAttribute("onblur", "checkInputSequence()");
+			cell.setAttribute("onkeypress", "return validate(this, event)");
+			//cell.setAttribute("oninput", "checkLength(2,this)");
 			row.appendChild(cell);
 		}
 		tableBody.appendChild(row);
@@ -272,8 +270,7 @@ function createExerciseMatrixAnswer() {
 			var cell = document.createElement("input");
 			cell.setAttribute("id", "Ec" + rowId + colId);
 			cell.setAttribute("type", "text");
-			cell.setAttribute("onkeypress", "validate(event)");
-			//cell.setAttribute("onblur", "checkInputSequence()");
+			cell.setAttribute("onkeypress", "return validate(this, event)");
 			row.appendChild(cell);
 		}
 		tableBody.appendChild(row);
@@ -337,17 +334,13 @@ function checkMatrixFinalAnswers() {
 
 			for (var i = 0; i < Em1y; i++) {
 				var Ea = document.getElementById("Ea" + rowId + c).value;
-				//console.log("checkMatrixFinalAnswers Ea: "+Ea);
 				var Eb = document.getElementById("Eb" + c + colId).value;
-				//console.log("checkMatrixFinalAnswers Eb: "+Eb);
 				matrixAnswerString += Ea + "*" + Eb + " + ";
 				c++;
 			}
 			var strLength = matrixAnswerString.length;
-			matrixCellValue = math.eval(matrixAnswerString.slice(0, strLength - 3));
-			console.log("Kalkulaatori lõppvastus matrixCellValue: "+matrixCellValue);
+			var matrixCellValue = math.eval(matrixAnswerString.slice(0, strLength - 3));
 			var matrixInputCell = parseInt(matrixAnswer.value);
-			console.log("Kasutaja lõppvastus matrixInputCell: "+matrixInputCell);
 			c = 1;
 
 			if (matrixInputCell == matrixCellValue) {
@@ -383,20 +376,12 @@ function checkMatrixPreAnswers() {
 				matrixAnswerString += Ea + "*" + Eb + " + ";
 				c++;
 			}
-			
 			var strLength = matrixAnswerString.length;
-			matrixCellValuePreAnswers = matrixAnswerString.slice(0, strLength - 3);
-			console.log("matrixCellValuePreAnswers: "+matrixCellValuePreAnswers);
-			
-			var test = eval(matrixCellValuePreAnswers);
-			console.log("test: " +test);
-			
-			//console.log("matrixCellValue: "+matrixCellValue);
-			var matrixInputCell = eval(matrixAnswer.value);
-			//console.log("matrixInputCell: "+matrixInputCell);
+			var matrixCellValue = matrixAnswerString.slice(0, strLength - 3);
+			var matrixInputCell = matrixAnswer.value;
 			c = 1;
 
-			if (matrixInputCell === test) {
+			if (matrixInputCell === matrixCellValue) {
 				matrixAnswer.style.color = "green";
 				//answerCounter += 1
 				//score += 1
@@ -425,17 +410,13 @@ function justForDevsMatrixAnswers() {
 			for (var i = 0; i < Em1y; i++) {
 
 				var Ea = document.getElementById("Ea" + rowId + c).value;
-				//console.log("justForDevsMatrixAnswers Ea: "+Ea);
 				var Eb = document.getElementById("Eb" + c + colId).value;
-				//console.log("justForDevsMatrixAnswers Eb: "+Eb);
 				matrixAnswerString += Ea + "*" + Eb + " + ";
 				c++;
 			}
 			var strLength = matrixAnswerString.length;
-			math.eval(matrixAnswer.value = matrixAnswerString.slice(0, strLength - 3));
-			//console.log("justForDevsMatrixAnswers matrixAnswer.value: "+matrixAnswer.value);
+			matrixAnswer.value = matrixAnswerString.slice(0, strLength - 3);
 			matrixFinalAnswer.value = math.eval(matrixAnswerString.slice(0, strLength - 3));
-			//console.log("justForDevsMatrixAnswers matrixFinalAnswer.value: "+matrixFinalAnswer.value);
 			c = 1;
 		}
 	}
@@ -488,8 +469,8 @@ function checkMatrixAnswersRandom() {
 	matrixPreAnswerErrors = 0;
 }
 
-/*
 //TULEMUSTE SALVESTAMINE LOCALSTORAGESSE
+
 function saveStatsToLocalstorage(dataObject) {
 	if (!localStorage["top"]) {
 		var arr = []
@@ -517,7 +498,6 @@ function loadStatsFromLocalStorage() {
 			createTable(arr)
 	}
 }
-*/
 
 // MÄNGU SKOORI FUNKTSIOONID
 function resetScore() {
@@ -548,6 +528,7 @@ function updateScore() {
 
 //UUE MÄNGU ALUSTAMINE
 function startNewGame() {
+
 	document.getElementById("generateExerciseMatrix").style.visibility = "visible";
 	document.getElementById("generateRandomExerciseMatrix").style.visibility = "visible";
 	document.getElementById("startNewGame").style.visibility = "hidden";
@@ -582,13 +563,44 @@ function tick() {
 	}
 }
 
-
 // **** KONTROLLIB SISESTUST *****
-function validate(evt) {
-	key = evt.key;
-	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", " ", "/", "-", "*", "+", "Tab", "Backspace"];
-	if(allowed.indexOf(evt.key) == -1){
-		evt.preventDefault();
-		//console.log("EI LUBA");
+function validate(elementRef, event) {
+	var keyCodeEntered = (event.which) ? event.which : (window.event.keyCode) ? window.event.keyCode : -1;
+		console.log(event.keyCode);
+		if ((keyCodeEntered >= 48) && (keyCodeEntered <= 57) || (keyCodeEntered === 8)) {
+			return true;
+		} else if (keyCodeEntered == 47) {
+			if ((elementRef.value) && (elementRef.value.indexOf('/') >= 0)) {
+				return false;
+			} else {
+				return true;
+			}
+		} else if (keyCodeEntered == 32) {
+			//while(){
+				
+			/*
+			console.log(elementRef.value);
+			if ((elementRef.value) && (elementRef.value.indexOf(' ') >= 0)) {
+				return false;
+			} else {
+				return true;
+			}
+			*/
+			
+		}
+	return false;
+}
+
+/*
+// **** KONTROLLIB PIKKUST SISESTAMISEL****
+function checkLength(len,ele){
+	var fieldLength = ele.value.length;
+	if(fieldLength <= len){
+		return true;
+	} else {
+		var str = ele.value;
+		str = str.substring(0, str.length - 1);
+		ele.value = str;
 	}
 }
+*/

@@ -13,7 +13,6 @@ var matrixPermutationTable = document.getElementById("matrixPermutationTable");
 
 var mistakes = false;
 
-
 // **** ÜLDINE FUNKTSIOON MAATRIKSI GENEREERIMISEKS ****
 
 function generateMatrixForDeterminant() {
@@ -42,16 +41,15 @@ function generateMatrixForDeterminant() {
 
 
 // **** FUNKTSIOON, MIS GENEREERIB ESIMESE MAATRIKSI ****
-// **** FUNKTSIOON, MIS GENEREERIB ESIMESE MAATRIKSI ****
 
 function createMatrixForDeterminant() {
 
 	var matrixDeterminantContainer = document.getElementById("matrixDeterminantContainer");
-	var mWidth = 42 * matrixSize;
+	/*var mWidth = 42 * matrixSize;
 	var mHeight = 28 * matrixSize;
 	matrixDeterminantContainer.style.width = mWidth + "px";
 	matrixDeterminantContainer.style.height = mHeight + "px";
-
+*/
 	var matrixForDeterminant = document.getElementById("matrixForDeterminant");
 	var tableBody = document.createElement("tbody");
 
@@ -73,6 +71,7 @@ function createMatrixForDeterminant() {
 	}
 	matrixForDeterminant.appendChild(tableBody);
 }
+
 
 // ||||| ----- ----- ----- ----- DETERMINANTIDE KALKULAATORI OSA ----- ----- ----- ----- |||||
 
@@ -113,6 +112,7 @@ function calculateDeterminant() {
 	
 }
 }
+
 // **** FUNKTSIOONID PERMUTATSIOONIDE GENEREERIMISEKS ****
 
 function determinantFor2() {
@@ -122,7 +122,7 @@ function determinantFor2() {
 	var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
 	var matrixPermutationTableString = permutationTableHead;
 	
-	// esimene tsükkel, mis määrab ära esimese numbri
+	// esimene ts�kkel, mis m��rab �ra esimese numbri
 	for(var i = 0; i < 2; i++) {
 		
 		//console.log("tsykkel 1 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
@@ -132,7 +132,7 @@ function determinantFor2() {
 		var detValuesTemp = "";
 		
 		
-		// teine tsükkel, mis määrab ära teise numbri
+		// teine ts�kkel, mis m��rab �ra teise numbri
 		for(var j = 0; j < 1; j++) {
 			
 			//console.log("tsykkel 2 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
@@ -193,7 +193,7 @@ function determinantFor3() {
 	var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
 	var matrixPermutationTableString = permutationTableHead;
 	
-	// esimene tsükkel, mis määrab ära esimese numbri
+	// esimene ts�kkel, mis m��rab �ra esimese numbri
 	for(var i = 0; i < 3; i++) {
 		
 		//console.log("tsykkel 1 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
@@ -203,7 +203,7 @@ function determinantFor3() {
 		var detValuesTemp = "";
 		
 		
-		// teine tsükkel, mis määrab ära teise numbri
+		// teine ts�kkel, mis m��rab �ra teise numbri
 		for(var j = 0; j < 2; j++) {
 			
 			//console.log("tsykkel 2 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
@@ -215,7 +215,7 @@ function determinantFor3() {
 			detNumbers2.splice(i, 1);
 			
 			
-			// kolmas tsükkel, mis määrab ära kolmanda numbri
+			// kolmas ts�kkel, mis m��rab �ra kolmanda numbri
 			for(var k = 0; k < 1; k++) {
 				
 				//console.log("tsykkel 3 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
@@ -282,7 +282,7 @@ function determinantFor4() {
 	var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
 	var matrixPermutationTableString = permutationTableHead;
 	
-	// esimene tsükkel, mis määrab ära esimese numbri
+	// esimene ts�kkel, mis m��rab �ra esimese numbri
 	for(var i = 0; i < 4; i++) {
 		
 		//console.log("tsykkel 1 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
@@ -292,7 +292,7 @@ function determinantFor4() {
 		var detValuesTemp = "";
 		
 		
-		// teine tsükkel, mis määrab ära teise numbri
+		// teine ts�kkel, mis m��rab �ra teise numbri
 		for(var j = 0; j < 3; j++) {
 			
 			//console.log("tsykkel 2 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
@@ -303,7 +303,7 @@ function determinantFor4() {
 			}
 			detNumbers3.splice(i, 1);
 			
-			// kolmas tsükkel, mis määrab ära kolmanda numbri
+			// kolmas ts�kkel, mis m��rab �ra kolmanda numbri
 			for(var k = 0; k < 2; k++) {
 				
 				//console.log("tsykkel 3 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
@@ -314,7 +314,7 @@ function determinantFor4() {
 				}
 				detNumbers2.splice(j, 1);
 				
-				// neljas tsükkel, mis määrab ära neljanda numbri
+				// neljas ts�kkel, mis m��rab �ra neljanda numbri
 				for(var l = 0; l < 1; l++) {
 					
 					//console.log("tsykkel 4 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
@@ -390,7 +390,7 @@ function determinantFor5() {
 	var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
 	var matrixPermutationTableString = permutationTableHead;
 	
-	// esimene tsükkel, mis määrab ära esimese numbri
+	// esimene ts�kkel, mis m��rab �ra esimese numbri
 	for(var i = 0; i < 5; i++) {
 		
 		//console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
@@ -400,7 +400,7 @@ function determinantFor5() {
 		var detValuesTemp = "";
 		
 		
-		// teine tsükkel, mis määrab ära teise numbri
+		// teine ts�kkel, mis m��rab �ra teise numbri
 		for(var j = 0; j < 4; j++) {
 			
 			//console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
@@ -411,7 +411,7 @@ function determinantFor5() {
 			}
 			detNumbers4.splice(i, 1);
 			
-			// kolmas tsükkel, mis määrab ära kolmanda numbri
+			// kolmas ts�kkel, mis m��rab �ra kolmanda numbri
 			for(var k = 0; k < 3; k++) {
 				
 				//console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
@@ -422,7 +422,7 @@ function determinantFor5() {
 				}
 				detNumbers3.splice(j, 1);
 				
-				// neljas tsükkel, mis määrab ära neljanda numbri
+				// neljas ts�kkel, mis m��rab �ra neljanda numbri
 				for(var l = 0; l < 2; l++) {
 					
 					//console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
@@ -433,7 +433,7 @@ function determinantFor5() {
 					}
 					detNumbers2.splice(k, 1);
 					
-					// viies tsükkel, mis määrab ära viienda numbri
+					// viies ts�kkel, mis m��rab �ra viienda numbri
 					for(var m = 0; m < 1; m++) {
 					
 					//console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
@@ -499,7 +499,6 @@ function determinantFor5() {
 			}
 		}
 	}
-	
 	detValues = detValues.slice(3, detValues.length);
 	console.log("vahetulemus: " + detValues);
 	
@@ -509,6 +508,16 @@ function determinantFor5() {
 	detValues = "";
 	matrixPermutationTable.innerHTML = matrixPermutationTableString;
 	matrixPermutationTableString = "";
+}
+
+function displayTable(){
+	document.getElementById("determinantTable").style.display="block";
+	//document.getElementById("checkAnswerDeterminant").style.display="none";
+	//document.getElementById("showCalculations").style.display="none";
+	
+}
+function newCalculation(){
+	window.location.reload(false);
 }
 
 
@@ -564,10 +573,5 @@ function validate(evt) {
 	if(evt.key === "/" && evt.target.value.indexOf('/') != -1) {
 		evt.preventDefault();
 	}
-	if(evt.key==="-") {
-		//console.log("EVENT TARGET VALUE: "+ evt.target.value.length);
-		if(evt.target.value.length > 3){
-			evt.preventDefault();
-		}
-	}
+	
 }

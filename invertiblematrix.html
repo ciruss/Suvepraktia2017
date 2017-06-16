@@ -9,6 +9,7 @@
 		<script src="invertiblematrix.js"></script>
         <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+		<link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
 		<style>
 			#math {
 				display: none
@@ -17,23 +18,29 @@
 	</head>
 	
 	<body>
-        <div class="headNav">
-			<h1>Pöördmaatriks</h1>
-			<button type="button" class="btn" onclick="location.href='index.html'">Pealehele</button>
-			<button type="button" class="btn" onclick="location.href='calculator.html'">Maatriksite korrutamine</button>
-			<button type="button" class="btn" onclick="location.href='determinant.html'">Determinandid</button>
-        </div>
 
+<header> 
+	<div id="headerAndIcon">
+	   <div id="pageHeader">MATEMAATIKA</div>
+	    <div id="headerIcon" > </div>
+	</div>
+    <div class="topnav">
+			<a href="game.html">Harjutusmäng</a>
+			<a href="index.html">Maatriksite korrutamine</a>
+			<a href="determinant.html">Determinandid</a>
+			<a class="active" href="invertiblematrix.html">Pöördmaatriks</a>
+	</div>
+</header>
 		<!-- DETERMINANTIDE KALKULAATOR -->
 
 		<div id="pageContent">
-			<div id="instructions">
-				<p>
-					<h3>Pöördmaatriksite arvutamine</h3>
-						"Kuidas lehtede kasutada"
-					<br> 
-				</p>
-			</div>
+			 <div id="instructions">
+            <p>
+            <h3>Pöördmaatriks</h3> 
+             Vali pöördmaatriksi järk ning vajuta "genereeri maatriks" 
+            <br>mingid asjad veel
+            </p>
+        </div>
 				
 			<form class="tooltip" id="selectFormSize" >
 				<span class="tooltiptext">Vali ruutmaatriksi suurus</span>

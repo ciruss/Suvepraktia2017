@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>PROJEKT</title>
@@ -7,9 +7,10 @@
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.2/math.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="game.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet"> 
 	</head>
 	<body>
-			<header> 
+		<header> 
 	<div id="headerAndIcon">
 	   <div id="pageHeader">MATEMAATIKA</div>
 	    <div id="headerIcon" > </div>
@@ -20,28 +21,22 @@
 			<a href="determinant.html">Determinandid</a>
 			<a href="invertiblematrix.html">Pöördmaatriks</a>
 	</div>
-</header>
+</header>>
 		<!-- MAATRIKSITE MÄNG -->
 		
 		<div id="pageContent">
-			 <div id="instructions">
-            <p>
-                <h3>Maatriksite harjutamine</h3>
-                Vajuta "Alusta", sisesta oma nimi, ning asu lahtreid täitma.
-                <br>Õigeks lahenduseks tuleb täita nii vahearvutuste kastid kui ka lõppvastuse kast.
-            </p>
-        </div>
 		<div id="gameStats">
-			<div id="playerName">MÄNGIJA:</div>
+			<div id="playerName">NIMI:</div>
 			<div id="stopper">AEG: 60</div>
-			<div id="playerScore">SKOOR: 0</div>
 			<div id="wrongAnswers">VIGU: 0</div>
 			<div id="TotalSum">MAATRIKSEID KOKKU: 0</div>
 		</div>
-		<div id="gameBtns">
+		
 		<button id="beginGame" class="btn" type="button" onclick="setPlayerName()">Alusta</button> <br>
+		
+		<div id="gameBts">
 		<button id="checkAndRestartRandom" class="btn" type="button" onclick="checkMatrixAnswersRandom()">Kontrolli vastust</button>
-		<button id="justForDevs" type="button" class="btn" onclick="justForDevsMatrixAnswers()">Täida vastused</button>
+		<button id="justForDevs" class="btn" type="button" onclick="justForDevsMatrixAnswers()">Täida vastused</button>
 		</div>
 			<!-- maatriksid, kus arvud ette antud -->
 			<div class="wrapper">

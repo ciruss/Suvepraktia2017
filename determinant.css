@@ -1,64 +1,92 @@
-@import url("projekt.css");
-
-.headNav{
-     padding: 30px;
-     width:100%;
-     height:30px;
-   
-} 
 
 *{
-    box-sizing: border-box;
+     box-sizing: border-box;
+	font-family: 'Overpass', sans-serif;
+	padding:0px;
+	margin:0px;
 }
+header{
+color:#004080;
+display: block; 
+height:60px;
+font-size:54px;
+background-color:#FFFFFF;
  
-body{
 
 }
+header:before{
+	/*content:url('test.png'); */
+}
+
+#headerAndIcon{
+	display:flex;
+	justify-content:space-between;
+    background-color:#FFFFFF;
+}
+
+.btn {
+     box-shadow: 0 5px 10px 0 rgba(0,0,0,0.20), 0 17px 50px 0 rgba(0,0,0,0.19);
+    cursor: pointer;
+    background-color: #004080;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 10px;
+    overflow-wrap: break-word;
+    white-space:normal;
+    border-radius: 6px;
+
+}
+
+
+
+    .btn:hover, button:hover {
+        background-color: #221a54;
+        color: white;
+    }
+ 
+
+
 
 #pageContent{
     width: 50%;
-    display: flex;
-    flex-direction: column;
     height: 70%;
+    background-color: #ffffff;
     position: absolute;
+    display:flex;
+    flex-direction:column;
     transform: translate(-50%, -50%);
-    opacity:0.9;
-    border-radius:6px;
     top: 50%;
     left: 50%;
-   
+    z-index:-1;
+    
+}
 
-}
-h1 {
-    text-align: center;
-    color: #004080;
-    text-align: center;
-    transform: translate(-50%, -50%);
-    top: 5px;
-    left: 50%;
-    font-size: 60px;
-}
 
 h3 {
     color: #004080;
 }
 
 #instructions{
-    overflow: hidden;
     font-size: 20px;
-    text-align: center;
-    -webkit-transition: opacity 0.5s ease-in-out;
-    -moz-transition: opacity 0.5s ease-in-out;
-    transition: opacity 0.5s ease-in-out;
-    padding:50 100 0 100;
+    text-align: left;
+    width:80%;
+    margin:0 auto;
+    color:grey;
 }
+
 
 
 
 .tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 0px dotted black;
+    text-align:center;
+    margin-top:10px;
 }
 
     .tooltip .tooltiptext {
@@ -68,7 +96,6 @@ h3 {
         color: #fff;
         text-align: center;
         border-radius: 6px;
-        padding: 5px 0;
         position: absolute;
         z-index: 1;
         bottom: 125%;
@@ -99,25 +126,32 @@ h3 {
     text-align: center;
     
 }
-
-#btnContainer{
+#btnContainer .btn{
+     min-width:150px;
+    min-height:50px;
      display: flex;
-     justify-content:space-evenly;
+     justify-content:space-between;
      white-space:normal;
 }
 
-
-#btnContainer .btn {
-    width: 18%;
-	max-height:70px;
+#btnContainer{
+     display: flex;
+     justify-content:space-between;
+     white-space:normal;
+    
 }
+
+
+
 
 form {
     color: grey;
 }
 input {
     width: 30px;
+    height:30px;
     margin-left: 5px;
+    margin-bottom:5px;
     color: black;
     background-color: #FFFFFF;
     border-style: solid;
@@ -134,8 +168,9 @@ th, td {
     padding: 8px;
 }
 th{
-   background-color: #272788;  
+   background-color: #221a54;  
     color:#ffffff;
+    border-radius:6px;
 }
 
 
@@ -174,10 +209,65 @@ margin: auto;
 }
 
 #matrixInput{
-    display: flex;
+    height:180px;
+    margin:20px;
+    display:flex;
     justify-content: center;
-    flex-direction:row;
-    margin: 20px;   
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.20), 0 17px 50px 0 rgba(0,0,0,0.19);
-    border-radius:10px;   
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.10), 0 10px 40px 0 rgba(0,0,0,0.19);
+    border-radius:10px;
 }
+
+#matrixInput > * {
+    margin: auto;
+}
+
+
+
+	.topnav {
+			overflow: hidden;
+			background-color: #004080;
+	
+		}
+
+		.topnav a {
+		  float: left;
+		  display: block;
+		  color: #f2f2f2;
+		  text-align: center;
+		  padding: 14px 16px;
+		  text-decoration: none;
+		  font-size: 17px;
+		}
+
+		.topnav a:hover {
+		  background-color: #eaf0f9;
+		  color: black;
+		}
+
+		.topnav a.active {
+			background-color: #221a54;
+			color: white;
+		}
+#selectDeterminant{
+     display: flex;
+     justify-content:center;
+     white-space:normal;
+     width:100%;
+    
+	
+}
+#selectDeterminant > *{
+	margin-right:15px;
+}
+#determinant{
+ border:none;
+    border-radius:5px;
+    padding:3px;
+    color:grey;
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.10), 0 10px 40px 0 rgba(0,0,0,0.19);
+ 
+}
+
+#math {
+	display: none
+	}

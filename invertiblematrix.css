@@ -1,8 +1,38 @@
 
 
 *{
-     box-sizing: border-box;
-	 font-family: verdana;
+    box-sizing: border-box;
+	font-family: 'Overpass', sans-serif;
+	padding:0px;
+	margin:0px;
+}
+
+header{
+color:#004080;
+display: block; 
+height:60px;
+font-size:54px;
+background-color:#FFFFFF;
+ 
+
+}
+header:before{
+	/*content:url('test.png'); */
+}
+
+#headerAndIcon{
+	display:flex;
+	justify-content:space-between;
+    background-color:#FFFFFF;
+}
+
+#instructions{
+    padding:15px;
+    font-size: 20px;
+    text-align: left;
+    width:80%;
+    margin:0 auto;
+    color:grey;
 }
 
 .btn {
@@ -22,9 +52,6 @@
     border-radius: 6px;
 
 }
-
-
-
     .btn:hover, button:hover {
         background-color: #221a54;
         color: white;
@@ -34,17 +61,16 @@
 
 #pageContent{
     width: 50%;
-    display: flex;
-    flex-direction: column;
     height: 70%;
+    background-color: #ffffff;
     position: absolute;
+    display:flex;
+    flex-direction:column;
     transform: translate(-50%, -50%);
-    opacity:0.9;
-    border-radius:6px;
     top: 50%;
     left: 50%;
-   
-
+    z-index:-1;
+ 
 }
 h1 {
     text-align: center;
@@ -58,7 +84,7 @@ h3 {
 
 #instructions{
     font-size: 20px;
-    text-align: center;
+    text-align:left;
     width:80%;
     margin:0 auto;
 }
@@ -189,20 +215,22 @@ margin: auto;
 }
 
 #matrixInput{
-    display: flex;
+
+    height:180px;
+    margin:20px;
+    display:flex;
     justify-content: center;
-    flex-direction:row;
-    margin: 20px;   
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.20), 0 17px 50px 0 rgba(0,0,0,0.19);
-    border-radius:10px;   
-    padding:10px;
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.10), 0 10px 40px 0 rgba(0,0,0,0.19);
+    border-radius:10px;
+
 }
 
 
 
-	.topnav {
+		.topnav {
 			overflow: hidden;
 			background-color: #004080;
+	
 		}
 
 		.topnav a {
@@ -224,4 +252,7 @@ margin: auto;
 			background-color: #221a54;
 			color: white;
 		}
+        #math {
+				display: none
+			}
  
