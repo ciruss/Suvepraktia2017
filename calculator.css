@@ -2,6 +2,26 @@
 *{
      box-sizing: border-box;
 	font-family: 'Overpass', sans-serif;
+	padding:0px;
+	margin:0px;
+}
+
+header{
+color:#004080;
+display: block; 
+height:60px;
+font-size:54px;
+    background-color:#FFFFFF;
+ 
+
+}
+header:before{
+	/*content:url('test.png'); */
+}
+
+#headerAndIcon{
+	display:flex;
+	justify-content:space-between;
 }
 
 
@@ -39,7 +59,8 @@
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-   
+    z-index:-1;
+    
 }
 #instructions{
     font-size: 20px;
@@ -48,11 +69,7 @@
     margin:0 auto;
 	color:grey;
 }
-#selectMatrices{
-   text-align:center;
-    
-    
-}
+
 .wrapper{
     height:180px;
     margin:20px;
@@ -195,14 +212,18 @@ input {
 			color: white;
 		}
 #selectMatrices #m1x, #m1y, #m2x, #m2y{
-	 border:none;
-    border-radius:5px;
+	border:none;
+    border-radius:3px;
     color:grey;
     box-shadow: 0 3px 3px 0 rgba(0,0,0,0.10), 0 10px 40px 0 rgba(0,0,0,0.19);
+    width:80%;
+    
 }
 #selectMatrices{
+    text-align:center;
     display:flex;
-    justify-content:space-between;
+    justify-content:center;
+    
  
 }
 
@@ -224,5 +245,7 @@ input {
         
 	}
 #selectors >*{
-  padding-right:20px;
+ padding:10px;
+ width:30%;
+  
 }
