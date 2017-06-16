@@ -213,7 +213,8 @@ function calculateDeterminant() {
 	document.getElementById("answerHeadline").style.display="inline-block";
 	
 	
-}
+	}
+	return a
 }
 
 // **** FUNKTSIOONID PERMUTATSIOONIDE GENEREERIMISEKS ****
