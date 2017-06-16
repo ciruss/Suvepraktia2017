@@ -475,7 +475,6 @@ function calculateMatrixFinalSum() {
 			};
 
 			var matrixAnswerString = "";
-<<<<<<< HEAD
 			
 			for(var i = 0; i < m1y; i++) {
 				
@@ -487,14 +486,6 @@ function calculateMatrixFinalSum() {
 				if(!b){
 					b = 0;
 				}
-=======
-
-			for (var i = 0; i < m1y; i++) {
-
-				var a = document.getElementById("a" + x + c).value;
-
-				var b = document.getElementById("b" + c + y).value;(b);
->>>>>>> 8cc09e65c6be4955c296e6edcfd7e1bdd8227b62
 				matrixAnswerString += a + "*" + b + " + ";
 				c++;
 			}
