@@ -512,9 +512,9 @@ function determinantFor5() {
 
 function displayTable(){
 	document.getElementById("determinantTable").style.display="block";
-	document.getElementById("checkAnswerDeterminant").style.display="none";
-	document.getElementById("showCalculations").style.display="none";
-	document.getElementById("newDeterminant").style.display="block";
+	//document.getElementById("checkAnswerDeterminant").style.display="none";
+	//document.getElementById("showCalculations").style.display="none";
+	
 }
 function newCalculation(){
 	window.location.reload(false);
