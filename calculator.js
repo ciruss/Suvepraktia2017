@@ -52,22 +52,39 @@ function generateMatrix() {
 			mFA.innerHTML = "";
 
 			createMatrix1();
-			createMatrix2();
+			createMatrix2();/*
 			calculateMatrixSum();
-			calculateMatrixFinalSum();
+			calculateMatrixFinalSum();*/
 
 		} else {
 
 			createMatrix1();
-			createMatrix2();
+			createMatrix2();/*
 			calculateMatrixSum();
-			calculateMatrixFinalSum();
+			calculateMatrixFinalSum();*/
 		}
 	} else {
 		console.log("Ei saa arvutada");
 		alert("Ei saa genereerida, muuda maatriksite suuruseid!");
 	}
 
+}
+
+function generateMatrix12(){
+	generateMatrix();
+	matrix1Values();
+	matrix2Values();
+	calculateMatrixSum();
+	calculateMatrixFinalSum();
+	createMatrix3(); // sama, mis createValues()
+}
+
+function generateValues(){
+	matrix1Values();
+	matrix2Values();
+	calculateMatrixSum();
+	calculateMatrixFinalSum();
+	createMatrix3();
 }
 
 // **** FUNKTSIOON, MIS GENEREERIB ESIMESE MAATRIKSI ****
@@ -275,7 +292,7 @@ function matrix1Values() {
 
 
 // **** KÄIVITAB ARVUTAMISE ****
-function calculateMatrix() {
+/*function calculateMatrix() {
 	if(mistakeA === false || mistakeB === false){
 		document.getElementById("mistakeNotification").style.display = "inline";
 		document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
@@ -291,7 +308,7 @@ function calculateMatrix() {
     //document.getElementById("checkAnswer").style.display = "none";
 
 }
-}
+}*/
 //sama mis eelmine, aga peidab eelmise lahenduse ja  nupud
 function calculateNextMatrix() {
     calculateMatrixSum();
@@ -404,6 +421,12 @@ function calculateMatrixFinalSum() {
 				
 				var a = document.getElementById("a"+x+c).value;
 				var b = document.getElementById("b"+c+y).value;
+				if(!a){
+					a = 0;
+				}
+				if(!b){
+					b = 0;
+				}
 				matrixAnswerString += a + "*" + b + " + ";
 				c++;
 			}
@@ -434,6 +457,18 @@ function calculateMatrixFinalSum() {
 	return finalString;
 }
 
+var timer;
+
+$(document).ready(function () {
+	$(".wrapper").on("keyup", function () {
+
+		window.clearTimeout(timer);
+		timer = window.setTimeout(function () {
+			generateValues();
+		}, 200);
+		console.log("midagi toimub");
+	});
+});
 
 
 
