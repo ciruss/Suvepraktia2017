@@ -4,6 +4,7 @@ var invertibleMatrixSize;
 var detNumbers = [];
 var detValues = "";
 var inversionCount = 0;
+var mainMatrixArray = [[null]];
 
 //var mistakes = false;
 
@@ -14,7 +15,7 @@ function generateMatrixForInvertibleM() {
 	console.log("genereerib");
 	//document.getElementById("mistakeNotification").style.display = "none";
 
-	invertibleMatrixSize = document.getElementById("invertibleMatrixSize").value;
+	invertibleMatrixSize = parseInt(document.getElementById("invertibleMatrixSize").value);
 	var matrixForInvertibleM = document.getElementById("matrixForInvertibleM");
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 
@@ -78,19 +79,19 @@ function calculateDeterminant() {
 		document.getElementById("mistakeNotification").style.display = "none";
 		var determinant = document.getElementById("determinant").value; */
 		
-		if(invertibleMatrixSize === "4") {
+		if(invertibleMatrixSize === 4) {
 			determinantFor4();
 		}
 		
-		if(invertibleMatrixSize === "5") {
+		if(invertibleMatrixSize === 5) {
 			determinantFor5();
 		}
 		
-		if(invertibleMatrixSize === "3") {
+		if(invertibleMatrixSize === 3) {
 			determinantFor3();
 		}
 		
-		if(invertibleMatrixSize === "2") {
+		if(invertibleMatrixSize === 2) {
 			console.log("teist jarku 1");
 			determinantFor2();
 			console.log("teist jarku 2");
@@ -168,6 +169,7 @@ function determinantFor2() {
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 	matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
 	detValues = "";
+	return matrixDetAnswer;
 }
 
 function determinantFor3() {
@@ -249,6 +251,7 @@ function determinantFor3() {
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 	matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
 	detValues = "";
+	return matrixDetAnswer;
 }
 
 function determinantFor4() {
@@ -349,6 +352,7 @@ function determinantFor4() {
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 	matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
 	detValues = "";
+	return matrixDetAnswer;
 }
 
 function determinantFor5() {
@@ -469,9 +473,174 @@ function determinantFor5() {
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 	matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
 	detValues = "";
+	return matrixDetAnswer;
 }
 
 
+
+
+function calculateInvertibleMatrix() {
+	
+	if(invertibleMatrixSize === 2) {
+		var determinant = determinantFor2();
+		console.log(determinant);
+		if(determinant === 0) {
+			console.log("ei saa arvutada, 0-ga jagamine")
+		} else {
+			invertibleMatrix(determinant);
+		}
+	}
+	
+	if(invertibleMatrixSize === 3) {
+		var determinant = determinantFor3();
+		console.log(determinant);
+		if(determinant === 0) {
+			console.log("ei saa arvutada, 0-ga jagamine")
+		} else {
+			invertibleMatrix(determinant);
+		}
+	}
+	
+	if(invertibleMatrixSize === 4) {
+		var determinant = determinantFor4();
+		console.log(determinant);
+		if(determinant === 0) {
+			console.log("ei saa arvutada, 0-ga jagamine")
+		} else {
+			invertibleMatrix(determinant);
+		}
+	}
+	
+	if(invertibleMatrixSize === 5) {
+		var determinant = determinantFor5();
+		console.log(determinant);
+		if(determinant === 0) {
+			console.log("ei saa arvutada, 0-ga jagamine")
+		} else {
+			invertibleMatrix(determinant);
+		}
+	}
+	
+	document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
+	document.getElementById("answerHeadline").style.display="inline-block";
+	
+}
+
+
+
+function generateArrayForMatrix() {
+	
+	var matrixRow = [null];
+	for(var x = 1; x <= invertibleMatrixSize; x++) {
+		for(var y = 1; y <= invertibleMatrixSize; y++) {
+			var matrixCell = document.getElementById("a"+x+y).value;
+			console.log(matrixCell + " to array");
+			matrixRow.push(matrixCell);
+		}
+		console.log("uus rida");
+		mainMatrixArray.push(matrixRow);
+		matrixRow = [null];
+	}
+}
+
+
+
+var finalMatrix = [null];
+var finalMatrixRow = [null];
+
+function invertibleMatrix(determinant) {
+	
+	
+	
+	// viib maatriksi massiivi kujule
+	generateArrayForMatrix();
+	
+	console.log(mainMatrixArray);
+	
+	// arv millega korrutada igat maatriksi kasti
+	var matrixMultiplier = "1 / " + determinant;
+	console.log("matrixmultiplier: " + matrixMultiplier);
+	//var tempMatrix = mainMatrixArray.slice(); 
+	
+	for(var x = 1; x <= invertibleMatrixSize; x++) {
+		
+		for(var y = 1; y <= invertibleMatrixSize; y++) {
+			
+			// arv, mis määrab ära kas miinusmärk on või ei ole
+			var cellMultiplier = math.pow(-1,x+y);
+			console.log(cellMultiplier);
+			
+			// infoks millise "kasti" peal ma suures (peamises) maatriksis olen
+			console.log("a" + x + y);
+			
+			// peamine maatriks
+			console.log("main: " + mainMatrixArray);
+			
+			// teen peamisest maatriksist uue klooni, mida hakkan vähendama
+			var tempMatrix = mainMatrixArray.slice();
+			console.log("temp: " + tempMatrix);
+			
+			
+			
+			// muutuja i jäljendab x-i, et eemaldada iga mingit elementi 
+			for(i = 1; i <= invertibleMatrixSize; i++) {
+				
+				// teen ühest maatriksireast kohal i klooni
+				var tempRow = tempMatrix[i].slice();
+				
+				// eemaldab kohalt y maatriksireast elemendi (veerust)
+				tempRow.splice(y, 1);
+				
+				// eemaldab tempMatrix-ist kohal i oleva rea ja paneb uue tehtud rea asemele
+				tempMatrix.splice(i, 1, tempRow);
+				console.log(tempMatrix);
+			}
+			
+			tempMatrix.splice(x, 1);
+			console.log(tempMatrix);
+			
+			// siin on uus väiksem maatriks valmis
+			
+			finalMatrixRow.push(tempMatrix);
+			console.log("row: " + finalMatrixRow);
+			
+			console.log("main: " + mainMatrixArray);
+			console.log("temp: " + tempMatrix);
+			
+		}
+		console.log(finalMatrixRow);
+		finalMatrix.push(finalMatrixRow);
+		finalMatrixRow = [null];
+		console.log("uus rida");
+	}
+	console.log(finalMatrix);
+}
+
+
+
+
+
+/* function cutMatrixForInvertibleM() {
+	
+	for(var x = 1; x <= invertibleMatrixSize; x++) {
+		
+		for(var y = 1; y <= invertibleMatrixSize; y++) {
+			
+			var tempMatrix = mainMatrixArray.slice();
+			console.log(tempMatrix);
+			
+			for(i = 1; i <= invertibleMatrixSize; i++) {
+				console.log(tempMatrix);
+				tempMatrix[i].splice(y, 1);
+			}
+			console.log(tempMatrix);
+			tempMatrix.splice(x, 1);
+		}
+		console.log(tempMatrix);
+	}
+}
+
+cutMatrixForInvertibleM(); */
 
 
 
