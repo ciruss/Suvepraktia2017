@@ -42,6 +42,12 @@ function generateMatrixForDeterminant() {
 
 // **** FUNKTSIOON, MIS GENEREERIB ESIMESE MAATRIKSI ****
 
+function generateMatrix(){
+	generateMatrixForDeterminant();
+	//generateDetMatrix();
+} 
+
+
 function createMatrixForDeterminant() {
 
     var matrixDeterminantContainer = document.getElementById("matrixDeterminantContainer");
@@ -72,6 +78,67 @@ function createMatrixForDeterminant() {
     matrixForDeterminant.appendChild(tableBody);
 }
 
+// **** FUNKTSIOON, MIS GENEREERIB MATHJAXI RUUTMAATRIKSI ***** 
+function createDetMatrix(){
+    var answerString = "";
+    var output = document.getElementById("DetMatrix");
+    var table = document.getElementById("matrixForDeterminant");
+    for(var r = 0, n = table.rows.length; r < n; r++){
+		if(r >= 1){
+			var strLength = answerString.length;
+			answerString = (answerString.slice(0, strLength - 1));
+			answerString +="\\\\";
+		}
+        for(var c = 0, n = table.rows.length; c<n; c++){
+            var rowId = r + 1;
+            var colId = c + 1;
+            if(c<n){
+                var Cell = document.getElementById("a" + rowId + colId).value + "&";
+                answerString += Cell;
+            }else if(c==n){
+                var Cell = document.getElementById("a" + rowId + colId).value;
+                answerString += Cell;
+            }
+        }
+    }
+    var strLength = answerString.length;
+    answerString = (answerString.slice(0, strLength - 1));
+    //answerString = answerString.concat(Cell);
+    return answerString;
+}
+console.log(createDetMatrix());
+
+function determinantPhase(){
+	var p = document.getElementById("determinant").value;
+	if(p==2){
+		return "Teist";
+	}else if(p==3){
+		return "Kolmandat";
+	}else if(p==4){
+		return "Neljandat";
+	}else if(p==5){
+		return "Viiendat"
+	}
+}
+
+function generateDetMatrix(){
+	var mathDiv = document.getElementById("math");
+	var displayDiv = document.getElementById("display");
+
+	MathJax.Hub.Queue(["Typeset", MathJax.Hub, "math"]);
+	MathJax.Hub.Queue(function(){
+		var math = MathJax.Hub.getAllJax("MathDiv")[0];
+		var i = document.getElementById("determinant").value;
+		var j = calculateDeterminant();
+		var k = determinantPhase();
+		var l = createDetMatrix();
+
+		MathJax.Hub.Queue(["Text", math, k + "\\ järku\\ ruutmaatriksi\\ A_" + i + " = \\begin{pmatrix}" + l + "\\end{pmatrix}" + k + "\\ järku\\ determinandiks\\ nimetatakse\\ reaalarvu \\begin{vmatrix}A_" + i + "\\end{vmatrix} = \\begin{vmatrix}" + l + "\\end{vmatrix} = " + j])
+		MathJax.Hub.Queue(function(){
+			displayDiv.innerHTML = mathDiv.innerHTML;
+		})
+	})
+}
 
 // ||||| ----- ----- ----- ----- DETERMINANTIDE KALKULAATORI OSA ----- ----- ----- ----- |||||
 
@@ -89,18 +156,26 @@ function calculateDeterminant() {
 
         if (determinant === "4") {
             determinantFor4();
+            generateDetMatrix();
+			a = determinantFor4();
         }
 
         if (determinant === "5") {
             determinantFor5();
+            generateDetMatrix();
+			a = determinantFor5();
         }
 
         if (determinant === "3") {
             determinantFor3();
+            generateDetMatrix();
+			a = determinantFor3();
         }
 
         if (determinant === "2") {
             determinantFor2();
+            generateDetMatrix();
+			a = determinantFor2();
         }
 
         mistakes = false;
@@ -111,6 +186,7 @@ function calculateDeterminant() {
 
 
     }
+    return a;
 }
 
 // **** FUNKTSIOONID PERMUTATSIOONIDE GENEREERIMISEKS ****
@@ -184,6 +260,7 @@ function determinantFor2() {
     detValues = "";
     matrixPermutationTable.innerHTML = matrixPermutationTableString;
     matrixPermutationTableString = "";
+    return matrixDetAnswer;
 }
 
 function determinantFor3() {
@@ -273,6 +350,7 @@ function determinantFor3() {
     detValues = "";
     matrixPermutationTable.innerHTML = matrixPermutationTableString;
     matrixPermutationTableString = "";
+    return matrixDetAnswer;
 }
 
 function determinantFor4() {
@@ -381,6 +459,7 @@ function determinantFor4() {
     detValues = "";
     matrixPermutationTable.innerHTML = matrixPermutationTableString;
     matrixPermutationTableString = "";
+    return matrixDetAnswer;
 }
 
 function determinantFor5() {
@@ -508,6 +587,7 @@ function determinantFor5() {
     detValues = "";
     matrixPermutationTable.innerHTML = matrixPermutationTableString;
     matrixPermutationTableString = "";
+    return matrixDetAnswer;
 }
 
 function displayTable() {
