@@ -3,6 +3,13 @@
     box-sizing: border-box;
 }
 
+/*
+#math{
+	display: none;
+	z-index: 5000;
+}
+*/
+
 html,
 body {
     height: 100%;
@@ -153,6 +160,7 @@ table {
 
 #display {
     display: none;
+	z-index: 5000;
 }
 #answerHeadline{
 	color:#666666;

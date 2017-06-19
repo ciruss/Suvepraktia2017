@@ -5,12 +5,14 @@
     <title>Maatriksite korrutamine</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="calculator.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.2/math.min.js"></script>
     <script src="calculator.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
 
 </head>
 
@@ -87,7 +89,7 @@
                     </div>
                 </div>
                 <div id="generate">
-                    <button type="button" class="btn" id="generateMatrixBtn" onclick="generateMatrix()">Genereeri maatriksid</button>
+                    <button type="button" class="btn" id="generateMatrixBtn" onclick="generateMatrix12()">Genereeri maatriksid</button>
                 </div>
             </div>
             <div id="mistakeNotification"></div>

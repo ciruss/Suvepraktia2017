@@ -35,13 +35,13 @@ function generateMatrix() {
 
             createMatrix();
             //createMatrix2();
-            calculateMatrixSum();
-            calculateMatrixFinalSum();
+            //calculateMatrixSum();
+           // calculateMatrixFinalSum();
         } else {
             createMatrix();
             //createMatrix2();
-            calculateMatrixSum();
-            calculateMatrixFinalSum();
+           // calculateMatrixSum();
+            //calculateMatrixFinalSum();
         }
     } else {
         console.log("Ei saa arvutada");
@@ -96,6 +96,27 @@ function createMatrix() {
     }
     matrix2.appendChild(tableBody);
 }
+
+function generateMatrix12() {
+
+	generateMatrix();
+	matrix1Values();
+	matrix2Values();
+	calculateMatrixSum();
+	calculateMatrixFinalSum();
+	console.log('siin');
+	createValues();
+}
+
+function generateValues() {
+	matrix1Values();
+	matrix2Values();
+	calculateMatrixSum();
+	calculateMatrixFinalSum();
+	console.log('siin');
+	createValues();
+	
+}
 // **** FUNKTSIOON, MIS GENEREERIB TEISE MAATRIKSI ****
 /*function createMatrix2() {
 
@@ -124,6 +145,26 @@ function createMatrix() {
 	matrix2.appendChild(tableBody);
 
 }*/
+
+function createValues() {
+	var mathDiv = document.getElementById('math');
+	var displayDiv = document.getElementById('display');
+
+	MathJax.Hub.Queue(["Typeset", MathJax.Hub, "math"]);
+	MathJax.Hub.Queue(function () {
+		var math = MathJax.Hub.getAllJax("MathDiv")[0];
+		var i = matrix1Values();
+		var j = matrix2Values();
+		var k = calculateMatrixSum();
+		var l = calculateMatrixFinalSum();
+		console.log(l);
+
+		MathJax.Hub.Queue(["Text", math, "\\begin{bmatrix}" + i + "\\end{bmatrix} \\times \\begin{bmatrix}" + j + "\\end{bmatrix} = \\begin{bmatrix}" + k + "\\end{bmatrix} = \\begin{bmatrix}" + l + "\\end{bmatrix}"]);
+		MathJax.Hub.Queue(function () {
+			displayDiv.innerHTML = mathDiv.innerHTML;
+		});
+	});
+};
 
 function createMatrix3() {
     var mathDiv = document.getElementById('math');
@@ -388,6 +429,12 @@ function calculateMatrixFinalSum() {
 
                 var a = document.getElementById("a" + x + c).value;
                 var b = document.getElementById("b" + c + y).value;
+                if (!a) {
+					a = 0;
+				}
+				if (!b) {
+					b = 0;
+				}
                 matrixAnswerString += a + "*" + b + " + ";
                 c++;
             }
@@ -417,6 +464,19 @@ function calculateMatrixFinalSum() {
 
     return finalString;
 }
+
+var timer;
+
+$(document).ready(function () {
+	$("#wrapper").on("keyup", function () {
+
+		window.clearTimeout(timer);
+		timer = window.setTimeout(function () {
+			generateValues();
+		}, 200);
+		console.log("midagi toimub");
+	});
+});
 
 
 
@@ -452,6 +512,7 @@ function checkInputSequence() {
                     mistakeA = false;
                     document.getElementById("mistakeNotification").style.display = "inline";
                     document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
+					break checkA;
                 } else {
                     var inputColorA = document.getElementById("a" + rowId + colId);
                     inputColorA.style.backgroundColor = "";
@@ -485,6 +546,7 @@ function checkInputSequence() {
                     mistakeB = false;
                     document.getElementById("mistakeNotification").style.display = "inline";
                     document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
+					break checkB;
                 } else {
                     var inputColorB = document.getElementById("b" + rowId + colId);
                     inputColorB.style.backgroundColor = "";
@@ -496,7 +558,7 @@ function checkInputSequence() {
         }
     }
 
-        console.log("Lõpus mistakeB: " + mistakeB);
+    console.log("Lõpus mistakeB: " + mistakeB);
     console.log("Lõpus mistakeA: " + mistakeA);
     if (mistakeB === true && mistakeA === true) {
         document.getElementById("mistakeNotification").style.display = "none";
