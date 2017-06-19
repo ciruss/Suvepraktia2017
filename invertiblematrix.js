@@ -4,6 +4,7 @@ var detValues = "";
 var inversionCount = 0;
 
 var mistakes = false;
+var timer;
 
 function generateMatrixForInvertibleM() {
 	
@@ -109,7 +110,6 @@ function determinantFor2(smallMatrix) {
 		var detNumbersTemp = [];
 		var detValuesTemp = "";
 		
-		
 		// teine tsükkel, mis määrab ära teise numbri
 		for(var j = 0; j < 1; j++) {
 			
@@ -123,7 +123,6 @@ function determinantFor2(smallMatrix) {
 			detNumbersTemp = [detNumbers2[i], detNumbers1[j]];
 		}
 		
-		
 		// siia inversioonid
 		for(var i1 = 0; i1 < 2; i1++) {
 			if(detNumbersTemp[i1] > detNumbersTemp[i1+1]) {
@@ -132,7 +131,6 @@ function determinantFor2(smallMatrix) {
 		}
 		
 		if(smallMatrix) {
-			
 			// console.log("maatriks");
 			var cellValue1 = smallMatrix[1][detNumbersTemp[0]];
 			var cellValue2 = smallMatrix[2][detNumbersTemp[1]];
@@ -167,10 +165,8 @@ function determinantFor2(smallMatrix) {
 	var matrixDetAnswer = math.eval(detValues);
 	
 	if(!smallMatrix) {
-		
 		var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 		matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
-		
 	}
 	
 	detValues = "";
@@ -266,10 +262,8 @@ function determinantFor3(smallMatrix) {
 	var matrixDetAnswer = math.eval(detValues);
 	
 	if(!smallMatrix) {
-		
 		var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
-		matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
-		
+		matrixDeterminantAnswer.innerHTML = matrixDetAnswer;	
 	}
 	
 	detValues = "";
@@ -288,7 +282,6 @@ function determinantFor4(smallMatrix) {
 		var detNumbers4 = [1, 2, 3, 4];
 		var detNumbersTemp = [];
 		var detValuesTemp = "";
-		
 		
 		// teine tsükkel, mis määrab ära teise numbri
 		for(var j = 0; j < 3; j++) {
@@ -325,7 +318,6 @@ function determinantFor4(smallMatrix) {
 					detNumbersTemp = [detNumbers4[i], detNumbers3[j], detNumbers2[k], detNumbers1[l]];
 				}
 				
-				
 				// siia inversioonid
 				for(var i1 = 0; i1 < 3; i1++) {
 					if(detNumbersTemp[i1] > detNumbersTemp[i1+1]) {
@@ -345,7 +337,6 @@ function determinantFor4(smallMatrix) {
 					}
 				}
 				
-				
 				if(smallMatrix) {
 				
 					// console.log("maatriks");
@@ -363,7 +354,6 @@ function determinantFor4(smallMatrix) {
 					var cellValue4 = document.getElementById("a4" + detNumbersTemp[3]).value;
 				}
 				
-				
 				if(inversionCount % 2 === 0) {
 					detValuesTemp += " + " + cellValue1 + "*" + cellValue2 + "*" + cellValue3 + "*" + cellValue4;
 					detValues += detValuesTemp;
@@ -373,7 +363,6 @@ function determinantFor4(smallMatrix) {
 				}
 				
 				// console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
-				
 				detNumbers.push(detNumbersTemp);
 				detNumbersTemp = [];
 				detValuesTemp = "";
@@ -388,12 +377,9 @@ function determinantFor4(smallMatrix) {
 	var matrixDetAnswer = math.eval(detValues);
 	
 	if(!smallMatrix) {
-		
 		var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
-		matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
-		
+		matrixDeterminantAnswer.innerHTML = matrixDetAnswer
 	}
-	
 	detValues = "";
 	return matrixDetAnswer;
 }
@@ -518,9 +504,6 @@ function determinantFor5() {
 	detValues = "";
 	return matrixDetAnswer;
 }
-
-
-
 
 function calculateInvertibleMatrix() {
 	
@@ -686,8 +669,6 @@ function invertibleMatrix(determinant) {
 				// console.log("matrix answer: " + smallMatrixAnswer);
 			}
 			
-			
-			
 			finalMatrixRow.push(tempMatrix);
 			// console.log("row: " + finalMatrixRow);
 			// console.log("main: " + mainMatrixArray);
@@ -809,13 +790,15 @@ function checkInputSequence() {
             }
         }
     }
+	
     if (mistakes === true) {
         ////console.log("Vigu ei olnud");
         //document.getElementById("checkAnswerDeterminant").style.display = "block"
         //document.getElementById("newDeterminant").style.display = "block"
         //document.getElementById("mistakeNotification").style.display = "block",
 		mistakes = true;
-		calculateDeterminant();
+		//calculateDeterminant();
+		calculateInvertibleMatrix();
 		document.getElementById("mistakeNotification").style.display = "none";
     } else {
         ////console.log("vigu on");
@@ -833,5 +816,19 @@ function validate(evt) {
     if (evt.key === "/" && evt.target.value.indexOf('/') != -1) {
         evt.preventDefault();
     }
-
 }
+
+
+//Timer
+/*
+$(document).ready(function () {
+	$(".content").on("input", function () {
+
+		window.clearTimeout(timer);
+		timer = window.setTimeout(function () {
+			generateValues();
+		}, 500);
+		console.log("midagi toimub");
+	});
+});
+*/

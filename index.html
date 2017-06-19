@@ -45,7 +45,7 @@
 							<h3>I</h3>
 							<form class="tooltip">
 								<span class="tooltiptext">vali esimese maatriksi suurus</span>
-								<select id="m1x">
+								<select id="mFirstX">
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -53,7 +53,7 @@
 									<option value="5">5</option>
 								</select>
 								<br>
-								<select id="m1y">
+								<select id="mFirstY">
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -67,7 +67,7 @@
 
 							<form class="tooltip">
 								<span class="tooltiptext">vali teise maatriksi suurus</span>
-								<select id="m2x">
+								<select id="mSecondX">
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -75,7 +75,7 @@
 									<option value="5">5</option>
 								</select>
 								<br>
-								<select id="m2y">
+								<select id="mSecondY">
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -86,18 +86,18 @@
 						</div>
 					</div>
 					<div id="generate">
-						<button type="button" class="btn" id="generateMatrixBtn" onclick="generateMatrix12()">Genereeri maatriksid</button>
+						<button type="button" class="btn" id="generateMatrixBtn" onclick="generateMatrixFirstSecond()">Genereeri maatriksid</button>
 					</div>
 				</div>
 				<div id="mistakeNotification"></div>
 				<div id="main">
 					<div class="input">
 						<!-- maatriksid arvude sisestuseks -->
-						<div id="matrix1Container" class="resp">
-							<table id="matrix1"></table>
+						<div id="matrixFirstContainer" class="resp">
+							<table id="matrixFirst"></table>
 						</div>
-						<div id="matrix2Container" class="resp">
-							<table id="matrix2"></table>
+						<div id="matrixSecondContainer" class="resp">
+							<table id="matrixSecond"></table>
 						</div>
 						<!-- maatriksid vastuste genereerimiseks -->
 						<div id="matrixAnswerContainer" class="resp">

@@ -20,6 +20,7 @@ function generateMatrixForDeterminant() {
     document.getElementById("mistakeNotification").style.display = "none";
 
     matrixSize = document.getElementById("determinant").value;
+	//console.log("matrixSize: "+matrixSize);
     var matrixForDeterminant = document.getElementById("matrixForDeterminant");
     var matrixPermutationTable = document.getElementById("matrixPermutationTable");
     var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
@@ -153,27 +154,27 @@ function calculateDeterminant() {
         var determinant = document.getElementById("determinant").value;
 
         if (determinant === "4") {
-            determinantFor4();
+            determinantForFour();
             generateDetMatrix();
-			a = determinantFor4();
+			a = determinantForFour();
         }
 
         if (determinant === "5") {
-            determinantFor5();
+            determinantForFive();
             generateDetMatrix();
-			a = determinantFor5();
+			a = determinantForFive();
         }
 
         if (determinant === "3") {
-            determinantFor3();
+            determinantForThree();
             generateDetMatrix();
-			a = determinantFor3();
+			a = determinantForThree();
         }
 
         if (determinant === "2") {
-            determinantFor2();
+            determinantForTwo();
             generateDetMatrix();
-			a = determinantFor2();
+			a = determinantForTwo();
         }
 
         mistakes = false;
@@ -187,7 +188,7 @@ function calculateDeterminant() {
 
 // **** FUNKTSIOONID PERMUTATSIOONIDE GENEREERIMISEKS ****
 
-function determinantFor2() {
+function determinantForTwo() {
 
     var matrixPermutationTable = document.getElementById("matrixPermutationTable");
     var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
@@ -198,22 +199,20 @@ function determinantFor2() {
     for (var i = 0; i < 2; i++) {
 
         ////console.log("tsykkel 1 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
-
-        var detNumbers2 = [1, 2];
+        var detNumbersTwo = [1, 2];
         var detNumbersTemp = [];
         var detValuesTemp = "";
         // teine ts�kkel, mis m��rab �ra teise numbri
         for (var j = 0; j < 1; j++) {
 
             ////console.log("tsykkel 2 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
-            var detNumbers1 = [];
+            var detNumbersOne = [];
             for (var n1 = 0; n1 < 2; n1++) {
-                detNumbers1[n1] = detNumbers2[n1];
+                detNumbersOne[n1] = detNumbersTwo[n1];
             }
-            detNumbers1.splice(i, 1);
-            detNumbersTemp = [detNumbers2[i], detNumbers1[j]];
+            detNumbersOne.splice(i, 1);
+            detNumbersTemp = [detNumbersTwo[i], detNumbersOne[j]];
         }
-
 
         // siia inversioonid
         for (var i1 = 0; i1 < 2; i1++) {
@@ -222,14 +221,14 @@ function determinantFor2() {
             }
         }
 
-        var cellValue1 = document.getElementById("a1" + detNumbersTemp[0]).value;
-        var cellValue2 = document.getElementById("a2" + detNumbersTemp[1]).value;
+        var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
+        var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
 
         if (inversionCount % 2 === 0) {
-            detValuesTemp += " + " + cellValue1 + "*" + cellValue2;
+            detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo;
             detValues += detValuesTemp;
         } else {
-            detValuesTemp += " - " + cellValue1 + "*" + cellValue2;
+            detValuesTemp += " - " + cellValueOne + "*" + cellValueTwo;
             detValues += detValuesTemp;
         }
 
@@ -255,7 +254,7 @@ function determinantFor2() {
     return matrixDetAnswer;
 }
 
-function determinantFor3() {
+function determinantForThree() {
 
     var matrixPermutationTable = document.getElementById("matrixPermutationTable");
     var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
@@ -266,30 +265,30 @@ function determinantFor3() {
     for (var i = 0; i < 3; i++) {
 
         ////console.log("tsykkel 1 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
-        var detNumbers3 = [1, 2, 3];
+        var detNumbersThree = [1, 2, 3];
         var detNumbersTemp = [];
         var detValuesTemp = "";
 
         // teine ts�kkel, mis m��rab �ra teise numbri
         for (var j = 0; j < 2; j++) {
             ////console.log("tsykkel 2 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
-            var detNumbers2 = [];
+            var detNumbersTwo = [];
             for (var n2 = 0; n2 < 3; n2++) {
-                detNumbers2[n2] = detNumbers3[n2];
+                detNumbersTwo[n2] = detNumbersThree[n2];
             }
-            detNumbers2.splice(i, 1);
+            detNumbersTwo.splice(i, 1);
 
             // kolmas ts�kkel, mis m��rab �ra kolmanda numbri
             for (var k = 0; k < 1; k++) {
 
                 ////console.log("tsykkel 3 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
 
-                var detNumbers1 = [];
+                var detNumbersOne = [];
                 for (var n1 = 0; n1 < 2; n1++) {
-                    detNumbers1[n1] = detNumbers2[n1];
+                    detNumbersOne[n1] = detNumbersTwo[n1];
                 }
-                detNumbers1.splice(j, 1);
-                detNumbersTemp = [detNumbers3[i], detNumbers2[j], detNumbers1[k]];
+                detNumbersOne.splice(j, 1);
+                detNumbersTemp = [detNumbersThree[i], detNumbersTwo[j], detNumbersOne[k]];
             }
 
             // siia inversioonid
@@ -305,15 +304,15 @@ function determinantFor3() {
                 }
             }
 
-            var cellValue1 = document.getElementById("a1" + detNumbersTemp[0]).value;
-            var cellValue2 = document.getElementById("a2" + detNumbersTemp[1]).value;
-            var cellValue3 = document.getElementById("a3" + detNumbersTemp[2]).value;
+            var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
+            var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
+            var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
 
             if (inversionCount % 2 === 0) {
-                detValuesTemp += " + " + cellValue1 + "*" + cellValue2 + "*" + cellValue3;
+                detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree;
                 detValues += detValuesTemp;
             } else {
-                detValuesTemp += " - " + cellValue1 + "*" + cellValue2 + "*" + cellValue3;
+                detValuesTemp += " - " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree;
                 detValues += detValuesTemp;
             }
 
@@ -340,7 +339,7 @@ function determinantFor3() {
     return matrixDetAnswer;
 }
 
-function determinantFor4() {
+function determinantForFour() {
 
     var matrixPermutationTable = document.getElementById("matrixPermutationTable");
     var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
@@ -352,7 +351,7 @@ function determinantFor4() {
 
         ////console.log("tsykkel 1 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
 
-        var detNumbers4 = [1, 2, 3, 4];
+        var detNumbersFour = [1, 2, 3, 4];
         var detNumbersTemp = [];
         var detValuesTemp = "";
 
@@ -361,31 +360,31 @@ function determinantFor4() {
         for (var j = 0; j < 3; j++) {
 
             ////console.log("tsykkel 2 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
-            var detNumbers3 = [];
+            var detNumbersThree = [];
             for (var n3 = 0; n3 < 4; n3++) {
-                detNumbers3[n3] = detNumbers4[n3];
+                detNumbersThree[n3] = detNumbersFour[n3];
             }
-            detNumbers3.splice(i, 1);
+            detNumbersThree.splice(i, 1);
 
             // kolmas ts�kkel, mis m��rab �ra kolmanda numbri
             for (var k = 0; k < 2; k++) {
 
                 ////console.log("tsykkel 3 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
-                var detNumbers2 = [];
+                var detNumbersTwo = [];
                 for (var n2 = 0; n2 < 3; n2++) {
-                    detNumbers2[n2] = detNumbers3[n2];
+                    detNumbersTwo[n2] = detNumbersThree[n2];
                 }
-                detNumbers2.splice(j, 1);
+                detNumbersTwo.splice(j, 1);
 
                 // neljas ts�kkel, mis m��rab �ra neljanda numbri
                 for (var l = 0; l < 1; l++) {
                     ////console.log("tsykkel 4 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
-                    var detNumbers1 = [];
+                    var detNumbersOne = [];
                     for (n1 = 0; n1 < 2; n1++) {
-                        detNumbers1[n1] = detNumbers2[n1];
+                        detNumbersOne[n1] = detNumbersTwo[n1];
                     }
-                    detNumbers1.splice(k, 1);
-                    detNumbersTemp = [detNumbers4[i], detNumbers3[j], detNumbers2[k], detNumbers1[l]];
+                    detNumbersOne.splice(k, 1);
+                    detNumbersTemp = [detNumbersFour[i], detNumbersThree[j], detNumbersTwo[k], detNumbersOne[l]];
                 }
 				
                 // siia inversioonid
@@ -407,16 +406,16 @@ function determinantFor4() {
                     }
                 }
 
-                var cellValue1 = document.getElementById("a1" + detNumbersTemp[0]).value;
-                var cellValue2 = document.getElementById("a2" + detNumbersTemp[1]).value;
-                var cellValue3 = document.getElementById("a3" + detNumbersTemp[2]).value;
-                var cellValue4 = document.getElementById("a4" + detNumbersTemp[3]).value;
+                var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
+                var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
+                var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
+                var cellValueFour = document.getElementById("a4" + detNumbersTemp[3]).value;
 
                 if (inversionCount % 2 === 0) {
-                    detValuesTemp += " + " + cellValue1 + "*" + cellValue2 + "*" + cellValue3 + "*" + cellValue4;
+                    detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour;
                     detValues += detValuesTemp;
                 } else {
-                    detValuesTemp += " - " + cellValue1 + "*" + cellValue2 + "*" + cellValue3 + "*" + cellValue4;
+                    detValuesTemp += " - " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour;
                     detValues += detValuesTemp;
                 }
 
@@ -432,6 +431,7 @@ function determinantFor4() {
             }
         }
     }
+	
     detValues = detValues.slice(3, detValues.length);
     //console.log("vahetulemus: " + detValues);
 
@@ -444,7 +444,7 @@ function determinantFor4() {
     return matrixDetAnswer;
 }
 
-function determinantFor5() {
+function determinantForFive() {
 
     var matrixPermutationTable = document.getElementById("matrixPermutationTable");
     // var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
@@ -456,7 +456,7 @@ function determinantFor5() {
 
         ////console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
 
-        var detNumbers5 = [1, 2, 3, 4, 5];
+        var detNumbersFive = [1, 2, 3, 4, 5];
         var detNumbersTemp = [];
         var detValuesTemp = "";
 
@@ -464,42 +464,42 @@ function determinantFor5() {
         for (var j = 0; j < 4; j++) {
 
             ////console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
-            var detNumbers4 = [];
+            var detNumbersFour = [];
             for (var n4 = 0; n4 < 5; n4++) {
-                detNumbers4[n4] = detNumbers5[n4];
+                detNumbersFour[n4] = detNumbersFive[n4];
             }
-            detNumbers4.splice(i, 1);
+            detNumbersFour.splice(i, 1);
 
             // kolmas ts�kkel, mis m��rab �ra kolmanda numbri
             for (var k = 0; k < 3; k++) {
 
                 ////console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
-                var detNumbers3 = [];
+                var detNumbersThree = [];
                 for (var n3 = 0; n3 < 4; n3++) {
-                    detNumbers3[n3] = detNumbers4[n3];
+                    detNumbersThree[n3] = detNumbersFour[n3];
                 }
-                detNumbers3.splice(j, 1);
+                detNumbersThree.splice(j, 1);
 
                 // neljas ts�kkel, mis m��rab �ra neljanda numbri
                 for (var l = 0; l < 2; l++) {
 
                     ////console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
-                    var detNumbers2 = [];
+                    var detNumbersTwo = [];
                     for (n2 = 0; n2 < 3; n2++) {
-                        detNumbers2[n2] = detNumbers3[n2];
+                        detNumbersTwo[n2] = detNumbersThree[n2];
                     }
-                    detNumbers2.splice(k, 1);
+                    detNumbersTwo.splice(k, 1);
 
                     // viies ts�kkel, mis m��rab �ra viienda numbri
                     for (var m = 0; m < 1; m++) {
 
                         ////console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
-                        var detNumbers1 = [];
+                        var detNumbersOne = [];
                         for (n1 = 0; n1 < 2; n1++) {
-                            detNumbers1[n1] = detNumbers2[n1];
+                            detNumbersOne[n1] = detNumbersTwo[n1];
                         }
-                        detNumbers1.splice(l, 1);
-                        detNumbersTemp = [detNumbers5[i], detNumbers4[j], detNumbers3[k], detNumbers2[l], detNumbers1[m]];
+                        detNumbersOne.splice(l, 1);
+                        detNumbersTemp = [detNumbersFive[i], detNumbersFour[j], detNumbersThree[k], detNumbersTwo[l], detNumbersOne[m]];
 
                         // siia inversioonid
                         for (var i1 = 0; i1 < 4; i1++) {
@@ -526,17 +526,17 @@ function determinantFor5() {
                             }
                         }
 
-                        var cellValue1 = document.getElementById("a1" + detNumbersTemp[0]).value;
-                        var cellValue2 = document.getElementById("a2" + detNumbersTemp[1]).value;
-                        var cellValue3 = document.getElementById("a3" + detNumbersTemp[2]).value;
-                        var cellValue4 = document.getElementById("a4" + detNumbersTemp[3]).value;
-                        var cellValue5 = document.getElementById("a5" + detNumbersTemp[4]).value;
+                        var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
+                        var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
+                        var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
+                        var cellValueFour = document.getElementById("a4" + detNumbersTemp[3]).value;
+                        var cellValueFive = document.getElementById("a5" + detNumbersTemp[4]).value;
 
                         if (inversionCount % 2 === 0) {
-                            detValuesTemp += " + " + cellValue1 + "*" + cellValue2 + "*" + cellValue3 + "*" + cellValue4 + "*" + cellValue5;
+                            detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour + "*" + cellValueFive;
                             detValues += detValuesTemp;
                         } else {
-                            detValuesTemp += " - " + cellValue1 + "*" + cellValue2 + "*" + cellValue3 + "*" + cellValue4 + "*" + cellValue5;
+                            detValuesTemp += " - " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour + "*" + cellValueFive;
                             detValues += detValuesTemp;
                         }
 
@@ -584,6 +584,7 @@ function checkInputSequence() {
             var rowId = i + 1;
             var colId = j + 1;
             var number = document.getElementById("a" + rowId + colId).value;
+			//console.log(number);
             if (number == "") {
                 //console.log("See kast on tühi");
                 var inputColor = document.getElementById("a" + rowId + colId);
@@ -610,6 +611,7 @@ function checkInputSequence() {
             }
         }
     }
+	
     if (mistakes === true) {
         ////console.log("Vigu ei olnud");
         //document.getElementById("checkAnswerDeterminant").style.display = "block"

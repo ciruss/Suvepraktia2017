@@ -16,7 +16,7 @@ var ticker;
 var answerCounter = 0;
 
 // harjutusmaatriksi mõõdu muutujad
-var Em1x, Em1y, Em2x, Em2y;
+var EmFirstX, EmFirstY, EmSecondX, EmSecondY;
 
 // massiivid harjutusmaatriksite väärtuste jaoks
 var a = [[null, null, null]];
@@ -44,47 +44,47 @@ function setPlayerName() {
 // **** ÜLDINE FUNKTSIOON MAATRIKSITE GENEREERIMISEKS ****
 function generateExerciseMatrix() {
 
-	document.getElementById("exerciseMatrix1Container").style.visibility = "visible";
-	document.getElementById("exerciseMatrix2Container").style.visibility = "visible";
+	document.getElementById("exerciseMatrixFirstContainer").style.visibility = "visible";
+	document.getElementById("exerciseMatrixSecondContainer").style.visibility = "visible";
 	document.getElementById("exerciseMatrixAnswerContainer").style.visibility = "visible";
 	document.getElementById("exerciseMatrixPreAnswerContainer").style.visibility = "visible";
 
 	document.getElementById("justForDevs").style.visibility = "visible";
 	document.getElementById("checkAndRestart").style.visibility = "visible";
 
-	Em1x = 1;
-	Em1y = 1;
-	Em2x = 1;
-	Em2y = 1;
+	EmFirstX = 1;
+	EmFirstY = 1;
+	EmSecondX = 1;
+	EmSecondY = 1;
 
-	var Em1 = document.getElementById("exerciseMatrix1");
-	var Em2 = document.getElementById("exerciseMatrix2");
+	var EmFirst = document.getElementById("exerciseMatrixFirst");
+	var EmSecond = document.getElementById("exerciseMatrixSecond");
 	var EmPA = document.getElementById("exerciseMatrixPreAnswer");
 	var EmFA = document.getElementById("exerciseMatrixAnswer");
 
-	if (Em1y === Em2x) {
+	if (EmFirstY === EmSecondX) {
 
 		//console.log("Saab arvutada");
-		//console.log("Esimene maatriks on Em1x x Em1y (" + Em1x + " x " + Em1y + ")");
-		//console.log("Teine maatriks on Em2x x Em2y (" + Em2x + " x " + Em2y + ")");
+		//console.log("Esimene maatriks on EmFirstX x EmFirstY (" + EmFirstX + " x " + EmFirstY + ")");
+		//console.log("Teine maatriks on EmSecondX x EmSecondY (" + EmSecondX + " x " + EmSecondY + ")");
 
-		if (Em1 && Em2 && EmFA && EmPA) {
+		if (EmFirst && EmSecond && EmFA && EmPA) {
 
-			Em1.innerHTML = "";
-			Em2.innerHTML = "";
+			EmFirst.innerHTML = "";
+			EmSecond.innerHTML = "";
 			EmPA.innerHTML = "";
 			EmFA.innerHTML = "";
 
-			createExerciseMatrix1();
-			createExerciseMatrix2();
+			createExerciseMatrixFirst();
+			createexerciseMatrixSecond();
 			createExerciseMatrixPreAnswer();
 			createExerciseMatrixAnswer();
 			generateValuesForMatrices();
 
 		} else {
 
-			createExerciseMatrix1();
-			createExerciseMatrix2();
+			createExerciseMatrixFirst();
+			createexerciseMatrixSecond();
 			createExerciseMatrixPreAnswer();
 			createExerciseMatrixAnswer();
 			generateValuesForMatrices();
@@ -99,8 +99,8 @@ function generateExerciseMatrix() {
 // **** GENEREERIB SUVALISE SUURUSEGA MAATRIKSID ****
 function generateRandomExerciseMatrix() {
 
-	document.getElementById("exerciseMatrix1Container").style.visibility = "visible";
-	document.getElementById("exerciseMatrix2Container").style.visibility = "visible";
+	document.getElementById("exerciseMatrixFirstContainer").style.visibility = "visible";
+	document.getElementById("exerciseMatrixSecondContainer").style.visibility = "visible";
 	document.getElementById("exerciseMatrixAnswerContainer").style.visibility = "visible";
 	document.getElementById("exerciseMatrixPreAnswerContainer").style.visibility = "visible";
 
@@ -108,39 +108,39 @@ function generateRandomExerciseMatrix() {
 	//document.getElementById("justForDevs").style.visibility = "visible";
 	document.getElementById("checkAndRestartRandom").style.visibility = "visible";
 
-	Em1x = Math.floor((Math.random() * 5) + 1);
-	Em1y = Math.floor((Math.random() * 5) + 1);
-	Em2x = Em1y;
-	Em2y = Math.floor((Math.random() * 5) + 1);
+	EmFirstX = Math.floor((Math.random() * 5) + 1);
+	EmFirstY = Math.floor((Math.random() * 5) + 1);
+	EmSecondX = EmFirstY;
+	EmSecondY = Math.floor((Math.random() * 5) + 1);
 
-	var Em1 = document.getElementById("exerciseMatrix1");
-	var Em2 = document.getElementById("exerciseMatrix2");
+	var EmFirst = document.getElementById("exerciseMatrixFirst");
+	var EmSecond = document.getElementById("exerciseMatrixSecond");
 	var EmFA = document.getElementById("exerciseMatrixAnswer");
 	var EmPA = document.getElementById("exerciseMatrixPreAnswer");
 
-	if (Em1y === Em2x) {
+	if (EmFirstY === EmSecondX) {
 
 		//console.log("Saab arvutada Random");
-		//console.log("Esimene maatriks on Em1x x Em1y (" + Em1x + " x " + Em1y + ")");
-		//console.log("Teine maatriks on Em2x x Em2y (" + Em2x + " x " + Em2y + ")");
+		//console.log("Esimene maatriks on EmFirstX x EmFirstY (" + EmFirstX + " x " + EmFirstY + ")");
+		//console.log("Teine maatriks on EmSecondX x EmSecondY (" + EmSecondX + " x " + EmSecondY + ")");
 
-		if (Em1 && Em2 && EmFA && EmPA) {
+		if (EmFirst && EmSecond && EmFA && EmPA) {
 
-			Em1.innerHTML = "";
-			Em2.innerHTML = "";
+			EmFirst.innerHTML = "";
+			EmSecond.innerHTML = "";
 			EmFA.innerHTML = "";
 			EmPA.innerHTML = "";
 
-			createExerciseMatrix1();
-			createExerciseMatrix2();
+			createExerciseMatrixFirst();
+			createexerciseMatrixSecond();
 			createExerciseMatrixAnswer();
 			createExerciseMatrixPreAnswer();
 			generateValuesForMatrices();
 
 		} else {
 
-			createExerciseMatrix1();
-			createExerciseMatrix2();
+			createExerciseMatrixFirst();
+			createexerciseMatrixSecond();
 			createExerciseMatrixAnswer();
 			createExerciseMatrixPreAnswer();
 			generateValuesForMatrices();
@@ -153,21 +153,21 @@ function generateRandomExerciseMatrix() {
 
 // **** FUNKTSIOON, MIS GENEREERIB ESIMESE HARJUTUSMAATRIKSI ****
 
-function createExerciseMatrix1() {
+function createExerciseMatrixFirst() {
 
-	var exerciseMatrix1Container = document.getElementById("exerciseMatrix1Container");
-	var Em1Width = 42 * Em1y;
-	var Em1Height = 28 * Em1x;
-	exerciseMatrix1Container.style.width = Em1Width + "px";
-	exerciseMatrix1Container.style.height = Em1Height + "px";
+	var exerciseMatrixFirstContainer = document.getElementById("exerciseMatrixFirstContainer");
+	var EmFirstWidth = 42 * EmFirstY;
+	var EmFirstHeight = 28 * EmFirstX;
+	exerciseMatrixFirstContainer.style.width = EmFirstWidth + "px";
+	exerciseMatrixFirstContainer.style.height = EmFirstHeight + "px";
 
-	var exerciseMatrix1 = document.getElementById("exerciseMatrix1");
+	var exerciseMatrixFirst = document.getElementById("exerciseMatrixFirst");
 	var tableBody = document.createElement("tbody");
 
-	for (var rowId = 1; rowId <= Em1x; rowId++) {
+	for (var rowId = 1; rowId <= EmFirstX; rowId++) {
 		var row = document.createElement("tr");
 
-		for (var colId = 1; colId <= Em1y; colId++) {
+		for (var colId = 1; colId <= EmFirstY; colId++) {
 			var cell = document.createElement("input");
 			cell.setAttribute("id", "Ea" + rowId + colId);
 			cell.setAttribute("type", "text");
@@ -175,30 +175,30 @@ function createExerciseMatrix1() {
 		}
 		tableBody.appendChild(row);
 	}
-	exerciseMatrix1.appendChild(tableBody);
+	exerciseMatrixFirst.appendChild(tableBody);
 }
 
 // **** FUNKTSIOON, MIS GENEREERIB TEISE HARJUTUSMAATRIKSI ****
-function createExerciseMatrix2() {
+function createexerciseMatrixSecond() {
 
-	var exerciseMatrix2Container = document.getElementById("exerciseMatrix2Container");
-	var Em2Width = 42 * Em2y;
-	var Em2Height = 28 * Em2x;
+	var exerciseMatrixSecondContainer = document.getElementById("exerciseMatrixSecondContainer");
+	var EmSecondWidth = 42 * EmSecondY;
+	var EmSecondHeight = 28 * EmSecondX;
 
-	var Em1Width = 42 * Em1y;
-	var Em2Position = Em1Width + 20;
+	var EmFirstWidth = 42 * EmFirstY;
+	var EmSecondPosition = EmFirstWidth + 20;
 
-	exerciseMatrix2Container.style.width = Em2Width + "px";
-	exerciseMatrix2Container.style.height = Em2Height + "px";
-	exerciseMatrix2Container.style.left = Em2Position + "px";
+	exerciseMatrixSecondContainer.style.width = EmSecondWidth + "px";
+	exerciseMatrixSecondContainer.style.height = EmSecondHeight + "px";
+	exerciseMatrixSecondContainer.style.left = EmSecondPosition + "px";
 
-	var exerciseMatrix2 = document.getElementById("exerciseMatrix2");
+	var exerciseMatrixSecond = document.getElementById("exerciseMatrixSecond");
 	var tableBody = document.createElement("tbody");
 
-	for (var rowId = 1; rowId <= Em2x; rowId++) {
+	for (var rowId = 1; rowId <= EmSecondX; rowId++) {
 		var row = document.createElement("tr");
 
-		for (var colId = 1; colId <= Em2y; colId++) {
+		for (var colId = 1; colId <= EmSecondY; colId++) {
 			var cell = document.createElement("input");
 			cell.setAttribute("id", "Eb" + rowId + colId);
 			cell.setAttribute("type", "text");
@@ -206,19 +206,19 @@ function createExerciseMatrix2() {
 		}
 		tableBody.appendChild(row);
 	}
-	exerciseMatrix2.appendChild(tableBody);
+	exerciseMatrixSecond.appendChild(tableBody);
 }
 
 // **** FUNKTSIOON, MIS GENEREERIB VAHETULEMUSTE MAATRIKSI ****
 function createExerciseMatrixPreAnswer() {
 
 	var exerciseMatrixPreAnswerContainer = document.getElementById("exerciseMatrixPreAnswerContainer");
-	var EmAnswerWidth = 42 * Em2y * 3;
-	var EmAnswerHeight = 28 * Em1x;
+	var EmAnswerWidth = 42 * EmSecondY * 3;
+	var EmAnswerHeight = 28 * EmFirstX;
 
-	var Em1Width = 42 * Em1y;
-	var Em2Width = 42 * Em2y;
-	var EmPreAnswerPosition = Em1Width + Em2Width + 30;
+	var EmFirstWidth = 42 * EmFirstY;
+	var EmSecondWidth = 42 * EmSecondY;
+	var EmPreAnswerPosition = EmFirstWidth + EmSecondWidth + 30;
 
 	exerciseMatrixPreAnswerContainer.style.width = EmAnswerWidth + "px";
 	exerciseMatrixPreAnswerContainer.style.height = EmAnswerHeight + "px";
@@ -227,16 +227,17 @@ function createExerciseMatrixPreAnswer() {
 	var exerciseMatrixPreAnswer = document.getElementById("exerciseMatrixPreAnswer");
 	var tableBody = document.createElement("tbody");
 
-	for (var i = 0; i < Em1x; i++) {
+	for (var i = 0; i < EmFirstX; i++) {
 		var row = document.createElement("tr");
 
-		for (var j = 0; j < Em2y; j++) {
+		for (var j = 0; j < EmSecondY; j++) {
 			var rowId = i + 1;
 			var colId = j + 1;
 			var cell = document.createElement("input");
 			cell.setAttribute("id", "Ed" + rowId + colId);
 			cell.setAttribute("class", "matrixAnswerInput");
 			cell.setAttribute("type", "text");
+			cell.setAttribute("onkeypress", "validate(event)");
 			cell.setAttribute("onkeypress", "return validate( event)");
 			//cell.setAttribute("oninput", "checkLength(2,this)");
 			row.appendChild(cell);
@@ -250,13 +251,13 @@ function createExerciseMatrixPreAnswer() {
 function createExerciseMatrixAnswer() {
 
 	var exerciseMatrixAnswerContainer = document.getElementById("exerciseMatrixAnswerContainer");
-	var EmAnswerWidth = 42 * Em2y;
-	var EmAnswerHeight = 28 * Em1x;
+	var EmAnswerWidth = 42 * EmSecondY;
+	var EmAnswerHeight = 28 * EmFirstX;
 
-	var Em1Width = 42 * Em1y;
-	var Em2Width = 42 * Em2y;
-	var EmPreAnswerWidth = 42 * Em2y * 3;
-	var EmAnswerPosition = Em1Width + Em2Width + EmPreAnswerWidth + 40;
+	var EmFirstWidth = 42 * EmFirstY;
+	var EmSecondWidth = 42 * EmSecondY;
+	var EmPreAnswerWidth = 42 * EmSecondY * 3;
+	var EmAnswerPosition = EmFirstWidth + EmSecondWidth + EmPreAnswerWidth + 40;
 
 	exerciseMatrixAnswerContainer.style.width = EmAnswerWidth + "px";
 	exerciseMatrixAnswerContainer.style.height = EmAnswerHeight + "px";
@@ -265,14 +266,14 @@ function createExerciseMatrixAnswer() {
 	var exerciseMatrixAnswer = document.getElementById("exerciseMatrixAnswer");
 	var tableBody = document.createElement("tbody");
 
-	for (var rowId = 1; rowId <= Em1x; rowId++) {
+	for (var rowId = 1; rowId <= EmFirstX; rowId++) {
 		var row = document.createElement("tr");
 
-		for (var colId = 1; colId <= Em2y; colId++) {
+		for (var colId = 1; colId <= EmSecondY; colId++) {
 			var cell = document.createElement("input");
 			cell.setAttribute("id", "Ec" + rowId + colId);
 			cell.setAttribute("type", "text");
-			cell.setAttribute("onkeypress", "return validate(this, event)");
+			cell.setAttribute("onkeypress", "validate(event)");
 			row.appendChild(cell);
 		}
 		tableBody.appendChild(row);
@@ -282,18 +283,18 @@ function createExerciseMatrixAnswer() {
 
 // **** KÄIVITAB ARVUDE GENEREERIMISE MAATRIKSISSE ****
 function generateValuesForMatrices() {
-	generateValuesForMatrix1();
-	generateValuesForMatrix2();
+	generateValuesForMatrixFirst();
+	generateValuesForMatrixSecond();
 }
 
 // **** GENEREERIB VÄÄRTUSED ESIMESSE MAATRIKSISSE JA MASSIIVI ****
-function generateValuesForMatrix1() {
+function generateValuesForMatrixFirst() {
 
-	for (var rowId = 1; rowId <= Em1x; rowId++) {
+	for (var rowId = 1; rowId <= EmFirstX; rowId++) {
 
 		var matrixRow = [null];
 
-		for (var colId = 1; colId <= Em1y; colId++) {
+		for (var colId = 1; colId <= EmFirstY; colId++) {
 			var randomValue = Math.floor((Math.random() * 10) + 1);
 			matrixRow.push(randomValue);
 			var matrixCell = document.getElementById("Ea" + rowId + colId);
@@ -305,13 +306,13 @@ function generateValuesForMatrix1() {
 }
 
 // **** GENEREERIB VÄÄRTUSED TEISE MAATRIKSISSE JA MASSIIVI ****
-function generateValuesForMatrix2() {
+function generateValuesForMatrixSecond() {
 
-	for (var rowId = 1; rowId <= Em2x; rowId++) {
+	for (var rowId = 1; rowId <= EmSecondX; rowId++) {
 
 		var matrixRow = [null];
 
-		for (var colId = 1; colId <= Em2y; colId++) {
+		for (var colId = 1; colId <= EmSecondY; colId++) {
 			var randomValue = Math.floor((Math.random() * 10) + 1);
 			matrixRow.push(randomValue);
 			var matrixCell = document.getElementById("Eb" + rowId + colId);
@@ -327,14 +328,13 @@ function checkMatrixFinalAnswers() {
 
 	var c = 1;
 
-	for (var rowId = 1; rowId <= Em1x; rowId++) {
-
-		for (var colId = 1; colId <= Em2y; colId++) {
+	for (var rowId = 1; rowId <= EmFirstX; rowId++) {
+		for (var colId = 1; colId <= EmSecondY; colId++) {
 
 			var matrixAnswer = document.getElementById("Ec" + rowId + colId);
 			var matrixAnswerString = "";
 
-			for (var i = 0; i < Em1y; i++) {
+			for (var i = 0; i < EmFirstY; i++) {
 				var Ea = document.getElementById("Ea" + rowId + c).value;
 				var Eb = document.getElementById("Eb" + c + colId).value;
 				matrixAnswerString += Ea + "*" + Eb + " + ";
@@ -365,14 +365,13 @@ function checkMatrixPreAnswers() {
 
 	var c = 1;
 
-	for (var rowId = 1; rowId <= Em1x; rowId++) {
-
-		for (var colId = 1; colId <= Em2y; colId++) {
+	for (var rowId = 1; rowId <= EmFirstX; rowId++) {
+		for (var colId = 1; colId <= EmSecondY; colId++) {
 
 			var matrixAnswer = document.getElementById("Ed" + rowId + colId);
 			var matrixAnswerString = "";
 
-			for (var i = 0; i < Em1y; i++) {
+			for (var i = 0; i < EmFirstY; i++) {
 				var Ea = document.getElementById("Ea" + rowId + c).value;
 				var Eb = document.getElementById("Eb" + c + colId).value;
 				matrixAnswerString += Ea + "*" + Eb + " + ";
@@ -402,15 +401,15 @@ function justForDevsMatrixAnswers() {
 
 	var c = 1;
 
-	for (var rowId = 1; rowId <= Em1x; rowId++) {
+	for (var rowId = 1; rowId <= EmFirstX; rowId++) {
 
-		for (var colId = 1; colId <= Em2y; colId++) {
+		for (var colId = 1; colId <= EmSecondY; colId++) {
 
 			var matrixFinalAnswer = document.getElementById("Ec" + rowId + colId);
 			var matrixAnswer = document.getElementById("Ed" + rowId + colId);
 			var matrixAnswerString = "";
 
-			for (var i = 0; i < Em1y; i++) {
+			for (var i = 0; i < EmFirstY; i++) {
 
 				var Ea = document.getElementById("Ea" + rowId + c).value;
 				var Eb = document.getElementById("Eb" + c + colId).value;
@@ -449,19 +448,19 @@ function checkMatrixAnswersRandom() {
 	checkMatrixPreAnswers();
 
 	if (matrixFinalAnswerErrors === 0 && matrixPreAnswerErrors === 0) {
-		var matrixScore = Em1x * Em1y * Em2x * Em2y;
+		var matrixScore = EmFirstX * EmFirstY * EmSecondX * EmSecondY;
 		console.log("");
-		console.log("Maatriks suurusega " + Em1x + "x" + Em1y + " x " + Em2x + "x" + Em2y);
-		console.log("Skoori arvutamine " + Em1x + "*" + Em1y + "*" + Em2x + "*" + Em2y + " = " + (Em1x * Em1y * Em2x * Em2y));
+		console.log("Maatriks suurusega " + EmFirstX + "x" + EmFirstY + " x " + EmSecondX + "x" + EmSecondY);
+		console.log("Skoori arvutamine " + EmFirstX + "*" + EmFirstY + "*" + EmSecondX + "*" + EmSecondY + " = " + (EmFirstX * EmFirstY * EmSecondX * EmSecondY));
 		
 		sumOfExercises++;
 		updateScore();
 		generateRandomExerciseMatrix();
 	} else {
-		var matrixErrorScore = parseInt((Em1x * Em1y * Em2x * Em2y) / 2, 10);
+		var matrixErrorScore = parseInt((EmFirstX * EmFirstY * EmSecondX * EmSecondY) / 2, 10);
 		console.log("");
-		console.log("Maatriks suurusega " + Em1x + "x" + Em1y + " x " + Em2x + "x" + Em2y);
-		console.log("Vea skoori arvutamine " + "(" + Em1x + "*" + Em1y + "*" + Em2x + "*" + Em2y + ")/2" + " = " + ((Em1x * Em1y * Em2x * Em2y) / 2));
+		console.log("Maatriks suurusega " + EmFirstX + "x" + EmFirstY + " x " + EmSecondX + "x" + EmSecondY);
+		console.log("Vea skoori arvutamine " + "(" + EmFirstX + "*" + EmFirstY + "*" + EmSecondX + "*" + EmSecondY + ")/2" + " = " + ((EmFirstX * EmFirstY * EmSecondX * EmSecondY) / 2));
 		
 		console.log("");
 		errorCount++;
@@ -472,7 +471,7 @@ function checkMatrixAnswersRandom() {
 }
 
 //TULEMUSTE SALVESTAMINE LOCALSTORAGESSE
-
+/*
 function saveStatsToLocalstorage(dataObject) {
 	if (!localStorage["top"]) {
 		var arr = []
@@ -500,6 +499,7 @@ function loadStatsFromLocalStorage() {
 			createTable(arr)
 	}
 }
+*/
 
 // MÄNGU SKOORI FUNKTSIOONID
 function resetScore() {
@@ -507,8 +507,8 @@ function resetScore() {
 	document.getElementById("checkAndRestartRandom").style.visibility = "hidden";
 	document.getElementById("beginGame").style.visibility = "visible";
 
-	document.getElementById("exerciseMatrix1Container").style.visibility = "hidden";
-	document.getElementById("exerciseMatrix2Container").style.visibility = "hidden";
+	document.getElementById("exerciseMatrixFirstContainer").style.visibility = "hidden";
+	document.getElementById("exerciseMatrixSecondContainer").style.visibility = "hidden";
 	document.getElementById("exerciseMatrixAnswerContainer").style.visibility = "hidden";
 	document.getElementById("exerciseMatrixPreAnswerContainer").style.visibility = "hidden";
 
@@ -565,14 +565,14 @@ function tick() {
 
 // **** KONTROLLIB SISESTUST *****
 function validate(evt) {
-	key = evt.key;
-	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "*","+", "Tab", "Backspace"];
-	if(allowed.indexOf(evt.key) == -1){
-		evt.preventDefault();
-		console.log("EI LUBA");
-	}
-	// PRAEGUNE
-	if(evt.key === "/" && evt.target.value.indexOf('/') != -1) {
-		evt.preventDefault();
-	}
+    key = evt.key;
+    var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "*","+", "Tab", "Backspace"];
+    if (allowed.indexOf(evt.key) == -1) {
+        evt.preventDefault();
+        //console.log("EI LUBA");
+    }
+    // PRAEGUNE
+    if (evt.key === "/" && evt.target.value.indexOf('/') != -1) {
+        evt.preventDefault();
+    }
 }

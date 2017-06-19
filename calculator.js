@@ -1,7 +1,7 @@
 // **** GLOBAALSED MUUTUJAD ****
 
 // kalkulaatori maatriksi mõõdu muutujad
-var m1x, m1y, m2x, m2y;
+var mFirstX, mFirstY, mSecondX, mSecondY;
 // maatriksite sisendite muutujad
 var mistakeA = false;
 var mistakeB = false;
@@ -18,30 +18,30 @@ function generateMatrix() {
 
     document.getElementById("mistakeNotification").style.display = "none";
 
-    m1x = parseInt(document.getElementById("m1x").value);
-    m1y = parseInt(document.getElementById("m1y").value);
-    m2x = parseInt(document.getElementById("m2x").value);
-    m2y = parseInt(document.getElementById("m2y").value);
+    mFirstX = parseInt(document.getElementById("mFirstX").value);
+    mFirstY = parseInt(document.getElementById("mFirstY").value);
+    mSecondX = parseInt(document.getElementById("mSecondX").value);
+    mSecondY = parseInt(document.getElementById("mSecondY").value);
 
-    var m1 = document.getElementById("matrix1");
-    var m2 = document.getElementById("matrix2");
+    var mFirst = document.getElementById("matrixFirst");
+    var mSecond = document.getElementById("matrixSecond");
     var mA = document.getElementById("matrixAnswer");
     var mFA = document.getElementById("matrixFinalAnswer");
 
-    if (m1y === m2x) {
-        if (m1 && m2 && mA && mFA) {
-            m1.innerHTML = "";
-            m2.innerHTML = "";
+    if (mFirstY === mSecondX) {
+        if (mFirst && mSecond && mA && mFA) {
+            mFirst.innerHTML = "";
+            mSecond.innerHTML = "";
             mA.innerHTML = "";
             mFA.innerHTML = "";
 
             createMatrix();
-            //createMatrix2();
+            //creatematrixSecond();
             //calculateMatrixSum();
            // calculateMatrixFinalSum();
         } else {
             createMatrix();
-            //createMatrix2();
+            //creatematrixSecond();
            // calculateMatrixSum();
             //calculateMatrixFinalSum();
         }
@@ -54,14 +54,14 @@ function generateMatrix() {
 // **** FUNKTSIOON, MIS GENEREERIB ESIMESE MAATRIKSI ****
 function createMatrix() {
 
-    var matrix1Container = document.getElementById("matrix1Container");
-    var matrix1 = document.getElementById("matrix1");
+    var matrixFirstContainer = document.getElementById("matrixFirstContainer");
+    var matrixFirst = document.getElementById("matrixFirst");
     var tableBody = document.createElement("tbody");
 
-    for (var i = 0; i < m1x; i++) {
+    for (var i = 0; i < mFirstX; i++) {
         var row = document.createElement("tr");
 
-        for (var j = 0; j < m1y; j++) {
+        for (var j = 0; j < mFirstY; j++) {
             var rowId = i + 1;
             var colId = j + 1;
             var cell = document.createElement("input");
@@ -74,16 +74,16 @@ function createMatrix() {
         }
         tableBody.appendChild(row);
     }
-    matrix1.appendChild(tableBody);
+    matrixFirst.appendChild(tableBody);
 
-    var matrix2Container = document.getElementById("matrix2Container");
-    var matrix2 = document.getElementById("matrix2");
+    var matrixSecondContainer = document.getElementById("matrixSecondContainer");
+    var matrixSecond = document.getElementById("matrixSecond");
     var tableBody = document.createElement("tbody");
 
-    for (var i = 0; i < m2x; i++) {
+    for (var i = 0; i < mSecondX; i++) {
         var row = document.createElement("tr");
 
-        for (var j = 0; j < m2y; j++) {
+        for (var j = 0; j < mSecondY; j++) {
             var rowId = i + 1;
             var colId = j + 1;
             var cell = document.createElement("input");
@@ -96,14 +96,14 @@ function createMatrix() {
         }
         tableBody.appendChild(row);
     }
-    matrix2.appendChild(tableBody);
+    matrixSecond.appendChild(tableBody);
 }
 
-function generateMatrix12() {
+function generateMatrixFirstSecond() {
 
 	generateMatrix();
-	matrix1Values();
-	matrix2Values();
+	matrixFirstValues();
+	matrixSecondValues();
 	calculateMatrixSum();
 	calculateMatrixFinalSum();
 	console.log('siin');
@@ -111,8 +111,8 @@ function generateMatrix12() {
 }
 
 function generateValues() {
-	matrix1Values();
-	matrix2Values();
+	matrixFirstValues();
+	matrixSecondValues();
 	calculateMatrixSum();
 	calculateMatrixFinalSum();
 	console.log('siin');
@@ -121,17 +121,17 @@ function generateValues() {
 }
 
 // **** FUNKTSIOON, MIS GENEREERIB TEISE MAATRIKSI ****
-/*function createMatrix2() {
+/*function creatematrixSecond() {
 
-	var matrix2Container = document.getElementById("matrix2Container");
+	var matrixSecondContainer = document.getElementById("matrixSecondContainer");
 
-	var matrix2 = document.getElementById("matrix2");
+	var matrixSecond = document.getElementById("matrixSecond");
 	var tableBody = document.createElement("tbody");
 
-	for (var i = 0; i < m2x; i++) {
+	for (var i = 0; i < mSecondX; i++) {
 		var row = document.createElement("tr");
 
-		for (var j = 0; j < m2y; j++) {
+		for (var j = 0; j < mSecondY; j++) {
 			var rowId = i + 1;
 			var colId = j + 1;
 			var cell = document.createElement("input");
@@ -145,7 +145,7 @@ function generateValues() {
 		}
 		tableBody.appendChild(row);
 	}
-	matrix2.appendChild(tableBody);
+	matrixSecond.appendChild(tableBody);
 
 }*/
 
@@ -156,8 +156,8 @@ function createValues() {
 	MathJax.Hub.Queue(["Typeset", MathJax.Hub, "math"]);
 	MathJax.Hub.Queue(function () {
 		var math = MathJax.Hub.getAllJax("MathDiv")[0];
-		var i = matrix1Values();
-		var j = matrix2Values();
+		var i = matrixFirstValues();
+		var j = matrixSecondValues();
 		var k = calculateMatrixSum();
 		var l = calculateMatrixFinalSum();
 		console.log(l);
@@ -169,15 +169,16 @@ function createValues() {
 	});
 };
 
-function createMatrix3() {
+/*
+function createMatrixThird() {
     var mathDiv = document.getElementById('math');
     var displayDiv = document.getElementById('display');
 
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "math"]);
     MathJax.Hub.Queue(function() {
         var math = MathJax.Hub.getAllJax("MathDiv")[0];
-        var i = matrix1Values();
-        var j = matrix2Values();
+        var i = matrixFirstValues();
+        var j = matrixSecondValues();
         var k = calculateMatrixSum();
         var l = calculateMatrixFinalSum();
         MathJax.Hub.Queue(["Text", math, "\\begin{bmatrix}" + i + "\\end{bmatrix} \\times \\begin{bmatrix}" + j + "\\end{bmatrix} = \\begin{bmatrix}" + k + "\\end{bmatrix} = \\begin{bmatrix}" + l + "\\end{bmatrix}"]);
@@ -187,10 +188,12 @@ function createMatrix3() {
         });
     });
 }
+*/
+
 //Loendab esimeses maatriksis olevad arvud kokku, ning viib mathJax kujule
-function matrix1Values() {
+function matrixFirstValues() {
     var answerString = "";
-    var table = document.getElementById('matrix1');
+    var table = document.getElementById('matrixFirst');
     for (var r = 0, n = table.rows.length; r < n; r++) {
         if (r >= 1) {
 
@@ -199,7 +202,7 @@ function matrix1Values() {
             answerString += "\\\\";
         }
 
-        for (var c = 0; c < m1y; c++) {
+        for (var c = 0; c < mFirstY; c++) {
             var rowId = r + 1;
             var colId = c + 1;
             var Cell = document.getElementById("a" + rowId + colId).value;
@@ -228,9 +231,9 @@ function matrix1Values() {
 }
 
 //Viib teises maatriksis olevad arvud MatJax kujule
-function matrix2Values() {
+function matrixSecondValues() {
     var answerString = "";
-    var table = document.getElementById('matrix2');
+    var table = document.getElementById('matrixSecond');
     for (var r = 0, n = table.rows.length; r < n; r++) {
         if (r >= 1) {
             var strLength = answerString.length;
@@ -238,7 +241,7 @@ function matrix2Values() {
             answerString += "\\\\";
         };
 
-        for (var c = 0; c < m2y; c++) {
+        for (var c = 0; c < mSecondY; c++) {
             var rowId = r + 1;
             var colId = c + 1;
             var Cell = document.getElementById("b" + rowId + colId).value;
@@ -277,7 +280,7 @@ function calculateMatrix() {
     } else {
         calculateMatrixSum();
         calculateMatrixFinalSum();
-        createMatrix3();
+        createMatrixThird();
 
         document.getElementById("matrixAnswerContainer").style.display = "none"
         document.getElementById("matrixFinalAnswerContainer").style.display = "none";
@@ -288,12 +291,12 @@ function calculateMatrix() {
 function calculateNextMatrix() {
     calculateMatrixSum();
     calculateMatrixFinalSum();
-    createMatrix3();
+    createMatrixThird();
 
     document.getElementById("matrixAnswerContainer").style.display = "none"
     document.getElementById("matrixFinalAnswerContainer").style.display = "none";
-    document.getElementById("matrix1Container").style.display = "none";
-    document.getElementById("matrix2Container").style.display = "none";
+    document.getElementById("matrixFirstContainer").style.display = "none";
+    document.getElementById("matrixSecondContainer").style.display = "none";
     document.getElementById("checkAnswer").style.display = "none";
     document.getElementById("calculateNext").style.display = "none";
 }
@@ -304,15 +307,14 @@ function calculateMatrixSum() {
     var c = 1;
     var finalString = "";
 
-    for (var x = 1; x <= m1x; x++) {
+    for (var x = 1; x <= mFirstX; x++) {
         if (x >= 2) {
             var strLength = finalString.length;
             finalString = (finalString.slice(0, strLength - 3));
             finalString += "\\\\";
         };
 
-        for (var y = 1; y <= m2y; y++) {
-
+        for (var y = 1; y <= mSecondY; y++) {
             if (y >= 2) {
                 var strLength = finalString.length;
                 finalString = finalString.slice(0, strLength - 3);
@@ -320,7 +322,7 @@ function calculateMatrixSum() {
             };
             var matrixAnswerString = "";
 
-            for (var i = 0; i < m1y; i++) {
+            for (var i = 0; i < mFirstY; i++) {
 
                 var a = document.getElementById("a" + x + c).value;
                 var str = a;
@@ -367,13 +369,13 @@ function calculateMatrixFinalSum() {
     var c = 1;
     var finalString = "";
 
-    for (var x = 1; x <= m1x; x++) {
+    for (var x = 1; x <= mFirstX; x++) {
         if (x >= 2) {
             var strLength = finalString.length;
             finalString += "\\\\";
         };
 
-        for (var y = 1; y <= m2y; y++) {
+        for (var y = 1; y <= mSecondY; y++) {
             if (y >= 2) {
                 var strLength = finalString.length;
                 finalString += "&";
@@ -381,7 +383,7 @@ function calculateMatrixFinalSum() {
 
             var matrixAnswerString = "";
 
-            for (var i = 0; i < m1y; i++) {
+            for (var i = 0; i < mFirstY; i++) {
                 var a = document.getElementById("a" + x + c).value;
                 var b = document.getElementById("b" + c + y).value;
                 if (!a) {
@@ -437,12 +439,12 @@ function reduce(numerator, denominator) {
 }
 
 function checkInputSequence() {
-    checkA: for (var i = 0; i < m1x; i++) {
-        for (var j = 0; j < m1y; j++) {
+    checkA: for (var i = 0; i < mFirstX; i++) {
+        for (var j = 0; j < mFirstY; j++) {
             var rowId = i + 1;
             var colId = j + 1;
             var numberA = document.getElementById("a" + rowId + colId).value;
-            console.log(numberA);
+            //console.log(numberA);
             if (numberA == "") {
                 console.log("Kast A on tühi");
                 var inputColorA = document.getElementById("a" + rowId + colId);
@@ -469,8 +471,8 @@ function checkInputSequence() {
         }
     }
 
-	checkB: for (var i = 0; i < m2x; i++) {
-		for (var j = 0; j < m2y; j++) {
+	checkB: for (var i = 0; i < mSecondX; i++) {
+		for (var j = 0; j < mSecondY; j++) {
 			var rowId = i + 1;
 			var colId = j + 1;
 			var numberB = document.getElementById("b" + rowId + colId).value;
@@ -510,8 +512,8 @@ function checkInputSequence() {
 }
 
 /*function checkInputSequenceB() {
-    for (var i = 0; i < m2x; i++) {
-        for (var j = 0; j < m2y; j++) {
+    for (var i = 0; i < mSecondX; i++) {
+        for (var j = 0; j < mSecondY; j++) {
             var rowId = i + 1;
             var colId = j + 1;
             var numberB = document.getElementById("b" + rowId + colId).value;
@@ -567,10 +569,10 @@ function validate(evt) {
 }
 
 
-var matrix1Array = [
+var matrixFirstArray = [
     [null]
 ];
-var matrix2Array = [
+var matrixSecondArray = [
     [null]
 ];
 var matrixPreAnswerArray = [
@@ -581,37 +583,37 @@ function highlighter() {
 
     var tableCells = document.getElementsByClassName("mjx-mtd");
     var startpoint = tableCells.length / 2;
-    var answerStartpoint = startpoint + m1x * m1y + m2x * m2y;
-    var matrixPreAnswerSize = m1x * m2y;
-    var matrix1Column = m1x;
-    var matrix2Column = m2x;
+    var answerStartpoint = startpoint + mFirstX * mFirstY + mSecondX * mSecondY;
+    var matrixPreAnswerSize = mFirstX * mSecondY;
+    var matrixFirstColumn = mFirstX;
+    var matrixSecondColumn = mSecondX;
 
     var rowStartpoint = startpoint;
     var matrixRow = [null];
 
     // esimene maatriks
-    for (var i = 0; i < matrix1Column; i++) {
-        for (var j = 0; j < m1y; j++) {
+    for (var i = 0; i < matrixFirstColumn; i++) {
+        for (var j = 0; j < mFirstY; j++) {
             matrixRow.push(rowStartpoint);
             rowStartpoint++;
         }
-        matrix1Array.push(matrixRow);
+        matrixFirstArray.push(matrixRow);
         matrixRow = [null];
     }
 
     // teine maatriks
-    for (var i = 0; i < matrix2Column; i++) {
-        for (var j = 0; j < m2y; j++) {
+    for (var i = 0; i < matrixSecondColumn; i++) {
+        for (var j = 0; j < mSecondY; j++) {
             matrixRow.push(rowStartpoint);
             rowStartpoint++;
         }
-        matrix2Array.push(matrixRow);
+        matrixSecondArray.push(matrixRow);
         matrixRow = [null];
     }
 
     // vahevastuste maatriks
-    for (var i = 0; i < matrix1Column; i++) {
-        for (var j = 0; j < m2y; j++) {
+    for (var i = 0; i < matrixFirstColumn; i++) {
+        for (var j = 0; j < mSecondY; j++) {
             matrixRow.push(rowStartpoint);
             rowStartpoint++;
         }
@@ -619,25 +621,26 @@ function highlighter() {
         matrixRow = [null];
     }
 
-    /* console.log("startpoint: " + startpoint);
+    /*
+	console.log("startpoint: " + startpoint);
     console.log("rowStartpoint: " + rowStartpoint);
     console.log("answerStartpoint: " + answerStartpoint);
-    console.log(matrix1Array);
-    console.log(matrix2Array);
+    console.log(matrixFirstArray);
+    console.log(matrixSecondArray);
     console.log(matrixPreAnswerArray);
      */
 
     var c = 1;
-    for (var x = 1; x <= m1x; x++) {
-        for (var y = 1; y <= m2y; y++) {
-            for (var i = 0; i < m1y; i++) {
+    for (var x = 1; x <= mFirstX; x++) {
+        for (var y = 1; y <= mSecondY; y++) {
+            for (var i = 0; i < mFirstY; i++) {
                 (function() {
                         //console.log("1 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
                         //console.log("c: " + c + " , x: " + x + " , y: " + y);
-                        var aID = matrix1Array[x][c];
+                        var aID = matrixFirstArray[x][c];
                         //console.log("2 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
                         //console.log("c: " + c + " , x: " + x + " , y: " + y);
-                        var bID = matrix2Array[c][y];
+                        var bID = matrixSecondArray[c][y];
                         //console.log("3 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
                         //console.log("c: " + c + " , x: " + x + " , y: " + y);
                         var cID = matrixPreAnswerArray[x][y];
