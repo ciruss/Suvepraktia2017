@@ -10,7 +10,7 @@ body {
 }
 
 #wrapper {
-    width: 80%;
+    width:60%;
     margin: 0 auto;
     text-align: center;
     position: relative;
@@ -71,6 +71,14 @@ img {
 #content {
     border-radius: 0px 0px 10px 10px;
 }
+#selectFormSize{
+	color:#666666;
+    font-size:20px;
+}
+#matrixForInvertibleM tbody tr >*{
+    border:2px solid #666666;
+    margin:2px;
+}
 
 #content #instructions {
     padding: 10px;
@@ -82,6 +90,7 @@ img {
     font-family: 'Overpass', sans-serif;
     color: #666666;
 }
+
 
 #left {
     margin: auto 0;
@@ -116,9 +125,19 @@ th {
     background-color: #87CEFA;
 }
 
+#matrixDeterminantAnswer{
+	color:#666666;
+	
+}
+
 input {
     height: 30px;
     width: 30px;
+}
+#answerHeadline{
+	color:#666666;
+	font-size:20px;
+	display:none;
 }
 
 table {
@@ -176,4 +195,12 @@ table {
 button:hover {
     background-color: #221a54;
     color: white;
+}
+@media only screen and (max-width: 1366px) {
+    .topnav a {
+        font-size:25px;
+    }
+    #content #instructions{
+        width:80%;
+    }
 }

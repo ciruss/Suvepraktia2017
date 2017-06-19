@@ -26,6 +26,7 @@ function generateMatrixForInvertibleM() {
 }
 
 function createMatrixForInvertibleM() {
+	document.getElementById("answerHeadline").style.display="inline";
 
 	var matrixInvertibleMContainer = document.getElementById("matrixInvertibleMContainer");
 	/*

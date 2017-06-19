@@ -9,7 +9,7 @@ html, body {
 }
 
 #wrapper {
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
     text-align: center;
     padding-bottom: 40px;
@@ -124,10 +124,29 @@ table,
 #matrixSecondContainer {
     display: inline;
 }
+#matrixFirst tbody tr >*{
+    margin:2px;
+    border:2px solid #666666;
+}
+#matrixSecond tbody tr>*{
+    margin:2px;
+    border:2px solid #666666;
+}
+#highlight{
+	display:none;
+}
+#highlighterText{
+	display:none;
+	color:#666666;
+	font-size:20px;
+}
+
 
 #math {
     overflow: auto;
     overflow-y: hidden;
+    margin:10px 15px;
+    height:160px;
 }
 
 #footer {
@@ -184,7 +203,14 @@ button:hover {
     background-color: #221a54;
     color: white;
 }
-
 #highlight {
 	display: none;
+}
+@media only screen and (max-width: 1366px) {
+    .topnav a {
+        font-size:25px;
+    }
+    #content #instructions{
+        width:80%;
+    }
 }

@@ -11,7 +11,7 @@ body {
 }
 
 #wrapper {
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
     text-align: center;
 	padding-bottom:90px;
@@ -172,4 +172,13 @@ border:2px solid #888888;
 button:hover {
     background-color: #221a54;
     color: white;
+}
+
+@media only screen and (max-width: 1366px) {
+    .topnav a {
+        font-size:25px;
+    }
+    #content #instructions{
+        width:80%;
+    }
 }

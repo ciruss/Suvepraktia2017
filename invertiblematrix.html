@@ -34,7 +34,7 @@
 					<p>
 						<h3>Pöördmaatriks</h3>
 						Vali pöördmaatriksi järk ning vajuta "genereeri maatriks"
-						<br>mingid asjad veel
+						<br> 
 					</p>
 				</div>
 				<form class="tooltip" id="selectFormSize">
@@ -46,26 +46,28 @@
 						<option value="5">5</option>
 					</select>
 				</form>
+				<div id="btnContainer">
+					<button type="button" class="btn" onclick="generateMatrixForInvertibleM()">Genereeri maatriks</button>
+					<!--<button id="checkAnswerDeterminant" class="btn" type="button" onclick="calculateInvertibleMatrix()">Arvuta pöördmaatriksi vastus </button>-->
+				</div>
 				<div id="mistakeNotification"></div>
 
 				<!--<div id="matrixContainer">-->
 				<div id="matrixInput">
 					<!-- maatriksid arvude sisestuseks -->
-					<h5 id="answerHeadline">vastus</h5>
+					 
 					<div id="left">
 						<div id="matrixInvertibleMContainer" class="resp">
 							<table id="matrixForInvertibleM"></table>
 						</div>
 					</div>
 					<div id="right">
+					    <div id="answerHeadline">vastus:</div>
 						<div id="matrixDeterminantAnswer" class="resp"></div>
 					</div>
 				</div>
-				<!--</div>-->
-				<div id="btnContainer">
-					<button type="button" class="btn" onclick="generateMatrixForInvertibleM()">Genereeri maatriks</button>
-					<!--<button id="checkAnswerDeterminant" class="btn" type="button" onclick="calculateInvertibleMatrix()">Arvuta pöördmaatriksi vastus </button>-->
-				</div>
+				<div id="mathContainer">(siia sisse tuleb mathjax)</div>
+				
 			</div>
 			  <div id="footer"></div>
 		</div>
