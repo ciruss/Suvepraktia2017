@@ -28,11 +28,9 @@ function generateMatrixForDeterminant() {
     if (matrixForDeterminant) {
         matrixForDeterminant.innerHTML = "";
         matrixPermutationTable.innerHTML = "";
-        matrixDeterminantAnswer.innerHTML = "";
         createMatrixForDeterminant();
     } else {
         matrixPermutationTable.innerHTML = "";
-        matrixDeterminantAnswer.innerHTML = "";
         createMatrixForDeterminant();
     }
 }
@@ -76,24 +74,50 @@ function createMatrixForDeterminant() {
 }
 
 // **** FUNKTSIOON, MIS GENEREERIB MATHJAXI RUUTMAATRIKSI ***** 
-function createDetMatrix(){
+function createDetMatrix() {
     var answerString = "";
     var output = document.getElementById("DetMatrix");
     var table = document.getElementById("matrixForDeterminant");
-    for(var r = 0, n = table.rows.length; r < n; r++){
-		if(r >= 1){
-			var strLength = answerString.length;
-			answerString = (answerString.slice(0, strLength - 1));
-			answerString +="\\\\";
-		}
-        for(var c = 0, n = table.rows.length; c<n; c++){
+    for (var r = 0, n = table.rows.length; r < n; r++) {
+        if (r >= 1) {
+            var strLength = answerString.length;
+            answerString = (answerString.slice(0, strLength - 1));
+            answerString += "\\\\";
+        }
+        for (var c = 0, n = table.rows.length; c < n; c++) {
             var rowId = r + 1;
             var colId = c + 1;
-            if(c<n){
+            var  Cell = document.getElementById("a" + rowId + colId).value;
+            var str = Cell;
+            var pos = str.indexOf("/");
+            var minuspos = Cell.indexOf("-")
+            if (Cell.charAt(minuspos) === "-" && Cell.charAt(pos) === "/") {
+ 				var str2 = str.replace("-", "");
+ 				var start = str2.slice(0, pos - 1);
+ 				start = "\\frac {" + start + "}";
+ 				var end = Cell;
+ 				var afterSlash = str.substr(str.indexOf("/") + 1);
+ 				end = "{" + afterSlash + "}";
+ 				var fractionbracketstart = "(-";
+ 				var fractionbracketend = ")" + "&";
+ 				var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
+ 				answerString += fractionbracket;
+ 			} else if (Cell.charAt(pos) === "/") {
+ 				var stringLength = Cell.length;
+ 				var String1 = Cell;
+ 				var start = str.slice(0, pos);
+ 				start = "\\frac {" + start + "}";
+ 				var end = Cell;
+ 				var afterSlash = str.substr(str.indexOf("/") + 1);
+ 				end = "{" + afterSlash + "}&";
+ 				Cell = start + end;
+ 				answerString += Cell;
+ 			} else if (Cell.charAt(0) === "-") {
+ 				Cell = "(" + Cell + ")" + "&";
+ 				answerString += Cell;
+  			}
+            else {
                 var Cell = document.getElementById("a" + rowId + colId).value + "&";
-                answerString += Cell;
-            }else if(c==n){
-                var Cell = document.getElementById("a" + rowId + colId).value;
                 answerString += Cell;
             }
         }
@@ -126,7 +150,7 @@ function generateDetMatrix(){
 	MathJax.Hub.Queue(function(){
 		var math = MathJax.Hub.getAllJax("MathDiv")[0];
 		var i = document.getElementById("determinant").value;
-		var j = calculateDeterminant();
+		var j = fractionAnswer();
 		var k = determinantPhase();
 		var l = createDetMatrix();
 
@@ -139,7 +163,53 @@ function generateDetMatrix(){
 }
 
 // ||||| ----- ----- ----- ----- DETERMINANTIDE KALKULAATORI OSA ----- ----- ----- ----- |||||
+function reduce(numerator, denominator) {
+    var gcd = function gcd(a, b) {
+        return b ? gcd(b, a % b) : a;
+    };
+    gcd = gcd(numerator, denominator);
+    return [numerator / gcd, denominator / gcd];
+}
 
+
+function fractionAnswer(){
+    var detValue = calculateDeterminant();
+    var finalString = ""
+    console.log(detValue)
+    var abc = math.fraction(detValue);
+    abc = math.fraction({
+        n: abc.n,
+        d: abc.d
+    });
+    var num = detValue;
+    var n = num.toString();
+    var pos = n.indexOf("-");
+    if (abc.d === 1 && n.charAt(pos)!=="-") {
+				finalString += abc.n;
+			} 
+			if(abc.d ===1 && n.charAt(pos)==="-"){
+				abc.n = "-" + abc.n;
+				finalString += abc.n;
+			}
+			if(n.charAt(pos)==="-" && abc.d !== 1){
+					reduction = reduce(abc.n,abc.d);
+					start = "\\frac {" + abc.n + "}";
+					var end = "{" + abc.d + "}"
+					var fractionbracketstart = "-";
+					var fractionbracketend = "";
+					var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
+					finalString += fractionbracket;
+			}
+			
+			else if(abc.d !==1) {
+				reduction = reduce(abc.n, abc.d);
+				var numerator = "\\frac {" + abc.n + "}";
+				var denominator = "{" + abc.d + "}";
+				answerString = numerator + denominator;
+				finalString += answerString;
+			}
+    return finalString;
+}
 // **** FUNKTSIOON �IGE PERMUTATSIOONIDE FUNKTSIOONI K�IVITAMISEKS ****
 
 function calculateDeterminant() {
@@ -180,8 +250,6 @@ function calculateDeterminant() {
         mistakes = false;
 
         document.getElementById("showCalculations").style.display = "inline-block";
-        document.getElementById("matrixDeterminantAnswer").style.display = "inline-block";
-        document.getElementById("answerHeadline").style.display = "inline-block";
     }
     return a;
 }
@@ -246,8 +314,6 @@ function determinantForTwo() {
     //console.log("vahetulemus: " + detValues);
 
     var matrixDetAnswer = math.eval(detValues);
-    var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
-    matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
     detValues = "";
     matrixPermutationTable.innerHTML = matrixPermutationTableString;
     matrixPermutationTableString = "";
@@ -331,8 +397,6 @@ function determinantForThree() {
     //console.log("vahetulemus: " + detValues);
 
     var matrixDetAnswer = math.eval(detValues);
-    var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
-    matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
     detValues = "";
     matrixPermutationTable.innerHTML = matrixPermutationTableString;
     matrixPermutationTableString = "";
@@ -436,8 +500,6 @@ function determinantForFour() {
     //console.log("vahetulemus: " + detValues);
 
     var matrixDetAnswer = math.eval(detValues);
-    var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
-    matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
     detValues = "";
     matrixPermutationTable.innerHTML = matrixPermutationTableString;
     matrixPermutationTableString = "";
@@ -558,8 +620,6 @@ function determinantForFive() {
     //console.log("vahetulemus: " + detValues);
 
     var matrixDetAnswer = math.eval(detValues);
-    var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
-    matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
     detValues = "";
     matrixPermutationTable.innerHTML = matrixPermutationTableString;
     matrixPermutationTableString = "";
