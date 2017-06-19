@@ -152,23 +152,29 @@ table {
 #display {
     display: none;
 }
+
 #answerHeadline{
 	color:#666666;
 	display:none;
 }
+
 #selectFormSize{
 	color:#666666;
     font-size:20px;
 }
+
 #determinantTable{
 	display:none;
 }
+
 #matrixDeterminantAnswer{
 	color:#666666;
 }
+
 #checkAnswerDeterminant{
 	display:none;
 }
+
 #showCalculations{
 	display:none;
 }

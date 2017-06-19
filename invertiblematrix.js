@@ -1,13 +1,10 @@
-
-
 var invertibleMatrixSize;
 var detNumbers = [];
 var detValues = "";
 var inversionCount = 0;
 
-//var mistakes = false;
-
-
+var mistakes = false;
+var timer;
 
 function generateMatrixForInvertibleM() {
 	
@@ -19,28 +16,24 @@ function generateMatrixForInvertibleM() {
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 
 	if (matrixForInvertibleM) {
-		
 		matrixForInvertibleM.innerHTML = "";
 		matrixDeterminantAnswer.innerHTML = "";
 		createMatrixForInvertibleM();
-
 	} else {
-		
 		matrixDeterminantAnswer.innerHTML = "";
 		createMatrixForInvertibleM();
 	}
 }
 
-
-
-
 function createMatrixForInvertibleM() {
 
 	var matrixInvertibleMContainer = document.getElementById("matrixInvertibleMContainer");
+	/*
 	var mWidth = 42 * invertibleMatrixSize;
 	var mHeight = 28 * invertibleMatrixSize;
 	matrixInvertibleMContainer.style.width = mWidth + "px";
 	matrixInvertibleMContainer.style.height = mHeight + "px";
+	*/
 
 	var matrixForInvertibleM = document.getElementById("matrixForInvertibleM");
 	var tableBody = document.createElement("tbody");
@@ -54,8 +47,8 @@ function createMatrixForInvertibleM() {
 			var cell = document.createElement("input");
 			cell.setAttribute("id", "a" + rowId + colId);
 			cell.setAttribute("type", "text");
-			//cell.setAttribute("onkeypress", "validate(event)");
-			//cell.setAttribute("onblur", "checkInputSequence()");
+			cell.setAttribute("onkeypress", "validate(event)");
+			cell.setAttribute("oninput", "checkInputSequence()");
 			cell.setAttribute("maxlength", "10");
 			row.appendChild(cell);
 		}
@@ -64,9 +57,7 @@ function createMatrixForInvertibleM() {
 	matrixForInvertibleM.appendChild(tableBody);
 }
 
-
-
-
+/*
 function calculateDeterminant() {
 
 	console.log("arvutab");
@@ -76,7 +67,7 @@ function calculateDeterminant() {
 		document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
 	} else {
 		document.getElementById("mistakeNotification").style.display = "none";
-		var determinant = document.getElementById("determinant").value; */
+		var determinant = document.getElementById("determinant").value; 
 		
 		if(invertibleMatrixSize === 2) {
 			determinantFor2();
@@ -103,6 +94,7 @@ function calculateDeterminant() {
 	
 //}
 }
+*/
 // **** FUNKTSIOONID PERMUTATSIOONIDE GENEREERIMISEKS ****
 
 function determinantFor2(smallMatrix) {
@@ -118,7 +110,6 @@ function determinantFor2(smallMatrix) {
 		var detNumbersTemp = [];
 		var detValuesTemp = "";
 		
-		
 		// teine tsükkel, mis määrab ära teise numbri
 		for(var j = 0; j < 1; j++) {
 			
@@ -132,7 +123,6 @@ function determinantFor2(smallMatrix) {
 			detNumbersTemp = [detNumbers2[i], detNumbers1[j]];
 		}
 		
-		
 		// siia inversioonid
 		for(var i1 = 0; i1 < 2; i1++) {
 			if(detNumbersTemp[i1] > detNumbersTemp[i1+1]) {
@@ -141,7 +131,6 @@ function determinantFor2(smallMatrix) {
 		}
 		
 		if(smallMatrix) {
-			
 			// console.log("maatriks");
 			var cellValue1 = smallMatrix[1][detNumbersTemp[0]];
 			var cellValue2 = smallMatrix[2][detNumbersTemp[1]];
@@ -176,10 +165,8 @@ function determinantFor2(smallMatrix) {
 	var matrixDetAnswer = math.eval(detValues);
 	
 	if(!smallMatrix) {
-		
 		var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 		matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
-		
 	}
 	
 	detValues = "";
@@ -275,10 +262,8 @@ function determinantFor3(smallMatrix) {
 	var matrixDetAnswer = math.eval(detValues);
 	
 	if(!smallMatrix) {
-		
 		var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
-		matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
-		
+		matrixDeterminantAnswer.innerHTML = matrixDetAnswer;	
 	}
 	
 	detValues = "";
@@ -297,7 +282,6 @@ function determinantFor4(smallMatrix) {
 		var detNumbers4 = [1, 2, 3, 4];
 		var detNumbersTemp = [];
 		var detValuesTemp = "";
-		
 		
 		// teine tsükkel, mis määrab ära teise numbri
 		for(var j = 0; j < 3; j++) {
@@ -334,7 +318,6 @@ function determinantFor4(smallMatrix) {
 					detNumbersTemp = [detNumbers4[i], detNumbers3[j], detNumbers2[k], detNumbers1[l]];
 				}
 				
-				
 				// siia inversioonid
 				for(var i1 = 0; i1 < 3; i1++) {
 					if(detNumbersTemp[i1] > detNumbersTemp[i1+1]) {
@@ -354,7 +337,6 @@ function determinantFor4(smallMatrix) {
 					}
 				}
 				
-				
 				if(smallMatrix) {
 				
 					// console.log("maatriks");
@@ -372,7 +354,6 @@ function determinantFor4(smallMatrix) {
 					var cellValue4 = document.getElementById("a4" + detNumbersTemp[3]).value;
 				}
 				
-				
 				if(inversionCount % 2 === 0) {
 					detValuesTemp += " + " + cellValue1 + "*" + cellValue2 + "*" + cellValue3 + "*" + cellValue4;
 					detValues += detValuesTemp;
@@ -382,7 +363,6 @@ function determinantFor4(smallMatrix) {
 				}
 				
 				// console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
-				
 				detNumbers.push(detNumbersTemp);
 				detNumbersTemp = [];
 				detValuesTemp = "";
@@ -397,12 +377,9 @@ function determinantFor4(smallMatrix) {
 	var matrixDetAnswer = math.eval(detValues);
 	
 	if(!smallMatrix) {
-		
 		var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
-		matrixDeterminantAnswer.innerHTML = matrixDetAnswer;
-		
+		matrixDeterminantAnswer.innerHTML = matrixDetAnswer
 	}
-	
 	detValues = "";
 	return matrixDetAnswer;
 }
@@ -527,9 +504,6 @@ function determinantFor5() {
 	detValues = "";
 	return matrixDetAnswer;
 }
-
-
-
 
 function calculateInvertibleMatrix() {
 	
@@ -695,8 +669,6 @@ function invertibleMatrix(determinant) {
 				// console.log("matrix answer: " + smallMatrixAnswer);
 			}
 			
-			
-			
 			finalMatrixRow.push(tempMatrix);
 			// console.log("row: " + finalMatrixRow);
 			// console.log("main: " + mainMatrixArray);
@@ -786,14 +758,77 @@ function invMatrixFinalAnswer(matrixMultiplier) {
 	return invMatrixFinalAnswerArray;
 }
 
+function checkInputSequence() {
+    checkInput: for (var i = 0; i < invertibleMatrixSize; i++) {
+        for (var j = 0; j < invertibleMatrixSize; j++) {
+            var rowId = i + 1;
+            var colId = j + 1;
+            var number = document.getElementById("a" + rowId + colId).value;
+            if (number == "") {
+                //console.log("See kast on tühi");
+                var inputColor = document.getElementById("a" + rowId + colId);
+                inputColor.style.backgroundColor = "";
+                mistakes = false
+                break checkInput;
+            } else {
+                var regex = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
+                var found = regex.test(number);
+                //console.log(found);
+                if (found === false) {
+                    var inputColor = document.getElementById("a" + rowId + colId);
+                    inputColor.style.backgroundColor = "red";
+                    mistakes = false;
+                    document.getElementById("mistakeNotification").style.display = "inline";
+                    //document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
+					break checkInput;
+                } else {
+                    var inputColor = document.getElementById("a" + rowId + colId);
+                    inputColor.style.backgroundColor = "";
+                    document.getElementById("mistakeNotification").style.display = "none";
+                    mistakes = true
+                }
+            }
+        }
+    }
+	
+    if (mistakes === true) {
+        ////console.log("Vigu ei olnud");
+        //document.getElementById("checkAnswerDeterminant").style.display = "block"
+        //document.getElementById("newDeterminant").style.display = "block"
+        //document.getElementById("mistakeNotification").style.display = "block",
+		mistakes = true;
+		//calculateDeterminant();
+		calculateInvertibleMatrix();
+		document.getElementById("mistakeNotification").style.display = "none";
+    } else {
+        ////console.log("vigu on");
+    }
+}
+
+function validate(evt) {
+    key = evt.key;
+    var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
+    if (allowed.indexOf(evt.key) == -1) {
+        evt.preventDefault();
+        ////console.log("EI LUBA");
+    }
+    // PRAEGUNE
+    if (evt.key === "/" && evt.target.value.indexOf('/') != -1) {
+        evt.preventDefault();
+    }
+}
 
 
+//Timer
+/*
+$(document).ready(function () {
+	$(".content").on("input", function () {
 
-
-
-
-
-
-
-
-
+		window.clearTimeout(timer);
+		timer = window.setTimeout(function () {
+			generateValues();
+		}, 500);
+		console.log("midagi toimub");
+	});
+});
+*/
