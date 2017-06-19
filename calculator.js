@@ -271,6 +271,7 @@ function matrixSecondValues() {
 }
 
 // **** KÄIVITAB ARVUTAMISE ****
+/*
 function calculateMatrix() {
     if (mistakeA === false || mistakeB === false) {
         document.getElementById("mistakeNotification").style.display = "inline";
@@ -287,6 +288,8 @@ function calculateMatrix() {
         //document.getElementById("checkAnswer").style.display = "none";
     }
 }
+*/
+
 //sama mis eelmine, aga peidab eelmise lahenduse ja  nupud
 function calculateNextMatrix() {
     calculateMatrixSum();

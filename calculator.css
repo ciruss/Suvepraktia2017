@@ -184,3 +184,7 @@ button:hover {
     background-color: #221a54;
     color: white;
 }
+
+#highlight {
+	display: none;
+}
