@@ -25,4 +25,4 @@ limitations under the License.
 
 ## Ekraanitõmmis
 
-![Ekraanitõmmis 1](screenshots/Capture0.png "Ekraanitõmmis1")
+![Ekraanitõmmis 1](Capture0.png "Ekraanitõmmis1")
