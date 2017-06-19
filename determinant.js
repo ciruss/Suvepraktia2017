@@ -291,7 +291,14 @@ function determinantForTwo() {
 
         var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
         var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
-
+		
+		if(cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
+			cellValueOne = "(" + cellValueOne + ")";
+		}
+		if(cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
+			cellValueTwo = "(" + cellValueTwo + ")";
+		}
+		
         if (inversionCount % 2 === 0) {
             detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo;
             detValues += detValuesTemp;
@@ -373,7 +380,18 @@ function determinantForThree() {
             var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
             var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
             var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
-
+			
+			if(cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
+				cellValueOne = "(" + cellValueOne + ")";
+			}
+			if(cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
+				cellValueTwo = "(" + cellValueTwo + ")";
+			}
+			if(cellValueThree < 0 || cellValueThree.indexOf("/") > -1) {
+				cellValueThree = "(" + cellValueThree + ")";
+			}
+			
+			
             if (inversionCount % 2 === 0) {
                 detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree;
                 detValues += detValuesTemp;
@@ -474,7 +492,20 @@ function determinantForFour() {
                 var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
                 var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
                 var cellValueFour = document.getElementById("a4" + detNumbersTemp[3]).value;
-
+				
+				if(cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
+					cellValueOne = "(" + cellValueOne + ")";
+				}
+				if(cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
+					cellValueTwo = "(" + cellValueTwo + ")";
+				}
+				if(cellValueThree < 0 || cellValueThree.indexOf("/") > -1) {
+					cellValueThree = "(" + cellValueThree + ")";
+				}
+				if(cellValueFour < 0 || cellValueFour.indexOf("/") > -1) {
+					cellValueFour = "(" + cellValueFour + ")";
+				}
+				
                 if (inversionCount % 2 === 0) {
                     detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour;
                     detValues += detValuesTemp;
@@ -593,7 +624,23 @@ function determinantForFive() {
                         var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
                         var cellValueFour = document.getElementById("a4" + detNumbersTemp[3]).value;
                         var cellValueFive = document.getElementById("a5" + detNumbersTemp[4]).value;
-
+						
+						if(cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
+							cellValueOne = "(" + cellValueOne + ")";
+						}
+						if(cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
+							cellValueTwo = "(" + cellValueTwo + ")";
+						}
+						if(cellValueThree < 0 || cellValueThree.indexOf("/") > -1) {
+							cellValueThree = "(" + cellValueThree + ")";
+						}
+						if(cellValueFour < 0 || cellValueFour.indexOf("/") > -1) {
+							cellValueFour = "(" + cellValueFour + ")";
+						}
+						if(cellValueFive < 0 || cellValueFive.indexOf("/") > -1) {
+							cellValueFive = "(" + cellValueFive + ")";
+						}
+						
                         if (inversionCount % 2 === 0) {
                             detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour + "*" + cellValueFive;
                             detValues += detValuesTemp;
