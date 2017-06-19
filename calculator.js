@@ -103,6 +103,7 @@ function generateMatrixFirstSecond() {
 	document.getElementById("highlight").style.display= "inline";
 	
 
+	document.getElementById("highlight").style.display = "inline";
 	generateMatrix();
 	matrixFirstValues();
 	matrixSecondValues();
@@ -311,6 +312,7 @@ function matrixSecondValues() {
 }
 
 // **** KÄIVITAB ARVUTAMISE ****
+/*
 function calculateMatrix() {
     if (mistakeA === false || mistakeB === false) {
         document.getElementById("mistakeNotification").style.display = "inline";
@@ -327,6 +329,8 @@ function calculateMatrix() {
         //document.getElementById("checkAnswer").style.display = "none";
     }
 }
+*/
+
 //sama mis eelmine, aga peidab eelmise lahenduse ja  nupud
 function calculateNextMatrix() {
     calculateMatrixSum();
@@ -665,7 +669,6 @@ function checkInputSequence() {
 
 */
 
-
 // **** LASEB SISESTADA AINULT NUMBREID JA ÜHE KALDKRIIPSU, ET SAAKS SISESTADA MURDE ****
 function validate(evt) {
     key = evt.key;
@@ -697,81 +700,80 @@ function highlighter() {
 	matrixSecondArray = [[null]];
 	matrixPreAnswerArray = [[null]];
 
-    var tableCells = document.getElementsByClassName("mjx-mtd");
-    //var startpoint = tableCells.length / 2;
-    var answerStartpoint = mFirstX * mFirstY + mSecondX * mSecondY;
-    var matrixPreAnswerSize = mFirstX * mSecondY;
-    var matrixFirstColumn = mFirstX;
-    var matrixSecondColumn = mSecondX;
+	var tableCells = document.getElementsByClassName("mjx-mtd");
+	//var startpoint = tableCells.length / 2;
+	var answerStartpoint = mFirstX * mFirstY + mSecondX * mSecondY;
+	var matrixPreAnswerSize = mFirstX * mSecondY;
+	var matrixFirstColumn = mFirstX;
+	var matrixSecondColumn = mSecondX;
 
-    var rowStartpoint = 0;
-    var matrixRow = [null];
+	var rowStartpoint = 0;
+	var matrixRow = [null];
 
-    // esimene maatriks
-    for (var i = 0; i < matrixFirstColumn; i++) {
-        for (var j = 0; j < mFirstY; j++) {
-            matrixRow.push(rowStartpoint);
-            rowStartpoint++;
-        }
-        matrixFirstArray.push(matrixRow);
-        matrixRow = [null];
-    }
+	// esimene maatriks
+	for (var i = 0; i < matrixFirstColumn; i++) {
+		for (var j = 0; j < mFirstY; j++) {
+			matrixRow.push(rowStartpoint);
+			rowStartpoint++;
+		}
+		matrixFirstArray.push(matrixRow);
+		matrixRow = [null];
+	}
 
-    // teine maatriks
-    for (var i = 0; i < matrixSecondColumn; i++) {
-        for (var j = 0; j < mSecondY; j++) {
-            matrixRow.push(rowStartpoint);
-            rowStartpoint++;
-        }
-        matrixSecondArray.push(matrixRow);
-        matrixRow = [null];
-    }
+	// teine maatriks
+	for (var i = 0; i < matrixSecondColumn; i++) {
+		for (var j = 0; j < mSecondY; j++) {
+			matrixRow.push(rowStartpoint);
+			rowStartpoint++;
+		}
+		matrixSecondArray.push(matrixRow);
+		matrixRow = [null];
+	}
 
-    // vahevastuste maatriks
-    for (var i = 0; i < matrixFirstColumn; i++) {
-        for (var j = 0; j < mSecondY; j++) {
-            matrixRow.push(rowStartpoint);
-            rowStartpoint++;
-        }
-        matrixPreAnswerArray.push(matrixRow);
-        matrixRow = [null];
-    }
+	// vahevastuste maatriks
+	for (var i = 0; i < matrixFirstColumn; i++) {
+		for (var j = 0; j < mSecondY; j++) {
+			matrixRow.push(rowStartpoint);
+			rowStartpoint++;
+		}
+		matrixPreAnswerArray.push(matrixRow);
+		matrixRow = [null];
+	}
 
-    /*
+	/*
 	console.log("startpoint: " + startpoint);
-    console.log("rowStartpoint: " + rowStartpoint);
-    console.log("answerStartpoint: " + answerStartpoint);
-    console.log(matrixFirstArray);
-    console.log(matrixSecondArray);
-    console.log(matrixPreAnswerArray);
-     */
+	console.log("rowStartpoint: " + rowStartpoint);
+	console.log("answerStartpoint: " + answerStartpoint);
+	console.log(matrixFirstArray);
+	console.log(matrixSecondArray);
+	console.log(matrixPreAnswerArray);
+	 */
 
-    var c = 1;
-    for (var x = 1; x <= mFirstX; x++) {
-        for (var y = 1; y <= mSecondY; y++) {
-            for (var i = 0; i < mFirstY; i++) {
-                (function() {
-                        //console.log("1 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-                        //console.log("c: " + c + " , x: " + x + " , y: " + y);
-                        var aID = matrixFirstArray[x][c];
-                        //console.log("2 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-                        //console.log("c: " + c + " , x: " + x + " , y: " + y);
-                        var bID = matrixSecondArray[c][y];
-                        //console.log("3 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-                        // console.log("c: " + c + " , x: " + x + " , y: " + y);
-                        var cID = matrixPreAnswerArray[x][y];
+	var c = 1;
+	for (var x = 1; x <= mFirstX; x++) {
+		for (var y = 1; y <= mSecondY; y++) {
+			for (var i = 0; i < mFirstY; i++) {
+				(function() {
+						//console.log("1 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
+						//console.log("c: " + c + " , x: " + x + " , y: " + y);
+						var aID = matrixFirstArray[x][c];
+						//console.log("2 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
+						//console.log("c: " + c + " , x: " + x + " , y: " + y);
+						var bID = matrixSecondArray[c][y];
+						//console.log("3 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
+						// console.log("c: " + c + " , x: " + x + " , y: " + y);
+						var cID = matrixPreAnswerArray[x][y];
 
-                        highlight(aID, bID, cID);
-                        // console.log("4 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-                        c++;
-                    }
-                    ());
-            }
-            c = 1;
-        }
-    }
+						highlight(aID, bID, cID);
+						// console.log("4 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
+						c++;
+					}
+					());
+			}
+			c = 1;
+		}
+	}
 }
-
 
 function highlight(aID, bID, cID) {
 
