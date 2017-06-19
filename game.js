@@ -4,7 +4,7 @@
 var matrixFinalAnswerErrors = 0;
 var matrixPreAnswerErrors = 0;
 //mängu skoori muutujad
-var score = 0;
+
 var sumOfExercises = 0;
 var errorCount = 0;
 var playerName = "";
@@ -22,8 +22,6 @@ var Em1x, Em1y, Em2x, Em2y;
 var a = [[null, null, null]];
 var b = [[null, null, null]];
 
-var matrixCellValue;
-var matrixCellValuePreAnswers;
 // ||||| ----- ----- ----- ----- MAATRIKSITE HARJUTAMISE OSA ----- ----- ----- ----- |||||
 
 //mängija nime küsimine
@@ -237,8 +235,8 @@ function createExerciseMatrixPreAnswer() {
 			cell.setAttribute("id", "Ed" + rowId + colId);
 			cell.setAttribute("class", "matrixAnswerInput");
 			cell.setAttribute("type", "text");
-			cell.setAttribute("onkeypress", "validate(event)");
-			//cell.setAttribute("onblur", "checkInputSequence()");
+			cell.setAttribute("onkeypress", "return validate( event)");
+			//cell.setAttribute("oninput", "checkLength(2,this)");
 			row.appendChild(cell);
 		}
 		tableBody.appendChild(row);
@@ -272,8 +270,7 @@ function createExerciseMatrixAnswer() {
 			var cell = document.createElement("input");
 			cell.setAttribute("id", "Ec" + rowId + colId);
 			cell.setAttribute("type", "text");
-			cell.setAttribute("onkeypress", "validate(event)");
-			//cell.setAttribute("onblur", "checkInputSequence()");
+			cell.setAttribute("onkeypress", "return validate(this, event)");
 			row.appendChild(cell);
 		}
 		tableBody.appendChild(row);
@@ -337,17 +334,13 @@ function checkMatrixFinalAnswers() {
 
 			for (var i = 0; i < Em1y; i++) {
 				var Ea = document.getElementById("Ea" + rowId + c).value;
-				//console.log("checkMatrixFinalAnswers Ea: "+Ea);
 				var Eb = document.getElementById("Eb" + c + colId).value;
-				//console.log("checkMatrixFinalAnswers Eb: "+Eb);
 				matrixAnswerString += Ea + "*" + Eb + " + ";
 				c++;
 			}
 			var strLength = matrixAnswerString.length;
-			matrixCellValue = math.eval(matrixAnswerString.slice(0, strLength - 3));
-			console.log("Kalkulaatori lõppvastus matrixCellValue: "+matrixCellValue);
+			var matrixCellValue = math.eval(matrixAnswerString.slice(0, strLength - 3));
 			var matrixInputCell = parseInt(matrixAnswer.value);
-			console.log("Kasutaja lõppvastus matrixInputCell: "+matrixInputCell);
 			c = 1;
 
 			if (matrixInputCell == matrixCellValue) {
@@ -383,20 +376,12 @@ function checkMatrixPreAnswers() {
 				matrixAnswerString += Ea + "*" + Eb + " + ";
 				c++;
 			}
-			
 			var strLength = matrixAnswerString.length;
-			matrixCellValuePreAnswers = matrixAnswerString.slice(0, strLength - 3);
-			console.log("matrixCellValuePreAnswers: "+matrixCellValuePreAnswers);
-			
-			var test = eval(matrixCellValuePreAnswers);
-			console.log("test: " +test);
-			
-			//console.log("matrixCellValue: "+matrixCellValue);
-			var matrixInputCell = eval(matrixAnswer.value);
-			//console.log("matrixInputCell: "+matrixInputCell);
+			var matrixCellValue = matrixAnswerString.slice(0, strLength - 3);
+			var matrixInputCell = matrixAnswer.value;
 			c = 1;
 
-			if (matrixInputCell === test) {
+			if (matrixInputCell === matrixCellValue) {
 				matrixAnswer.style.color = "green";
 				//answerCounter += 1
 				//score += 1
@@ -425,17 +410,13 @@ function justForDevsMatrixAnswers() {
 			for (var i = 0; i < Em1y; i++) {
 
 				var Ea = document.getElementById("Ea" + rowId + c).value;
-				//console.log("justForDevsMatrixAnswers Ea: "+Ea);
 				var Eb = document.getElementById("Eb" + c + colId).value;
-				//console.log("justForDevsMatrixAnswers Eb: "+Eb);
 				matrixAnswerString += Ea + "*" + Eb + " + ";
 				c++;
 			}
 			var strLength = matrixAnswerString.length;
-			math.eval(matrixAnswer.value = matrixAnswerString.slice(0, strLength - 3));
-			//console.log("justForDevsMatrixAnswers matrixAnswer.value: "+matrixAnswer.value);
+			matrixAnswer.value = matrixAnswerString.slice(0, strLength - 3);
 			matrixFinalAnswer.value = math.eval(matrixAnswerString.slice(0, strLength - 3));
-			//console.log("justForDevsMatrixAnswers matrixFinalAnswer.value: "+matrixFinalAnswer.value);
 			c = 1;
 		}
 	}
@@ -468,9 +449,8 @@ function checkMatrixAnswersRandom() {
 		console.log("");
 		console.log("Maatriks suurusega " + Em1x + "x" + Em1y + " x " + Em2x + "x" + Em2y);
 		console.log("Skoori arvutamine " + Em1x + "*" + Em1y + "*" + Em2x + "*" + Em2y + " = " + (Em1x * Em1y * Em2x * Em2y));
-		console.log("Skoor kokku " + score + "+" + matrixScore + " = " + (score + matrixScore));
+		
 		sumOfExercises++;
-		score += matrixScore;
 		updateScore();
 		generateRandomExerciseMatrix();
 	} else {
@@ -478,9 +458,8 @@ function checkMatrixAnswersRandom() {
 		console.log("");
 		console.log("Maatriks suurusega " + Em1x + "x" + Em1y + " x " + Em2x + "x" + Em2y);
 		console.log("Vea skoori arvutamine " + "(" + Em1x + "*" + Em1y + "*" + Em2x + "*" + Em2y + ")/2" + " = " + ((Em1x * Em1y * Em2x * Em2y) / 2));
-		console.log("Skoor kokku " + score + "-" + matrixErrorScore + " = " + (score - matrixErrorScore));
+		
 		console.log("");
-		score -= matrixErrorScore;
 		errorCount++;
 		updateScore();
 	}
@@ -488,8 +467,8 @@ function checkMatrixAnswersRandom() {
 	matrixPreAnswerErrors = 0;
 }
 
-/*
 //TULEMUSTE SALVESTAMINE LOCALSTORAGESSE
+
 function saveStatsToLocalstorage(dataObject) {
 	if (!localStorage["top"]) {
 		var arr = []
@@ -517,7 +496,6 @@ function loadStatsFromLocalStorage() {
 			createTable(arr)
 	}
 }
-*/
 
 // MÄNGU SKOORI FUNKTSIOONID
 function resetScore() {
@@ -530,9 +508,9 @@ function resetScore() {
 	document.getElementById("exerciseMatrixAnswerContainer").style.visibility = "hidden";
 	document.getElementById("exerciseMatrixPreAnswerContainer").style.visibility = "hidden";
 
-	alert("MÄNG LÄBI! Sinu skoor: " + score + ", vigu tegid kokku " + errorCount + ", maatrikseid kokku: " + sumOfExercises)
+	alert("MÄNG LÄBI! Vigu tegid kokku " + errorCount + ", maatrikseid kokku: " + sumOfExercises);
 
-	score = 0;
+
 	sumOfExercises = 0;
 	errorCount = 0;
 	updateScore();
@@ -540,7 +518,6 @@ function resetScore() {
 }
 
 function updateScore() {
-	document.getElementById("playerScore").innerHTML = "SKOOR: " + score;
 	document.getElementById("TotalSum").innerHTML = "MAATRIKSEID KOKKU: " + sumOfExercises;
 	document.getElementById("wrongAnswers").innerHTML = "VIGU: " + errorCount;
 	document.getElementById("playerName").innerHTML = "MÄNGIJA: " + playerName;
@@ -548,6 +525,7 @@ function updateScore() {
 
 //UUE MÄNGU ALUSTAMINE
 function startNewGame() {
+
 	document.getElementById("generateExerciseMatrix").style.visibility = "visible";
 	document.getElementById("generateRandomExerciseMatrix").style.visibility = "visible";
 	document.getElementById("startNewGame").style.visibility = "hidden";
@@ -582,13 +560,37 @@ function tick() {
 	}
 }
 
-
 // **** KONTROLLIB SISESTUST *****
+/*
+function validate(elementRef, event) {
+	var keyCodeEntered = (event.which) ? event.which : (window.event.keyCode) ? window.event.keyCode : -1;
+		console.log(event.keyCode);
+		if ((keyCodeEntered >= 48) && (keyCodeEntered <= 57) || (keyCodeEntered === 8)) {
+			return true;
+		} else if (keyCodeEntered == 47) {
+			if ((elementRef.value) && (elementRef.value.indexOf('/') >= 0)) {
+				return false;
+			} else {
+				return true;
+			}
+		} else if (keyCodeEntered == 32) {
+		
+			
+		}
+	return false;
+} */
+
 function validate(evt) {
 	key = evt.key;
-	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", " ", "/", "-", "*", "+", "Tab", "Backspace"];
+	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
 	if(allowed.indexOf(evt.key) == -1){
 		evt.preventDefault();
-		//console.log("EI LUBA");
+		console.log("EI LUBA");
 	}
+	// PRAEGUNE
+	if(evt.key === "/" && evt.target.value.indexOf('/') != -1) {
+		evt.preventDefault();
+	}
+
 }
+

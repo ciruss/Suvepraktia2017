@@ -1,183 +1,187 @@
-@import url("projekt.css");
-
-.headNav{
-     padding: 30px;
-     width:100%;
-     height:30px;
-   
-} 
-
-*{
+* {
+    margin: 0;
     box-sizing: border-box;
 }
- 
-body{
 
-}
-
-#pageContent{
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    height: 70%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    opacity:0.9;
-    border-radius:6px;
-    top: 50%;
-    left: 50%;
-   
-
-}
-h1 {
-    text-align: center;
-    color: #004080;
-    text-align: center;
-    transform: translate(-50%, -50%);
-    top: 5px;
-    left: 50%;
-    font-size: 60px;
-}
-
-h3 {
-    color: #004080;
-}
-
-#instructions{
-    overflow: hidden;
-    font-size: 20px;
-    text-align: center;
-    -webkit-transition: opacity 0.5s ease-in-out;
-    -moz-transition: opacity 0.5s ease-in-out;
-    transition: opacity 0.5s ease-in-out;
-    padding:50 100 0 100;
-}
-
-
-
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 0px dotted black;
-}
-
-    .tooltip .tooltiptext {
-        visibility: hidden;
-        width: 120px;
-        background-color: #555;
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 0;
-        position: absolute;
-        z-index: 1;
-        bottom: 125%;
-        left: 50%;
-        margin-left: -60px;
-        opacity: 0;
-        transition: opacity 1s;
-    }
-
-        .tooltip .tooltiptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
-        }
-
-    .tooltip:hover .tooltiptext {
-        visibility: visible;
-        opacity: 1;
-    }
-
-    #selectFormSize{
-   
-    text-align: center;
-    
-}
-
-#btnContainer{
-     display: flex;
-     justify-content:space-evenly;
-     white-space:normal;
-}
-
-
-#btnContainer .btn {
-    width: 18%;
-	max-height:70px;
-}
-
-form {
-    color: grey;
-}
-input {
-    width: 30px;
-    margin-left: 5px;
-    color: black;
+html,
+body {
+    height: 100%;
     background-color: #FFFFFF;
-    border-style: solid;
 }
 
-tbody {
-      
+#wrapper {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 40px;
+    position: relative;
+    min-height: 100%;
+    background-color: rgba(0, 77, 255, 0.03);
 }
 
+#header {
+    color: #004080;
+    background-color: #FFFFFF;
+    text-transform: uppercase;
+}
 
-
-th, td {
+#textAndIcon {
     text-align: left;
+    background-color: #FFFFFF;
+    font-size: 45px;
+    line-height: 60px;
+    font-family: 'Francois One', sans-serif;
+}
+
+img {
+    height: 50px;
+    width: 50px;
+    float: left;
+    margin: 5px;
+}
+
+.topnav {
+    background-color: #004080;
+    color: #FFFFFF;
+    height: 60px;
+    border-radius: 10px 10px 0px 0px;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.topnav a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 30px;
+    line-height: 60px;
+    display: inline-block;
+    height: 60px;
+    margin-left: 10px;
+    padding: 0px 10px;
+}
+
+.topnav a:hover {
+    background-color: #eaf0f9;
+    color: black;
+}
+
+.topnav a:active {
+    background-color: #221a54;
+    color: white;
+}
+
+#content {
+    border-radius: 0px 0px 10px 10px;
+}
+
+#content #instructions {
+    padding: 10px;
+    font-size: 20px;
+    text-align: left;
+    margin: 0 auto;
+    padding-top: 20px;
+    width: 50%;
+    font-family: 'Overpass', sans-serif;
+    color: #666666;
+}
+
+#left {
+    margin: auto 0;
+    text-align: center;
+    padding: 0 10px;
+}
+
+#right {
+    margin: auto 0;
+    text-align: center;
+    padding: 0 10px;
+    font-size: 30px;
+}
+
+#determinantTable {
+    padding-left: 15px;
+    overflow: auto;
+    max-height: 400px;
+}
+
+th,
+td {
+    text-align: left;
+}
+
+th {
+    background-color: #221a54;
+    color: #ffffff;
+    border-radius: 6px;
     padding: 8px;
 }
-th{
-   background-color: #272788;  
-    color:#ffffff;
+
+#determinantTable tr:nth-child(even) {
+    background-color: #FFFFFF;
+}
+
+#determinantTable tr:hover {
+    background-color: #87CEFA;
+}
+
+input {
+    height: 30px;
+    width: 30px;
+}
+
+table {
+    display: inline;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-color: #004080;
+    color: #FFFFFF;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.tooltip span {
+    display: none;
 }
 
 
-#determinantTable{
-	display:none;
-  transition: margin-left .5s;
+/*display ja math teevad sama asja. kas võib ühe eemaldada? või miks nad seal duubeldavad*/
+
+#display {
+    display: none;
 }
-
-
-
-table#matrixPermutationTable {
-    margin: auto;
-}
-
-
-#matrixDeterminantAnswer{
-    order: 3;
-    margin: auto;
-    text-align:center;
-    font-size:30px;
-    display:none; 
-}
-
 #answerHeadline{
-    
-    order: 2;
-    margin: auto;
-    display:none;
+	color:#666666;
+}
+#selectFormSize{
+	color:#666666;
 }
 
-
-#matrixDeterminantContainer{
-order: 1;
-margin: auto;   
-  
+.btn {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.20), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+    background-color: #004080;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 10px;
+    overflow-wrap: break-word;
+    white-space: normal;
+    border-radius: 6px;
+    height: 40px;
+    font-family: 'Francois One', sans-serif;
 }
 
-#matrixInput{
-    display: flex;
-    justify-content: center;
-    flex-direction:row;
-    margin: 20px;   
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.20), 0 17px 50px 0 rgba(0,0,0,0.19);
-    border-radius:10px;   
+.btn:hover,
+button:hover {
+    background-color: #221a54;
+    color: white;
 }

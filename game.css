@@ -1,154 +1,185 @@
-/*
-#id <-- ID põhjal
-.class <-- klassi põhjal
-element <-- elemendi põjal
-*/
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
 
-@import url("projekt.css");
+html,
 body {
-    font-family: verdana;
+    height: 100%;
+    background-color: #FFFFFF;
+}
+
+#wrapper {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    min-height: 100%;
+    background-color: rgba(0, 77, 255, 0.03);
+}
+
+#header {
+    color: #004080;
+    background-color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+#textAndIcon {
+    text-align: left;
+    background-color: #FFFFFF;
+    font-size: 45px;
+    line-height: 60px;
+    font-family: 'Francois One', sans-serif;
+}
+
+img {
+    height: 50px;
+    width: 50px;
+    float: left;
     margin: 5px;
-    padding: 5px;
-    background-color: #ffffff;
 }
 
-h1 {
-    color: #004080;
-    text-align: center;
-    color: #004080;
-    text-align: center;
-    position: absolute;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 5px;
-    left: 50%;
-    font-size: 60px;
+.topnav {
+    background-color: #004080;
+    color: #FFFFFF;
+    height: 60px;
+    border-radius: 10px 10px 0px 0px;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 
-h3 {
-    color: #004080;
-}
-
-.headNav {
-    padding: 30px;
-}
-
-
-
-button {
-   
-    background-color: #272788;
-    color: white;
-    padding: 5px 20px;
+.topnav a {
+    color: #FFFFFF;
     text-decoration: none;
+    font-size: 30px;
+    line-height: 60px;
     display: inline-block;
-    margin: 4px 8px;
-    cursor: pointer;
+    height: 60px;
+    margin-left: 10px;
+    padding: 0px 10px;
+}
+
+.topnav a:hover {
+    background-color: #eaf0f9;
+    color: black;
+}
+
+.topnav a:active {
+    background-color: #221a54;
+    color: white;
+}
+
+#content {
+    border-radius: 0px 0px 10px 10px;
+}
+
+#content #instructions {
+    padding: 10px;
+    font-size: 20px;
+    text-align: left;
+    margin: 0 auto;
+    padding-top: 20px;
+    width: 50%;
+    font-family: 'Overpass', sans-serif;
+    color: #666666;
+}
+
+#content #select {
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+#content #select #selectors {
+    display: flex;
+    justify-content: center;
+}
+
+#content #select #selectors select {
+    margin: 2px;
+}
+
+#left {
+    margin: auto 0;
     text-align: center;
-    border-radius: 6px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.20), 0 17px 50px 0 rgba(0,0,0,0.19);
+    padding: 0 10px;
 }
 
-    button:hover {
-        background-color: #221a54;
-        color: white;
-    }
-
-form {
-    color: grey;
+#right {
+    margin: auto 0;
+    text-align: center;
+    padding: 0 10px;
 }
+
+#content #main {}
 
 input {
-    margin-bottom: 5px;
+    height: 30px;
     width: 30px;
-    margin-left: 5px;
-    color: black;
-    background-color: #FFFFFF;
-    display: inline-block;
-    float: left;
-    border-style: solid;
 }
 
-
-.resp {
-    display: inline-block;
-    text-align: left;
-    width: 21%;
-    margin-right: 1%;
-    justify-content: space-between;
-    flex-basis: content;
+table,
+#matrix1Container,
+#matrix2Container {
+    display: inline;
 }
 
-    .resp.fixed {
-        width: 100px;
-        margin-right: 10px;
-    }
-
-.matrixAnswerInput {
-    width: 110px;
+#math {
+    overflow: auto;
+    overflow-y: hidden;
 }
 
-.wrapper {
-    position: relative;
-    padding: 20px;
-    display: flex;
+#footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-color: #004080;
+    color: #FFFFFF;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 
-
-
-#checkAnswer {
+.tooltip span {
     display: none;
 }
 
 
+/*display ja math teevad sama asja. kas võib ühe eemaldada? või miks nad seal duubeldavad*/
 
-th, td {
-    text-align: left;
-    padding: 8px;
+#display {
+    display: none;
 }
 
-tr:nth-child(even) {
-    background-color: #ffffff
+#buttons>* {
+    min-width: 90px;
+    ;
 }
 
-#checkAndRestart {
-    visibility: hidden;
-}
-
-#checkAndRestartRandom {
-    visibility: hidden;
-}
-
-#resetScore {
-    visibility: hidden;
-}
-
-#startNewGame {
-    visibility: hidden;
-}
-
-#justForDevs {
-    visibility: hidden;
-}
-
-
-#gameStats {
-    /*background-color: white;*/
-    color: #272788;
-    padding: 15px 32px;
+.btn {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.20), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+    background-color: #004080;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
     text-decoration: none;
-    /*display: inline-block;*/
-    margin: 4px 4px;
-    width: 280px;
-    height: 120px;
-    text-align: left;
+    display: inline-block;
+    font-size: 15px;
+    margin: 10px;
+    overflow-wrap: break-word;
+    white-space: normal;
     border-radius: 6px;
-    font-size: 20px;
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.20), 0 17px 50px 0 rgba(0,0,0,0.19);
-    /*position: absolute;
-	right: 10%;
-	top:10%*/
+    height: 40px;
+    font-family: 'Francois One', sans-serif;
 }
- 
+
+#selectMatrices .btn {
+    margin: 30px;
+}
+
+.btn:hover,
+button:hover {
+    background-color: #221a54;
+    color: white;
+}
