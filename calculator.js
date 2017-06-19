@@ -46,7 +46,7 @@ function generateMatrix() {
             //calculateMatrixFinalSum();
         }
     } else {
-        console.log("Ei saa arvutada");
+        // console.log("Ei saa arvutada");
         alert("Ei saa genereerida, muuda maatriksite suuruseid!");
     }
 }
@@ -106,7 +106,7 @@ function generateMatrixFirstSecond() {
 	matrixSecondValues();
 	calculateMatrixSum();
 	calculateMatrixFinalSum();
-	console.log('siin');
+	// console.log('siin');
 	createValues();
 }
 
@@ -115,7 +115,7 @@ function generateValues() {
 	matrixSecondValues();
 	calculateMatrixSum();
 	calculateMatrixFinalSum();
-	console.log('siin');
+	// console.log('siin');
 	createValues();
 	
 }
@@ -160,7 +160,7 @@ function createValues() {
 		var j = matrixSecondValues();
 		var k = calculateMatrixSum();
 		var l = calculateMatrixFinalSum();
-		console.log(l);
+		// console.log(l);
 
 		MathJax.Hub.Queue(["Text", math, "\\begin{bmatrix}" + i + "\\end{bmatrix} \\times \\begin{bmatrix}" + j + "\\end{bmatrix} = \\begin{bmatrix}" + k + "\\end{bmatrix} = \\begin{bmatrix}" + l + "\\end{bmatrix}"]);
 		MathJax.Hub.Queue(function () {
@@ -226,7 +226,7 @@ function matrixFirstValues() {
     }
     var strLength = answerString.length;
     answerString = (answerString.slice(0, strLength - 1));
-    console.log(answerString);
+    // console.log(answerString);
     return answerString;
 }
 
@@ -256,8 +256,8 @@ function matrixSecondValues() {
                 var afterSlash = str.substr(str.indexOf("/") + 1);
                 end = "{" + afterSlash + "}&";
                 Cell = start + end;
-                console.log("Cell");
-                console.log(Cell);
+                // console.log("Cell");
+                // console.log(Cell);
                 answerString += Cell;
             } else {
                 var Cell = document.getElementById("b" + rowId + colId).value + "&";
@@ -275,8 +275,8 @@ function calculateMatrix() {
     if (mistakeA === false || mistakeB === false) {
         document.getElementById("mistakeNotification").style.display = "inline";
         //document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
-        console.log("calculateMatrix IF mistakeA: " + mistakeA);
-        console.log("calculateMatrix IF mistakeB: " + mistakeB);
+        // console.log("calculateMatrix IF mistakeA: " + mistakeA);
+        // console.log("calculateMatrix IF mistakeB: " + mistakeB);
     } else {
         calculateMatrixSum();
         calculateMatrixFinalSum();
@@ -426,7 +426,7 @@ $(document).ready(function () {
 		timer = window.setTimeout(function () {
 			generateValues();
 		}, 500);
-		console.log("midagi toimub");
+		// console.log("midagi toimub");
 	});
 });
 
@@ -446,7 +446,7 @@ function checkInputSequence() {
             var numberA = document.getElementById("a" + rowId + colId).value;
             //console.log(numberA);
             if (numberA == "") {
-                console.log("Kast A on tühi");
+                // console.log("Kast A on tühi");
                 var inputColorA = document.getElementById("a" + rowId + colId);
                 inputColorA.style.backgroundColor = "";
                 mistakeA = false;
@@ -454,7 +454,7 @@ function checkInputSequence() {
             } else {
                 var regexA = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
                 var foundA = regexA.test(numberA);
-                console.log("Kast A: " + foundA);
+                // console.log("Kast A: " + foundA);
                 if (foundA === false) {
                     var inputColorA = document.getElementById("a" + rowId + colId);
                     inputColorA.style.backgroundColor = "red";
@@ -476,18 +476,18 @@ function checkInputSequence() {
 			var rowId = i + 1;
 			var colId = j + 1;
 			var numberB = document.getElementById("b" + rowId + colId).value;
-			console.log(numberB);
+			// console.log(numberB);
 			if (numberB == "") {
-				console.log("Kast B on tühi");
+				// console.log("Kast B on tühi");
 				mistakeB = false;
-				console.log("checkInputSequenceB Tühi kast: " + mistakeB);
+				// console.log("checkInputSequenceB Tühi kast: " + mistakeB);
 				var inputColorB = document.getElementById("b" + rowId + colId);
 				inputColorB.style.backgroundColor = "";
 				break checkB;
 			} else {
 				var regexB = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var foundB = regexB.test(numberB);
-				console.log("Kast B: " + foundB);
+				// console.log("Kast B: " + foundB);
 				if (foundB === false) {
 					var inputColorB = document.getElementById("b" + rowId + colId);
 					inputColorB.style.backgroundColor = "red";
@@ -504,8 +504,8 @@ function checkInputSequence() {
 		}
 	}
 
-	console.log("Lõpus mistakeB: " + mistakeB);
-    console.log("Lõpus mistakeA: " + mistakeA);
+	// console.log("Lõpus mistakeB: " + mistakeB);
+    // console.log("Lõpus mistakeA: " + mistakeA);
     if (mistakeB === true && mistakeA === true) {
         document.getElementById("mistakeNotification").style.display = "none";
     }
@@ -560,7 +560,7 @@ function validate(evt) {
     var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
     if (allowed.indexOf(evt.key) == -1) {
         evt.preventDefault();
-        console.log("EI LUBA");
+        // console.log("EI LUBA");
     }
     // PRAEGUNE
     if (evt.key === "/" && evt.target.value.indexOf('/') != -1) {
@@ -582,13 +582,13 @@ var matrixPreAnswerArray = [
 function highlighter() {
 
     var tableCells = document.getElementsByClassName("mjx-mtd");
-    var startpoint = tableCells.length / 2;
-    var answerStartpoint = startpoint + mFirstX * mFirstY + mSecondX * mSecondY;
+    //var startpoint = tableCells.length / 2;
+    var answerStartpoint = mFirstX * mFirstY + mSecondX * mSecondY;
     var matrixPreAnswerSize = mFirstX * mSecondY;
     var matrixFirstColumn = mFirstX;
     var matrixSecondColumn = mSecondX;
 
-    var rowStartpoint = startpoint;
+    var rowStartpoint = 0;
     var matrixRow = [null];
 
     // esimene maatriks
@@ -642,11 +642,11 @@ function highlighter() {
                         //console.log("c: " + c + " , x: " + x + " , y: " + y);
                         var bID = matrixSecondArray[c][y];
                         //console.log("3 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-                        //console.log("c: " + c + " , x: " + x + " , y: " + y);
+                        // console.log("c: " + c + " , x: " + x + " , y: " + y);
                         var cID = matrixPreAnswerArray[x][y];
 
                         highlight(aID, bID, cID);
-                        //console.log("4 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
+                        // console.log("4 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
                         c++;
                     }
                     ());
