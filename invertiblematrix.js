@@ -38,10 +38,10 @@ function generateMatrixForInvertibleM() {
 function createMatrixForInvertibleM() {
 
 	var matrixInvertibleMContainer = document.getElementById("matrixInvertibleMContainer");
-	var mWidth = 42 * invertibleMatrixSize;
-	var mHeight = 28 * invertibleMatrixSize;
-	matrixInvertibleMContainer.style.width = mWidth + "px";
-	matrixInvertibleMContainer.style.height = mHeight + "px";
+	//var mWidth = 42 * invertibleMatrixSize;
+	//var mHeight = 28 * invertibleMatrixSize;
+	//matrixInvertibleMContainer.style.width = mWidth + "px";
+	//matrixInvertibleMContainer.style.height = mHeight + "px";
 
 	var matrixForInvertibleM = document.getElementById("matrixForInvertibleM");
 	var tableBody = document.createElement("tbody");

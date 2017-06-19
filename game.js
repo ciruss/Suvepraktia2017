@@ -4,7 +4,7 @@
 var matrixFinalAnswerErrors = 0;
 var matrixPreAnswerErrors = 0;
 //mängu skoori muutujad
-var score = 0;
+
 var sumOfExercises = 0;
 var errorCount = 0;
 var playerName = "";
@@ -235,7 +235,7 @@ function createExerciseMatrixPreAnswer() {
 			cell.setAttribute("id", "Ed" + rowId + colId);
 			cell.setAttribute("class", "matrixAnswerInput");
 			cell.setAttribute("type", "text");
-			cell.setAttribute("onkeypress", "return validate(this, event)");
+			cell.setAttribute("onkeypress", "return validate( event)");
 			//cell.setAttribute("oninput", "checkLength(2,this)");
 			row.appendChild(cell);
 		}
@@ -449,9 +449,8 @@ function checkMatrixAnswersRandom() {
 		console.log("");
 		console.log("Maatriks suurusega " + Em1x + "x" + Em1y + " x " + Em2x + "x" + Em2y);
 		console.log("Skoori arvutamine " + Em1x + "*" + Em1y + "*" + Em2x + "*" + Em2y + " = " + (Em1x * Em1y * Em2x * Em2y));
-		console.log("Skoor kokku " + score + "+" + matrixScore + " = " + (score + matrixScore));
+		
 		sumOfExercises++;
-		score += matrixScore;
 		updateScore();
 		generateRandomExerciseMatrix();
 	} else {
@@ -459,9 +458,8 @@ function checkMatrixAnswersRandom() {
 		console.log("");
 		console.log("Maatriks suurusega " + Em1x + "x" + Em1y + " x " + Em2x + "x" + Em2y);
 		console.log("Vea skoori arvutamine " + "(" + Em1x + "*" + Em1y + "*" + Em2x + "*" + Em2y + ")/2" + " = " + ((Em1x * Em1y * Em2x * Em2y) / 2));
-		console.log("Skoor kokku " + score + "-" + matrixErrorScore + " = " + (score - matrixErrorScore));
+		
 		console.log("");
-		score -= matrixErrorScore;
 		errorCount++;
 		updateScore();
 	}
@@ -510,9 +508,9 @@ function resetScore() {
 	document.getElementById("exerciseMatrixAnswerContainer").style.visibility = "hidden";
 	document.getElementById("exerciseMatrixPreAnswerContainer").style.visibility = "hidden";
 
-	alert("MÄNG LÄBI! Sinu skoor: " + score + ", vigu tegid kokku " + errorCount + ", maatrikseid kokku: " + sumOfExercises)
+	alert("MÄNG LÄBI! Vigu tegid kokku " + errorCount + ", maatrikseid kokku: " + sumOfExercises);
 
-	score = 0;
+
 	sumOfExercises = 0;
 	errorCount = 0;
 	updateScore();
@@ -520,7 +518,6 @@ function resetScore() {
 }
 
 function updateScore() {
-	document.getElementById("playerScore").innerHTML = "SKOOR: " + score;
 	document.getElementById("TotalSum").innerHTML = "MAATRIKSEID KOKKU: " + sumOfExercises;
 	document.getElementById("wrongAnswers").innerHTML = "VIGU: " + errorCount;
 	document.getElementById("playerName").innerHTML = "MÄNGIJA: " + playerName;
@@ -564,6 +561,7 @@ function tick() {
 }
 
 // **** KONTROLLIB SISESTUST *****
+/*
 function validate(elementRef, event) {
 	var keyCodeEntered = (event.which) ? event.which : (window.event.keyCode) ? window.event.keyCode : -1;
 		console.log(event.keyCode);
@@ -576,31 +574,23 @@ function validate(elementRef, event) {
 				return true;
 			}
 		} else if (keyCodeEntered == 32) {
-			//while(){
-				
-			/*
-			console.log(elementRef.value);
-			if ((elementRef.value) && (elementRef.value.indexOf(' ') >= 0)) {
-				return false;
-			} else {
-				return true;
-			}
-			*/
+		
 			
 		}
 	return false;
+} */
+
+function validate(evt) {
+	key = evt.key;
+	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
+	if(allowed.indexOf(evt.key) == -1){
+		evt.preventDefault();
+		console.log("EI LUBA");
+	}
+	// PRAEGUNE
+	if(evt.key === "/" && evt.target.value.indexOf('/') != -1) {
+		evt.preventDefault();
+	}
+
 }
 
-/*
-// **** KONTROLLIB PIKKUST SISESTAMISEL****
-function checkLength(len,ele){
-	var fieldLength = ele.value.length;
-	if(fieldLength <= len){
-		return true;
-	} else {
-		var str = ele.value;
-		str = str.substring(0, str.length - 1);
-		ele.value = str;
-	}
-}
-*/
