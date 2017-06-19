@@ -88,7 +88,7 @@ function createMatrix() {
             cell.setAttribute("id", "b" + rowId + colId);
             cell.setAttribute("type", "text");
             cell.setAttribute("onkeypress", "validate(event)");
-            cell.setAttribute("onblur", "checkInputSequence()");
+            cell.setAttribute("oninput", "checkInputSequence()");
             cell.setAttribute("maxlength", "10");
             row.appendChild(cell);
         }
@@ -295,10 +295,11 @@ function matrix2Values() {
 
 
 // **** KÄIVITAB ARVUTAMISE ****
+/*
 function calculateMatrix() {
     if (mistakeA === false || mistakeB === false) {
         document.getElementById("mistakeNotification").style.display = "inline";
-        document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
+        //document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
         //console.log("calculateMatrix IF mistakeA: " + mistakeA);
         //console.log("calculateMatrix IF mistakeB: " + mistakeB);
     } else {
@@ -312,6 +313,7 @@ function calculateMatrix() {
 
     }
 }
+*/
 //sama mis eelmine, aga peidab eelmise lahenduse ja  nupud
 function calculateNextMatrix() {
     calculateMatrixSum();
@@ -460,10 +462,11 @@ function calculateMatrixFinalSum() {
     return finalString;
 }
 
+
 var timer;
 
 $(document).ready(function () {
-	$(".input").on("keyup", function () {
+	$(".input").on("input", function () {
 
 		window.clearTimeout(timer);
 		timer = window.setTimeout(function () {
@@ -472,7 +475,6 @@ $(document).ready(function () {
 		//console.log("midagi toimub");
 	});
 });
-
 
 function reduce(numerator, denominator) {
     var gcd = function gcd(a, b) {
@@ -504,7 +506,7 @@ function checkInputSequence() {
                     inputColorA.style.backgroundColor = "red";
                     mistakeA = false;
                     document.getElementById("mistakeNotification").style.display = "inline";
-                    document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
+                    //document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
 					break checkA;
                 } else {
                     var inputColorA = document.getElementById("a" + rowId + colId);
@@ -538,7 +540,7 @@ function checkInputSequence() {
                     inputColorB.style.backgroundColor = "red";
                     mistakeB = false;
                     document.getElementById("mistakeNotification").style.display = "inline";
-                    document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
+                    //document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
 					break checkB;
                 } else {
                     var inputColorB = document.getElementById("b" + rowId + colId);
@@ -555,6 +557,7 @@ function checkInputSequence() {
     //console.log("Lõpus mistakeA: " + mistakeA);
     if (mistakeB === true && mistakeA === true) {
         document.getElementById("mistakeNotification").style.display = "none";
+		//generateValues();
     }
 }
 
