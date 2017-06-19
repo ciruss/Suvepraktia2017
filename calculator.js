@@ -101,6 +101,7 @@ function createMatrix() {
 
 function generateMatrixFirstSecond() {
 
+	document.getElementById("highlight").style.display = "inline";
 	generateMatrix();
 	matrixFirstValues();
 	matrixSecondValues();
@@ -583,10 +584,6 @@ var matrixPreAnswerArray = [
 ];
 
 function highlighter() {
-	
-	matrixFirstArray = [[null]];
-	matrixSecondArray = [[null]];
-	matrixPreAnswerArray = [[null]];
 
     var tableCells = document.getElementsByClassName("mjx-mtd");
     //var startpoint = tableCells.length / 2;
