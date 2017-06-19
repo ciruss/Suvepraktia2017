@@ -580,6 +580,10 @@ var matrixPreAnswerArray = [
 ];
 
 function highlighter() {
+	
+	matrixFirstArray = [[null]];
+	matrixSecondArray = [[null]];
+	matrixPreAnswerArray = [[null]];
 
     var tableCells = document.getElementsByClassName("mjx-mtd");
     //var startpoint = tableCells.length / 2;
