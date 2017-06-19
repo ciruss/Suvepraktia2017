@@ -69,7 +69,7 @@ function createMatrixForDeterminant() {
             cell.setAttribute("id", "a" + rowId + colId);
             cell.setAttribute("type", "text");
             cell.setAttribute("onkeypress", "validate(event)");
-            cell.setAttribute("onblur", "checkInputSequence()");
+            cell.setAttribute("oninput", "checkInputSequence()");
             cell.setAttribute("maxlength", "10");
             row.appendChild(cell);
         }
@@ -663,10 +663,6 @@ function validate(evt) {
     }
 
 }
-
-
-
-
 
 
 //täidab testimiseks väljad
