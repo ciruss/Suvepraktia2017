@@ -194,103 +194,127 @@ function createMatrix3() {
 }
 //Loendab esimeses maatriksis olevad arvud kokku, ning viib mathJax kujule
 function matrix1Values() {
-    var answerString = "";
-    var table = document.getElementById('matrix1');
-    for (var r = 0, n = table.rows.length; r < n; r++) {
-        if (r >= 1) {
-
-            var strLength = answerString.length;
-            answerString = (answerString.slice(0, strLength - 1));
-            answerString += "\\\\";
-        }
-
-
-        for (var c = 0; c < m1y; c++) {
-            var rowId = r + 1;
-            var colId = c + 1;
-            var Cell = document.getElementById("a" + rowId + colId).value;
-            var str = Cell;
-            var pos = str.indexOf("/");
-            if (Cell.charAt(pos) === "/") {
-                var stringLength = Cell.length;
-                var String1 = Cell;
-                var start = str.slice(0, pos);
-                start = "\\frac {" + start + "}";
-                var end = Cell;
-                var afterSlash = str.substr(str.indexOf("/") + 1);
-                end = "{" + afterSlash + "}&";
-                Cell = start + end;
-                answerString += Cell;
-            } else {
-                var Cell = document.getElementById("a" + rowId + colId).value + "&";
-                answerString += Cell;
-            }
 
 
 
+	var answerString = "";
+	var table = document.getElementById('matrix1');
+	for (var r = 0, n = table.rows.length; r < n; r++) {
+		if (r >= 1) {
 
-        }
+			var strLength = answerString.length;
+			answerString = (answerString.slice(0, strLength - 1));
+			answerString += "\\\\";
+		}
+		for (var c = 0; c < m1y; c++) {
+			var rowId = r + 1;
+			var colId = c + 1;
+			var Cell = document.getElementById("a" + rowId + colId).value;
+			var str = Cell;
+			var pos = str.indexOf("/");
+			var minuspos = Cell.indexOf("-");
+			if (Cell.charAt(minuspos) === "-" && Cell.charAt(pos) === "/") {
+				var str2 = str.replace("-", "");
+				var start = str2.slice(0, pos - 1);
+				start = "\\frac {" + start + "}";
+				var end = Cell;
+				var afterSlash = str.substr(str.indexOf("/") + 1);
+				end = "{" + afterSlash + "}";
+				var fractionbracketstart = "(-";
+				var fractionbracketend = ")" + "&";
+				var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
+				answerString += fractionbracket;
+			} else if (Cell.charAt(pos) === "/") {
+				var stringLength = Cell.length;
+				var String1 = Cell;
+				var start = str.slice(0, pos);
+				start = "\\frac {" + start + "}";
+				var end = Cell;
+				var afterSlash = str.substr(str.indexOf("/") + 1);
+				end = "{" + afterSlash + "}&";
+				Cell = start + end;
+				answerString += Cell;
+			} else if (Cell.charAt(0) === "-") {
+				Cell = "(" + Cell + ")" + "&";
+				answerString += Cell;
+			}
+			//if (Cell.charAt(0)!== "-" && Cell.charAt(pos)!=="/")
+			else {
+				var Cell = document.getElementById("a" + rowId + colId).value + "&";
+				answerString += Cell;
+			}
 
 
 
 
-    }
-    var strLength = answerString.length;
-    answerString = (answerString.slice(0, strLength - 1));
-    console.log(answerString);
-    return answerString;
-
-
+		}
+	}
+	var strLength = answerString.length;
+	answerString = (answerString.slice(0, strLength - 1));
+	return answerString;
 }
 
 //Viib teises maatriksis olevad arvud MatJax kujule
 
 function matrix2Values() {
-    var answerString = "";
-    var table = document.getElementById('matrix2');
-    for (var r = 0, n = table.rows.length; r < n; r++) {
-        if (r >= 1) {
-            var strLength = answerString.length;
-            answerString = (answerString.slice(0, strLength - 1));
-            answerString += "\\\\";
-        };
+	var answerString = "";
+	var table = document.getElementById('matrix2');
+	for (var r = 0, n = table.rows.length; r < n; r++) {
+		if (r >= 1) {
+			var strLength = answerString.length;
+			answerString = (answerString.slice(0, strLength - 1));
+			answerString += "\\\\";
+		};
 
-        for (var c = 0; c < m2y; c++) {
-            var rowId = r + 1;
-            var colId = c + 1;
-            var Cell = document.getElementById("b" + rowId + colId).value;
-            var str = Cell;
-            var pos = str.indexOf("/");
-            if (Cell.charAt(pos) === "/") {
-                var stringLength = Cell.length;
-                var String1 = Cell;
-                var start = str.slice(0, pos);
-                start = "\\frac {" + start + "}";
-                var end = Cell;
-                var afterSlash = str.substr(str.indexOf("/") + 1);
-                end = "{" + afterSlash + "}&";
-                Cell = start + end;
-                console.log("Cell");
-                console.log(Cell);
-                answerString += Cell;
-            } else {
-                var Cell = document.getElementById("b" + rowId + colId).value + "&";
-                answerString += Cell;
-            }
+		for (var c = 0; c < m2y; c++) {
+			var rowId = r + 1;
+			var colId = c + 1;
+			var Cell = document.getElementById("b" + rowId + colId).value;
+			var str = Cell;
+			var pos = str.indexOf("/");
+			var minuspos = str.indexOf("-");
+			if (Cell.charAt(minuspos) === "-" && Cell.charAt(pos) === "/") {
+				var str2 = str.replace("-", "");
+				var start = str2.slice(0, pos - 1);
+				start = "\\frac {" + start + "}";
+				var end = Cell;
+				var afterSlash = str.substr(str.indexOf("/") + 1);
+				end = "{" + afterSlash + "}";
+				var fractionbracketstart = "(-";
+				var fractionbracketend = ")" + "&";
+				var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
+				answerString += fractionbracket;
+			} else if (Cell.charAt(pos) === "/") {
+				var stringLength = Cell.length;
+				var String1 = Cell;
+				var start = str.slice(0, pos);
+				start = "\\frac {" + start + "}";
+				var end = Cell;
+				var afterSlash = str.substr(str.indexOf("/") + 1);
+				end = "{" + afterSlash + "}&";
+				Cell = start + end;
+				minuspos = Cell.indexOf("-");
+				answerString += Cell;
+			} else if (Cell.charAt(0) === "-") {
+				Cell = "(" + Cell + ")" + "&";
+				answerString += Cell;
+			}
+			//if (Cell.charAt(0)!== "-" && Cell.charAt(pos)!=="/")
+			else {
+				var Cell = document.getElementById("b" + rowId + colId).value + "&";
+				answerString += Cell;
+			}
 
 
-        }
 
 
-
-    }
-
-    var strLength = answerString.length;
-    answerString = (answerString.slice(0, strLength - 1));
-    return answerString;
-
-
+		}
+	}
+	var strLength = answerString.length;
+	answerString = (answerString.slice(0, strLength - 1));
+	return answerString;
 }
+
 
 
 
@@ -334,146 +358,209 @@ function calculateNextMatrix() {
 // **** GENEREERIB VAHETULEMUSE ****
 function calculateMatrixSum() {
 
-    var c = 1;
-    var finalString = "";
+	var c = 1;
+	var finalString = "";
 
-    for (var x = 1; x <= m1x; x++) {
-        if (x >= 2) {
-            var strLength = finalString.length;
-            finalString = (finalString.slice(0, strLength - 3));
-            finalString += "\\\\";
-        };
+	for (var x = 1; x <= m1x; x++) {
+		if (x >= 2) {
+			var strLength = finalString.length;
+			finalString = (finalString.slice(0, strLength - 3));
+			finalString += "\\\\";
+		};
 
-        for (var y = 1; y <= m2y; y++) {
+		for (var y = 1; y <= m2y; y++) {
 
-            if (y >= 2) {
-                var strLength = finalString.length;
-                finalString = finalString.slice(0, strLength - 3);
-                finalString += "&";
-            };
-            var matrixAnswerString = "";
+			if (y >= 2) {
+				var strLength = finalString.length;
+				finalString = finalString.slice(0, strLength - 3);
+				finalString += "&~~~~";
+			};
+			var matrixAnswerString = "";
 
-            for (var i = 0; i < m1y; i++) {
-
-
-                var a = document.getElementById("a" + x + c).value;
-                var str = a;
-                var pos = str.indexOf("/");
-                if (a.charAt(pos) === "/") {
-                    var stringLength = a.length;
-                    var String1 = a;
-                    var start = str.slice(0, pos);
-                    start = "\\frac {" + start + "}";
-                    var end = a;
-                    var afterSlash = str.substr(str.indexOf("/") + 1);
-                    end = "{" + afterSlash + "}";
-                    a = start + end;
-                }
-                var b = document.getElementById("b" + c + y).value;
-                var str = b;
-                var pos1 = str.indexOf("/");
-                if (b.charAt(pos1) === "/") {
-                    var stringLength = b.length;
-                    var String1 = b;
-                    var start = str.slice(0, pos1);
-                    start = "\\frac {" + start + "}";
-                    var end = b;
-                    var afterSlash = str.substr(str.indexOf("/") + 1);
-                    end = "{" + afterSlash + "}";
-                    b = start + end;
-                }
-                matrixAnswerString += a + "*" + b + " + ";
+			for (var i = 0; i < m1y; i++) {
 
 
-                c++;
-            }
-            finalString += matrixAnswerString;
+				var a = document.getElementById("a" + x + c).value;
+				var str = a;
+				var pos = str.indexOf("/");
+				var minuspos = str.indexOf("-");
+				if (a.charAt(minuspos) === "-" && a.charAt(pos) === "/") {
+					var str2 = str.replace("-", "");
+					var a = str2.slice(0, pos - 1);
+					start = "\\frac {" + a + "}";
+					var end;
+					var afterSlash = str.substr(str.indexOf("/") + 1);
+					end = "{" + afterSlash + "}";
+					var fractionbracketstart = "(-";
+					var fractionbracketend = ")";
+					var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
+					a = a.replace("/","");
+					a = fractionbracket;
+
+				}
+				if (a.charAt(pos) === "/"){
+					start = str.slice(0, pos);
+					start = "\\frac {" + start + "}";
+					var end;
+					var afterSlash = str.substr(str.indexOf("/") + 1);
+					end = "{" + afterSlash + "}";
+					a = start + end;
+					a = a.replace("/","");
+				}
+
+				if (a.charAt(0) === "-") {
+					a = "(" + a + ")";
+					a = a;
+				}
+				var b = document.getElementById("b" + c + y).value;
+				var str = b;
+				var pos1 = str.indexOf("/");
+				var minuspos = str.indexOf("-");
+				if (b.charAt(minuspos) === "-" && b.charAt(pos1) === "/") {
+					var str2 = str.replace("-", "");
+					typeof str2;
+					var sliceString = str2.slice(0, pos1 - 1);
+					b = sliceString;
+					start = "\\frac {" + b + "}";
+					var end;
+					var afterSlash = str.substr(str.indexOf("/") + 1);
+					end = "{" + afterSlash + "}";
+					var fractionbracketstart = "(-";
+					var fractionbracketend = ")";
+					var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
+					fractionbracket = fractionbracket.replace("/","");
+					b = fractionbracket;
+				}
+				if (b.charAt(pos1) === "/") {
+					var start = str.slice(0, pos1);
+					start = "\\frac {" + start + "}";
+					var end;
+					var afterSlash = str.substr(str.indexOf("/") + 1);
+					end = "{" + afterSlash + "}";
+					b = start + end;
+					b = b.replace("/","");
+				}
+				if (b.charAt(0) === "-") {
+					b = "(" + b + ")";
+					b = b;
+				}
+				matrixAnswerString += a + "*" + b + " + ";
 
 
-            c = 1;
+				c++;
+			}
+			finalString += matrixAnswerString;
 
 
-        }
-    }
-    var strLength = finalString.length;
-    finalString = finalString.slice(0, strLength - 3);
+			c = 1;
 
-    return finalString;
+
+		}
+	}
+	var strLength = finalString.length;
+	finalString = finalString.slice(0, strLength - 3);
+
+	return finalString;
 }
 
 
 // **** ARVUTAB MAATRIKSI VÄÄRTUSE ****
 function calculateMatrixFinalSum() {
 
-    var c = 1;
-    var finalString = "";
+	var c = 1;
+	var finalString = "";
 
-    for (var x = 1; x <= m1x; x++) {
-        if (x >= 2) {
-            var strLength = finalString.length;
+	for (var x = 1; x <= m1x; x++) {
+		if (x >= 2) {
+			var strLength = finalString.length;
 
-            finalString += "\\\\";
-        };
+			finalString += "\\\\";
+		};
 
-        for (var y = 1; y <= m2y; y++) {
+		for (var y = 1; y <= m2y; y++) {
 
-            if (y >= 2) {
-                var strLength = finalString.length;
+			if (y >= 2) {
+				var strLength = finalString.length;
 
-                finalString += "&";
-            };
+				finalString += "&";
+			};
 
-            var matrixAnswerString = "";
+			var matrixAnswerString = "";
 
-            for (var i = 0; i < m1y; i++) {
+			for (var i = 0; i < m1y; i++) {
 
-                var a = document.getElementById("a" + x + c).value;
-                var b = document.getElementById("b" + c + y).value;
+				var a = document.getElementById("a" + x + c).value;
+				var b = document.getElementById("b" + c + y).value;(b);
                 if (!a) {
 					a = 0;
 				}
 				if (!b) {
 					b = 0;
 				}
-                matrixAnswerString += a + "*" + b + " + ";
-                c++;
-            }
+				matrixAnswerString += a + "*" + b + " + ";
+				c++;
+			}
 
-            var strLength = matrixAnswerString.length;
-            matrixAnswer.value = math.eval(matrixAnswerString.slice(0, strLength - 3));
-            var a = matrixAnswer.value;
-            var abc = math.fraction(a);
-            abc = math.fraction({ n: abc.n, d: abc.d });
-            if (abc.d === 1) {
-                finalString += abc.n;
-            } else {
-                var reduction = reduce(abc.n, abc.d);
-                var numerator = "\\frac {" + abc.n + "}";
-                var denominator = "{" + abc.d + "}";
-                answerString = numerator + denominator;
-                finalString += answerString;
-            }
+			var strLength = matrixAnswerString.length;
+			matrixAnswer.value = math.eval(matrixAnswerString.slice(0, strLength - 3));
+			var a = matrixAnswer.value;
+			var abc = math.fraction(a);
+			abc = math.fraction({
+				n: abc.n,
+				d: abc.d
+			});
+			var num = a;
+			var n = num.toString();
+			var pos = n.indexOf("-");
+			//if(){
 
-            c = 1;
-        }
+			//}
+			if (abc.d === 1 && n.charAt(pos)!=="-") {
+				finalString += abc.n;
+			} 
+			if(abc.d ===1 && n.charAt(pos)==="-"){
+				abc.n = "-" + abc.n;
+				finalString += abc.n;
+			}
+			if(n.charAt(pos)==="-" && abc.d !== 1){
+					reduction = reduce(abc.n,abc.d);
+					start = "\\frac {" + abc.n + "}";
+					var end = "{" + abc.d + "}"
+					var fractionbracketstart = "(-";
+					var fractionbracketend = ")";
+					var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
+					finalString += fractionbracket;
+			}
+			
+			else if(abc.d !==1) {
+				reduction = reduce(abc.n, abc.d);
+				var numerator = "\\frac {" + abc.n + "}";
+				var denominator = "{" + abc.d + "}";
+				answerString = numerator + denominator;
+				finalString += answerString;
+			}
 
-    }
+			c = 1;
+		}
 
-    var strLength = finalString.length;
+	}
+
+	var strLength = finalString.length;
 
 
-    return finalString;
+	return finalString;
 }
+
 
 var timer;
 
 $(document).ready(function () {
-	$("#wrapper").on("keyup", function () {
+	$(".input").on("keyup", function () {
 
 		window.clearTimeout(timer);
 		timer = window.setTimeout(function () {
 			generateValues();
-		}, 200);
+		}, 500);
 		console.log("midagi toimub");
 	});
 });
