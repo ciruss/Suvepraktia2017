@@ -100,6 +100,8 @@ function createMatrix() {
 }
 
 function generateMatrixFirstSecond() {
+	document.getElementById("highlight").style.display= "inline";
+	
 
 	generateMatrix();
 	matrixFirstValues();
@@ -580,7 +582,7 @@ var matrixPreAnswerArray = [
 ];
 
 function highlighter() {
-	
+	document.getElementById("highlighterText").style.display= "inline";
 	matrixFirstArray = [[null]];
 	matrixSecondArray = [[null]];
 	matrixPreAnswerArray = [[null]];

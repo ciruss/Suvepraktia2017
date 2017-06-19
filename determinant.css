@@ -10,7 +10,7 @@ body {
 }
 
 #wrapper {
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
     text-align: center;
     padding-bottom: 40px;
@@ -123,14 +123,22 @@ th {
 #determinantTable tr:hover {
     background-color: rgba(56, 58, 132, 0.64);
 }
+#determinantTable{
+	color:#666666;
+}
 
 input {
     height: 30px;
     width: 30px;
 }
+#matrixForDeterminant tbody tr >*{
+    margin:2px;
+    border:2px solid #666666;
+}
 
 table {
     display: inline;
+
 }
 
 #footer {
@@ -178,6 +186,13 @@ table {
 #showCalculations{
 	display:none;
 }
+#math{
+	color:#666666;
+	overflow: auto;
+    overflow-y: hidden;
+    margin:10px 15px;
+    height:160px;
+}
 
 .btn {
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.20), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
@@ -202,4 +217,12 @@ table {
 button:hover {
     background-color: #221a54;
     color: white;
+}
+@media only screen and (max-width: 1366px) {
+    .topnav a {
+        font-size:25px;
+    }
+    #content #instructions{
+        width:80%;
+    }
 }
