@@ -347,10 +347,6 @@ function checkMatrixFinalAnswers() {
 
 			if (matrixInputCell == matrixCellValue) {
 				matrixAnswer.style.color = "green";
-				//answerCounter += 1
-				//score += 1
-				//console.log("skoor " + score)
-				//console.log("lahendatud maatrikseid: " + sumOfExercises)
 			} else {
 				matrixAnswer.style.color = "red";
 				//errorCount += 1;
