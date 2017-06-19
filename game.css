@@ -91,10 +91,12 @@ img {
     color:#666666;
    
 }
+
 input {
     height: 30px;
     width: 30px;
 }
+
 .input{
     display:flex;
     justify-content:center;
@@ -108,24 +110,29 @@ input {
     color:#666666;
     
 }
+
 #exerciseMatrixAnswer tbody tr >*{
     margin:2px;
     border:2px solid #888888;
      color:#666666;
 }
+
 #exerciseMatrix1 tbody tr >*{
 margin:2px;
     border:2px solid #888888;
     color:#666666;
 }
+
 #exerciseMatrix2 tbody tr >*{
 margin:2px;
 border:2px solid #888888;
     color:#666666;
 }
+
 #checkAndRestartRandom{
 	display:none;
 }
+
 #justForDevs{
 	display:none;
 }
@@ -160,8 +167,6 @@ border:2px solid #888888;
     height: 40px;
     font-family: 'Francois One', sans-serif;
 }
-
-
 
 .btn:hover,
 button:hover {

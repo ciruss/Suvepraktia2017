@@ -1,126 +1,122 @@
 ﻿<!DOCTYPE html>
 <html>
+	<head>
+		<title>Maatriksite korrutamine</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="calculator.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.2/math.min.js"></script>
+		<script src="calculator.js"></script>
+		<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
+	</head>
 
-<head>
-    <title>Maatriksite korrutamine</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="calculator.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.2/math.min.js"></script>
-    <script src="calculator.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
-</head>
+	<body>
+		<div id="wrapper">
+			<div id="header">
+				<div id="textAndIcon">
+					<div id="icon"> <img src="icon.png"> </div>
+					<div id="text">MATEMAATIKA</div>
 
-<body>
-    <div id="wrapper">
-        <div id="header">
-            <div id="textAndIcon">
-                <div id="icon"> <img src="icon.png"> </div>
-                <div id="text">MATEMAATIKA</div>
+				</div>
+				<div class="topnav">
+					<a href="game.html">Harjutusmäng</a>
+					<a class="active" href="index.html">Maatriksite korrutamine</a>
+					<a href="determinant.html">Determinandid</a>
+					<a href="invertiblematrix.html">Pöördmaatriks</a>
+				</div>
+			</div>
+			<!-- X on rida ja Y on veerg -->
+			<!-- MAATRIKSITE KALKULAATOR -->
+			<div id="content">
+				<div id="instructions">
+					<p>
+						<h3>Maatriksite korrutamine</h3>
+						Vastuse arvutamiseks vali kõigepealt maatriksite suurused ning seejärel täida lahtrid.
+						<br>Programm kuvab maatriksite vastuse koos vahearvutustega.
+					</p>
+				</div>
+				<div id="select">
+					<div id="selectors">
+						<div id="left">
+							<h3>I</h3>
+							<form class="tooltip">
+								<span class="tooltiptext">vali esimese maatriksi suurus</span>
+								<select id="m1x">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+								<br>
+								<select id="m1y">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+							</form>
+						</div>
+						<div id="right">
+							<h3>II</h3>
 
-            </div>
-            <div class="topnav">
-                <a href="game.html">Harjutusmäng</a>
-                <a class="active" href="index.html">Maatriksite korrutamine</a>
-                <a href="determinant.html">Determinandid</a>
-                <a href="invertiblematrix.html">Pöördmaatriks</a>
-            </div>
-        </div>
-        <!-- X on rida ja Y on veerg -->
-        <!-- MAATRIKSITE KALKULAATOR -->
-        <div id="content">
-            <div id="instructions">
-                <p>
-                    <h3>Maatriksite korrutamine</h3>
-                    Vastuse arvutamiseks vali kõigepealt maatriksite suurused ning seejärel täida lahtrid.
-                    <br>Programm kuvab maatriksite vastuse koos vahearvutustega.
-                </p>
-            </div>
-            <div id="select">
-                <div id="selectors">
-
-                    <div id="left">
-                        <h3>I</h3>
-                        <form class="tooltip">
-                            <span class="tooltiptext">vali esimese maatriksi suurus</span>
-                            <select id="m1x">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                            <br>
-                            <select id="m1y">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                        </form>
-                    </div>
-                    <div id="right">
-                        <h3>II</h3>
-
-                        <form class="tooltip">
-                            <span class="tooltiptext">vali teise maatriksi suurus</span>
-                            <select id="m2x">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                            <br>
-                            <select id="m2y">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                        </form>
-                    </div>
-                </div>
-                <div id="generate">
-                    <button type="button" class="btn" id="generateMatrixBtn" onclick="generateMatrix12()">Genereeri maatriksid</button>
-                </div>
-            </div>
-            <div id="mistakeNotification"></div>
-            <div id="main">
-                <div class="input">
-                    <!-- maatriksid arvude sisestuseks -->
-                    <div id="matrix1Container" class="resp">
-                        <table id="matrix1"></table>
-                    </div>
-                    <div id="matrix2Container" class="resp">
-                        <table id="matrix2"></table>
-                    </div>
-                    <!-- maatriksid vastuste genereerimiseks -->
-                    <div id="matrixAnswerContainer" class="resp">
-                        <table id="matrixAnswer"></table>
-                    </div>
-                    <div id="matrixFinalAnswerContainer" class="resp">
-                        <table id="matrixFinalAnswer"></table>
-                    </div>
-                </div>
-                <!--</div>-->
-                <div id="buttons">
-                    <button id="checkAnswerDeterminant" class="btn" type="button" onclick="calculateMatrix()">kuva vastus </button>
-                    <button id="highlight" type="button" class="btn" onclick="highlighter()">Highlighter</button>
-                </div>
-            </div>
-            <div id="math">$$$$</div>
-            <div id="display"></div>
-        </div>
-        <div id="footer"></div>
-    </div>
-</body>
-
-
+							<form class="tooltip">
+								<span class="tooltiptext">vali teise maatriksi suurus</span>
+								<select id="m2x">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+								<br>
+								<select id="m2y">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+							</form>
+						</div>
+					</div>
+					<div id="generate">
+						<button type="button" class="btn" id="generateMatrixBtn" onclick="generateMatrix12()">Genereeri maatriksid</button>
+					</div>
+				</div>
+				<div id="mistakeNotification"></div>
+				<div id="main">
+					<div class="input">
+						<!-- maatriksid arvude sisestuseks -->
+						<div id="matrix1Container" class="resp">
+							<table id="matrix1"></table>
+						</div>
+						<div id="matrix2Container" class="resp">
+							<table id="matrix2"></table>
+						</div>
+						<!-- maatriksid vastuste genereerimiseks -->
+						<div id="matrixAnswerContainer" class="resp">
+							<table id="matrixAnswer"></table>
+						</div>
+						<div id="matrixFinalAnswerContainer" class="resp">
+							<table id="matrixFinalAnswer"></table>
+						</div>
+					</div>
+					<!--</div>-->
+					<div id="buttons">
+						<!--<button id="checkAnswerDeterminant" class="btn" type="button" onclick="calculateMatrix()">kuva vastus </button>-->
+						<button id="highlight" type="button" class="btn" onclick="highlighter()">Highlighter</button>
+					</div>
+				</div>
+				<div id="math">$$$$</div>
+				<div id="display"></div>
+			</div>
+			<div id="footer"></div>
+		</div>
+	</body>
 </html>

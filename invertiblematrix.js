@@ -1,13 +1,9 @@
-
-
 var invertibleMatrixSize;
 var detNumbers = [];
 var detValues = "";
 var inversionCount = 0;
 
-//var mistakes = false;
-
-
+var mistakes = false;
 
 function generateMatrixForInvertibleM() {
 	
@@ -19,28 +15,24 @@ function generateMatrixForInvertibleM() {
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 
 	if (matrixForInvertibleM) {
-		
 		matrixForInvertibleM.innerHTML = "";
 		matrixDeterminantAnswer.innerHTML = "";
 		createMatrixForInvertibleM();
-
 	} else {
-		
 		matrixDeterminantAnswer.innerHTML = "";
 		createMatrixForInvertibleM();
 	}
 }
 
-
-
-
 function createMatrixForInvertibleM() {
 
 	var matrixInvertibleMContainer = document.getElementById("matrixInvertibleMContainer");
+	/*
 	var mWidth = 42 * invertibleMatrixSize;
 	var mHeight = 28 * invertibleMatrixSize;
 	matrixInvertibleMContainer.style.width = mWidth + "px";
 	matrixInvertibleMContainer.style.height = mHeight + "px";
+	*/
 
 	var matrixForInvertibleM = document.getElementById("matrixForInvertibleM");
 	var tableBody = document.createElement("tbody");
@@ -54,8 +46,8 @@ function createMatrixForInvertibleM() {
 			var cell = document.createElement("input");
 			cell.setAttribute("id", "a" + rowId + colId);
 			cell.setAttribute("type", "text");
-			//cell.setAttribute("onkeypress", "validate(event)");
-			//cell.setAttribute("onblur", "checkInputSequence()");
+			cell.setAttribute("onkeypress", "validate(event)");
+			cell.setAttribute("oninput", "checkInputSequence()");
 			cell.setAttribute("maxlength", "10");
 			row.appendChild(cell);
 		}
@@ -64,9 +56,7 @@ function createMatrixForInvertibleM() {
 	matrixForInvertibleM.appendChild(tableBody);
 }
 
-
-
-
+/*
 function calculateDeterminant() {
 
 	console.log("arvutab");
@@ -76,7 +66,7 @@ function calculateDeterminant() {
 		document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
 	} else {
 		document.getElementById("mistakeNotification").style.display = "none";
-		var determinant = document.getElementById("determinant").value; */
+		var determinant = document.getElementById("determinant").value; 
 		
 		if(invertibleMatrixSize === 2) {
 			determinantFor2();
@@ -103,6 +93,7 @@ function calculateDeterminant() {
 	
 //}
 }
+*/
 // **** FUNKTSIOONID PERMUTATSIOONIDE GENEREERIMISEKS ****
 
 function determinantFor2(smallMatrix) {
@@ -786,14 +777,61 @@ function invMatrixFinalAnswer(matrixMultiplier) {
 	return invMatrixFinalAnswerArray;
 }
 
+function checkInputSequence() {
+    checkInput: for (var i = 0; i < invertibleMatrixSize; i++) {
+        for (var j = 0; j < invertibleMatrixSize; j++) {
+            var rowId = i + 1;
+            var colId = j + 1;
+            var number = document.getElementById("a" + rowId + colId).value;
+            if (number == "") {
+                //console.log("See kast on tühi");
+                var inputColor = document.getElementById("a" + rowId + colId);
+                inputColor.style.backgroundColor = "";
+                mistakes = false
+                break checkInput;
+            } else {
+                var regex = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
+                var found = regex.test(number);
+                //console.log(found);
+                if (found === false) {
+                    var inputColor = document.getElementById("a" + rowId + colId);
+                    inputColor.style.backgroundColor = "red";
+                    mistakes = false;
+                    document.getElementById("mistakeNotification").style.display = "inline";
+                    //document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
+					break checkInput;
+                } else {
+                    var inputColor = document.getElementById("a" + rowId + colId);
+                    inputColor.style.backgroundColor = "";
+                    document.getElementById("mistakeNotification").style.display = "none";
+                    mistakes = true
+                }
+            }
+        }
+    }
+    if (mistakes === true) {
+        ////console.log("Vigu ei olnud");
+        //document.getElementById("checkAnswerDeterminant").style.display = "block"
+        //document.getElementById("newDeterminant").style.display = "block"
+        //document.getElementById("mistakeNotification").style.display = "block",
+		mistakes = true;
+		calculateDeterminant();
+		document.getElementById("mistakeNotification").style.display = "none";
+    } else {
+        ////console.log("vigu on");
+    }
+}
 
+function validate(evt) {
+    key = evt.key;
+    var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
+    if (allowed.indexOf(evt.key) == -1) {
+        evt.preventDefault();
+        ////console.log("EI LUBA");
+    }
+    // PRAEGUNE
+    if (evt.key === "/" && evt.target.value.indexOf('/') != -1) {
+        evt.preventDefault();
+    }
 
-
-
-
-
-
-
-
-
-
+}

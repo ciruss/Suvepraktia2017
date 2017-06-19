@@ -36,9 +36,7 @@ function setPlayerName() {
 		startTimer(60);
 		//generateExerciseMatrix();
 		generateRandomExerciseMatrix();
-	}
-	
-	
+	}	
 	document.getElementById("checkAndRestartRandom").style.display="inline";
 	//document.getElementById("justForDevs").style.display="inline";
 }
@@ -426,8 +424,6 @@ function justForDevsMatrixAnswers() {
 		}
 	}
 }
-
-
 */
 
 // **** KÄIVITAB MAATRIKSITE VASTUSTE KONTROLLI (mitte random suurustega kuvatud maatriksid) ****
@@ -518,7 +514,6 @@ function resetScore() {
 
 	alert("MÄNG LÄBI! Vigu tegid kokku " + errorCount + ", maatrikseid kokku: " + sumOfExercises);
 
-
 	sumOfExercises = 0;
 	errorCount = 0;
 	updateScore();
@@ -569,25 +564,6 @@ function tick() {
 }
 
 // **** KONTROLLIB SISESTUST *****
-/*
-function validate(elementRef, event) {
-	var keyCodeEntered = (event.which) ? event.which : (window.event.keyCode) ? window.event.keyCode : -1;
-		console.log(event.keyCode);
-		if ((keyCodeEntered >= 48) && (keyCodeEntered <= 57) || (keyCodeEntered === 8)) {
-			return true;
-		} else if (keyCodeEntered == 47) {
-			if ((elementRef.value) && (elementRef.value.indexOf('/') >= 0)) {
-				return false;
-			} else {
-				return true;
-			}
-		} else if (keyCodeEntered == 32) {
-		
-			
-		}
-	return false;
-} */
-
 function validate(evt) {
 	key = evt.key;
 	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "*","+", "Tab", "Backspace"];
@@ -599,6 +575,4 @@ function validate(evt) {
 	if(evt.key === "/" && evt.target.value.indexOf('/') != -1) {
 		evt.preventDefault();
 	}
-
 }
-
