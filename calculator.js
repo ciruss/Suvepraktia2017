@@ -512,6 +512,7 @@ function checkInputSequence() {
                     mistakeA = false;
                     document.getElementById("mistakeNotification").style.display = "inline";
                     document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
+					break checkA;
                 } else {
                     var inputColorA = document.getElementById("a" + rowId + colId);
                     inputColorA.style.backgroundColor = "";
@@ -545,6 +546,7 @@ function checkInputSequence() {
                     mistakeB = false;
                     document.getElementById("mistakeNotification").style.display = "inline";
                     document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
+					break checkB;
                 } else {
                     var inputColorB = document.getElementById("b" + rowId + colId);
                     inputColorB.style.backgroundColor = "";
@@ -556,7 +558,7 @@ function checkInputSequence() {
         }
     }
 
-        console.log("Lõpus mistakeB: " + mistakeB);
+    console.log("Lõpus mistakeB: " + mistakeB);
     console.log("Lõpus mistakeA: " + mistakeA);
     if (mistakeB === true && mistakeA === true) {
         document.getElementById("mistakeNotification").style.display = "none";

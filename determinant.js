@@ -136,6 +136,7 @@ function generateDetMatrix(){
 		MathJax.Hub.Queue(["Text", math, k + "\\ järku\\ ruutmaatriksi\\ A_" + i + " = \\begin{pmatrix}" + l + "\\end{pmatrix}" + k + "\\ järku\\ determinandiks\\ nimetatakse\\ reaalarvu \\begin{vmatrix}A_" + i + "\\end{vmatrix} = \\begin{vmatrix}" + l + "\\end{vmatrix} = " + j])
 		MathJax.Hub.Queue(function(){
 			displayDiv.innerHTML = mathDiv.innerHTML;
+			mathDiv.innerHTML;
 		})
 	})
 }
@@ -145,11 +146,12 @@ function generateDetMatrix(){
 // **** FUNKTSIOON �IGE PERMUTATSIOONIDE FUNKTSIOONI K�IVITAMISEKS ****
 
 function calculateDeterminant() {
-
-
+	
+	console.log(mistakes);
+	
     if (mistakes === false) {
         document.getElementById("mistakeNotification").style.display = "inline";
-        document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
+        //document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
     } else {
         document.getElementById("mistakeNotification").style.display = "none";
         var determinant = document.getElementById("determinant").value;
@@ -623,7 +625,8 @@ function checkInputSequence() {
                     inputColor.style.backgroundColor = "red";
                     mistakes = false;
                     document.getElementById("mistakeNotification").style.display = "inline";
-                    document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
+                    //document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
+					break checkInput;
                 } else {
                     var inputColor = document.getElementById("a" + rowId + colId);
                     inputColor.style.backgroundColor = "";
@@ -637,7 +640,10 @@ function checkInputSequence() {
         //console.log("Vigu ei olnud");
         //document.getElementById("checkAnswerDeterminant").style.display = "block"
         //document.getElementById("newDeterminant").style.display = "block"
-        document.getElementById("mistakeNotification").style.display = "block"
+        //document.getElementById("mistakeNotification").style.display = "block",
+		mistakes = true;
+		calculateDeterminant();
+		document.getElementById("mistakeNotification").style.display = "none";
     } else {
         //console.log("vigu on");
     }
