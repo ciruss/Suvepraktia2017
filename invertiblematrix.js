@@ -37,10 +37,10 @@ function generateMatrixForInvertibleM() {
 function createMatrixForInvertibleM() {
 
 	var matrixInvertibleMContainer = document.getElementById("matrixInvertibleMContainer");
-	//var mWidth = 42 * invertibleMatrixSize;
-	//var mHeight = 28 * invertibleMatrixSize;
-	//matrixInvertibleMContainer.style.width = mWidth + "px";
-	//matrixInvertibleMContainer.style.height = mHeight + "px";
+	var mWidth = 42 * invertibleMatrixSize;
+	var mHeight = 28 * invertibleMatrixSize;
+	matrixInvertibleMContainer.style.width = mWidth + "px";
+	matrixInvertibleMContainer.style.height = mHeight + "px";
 
 	var matrixForInvertibleM = document.getElementById("matrixForInvertibleM");
 	var tableBody = document.createElement("tbody");
@@ -663,13 +663,16 @@ function invertibleMatrix(determinant) {
 			if(invertibleMatrixSize === 2) {
 				// console.log("teist jarku");
 				var smallMatrix = tempMatrix.slice();
-				finalMatrixDetAnswers.push(smallMatrix[1][1]);
+				var smallMatrixDetAnswer = smallMatrix[1][1];
+				var smallMatrixAnswer = cellMultiplier * smallMatrixDetAnswer;
+				finalMatrixDetAnswers.push(smallMatrixAnswer);
 			}
 			
 			if(invertibleMatrixSize === 3) {
 				// console.log("kolmandat jarku");
 				var smallMatrix = tempMatrix.slice();
-				var smallMatrixAnswer = determinantFor2(smallMatrix);
+				var smallMatrixDetAnswer = determinantFor2(smallMatrix);
+				var smallMatrixAnswer = cellMultiplier * smallMatrixDetAnswer;
 				finalMatrixDetAnswers.push(smallMatrixAnswer);
 				// console.log("matrix answer: " + smallMatrixAnswer);
 			}
@@ -677,7 +680,8 @@ function invertibleMatrix(determinant) {
 			if(invertibleMatrixSize === 4) {
 				// console.log("neljandat jarku");
 				var smallMatrix = tempMatrix.slice();
-				var smallMatrixAnswer = determinantFor3(smallMatrix);
+				var smallMatrixDetAnswer = determinantFor3(smallMatrix);
+				var smallMatrixAnswer = cellMultiplier * smallMatrixDetAnswer;
 				finalMatrixDetAnswers.push(smallMatrixAnswer);
 				// console.log("matrix answer: " + smallMatrixAnswer);
 			}
@@ -685,7 +689,8 @@ function invertibleMatrix(determinant) {
 			if(invertibleMatrixSize === 5) {
 				// console.log("neljandat jarku");
 				var smallMatrix = tempMatrix.slice();
-				var smallMatrixAnswer = determinantFor4(smallMatrix);
+				var smallMatrixDetAnswer = determinantFor4(smallMatrix);
+				var smallMatrixAnswer = cellMultiplier * smallMatrixDetAnswer;
 				finalMatrixDetAnswers.push(smallMatrixAnswer);
 				// console.log("matrix answer: " + smallMatrixAnswer);
 			}
@@ -705,7 +710,86 @@ function invertibleMatrix(determinant) {
 	}
 	console.log(finalMatrix);
 	console.log(finalMatrixDetAnswers);
+	
+	var preAnswerArray = invMatrixPreAnswer();
+	var transposedArray = invMatrixTransposed();
+	var finalAnswerArray = invMatrixFinalAnswer(matrixMultiplier);
+	
 }
+
+
+
+var invMatrixPreAnswerArray = [null];
+
+function invMatrixPreAnswer() {
+	
+	invMatrixPreAnswerArray = [null];
+	var secondPreAnswerRow = [null];
+	var counter = 0;
+	
+	for(var x = 1; x <= invertibleMatrixSize; x++) {
+		for(var y = 1; y <= invertibleMatrixSize; y++) {
+			counter++;
+			var matrixCell = finalMatrixDetAnswers[counter];
+			secondPreAnswerRow.push(matrixCell);
+		}
+		invMatrixPreAnswerArray.push(secondPreAnswerRow);
+		secondPreAnswerRow = [null];
+	}
+	return invMatrixPreAnswerArray;
+}
+
+
+var invMatrixTransposedArray = [];
+
+function invMatrixTransposed() {
+	
+	invMatrixTransposedArray = [];
+	var transposedAnswerArray = [];
+	var counter = 0;
+	
+	for(var x = 0; x < invertibleMatrixSize; x++) {
+		for(var y = 0; y < invertibleMatrixSize; y++) {
+			counter++;
+			var matrixCell = finalMatrixDetAnswers[counter];
+			transposedAnswerArray.push(matrixCell);
+		}
+		invMatrixTransposedArray.push(transposedAnswerArray);
+		transposedAnswerArray = [];
+	}
+	invMatrixTransposedArray = math.transpose(invMatrixTransposedArray);
+	return invMatrixTransposedArray;
+}
+
+
+
+var invMatrixFinalAnswerArray = [];
+
+function invMatrixFinalAnswer(matrixMultiplier) {
+	
+	invMatrixFinalAnswerArray = [];
+	var finalAnswerRow = [];
+	var counter = -1;
+	
+	for(var x = 0; x < invertibleMatrixSize; x++) {
+		for(var y = 0; y < invertibleMatrixSize; y++) {
+			counter++;
+			var matrixCell = invMatrixTransposedArray[x][y];
+			console.log(matrixMultiplier);
+			console.log(matrixCell);
+			var cellValue = math.eval(matrixMultiplier + "*" + matrixCell);
+			finalAnswerRow.push(cellValue);
+		}
+		invMatrixFinalAnswerArray.push(finalAnswerRow);
+		finalAnswerRow = [];
+	}
+	return invMatrixFinalAnswerArray;
+}
+
+
+
+
+
 
 
 
