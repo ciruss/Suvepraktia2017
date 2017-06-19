@@ -32,11 +32,15 @@ function setPlayerName() {
 	} else if (playerName === "") {
 		playerName = "Nimetu";
 	} else {
-		document.getElementById("playerName").innerHTML = "MÄNGIJA: " + playerName;
+		document.getElementById("playerName").innerHTML = "NIMI: " + playerName;
 		startTimer(60);
 		//generateExerciseMatrix();
 		generateRandomExerciseMatrix();
 	}
+	
+	
+	document.getElementById("checkAndRestartRandom").style.display="inline";
+	//document.getElementById("justForDevs").style.display="inline";
 }
 
 // **** ÜLDINE FUNKTSIOON MAATRIKSITE GENEREERIMISEKS ****
@@ -103,7 +107,7 @@ function generateRandomExerciseMatrix() {
 	document.getElementById("exerciseMatrixPreAnswerContainer").style.visibility = "visible";
 
 	document.getElementById("beginGame").style.visibility = "hidden";
-	document.getElementById("justForDevs").style.visibility = "visible";
+	//document.getElementById("justForDevs").style.visibility = "visible";
 	document.getElementById("checkAndRestartRandom").style.visibility = "visible";
 
 	Em1x = Math.floor((Math.random() * 5) + 1);
@@ -395,6 +399,7 @@ function checkMatrixPreAnswers() {
 }
 
 // **** JUST FOR DEVS FUNKTSIOON, MIS GENEREERIB MÄNGU TESTIMISEKS MAATRIKSITESSE ÕIGED VASTUSED ****
+/*
 function justForDevsMatrixAnswers() {
 
 	var c = 1;
@@ -421,6 +426,9 @@ function justForDevsMatrixAnswers() {
 		}
 	}
 }
+
+
+*/
 
 // **** KÄIVITAB MAATRIKSITE VASTUSTE KONTROLLI (mitte random suurustega kuvatud maatriksid) ****
 function checkMatrixAnswers() {
@@ -499,7 +507,7 @@ function loadStatsFromLocalStorage() {
 
 // MÄNGU SKOORI FUNKTSIOONID
 function resetScore() {
-	document.getElementById("justForDevs").style.visibility = "hidden";
+	//document.getElementById("justForDevs").style.visibility = "hidden";
 	document.getElementById("checkAndRestartRandom").style.visibility = "hidden";
 	document.getElementById("beginGame").style.visibility = "visible";
 
@@ -520,7 +528,7 @@ function resetScore() {
 function updateScore() {
 	document.getElementById("TotalSum").innerHTML = "MAATRIKSEID KOKKU: " + sumOfExercises;
 	document.getElementById("wrongAnswers").innerHTML = "VIGU: " + errorCount;
-	document.getElementById("playerName").innerHTML = "MÄNGIJA: " + playerName;
+	document.getElementById("playerName").innerHTML = "NIMI: " + playerName;
 }
 
 //UUE MÄNGU ALUSTAMINE
@@ -582,7 +590,7 @@ function validate(elementRef, event) {
 
 function validate(evt) {
 	key = evt.key;
-	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
+	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "*","+", "Tab", "Backspace"];
 	if(allowed.indexOf(evt.key) == -1){
 		evt.preventDefault();
 		console.log("EI LUBA");

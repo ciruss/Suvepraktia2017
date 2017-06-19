@@ -44,7 +44,7 @@ function generateMatrix() {
             //calculateMatrixFinalSum();
         }
     } else {
-        //console.log("Ei saa arvutada");
+        console.log("Ei saa arvutada");
         alert("Ei saa genereerida, muuda maatriksite suuruseid!");
     }
 }
@@ -88,7 +88,7 @@ function createMatrix() {
             cell.setAttribute("id", "b" + rowId + colId);
             cell.setAttribute("type", "text");
             cell.setAttribute("onkeypress", "validate(event)");
-            cell.setAttribute("oninput", "checkInputSequence()");
+            cell.setAttribute("onblur", "checkInputSequence()");
             cell.setAttribute("maxlength", "10");
             row.appendChild(cell);
         }
@@ -104,7 +104,7 @@ function generateMatrix12() {
 	matrix2Values();
 	calculateMatrixSum();
 	calculateMatrixFinalSum();
-	//console.log('siin');
+	console.log('siin');
 	createValues();
 }
 
@@ -113,7 +113,7 @@ function generateValues() {
 	matrix2Values();
 	calculateMatrixSum();
 	calculateMatrixFinalSum();
-	//console.log('siin');
+	console.log('siin');
 	createValues();
 	
 }
@@ -157,17 +157,15 @@ function createValues() {
 		var j = matrix2Values();
 		var k = calculateMatrixSum();
 		var l = calculateMatrixFinalSum();
-		////console.log(l);
+		console.log(l);
 
 		MathJax.Hub.Queue(["Text", math, "\\begin{bmatrix}" + i + "\\end{bmatrix} \\times \\begin{bmatrix}" + j + "\\end{bmatrix} = \\begin{bmatrix}" + k + "\\end{bmatrix} = \\begin{bmatrix}" + l + "\\end{bmatrix}"]);
 		MathJax.Hub.Queue(function () {
 			displayDiv.innerHTML = mathDiv.innerHTML;
-			//highlighter();
 		});
 	});
 };
 
-/*
 function createMatrix3() {
     var mathDiv = document.getElementById('math');
     var displayDiv = document.getElementById('display');
@@ -183,10 +181,17 @@ function createMatrix3() {
         //\\begin{bmatrix} {"+i+"}&{"+j+"}&0\\\\0&{"+i+"}&{"+j+"}\\\\{"+j+"}&0&{"+i+"}\\\end{bmatrix}
         MathJax.Hub.Queue(function() {
             displayDiv.innerHTML = mathDiv.innerHTML;
+
+
+
+
         });
+
+
+
+
     });
 }
-*/
 //Loendab esimeses maatriksis olevad arvud kokku, ning viib mathJax kujule
 function matrix1Values() {
     var answerString = "";
@@ -232,7 +237,7 @@ function matrix1Values() {
     }
     var strLength = answerString.length;
     answerString = (answerString.slice(0, strLength - 1));
-    //console.log(answerString);
+    console.log(answerString);
     return answerString;
 
 
@@ -265,8 +270,8 @@ function matrix2Values() {
                 var afterSlash = str.substr(str.indexOf("/") + 1);
                 end = "{" + afterSlash + "}&";
                 Cell = start + end;
-                //console.log("Cell");
-                //console.log(Cell);
+                console.log("Cell");
+                console.log(Cell);
                 answerString += Cell;
             } else {
                 var Cell = document.getElementById("b" + rowId + colId).value + "&";
@@ -295,13 +300,12 @@ function matrix2Values() {
 
 
 // **** KÄIVITAB ARVUTAMISE ****
-/*
 function calculateMatrix() {
     if (mistakeA === false || mistakeB === false) {
         document.getElementById("mistakeNotification").style.display = "inline";
-        //document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
-        //console.log("calculateMatrix IF mistakeA: " + mistakeA);
-        //console.log("calculateMatrix IF mistakeB: " + mistakeB);
+        document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
+        console.log("calculateMatrix IF mistakeA: " + mistakeA);
+        console.log("calculateMatrix IF mistakeB: " + mistakeB);
     } else {
         calculateMatrixSum();
         calculateMatrixFinalSum();
@@ -313,7 +317,6 @@ function calculateMatrix() {
 
     }
 }
-*/
 //sama mis eelmine, aga peidab eelmise lahenduse ja  nupud
 function calculateNextMatrix() {
     calculateMatrixSum();
@@ -462,19 +465,21 @@ function calculateMatrixFinalSum() {
     return finalString;
 }
 
-
 var timer;
 
 $(document).ready(function () {
-	$(".input").on("input", function () {
+	$("#wrapper").on("keyup", function () {
 
 		window.clearTimeout(timer);
 		timer = window.setTimeout(function () {
 			generateValues();
-		}, 500);
-		//console.log("midagi toimub");
+		}, 200);
+		console.log("midagi toimub");
 	});
 });
+
+
+
 
 function reduce(numerator, denominator) {
     var gcd = function gcd(a, b) {
@@ -490,9 +495,9 @@ function checkInputSequence() {
             var rowId = i + 1;
             var colId = j + 1;
             var numberA = document.getElementById("a" + rowId + colId).value;
-            //console.log(numberA);
+            console.log(numberA);
             if (numberA == "") {
-                //console.log("Kast A on tühi");
+                console.log("Kast A on tühi");
                 var inputColorA = document.getElementById("a" + rowId + colId);
                 inputColorA.style.backgroundColor = "";
                 mistakeA = false;
@@ -500,14 +505,13 @@ function checkInputSequence() {
             } else {
                 var regexA = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
                 var foundA = regexA.test(numberA);
-                //console.log("Kast A: " + foundA);
+                console.log("Kast A: " + foundA);
                 if (foundA === false) {
                     var inputColorA = document.getElementById("a" + rowId + colId);
                     inputColorA.style.backgroundColor = "red";
                     mistakeA = false;
                     document.getElementById("mistakeNotification").style.display = "inline";
-                    //document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
-					break checkA;
+                    document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
                 } else {
                     var inputColorA = document.getElementById("a" + rowId + colId);
                     inputColorA.style.backgroundColor = "";
@@ -523,25 +527,24 @@ function checkInputSequence() {
             var rowId = i + 1;
             var colId = j + 1;
             var numberB = document.getElementById("b" + rowId + colId).value;
-            //console.log(numberB);
+            console.log(numberB);
             if (numberB == "") {
-                //console.log("Kast B on tühi");
+                console.log("Kast B on tühi");
                 mistakeB = false;
-                //console.log("checkInputSequenceB Tühi kast: " + mistakeB);
+                console.log("checkInputSequenceB Tühi kast: " + mistakeB);
                 var inputColorB = document.getElementById("b" + rowId + colId);
                 inputColorB.style.backgroundColor = "";
                 break checkB;
             } else {
                 var regexB = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
                 var foundB = regexB.test(numberB);
-                //console.log("Kast B: " + foundB);
+                console.log("Kast B: " + foundB);
                 if (foundB === false) {
                     var inputColorB = document.getElementById("b" + rowId + colId);
                     inputColorB.style.backgroundColor = "red";
                     mistakeB = false;
                     document.getElementById("mistakeNotification").style.display = "inline";
-                    //document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
-					break checkB;
+                    document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
                 } else {
                     var inputColorB = document.getElementById("b" + rowId + colId);
                     inputColorB.style.backgroundColor = "";
@@ -553,11 +556,10 @@ function checkInputSequence() {
         }
     }
 
-    //console.log("Lõpus mistakeB: " + mistakeB);
-    //console.log("Lõpus mistakeA: " + mistakeA);
+        console.log("Lõpus mistakeB: " + mistakeB);
+    console.log("Lõpus mistakeA: " + mistakeA);
     if (mistakeB === true && mistakeA === true) {
         document.getElementById("mistakeNotification").style.display = "none";
-		//generateValues();
     }
 }
 
@@ -568,16 +570,16 @@ function checkInputSequence() {
             var rowId = i + 1;
             var colId = j + 1;
             var numberB = document.getElementById("b" + rowId + colId).value;
-            //console.log(numberB);
+            console.log(numberB);
             if (numberB == "") {
-                //console.log("Kast B on tühi");
+                console.log("Kast B on tühi");
                 var inputColorB = document.getElementById("b" + rowId + colId);
                 inputColorB.style.backgroundColor = "";
                 mistakeB = false;
             } else {
                 var regexB = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
                 var foundB = regexB.test(numberB);
-                //console.log("Kast B: " + foundB);
+                console.log("Kast B: " + foundB);
                 if (foundB === false) {
                     var inputColorB = document.getElementById("b" + rowId + colId);
                     inputColorB.style.backgroundColor = "red";
@@ -595,10 +597,10 @@ function checkInputSequence() {
         }
     }
     if (mistakeB === true && mistakeA === true) {
-        ////console.log("Vigu ei ole");
+        //console.log("Vigu ei ole");
         document.getElementById("mistakeNotification").style.display = "none";
     } else {
-        ////console.log("Vigu on")
+        //console.log("Vigu on")
     }
 }
 
@@ -611,7 +613,7 @@ function validate(evt) {
     var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
     if (allowed.indexOf(evt.key) == -1) {
         evt.preventDefault();
-        //console.log("EI LUBA");
+        console.log("EI LUBA");
     }
     // PRAEGUNE
     if (evt.key === "/" && evt.target.value.indexOf('/') != -1) {
@@ -619,7 +621,7 @@ function validate(evt) {
     }
     /*
     if(evt.key==="-") {
-    	////console.log("EVENT TARGET VALUE: "+ evt.target.value.length);
+    	//console.log("EVENT TARGET VALUE: "+ evt.target.value.length);
     	if(evt.target.value.length > 3){
     		evt.preventDefault();
     	}
@@ -628,15 +630,17 @@ function validate(evt) {
 }
 
 
-var matrix1Array;
-var matrix2Array;
-var matrixPreAnswerArray;
+var matrix1Array = [
+    [null]
+];
+var matrix2Array = [
+    [null]
+];
+var matrixPreAnswerArray = [
+    [null]
+];
 
 function highlighter() {
-	
-	matrix1Array = [[null]];
-	matrix2Array = [[null]];
-	matrixPreAnswerArray = [[null]];
 
     var tableCells = document.getElementsByClassName("mjx-mtd");
     var startpoint = tableCells.length / 2;
@@ -678,12 +682,12 @@ function highlighter() {
         matrixRow = [null];
     }
 
-    /* //console.log("startpoint: " + startpoint);
-    //console.log("rowStartpoint: " + rowStartpoint);
-    //console.log("answerStartpoint: " + answerStartpoint);
-    //console.log(matrix1Array);
-    //console.log(matrix2Array);
-    //console.log(matrixPreAnswerArray);
+    /* console.log("startpoint: " + startpoint);
+    console.log("rowStartpoint: " + rowStartpoint);
+    console.log("answerStartpoint: " + answerStartpoint);
+    console.log(matrix1Array);
+    console.log(matrix2Array);
+    console.log(matrixPreAnswerArray);
      */
 
 
@@ -695,20 +699,19 @@ function highlighter() {
 
                 (function() {
 
-                        ////console.log("1 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-                        ////console.log("c: " + c + " , x: " + x + " , y: " + y);
+                        //console.log("1 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
+                        //console.log("c: " + c + " , x: " + x + " , y: " + y);
                         var aID = matrix1Array[x][c];
-                        ////console.log("2 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-                        ////console.log("c: " + c + " , x: " + x + " , y: " + y);
+                        //console.log("2 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
+                        //console.log("c: " + c + " , x: " + x + " , y: " + y);
                         var bID = matrix2Array[c][y];
-                        ////console.log("3 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-                        ////console.log("c: " + c + " , x: " + x + " , y: " + y);
+                        //console.log("3 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
+                        //console.log("c: " + c + " , x: " + x + " , y: " + y);
                         var cID = matrixPreAnswerArray[x][y];
-						//console.log("cID: "+cID);
 
                         highlight(aID, bID, cID);
 
-                        ////console.log("4 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
+                        //console.log("4 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
 
                         c++;
                     }

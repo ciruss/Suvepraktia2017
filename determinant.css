@@ -3,13 +3,6 @@
     box-sizing: border-box;
 }
 
-/*
-#math{
-	display: none;
-	z-index: 5000;
-}
-*/
-
 html,
 body {
     height: 100%;
@@ -24,6 +17,7 @@ body {
     position: relative;
     min-height: 100%;
     background-color: rgba(0, 77, 255, 0.03);
+     font-family: 'Overpass', sans-serif;
 }
 
 #header {
@@ -127,7 +121,7 @@ th {
 }
 
 #determinantTable tr:hover {
-    background-color: #87CEFA;
+    background-color: rgba(56, 58, 132, 0.64);
 }
 
 input {
@@ -155,17 +149,28 @@ table {
     display: none;
 }
 
-
-/*display ja math teevad sama asja. kas võib ühe eemaldada? või miks nad seal duubeldavad*/
-
 #display {
     display: none;
 }
 #answerHeadline{
 	color:#666666;
+	display:none;
 }
 #selectFormSize{
 	color:#666666;
+    font-size:20px;
+}
+#determinantTable{
+	display:none;
+}
+#matrixDeterminantAnswer{
+	color:#666666;
+}
+#checkAnswerDeterminant{
+	display:none;
+}
+#showCalculations{
+	display:none;
 }
 
 .btn {

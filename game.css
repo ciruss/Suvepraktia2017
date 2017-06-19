@@ -1,6 +1,7 @@
 * {
     margin: 0;
     box-sizing: border-box;
+    
 }
 
 html,
@@ -13,9 +14,11 @@ body {
     width: 80%;
     margin: 0 auto;
     text-align: center;
+	padding-bottom:90px;
     position: relative;
     min-height: 100%;
     background-color: rgba(0, 77, 255, 0.03);
+    font-family: 'Overpass', sans-serif;
 }
 
 #header {
@@ -83,48 +86,48 @@ img {
     color: #666666;
 }
 
-#content #select {
-    margin: 10px 0;
-    font-size: 20px;
+#gameStats{
+    background-color:white;
+    color:#666666;
+   
 }
-
-#content #select #selectors {
-    display: flex;
-    justify-content: center;
-}
-
-#content #select #selectors select {
-    margin: 2px;
-}
-
-#left {
-    margin: auto 0;
-    text-align: center;
-    padding: 0 10px;
-}
-
-#right {
-    margin: auto 0;
-    text-align: center;
-    padding: 0 10px;
-}
-
-#content #main {}
-
 input {
     height: 30px;
     width: 30px;
 }
-
-table,
-#matrix1Container,
-#matrix2Container {
-    display: inline;
+.input{
+    display:flex;
+    justify-content:center;
+    
+   
 }
-
-#math {
-    overflow: auto;
-    overflow-y: hidden;
+.matrixAnswerInput{
+  width:100px; 
+  margin:2px;
+    border:2px solid #888888;
+    color:#666666;
+    
+}
+#exerciseMatrixAnswer tbody tr >*{
+    margin:2px;
+    border:2px solid #888888;
+     color:#666666;
+}
+#exerciseMatrix1 tbody tr >*{
+margin:2px;
+    border:2px solid #888888;
+    color:#666666;
+}
+#exerciseMatrix2 tbody tr >*{
+margin:2px;
+border:2px solid #888888;
+    color:#666666;
+}
+#checkAndRestartRandom{
+	display:none;
+}
+#justForDevs{
+	display:none;
 }
 
 #footer {
@@ -137,22 +140,6 @@ table,
     line-height: 40px;
     font-size: 15px;
     font-family: 'Open Sans Condensed', sans-serif;
-}
-
-.tooltip span {
-    display: none;
-}
-
-
-/*display ja math teevad sama asja. kas võib ühe eemaldada? või miks nad seal duubeldavad*/
-
-#display {
-    display: none;
-}
-
-#buttons>* {
-    min-width: 90px;
-    ;
 }
 
 .btn {
@@ -174,9 +161,7 @@ table,
     font-family: 'Francois One', sans-serif;
 }
 
-#selectMatrices .btn {
-    margin: 30px;
-}
+
 
 .btn:hover,
 button:hover {
