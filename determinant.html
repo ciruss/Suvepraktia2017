@@ -1,66 +1,65 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<title>Determinantide arvutamine</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="determinant.css">
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.2/math.min.js"></script>
+		<script src="determinant.js"></script>
+		<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
+	</head>
 
-<head>
-	<title>Determinantide arvutamine</title>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="determinant.css">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.2/math.min.js"></script>
-	<script src="determinant.js"></script>
-	<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
-</head>
+	<body>
+		<div id="wrapper">
+			<div id="header">
+				<div id="textAndIcon">
+					<div id="icon"> <img src="icon.png"> </div>
+					<div id="text">MATEMAATIKA</div>
 
-<body>
-	<div id="wrapper">
-		<div id="header">
-			<div id="textAndIcon">
-				<div id="icon"> <img src="icon.png"> </div>
-				<div id="text">MATEMAATIKA</div>
-
-			</div>
-			<div class="topnav">
+				</div>
+				<div class="topnav">
 				<!--VIIDE: https://www.w3schools.com/howto/howto_js_topnav.asp -->
-				<a href="game.html">Harjutusmäng</a>
-				<a href="index.html">Maatriksite korrutamine</a>
-				<a class="active" href="determinant.html">Determinandid</a>
-				<a href="invertiblematrix.html">Pöördmaatriks</a>
+					<a href="game.html">Harjutusmäng</a>
+					<a href="index.html">Maatriksite korrutamine</a>
+					<a class="active" href="determinant.html">Determinandid</a>
+					<a href="invertiblematrix.html">Pöördmaatriks</a>
+				</div>
 			</div>
-		</div>
-		<!-- DETERMINANTIDE KALKULAATOR -->
-		<div id="content">
-			<div id="instructions">
-				<p>
-					<h3>Determinantide arvutamine</h3>
-					Determinandi arvutamiseks vali determinandi järk ning vajuta "Genereeri maatriks".
-					<br>Permutatsioonide ja inversioonide nägemiseks täida ära kõik lahtrid.
-				</p>
-			</div>
-			<div id="selectDeterminant">
-				<form class="tooltip" id="selectFormSize">
-					<span class="tooltiptext">Vali ruutmaatriksi suurus</span> Determinandi järk
-					<select id="determinant">
+			<!-- DETERMINANTIDE KALKULAATOR -->
+			<div id="content">
+				<div id="instructions">
+					<p>
+						<h3>Determinantide arvutamine</h3>
+						Determinandi arvutamiseks vali determinandi järk ning vajuta "Genereeri maatriks".
+						<br>Permutatsioonide ja inversioonide nägemiseks täida ära kõik lahtrid ja vajuta "Kuva vahetulemused" nupule.
+					</p>
+				</div>
+				<div id="selectDeterminant">
+					<form class="tooltip" id="selectFormSize">
+						<span class="tooltiptext">Vali ruutmaatriksi suurus</span> Determinandi järk
+						<select id="determinant">
 							<option value="2">2</option>
 							<option value="3">3</option>
 							<option value="4">4</option>
 							<option value="5">5</option>
 						</select>
-				</form>
-				<button type="button" class="btn" onclick="generateMatrixForDeterminant()">Genereeri maatriks</button>
-			</div>
+					</form>
+					<button type="button" class="btn" onclick="generateMatrixForDeterminant()">Genereeri maatriks</button>
+				</div>
+				
+				<div id="mistakeNotification"></div>
 
-			<div id="mistakeNotification"></div>
-
-			<div id="matrixInput">
-				<!-- maatriksid arvude sisestuseks -->
-				<div id="left">
-					<div id="matrixDeterminantContainer" class="resp">
-						<table id="matrixForDeterminant"></table>
-					</div>
-
+				<div id="matrixInput">
+					<!-- maatriksid arvude sisestuseks -->
+					<div id="left">
+						<div id="matrixDeterminantContainer" class="resp">
+							<table id="matrixForDeterminant"></table>
+						</div>
+					
 				</div>
 				<!--</div>-->
 				<div id="btnContainer">
@@ -78,6 +77,5 @@
 			</div>
 			<div id="footer"></div>
 		</div>
-</body>
-
+	</body>
 </html>

@@ -138,7 +138,7 @@ function generateDetMatrix() {
     var displayDiv = document.getElementById("display");
 
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "math"]);
-    MathJax.Hub.Queue(function () {
+    MathJax.Hub.Queue(function() {
         var math = MathJax.Hub.getAllJax("MathDiv")[0];
         var i = document.getElementById("determinant").value;
         var j = fractionAnswer();
@@ -146,7 +146,7 @@ function generateDetMatrix() {
         var l = createDetMatrix();
 
         MathJax.Hub.Queue(["Text", math, k + "\\ järku\\ ruutmaatriksi\\ A_" + i + " = \\begin{pmatrix}" + l + "\\end{pmatrix}" + k + "\\ järku\\ determinandiks\\ nimetatakse\\ reaalarvu \\begin{vmatrix}A_" + i + "\\end{vmatrix} = \\begin{vmatrix}" + l + "\\end{vmatrix} = " + j])
-        MathJax.Hub.Queue(function () {
+        MathJax.Hub.Queue(function() {
             displayDiv.innerHTML = mathDiv.innerHTML;
             mathDiv.innerHTML;
         })
@@ -637,7 +637,18 @@ function determinantForFive() {
 }
 
 function displayTable() {
-    document.getElementById("determinantTable").style.display = "block";
+
+
+    var x = document.getElementById('determinantTable');
+    if (x.style.display === 'none') {
+        document.getElementById("showCalculations").innerHTML = "peida tabel";
+        x.style.display = 'block';
+    } else {
+        document.getElementById("showCalculations").innerHTML = "kuva vahetulemused";
+        x.style.display = 'none';
+    }
+
+
 }
 
 
@@ -671,7 +682,7 @@ function checkInputSequence() {
         }
     }
 
-    if (mistakes === true) {
+        if (mistakes === true) {
         mistakes = true;
         calculateDeterminant();
         document.getElementById("mistakeNotification").style.display = "none";
@@ -693,7 +704,7 @@ function validate(evt) {
 }
 
 //täidab testimiseks väljad
-document.addEventListener("keypress", function (e) {
+document.addEventListener("keypress", function(e) {
     if (e.key === "f") {
         fill()
     }
@@ -701,7 +712,7 @@ document.addEventListener("keypress", function (e) {
 
 function fill() {
     mistakes = true;
-    document.querySelectorAll("tr > *").forEach(function (element) {
+    document.querySelectorAll("tr > *").forEach(function(element) {
         element.value = Math.floor(Math.random() * 300)
     })
 }

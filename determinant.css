@@ -101,8 +101,7 @@ img {
     padding-left: 15px;
     overflow: auto;
     max-height: 400px;
-	margin-bottom:20px;
-	
+    margin-bottom: 20px;
 }
 
 th,
@@ -124,22 +123,23 @@ th {
 #determinantTable tr:hover {
     background-color: rgba(56, 58, 132, 0.64);
 }
-#determinantTable{
-	color:#666666;
+
+#determinantTable {
+    color: #666666;
 }
 
 input {
     height: 30px;
     width: 30px;
 }
-#matrixForDeterminant tbody tr >*{
-    margin:2px;
-    border:2px solid #666666;
+
+#matrixForDeterminant tbody tr>* {
+    margin: 2px;
+    border: 2px solid #666666;
 }
 
 table {
     display: inline;
-
 }
 
 #footer {
@@ -162,38 +162,38 @@ table {
     display: none;
 }
 
-#answerHeadline{
-	color:#666666;
-	display:none;
+#answerHeadline {
+    color: #666666;
+    display: none;
 }
 
-#selectFormSize{
-	color:#666666;
-    font-size:20px;
+#selectFormSize {
+    color: #666666;
+    font-size: 20px;
 }
 
-#determinantTable{
-	display:none;
+#determinantTable {
+    display: none;
 }
 
-#matrixDeterminantAnswer{
-	color:#666666;
+#matrixDeterminantAnswer {
+    color: #666666;
 }
 
-#checkAnswerDeterminant{
-	display:none;
+#checkAnswerDeterminant {
+    display: none;
 }
 
-#showCalculations{
-	display:none;
+#showCalculations {
+    display: none;
 }
-#math{
-	color:#666666;
-	overflow: auto;
+
+#math {
+    color: #666666;
+    overflow: auto;
     overflow-y: hidden;
-    margin:10px 15px;
-	padding:20px;
-	height:250px;
+    margin: 10px 15px;
+    padding: 20px;
 }
 
 .btn {
@@ -220,11 +220,12 @@ button:hover {
     background-color: #221a54;
     color: white;
 }
+
 @media only screen and (max-width: 1466px) {
     .topnav a {
-        font-size:25px;
+        font-size: 25px;
     }
-    #content #instructions{
-        width:80%;
+    #content #instructions {
+        width: 80%;
     }
 }

@@ -10,13 +10,13 @@ body {
 }
 
 #wrapper {
-    width:60%;
+    width: 60%;
     margin: 0 auto;
     text-align: center;
     position: relative;
     min-height: 100%;
     background-color: rgba(0, 77, 255, 0.03);
-	font-family: 'Overpass', "Trebuchet MS", Helvetica, sans-serif;
+    font-family: 'Overpass', "Trebuchet MS", Helvetica, sans-serif;
 }
 
 #header {
@@ -71,14 +71,17 @@ img {
 
 #content {
     border-radius: 0px 0px 10px 10px;
+    padding-bottom: 50px;
 }
-#selectFormSize{
-	color:#666666;
-    font-size:20px;
+
+#selectFormSize {
+    color: #666666;
+    font-size: 20px;
 }
-#matrixForInvertibleM tbody tr >*{
-    border:2px solid #666666;
-    margin:2px;
+
+#matrixForInvertibleM tbody tr>* {
+    border: 2px solid #666666;
+    margin: 2px;
 }
 
 #content #instructions {
@@ -90,7 +93,6 @@ img {
     width: 50%;
     color: #666666;
 }
-
 
 #left {
     margin: auto 0;
@@ -125,28 +127,37 @@ th {
     background-color: #87CEFA;
 }
 
-#matrixDeterminantAnswer{
-	color:#666666;
-	
+#matrixDeterminantAnswer {
+    color: #666666;
 }
 
 input {
     height: 30px;
     width: 30px;
 }
-#answerHeadline{
-	color:#666666;
-	font-size:20px;
-	display:none;
+
+#answerHeadline {
+    color: #666666;
+    font-size: 20px;
+    display: none;
 }
 
 table {
     display: inline;
 }
 
-#math {
+#display {
+    color: #666666;
     overflow: auto;
-    overflow-y: hidden;
+    margin: 10px 15px;
+    padding: 20px;
+}
+
+#mathContainer {
+    color: #666666;
+    overflow: auto;
+    margin: 10px 15px;
+    padding: 20px;
 }
 
 #footer {
@@ -168,8 +179,7 @@ table {
 
 /*display ja math teevad sama asja. kas võib ühe eemaldada? või miks nad seal duubeldavad*/
 
-#display {
-}
+#display {}
 
 .btn {
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.20), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
@@ -195,11 +205,12 @@ button:hover {
     background-color: #221a54;
     color: white;
 }
+
 @media only screen and (max-width: 1466px) {
     .topnav a {
-        font-size:25px;
+        font-size: 25px;
     }
-    #content #instructions{
-        width:80%;
+    #content #instructions {
+        width: 80%;
     }
 }

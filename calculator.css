@@ -3,7 +3,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     background-color: #FFFFFF;
 }
@@ -16,7 +17,7 @@ html, body {
     position: relative;
     min-height: 100%;
     background-color: rgba(0, 77, 255, 0.03);
-	font-family: 'Overpass', "Trebuchet MS", Helvetica, sans-serif;
+    font-family: 'Overpass', "Trebuchet MS", Helvetica, sans-serif;
 }
 
 #header {
@@ -82,8 +83,9 @@ img {
     width: 50%;
     color: #666666;
 }
-h3{
-	color:#666666;
+
+h3 {
+    color: #666666;
 }
 
 #content #select {
@@ -124,32 +126,33 @@ table,
 #matrixSecondContainer {
     display: inline;
 }
-#matrixFirst tbody tr >*{
-    margin:2px;
-    border:2px solid #666666;
-}
-#matrixSecond tbody tr>*{
-    margin:2px;
-    border:2px solid #666666;
-}
-#highlight{
-	display:none;
-}
-#highlighterText{
-	display:none;
-	color:#666666;
-	font-size:20px;
+
+#matrixFirst tbody tr>* {
+    margin: 2px;
+    border: 2px solid #666666;
 }
 
+#matrixSecond tbody tr>* {
+    margin: 2px;
+    border: 2px solid #666666;
+}
+
+#highlight {
+    display: none;
+}
+
+#highlighterText {
+    display: none;
+    color: #666666;
+    font-size: 20px;
+}
 
 #math {
     overflow: auto;
     overflow-y: hidden;
-    margin:10px 15px;
-	padding:20px;
-	height:250px;
-	color:#666666;
-    
+    margin: 10px 15px;
+    padding: 20px;
+    color: #666666;
 }
 
 #footer {
@@ -167,7 +170,6 @@ table,
 .tooltip span {
     display: none;
 }
-
 
 #display {
     display: none;
@@ -206,14 +208,16 @@ button:hover {
     background-color: #221a54;
     color: white;
 }
+
 #highlight {
-	display: none;
+    display: none;
 }
+
 @media only screen and (max-width: 1466px) {
     .topnav a {
-        font-size:25px;
+        font-size: 25px;
     }
-    #content #instructions{
-        width:80%;
+    #content #instructions {
+        width: 80%;
     }
 }
