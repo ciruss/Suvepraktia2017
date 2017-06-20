@@ -30,5 +30,5 @@ limitations under the License.
 
 ## Paigaldusjuhend
 
-https://github.com/ciruss/Suvepraktia2017
+https://github.com/ciruss/Suvepraktia2017 - 
 Sellelt lehelt on võimalik alla laadida kood maatriksite arvutamise veebilehe jaoks. Selleks vajutada nuppu "Clone or download", sellepeale tekib eraldi menüü, kust tuleb vajutada "Download ZIP". Siis tõmbab alla kokkupakitud failid koodist. Edasi tuleks see .zip fail lahti pakkida ning tõsta need failid enda poolt valitud veebiserverisse.
