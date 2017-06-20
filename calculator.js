@@ -41,7 +41,7 @@ function generateMatrix() {
         }
     } else {
         alert("Ei saa genereerida, muuda maatriksite suuruseid!");
-		document.getElementById("highlight").style.display = "none";
+        document.getElementById("highlight").style.display = "none";
     }
 }
 
