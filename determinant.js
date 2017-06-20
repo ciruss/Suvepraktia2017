@@ -1,501 +1,704 @@
 // **** GLOBAALSED MUUTUJAD ****
 
-// muutujad mängu jaoks
-var matrixFinalAnswerErrors = 0;
-var matrixPreAnswerErrors = 0;
-//mängu skoori muutujad
+// muutujad maatriksi suuruste jaoks
+var matrixSize;
 
-var sumOfExercises = 0;
-var errorCount = 0;
-var playerName = "";
+// muutujad determinantide jaoks
+var detNumbers = [];
+var detValues = "";
+var inversionCount = 0;
 
-//timeri muutujad
-var timeInSecs;
-var ticker;
+// muutuja permutatsioonide tabeli jaoks
+var matrixPermutationTable = document.getElementById("matrixPermutationTable");
 
-var answerCounter = 0;
+var mistakes = false;
 
-// harjutusmaatriksi mõõdu muutujad
-var EmFirstX, EmFirstY, EmSecondX, EmSecondY;
+// **** ÜLDINE FUNKTSIOON MAATRIKSI GENEREERIMISEKS ****
 
-// massiivid harjutusmaatriksite väärtuste jaoks
-var a = [
-	[null, null, null]
-];
-var b = [
-	[null, null, null]
-];
+function generateMatrixForDeterminant() {
 
-// ||||| ----- ----- ----- ----- MAATRIKSITE HARJUTAMISE OSA ----- ----- ----- ----- |||||
+    document.getElementById("mistakeNotification").style.display = "none";
+    document.getElementById("math").style.display = "none"
+    document.getElementById("determinantTable").style.display = "none"
 
-//mängija nime küsimine
-function setPlayerName() {
-	playerName = prompt("Sisesta mängija nimi");
-	if (playerName === null) {
-		return;
-	} else if (playerName === "") {
-		playerName = "Nimetu";
-	} else {
-		document.getElementById("playerName").innerHTML = "NIMI: " + playerName;
-		startTimer(600);
-		//generateExerciseMatrix();
-		generateRandomExerciseMatrix();
-	}
-	document.getElementById("checkAndRestartRandom").style.display = "inline";
+    matrixSize = document.getElementById("determinant").value;
+    var matrixForDeterminant = document.getElementById("matrixForDeterminant");
+    var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+    var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
+
+    if (matrixForDeterminant) {
+        matrixForDeterminant.innerHTML = "";
+        matrixPermutationTable.innerHTML = "";
+        createMatrixForDeterminant();
+    } else {
+        matrixPermutationTable.innerHTML = "";
+        createMatrixForDeterminant();
+    }
 }
 
-// **** ÜLDINE FUNKTSIOON MAATRIKSITE GENEREERIMISEKS ****
-function generateExerciseMatrix() {
+// **** FUNKTSIOON, MIS GENEREERIB ESIMESE MAATRIKSI ****
 
-	document.getElementById("exerciseMatrixFirstContainer").style.visibility = "visible";
-	document.getElementById("exerciseMatrixSecondContainer").style.visibility = "visible";
-	document.getElementById("exerciseMatrixAnswerContainer").style.visibility = "visible";
-	document.getElementById("exerciseMatrixPreAnswerContainer").style.visibility = "visible";
-
-	document.getElementById("justForDevs").style.visibility = "visible";
-	document.getElementById("checkAndRestart").style.visibility = "visible";
-
-	EmFirstX = 1;
-	EmFirstY = 1;
-	EmSecondX = 1;
-	EmSecondY = 1;
-
-	var EmFirst = document.getElementById("exerciseMatrixFirst");
-	var EmSecond = document.getElementById("exerciseMatrixSecond");
-	var EmPA = document.getElementById("exerciseMatrixPreAnswer");
-	var EmFA = document.getElementById("exerciseMatrixAnswer");
-
-	if (EmFirstY === EmSecondX) {
-
-
-		if (EmFirst && EmSecond && EmFA && EmPA) {
-
-			EmFirst.innerHTML = "";
-			EmSecond.innerHTML = "";
-			EmPA.innerHTML = "";
-			EmFA.innerHTML = "";
-
-			createExerciseMatrixFirst();
-			createexerciseMatrixSecond();
-			createExerciseMatrixPreAnswer();
-			createExerciseMatrixAnswer();
-			generateValuesForMatrices();
-
-		} else {
-
-			createExerciseMatrixFirst();
-			createexerciseMatrixSecond();
-			createExerciseMatrixPreAnswer();
-			createExerciseMatrixAnswer();
-			generateValuesForMatrices();
-		}
-
-	} else {
-		console.log("Ei saa arvutada");
-		alert("Ei saa genereerida, muuda maatriksite suuruseid!");
-	}
+function generateMatrix() {
+    generateMatrixForDeterminant();
 }
 
-// **** GENEREERIB SUVALISE SUURUSEGA MAATRIKSID ****
-function generateRandomExerciseMatrix() {
+function createMatrixForDeterminant() {
+    //VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
+    var matrixDeterminantContainer = document.getElementById("matrixDeterminantContainer");
+    var matrixForDeterminant = document.getElementById("matrixForDeterminant");
+    var tableBody = document.createElement("tbody");
 
-	document.getElementById("exerciseMatrixFirstContainer").style.visibility = "visible";
-	document.getElementById("exerciseMatrixSecondContainer").style.visibility = "visible";
-	document.getElementById("exerciseMatrixAnswerContainer").style.visibility = "visible";
-	document.getElementById("exerciseMatrixPreAnswerContainer").style.visibility = "visible";
+    for (var i = 0; i < matrixSize; i++) {
+        var row = document.createElement("tr");
 
-	document.getElementById("beginGame").style.visibility = "hidden";
-	document.getElementById("checkAndRestartRandom").style.visibility = "visible";
-
-	EmFirstX = Math.floor((Math.random() * 5) + 1);
-	EmFirstY = Math.floor((Math.random() * 5) + 1);
-	EmSecondX = EmFirstY;
-	EmSecondY = Math.floor((Math.random() * 5) + 1);
-
-	var EmFirst = document.getElementById("exerciseMatrixFirst");
-	var EmSecond = document.getElementById("exerciseMatrixSecond");
-	var EmFA = document.getElementById("exerciseMatrixAnswer");
-	var EmPA = document.getElementById("exerciseMatrixPreAnswer");
-
-	if (EmFirstY === EmSecondX) {
-
-
-		if (EmFirst && EmSecond && EmFA && EmPA) {
-
-			EmFirst.innerHTML = "";
-			EmSecond.innerHTML = "";
-			EmFA.innerHTML = "";
-			EmPA.innerHTML = "";
-
-			createExerciseMatrixFirst();
-			createexerciseMatrixSecond();
-			createExerciseMatrixAnswer();
-			createExerciseMatrixPreAnswer();
-			generateValuesForMatrices();
-
-		} else {
-
-			createExerciseMatrixFirst();
-			createexerciseMatrixSecond();
-			createExerciseMatrixAnswer();
-			createExerciseMatrixPreAnswer();
-			generateValuesForMatrices();
-		}
-	} else {
-		console.log("Ei saa arvutada");
-		alert("Ei saa genereerida, muuda maatriksite suuruseid!");
-	}
+        for (var j = 0; j < matrixSize; j++) {
+            var rowId = i + 1;
+            var colId = j + 1;
+            var cell = document.createElement("input");
+            cell.setAttribute("id", "a" + rowId + colId);
+            cell.setAttribute("type", "text");
+            cell.setAttribute("onkeypress", "validate(event)");
+            cell.setAttribute("oninput", "checkInputSequence()");
+            cell.setAttribute("maxlength", "10");
+            row.appendChild(cell);
+        }
+        tableBody.appendChild(row);
+    }
+    matrixForDeterminant.appendChild(tableBody);
 }
 
-// **** FUNKTSIOON, MIS GENEREERIB ESIMESE HARJUTUSMAATRIKSI ****
-
-function createExerciseMatrixFirst() {
-	//VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
-	var exerciseMatrixFirstContainer = document.getElementById("exerciseMatrixFirstContainer");
-	var EmFirstWidth = 42 * EmFirstY;
-	var EmFirstHeight = 28 * EmFirstX;
-	exerciseMatrixFirstContainer.style.width = EmFirstWidth + "px";
-	exerciseMatrixFirstContainer.style.height = EmFirstHeight + "px";
-
-	var exerciseMatrixFirst = document.getElementById("exerciseMatrixFirst");
-	var tableBody = document.createElement("tbody");
-
-	for (var rowId = 1; rowId <= EmFirstX; rowId++) {
-		var row = document.createElement("tr");
-
-		for (var colId = 1; colId <= EmFirstY; colId++) {
-			var cell = document.createElement("input");
-			cell.setAttribute("id", "Ea" + rowId + colId);
-			cell.setAttribute("type", "text");
-			row.appendChild(cell);
-		}
-		tableBody.appendChild(row);
-	}
-	exerciseMatrixFirst.appendChild(tableBody);
+// **** FUNKTSIOON, MIS GENEREERIB MATHJAXI RUUTMAATRIKSI ***** 
+function createDetMatrix() {
+    var answerString = "";
+    var output = document.getElementById("DetMatrix");
+    var table = document.getElementById("matrixForDeterminant");
+    for (var r = 0, n = table.rows.length; r < n; r++) {
+        if (r >= 1) {
+            var strLength = answerString.length;
+            answerString = (answerString.slice(0, strLength - 1));
+            answerString += "\\\\";
+        }
+        for (var c = 0, n = table.rows.length; c < n; c++) {
+            var rowId = r + 1;
+            var colId = c + 1;
+            var Cell = document.getElementById("a" + rowId + colId).value;
+            var str = Cell;
+            var pos = str.indexOf("/");
+            var minuspos = Cell.indexOf("-")
+            if (Cell.charAt(minuspos) === "-" && Cell.charAt(pos) === "/") {
+                var str2 = str.replace("-", "");
+                var start = str2.slice(0, pos - 1);
+                start = "\\frac {" + start + "}";
+                var end = Cell;
+                var afterSlash = str.substr(str.indexOf("/") + 1);
+                end = "{" + afterSlash + "}";
+                var fractionbracketstart = "(-";
+                var fractionbracketend = ")" + "&";
+                var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
+                answerString += fractionbracket;
+            } else if (Cell.charAt(pos) === "/") {
+                var stringLength = Cell.length;
+                var String1 = Cell;
+                var start = str.slice(0, pos);
+                start = "\\frac {" + start + "}";
+                var end = Cell;
+                var afterSlash = str.substr(str.indexOf("/") + 1);
+                end = "{" + afterSlash + "}&";
+                Cell = start + end;
+                answerString += Cell;
+            } else if (Cell.charAt(0) === "-") {
+                Cell = "(" + Cell + ")" + "&";
+                answerString += Cell;
+            } else {
+                var Cell = document.getElementById("a" + rowId + colId).value + "&";
+                answerString += Cell;
+            }
+        }
+    }
+    var strLength = answerString.length;
+    answerString = (answerString.slice(0, strLength - 1));
+    return answerString;
 }
 
-// **** FUNKTSIOON, MIS GENEREERIB TEISE HARJUTUSMAATRIKSI ****
-function createexerciseMatrixSecond() {
-
-	var exerciseMatrixSecondContainer = document.getElementById("exerciseMatrixSecondContainer");
-	var EmSecondWidth = 42 * EmSecondY;
-	var EmSecondHeight = 28 * EmSecondX;
-
-	var EmFirstWidth = 42 * EmFirstY;
-	var EmSecondPosition = EmFirstWidth + 20;
-
-	exerciseMatrixSecondContainer.style.width = EmSecondWidth + "px";
-	exerciseMatrixSecondContainer.style.height = EmSecondHeight + "px";
-	exerciseMatrixSecondContainer.style.left = EmSecondPosition + "px";
-
-	var exerciseMatrixSecond = document.getElementById("exerciseMatrixSecond");
-	var tableBody = document.createElement("tbody");
-
-	for (var rowId = 1; rowId <= EmSecondX; rowId++) {
-		var row = document.createElement("tr");
-
-		for (var colId = 1; colId <= EmSecondY; colId++) {
-			var cell = document.createElement("input");
-			cell.setAttribute("id", "Eb" + rowId + colId);
-			cell.setAttribute("type", "text");
-			row.appendChild(cell);
-		}
-		tableBody.appendChild(row);
-	}
-	exerciseMatrixSecond.appendChild(tableBody);
+function determinantPhase() {
+    var p = document.getElementById("determinant").value;
+    if (p == 2) {
+        return "Teist";
+    } else if (p == 3) {
+        return "Kolmandat";
+    } else if (p == 4) {
+        return "Neljandat";
+    } else if (p == 5) {
+        return "Viiendat"
+    }
 }
 
-// **** FUNKTSIOON, MIS GENEREERIB VAHETULEMUSTE MAATRIKSI ****
-function createExerciseMatrixPreAnswer() {
-	//VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
-	var exerciseMatrixPreAnswerContainer = document.getElementById("exerciseMatrixPreAnswerContainer");
-	var EmAnswerWidth = 42 * EmSecondY * 3;
-	var EmAnswerHeight = 28 * EmFirstX;
+function generateDetMatrix() {
+    var mathDiv = document.getElementById("math");
+    var displayDiv = document.getElementById("display");
 
-	var EmFirstWidth = 42 * EmFirstY;
-	var EmSecondWidth = 42 * EmSecondY;
-	var EmPreAnswerPosition = EmFirstWidth + EmSecondWidth + 30;
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "math"]);
+    MathJax.Hub.Queue(function() {
+        var math = MathJax.Hub.getAllJax("MathDiv")[0];
+        var i = document.getElementById("determinant").value;
+        var j = fractionAnswer();
+        var k = determinantPhase();
+        var l = createDetMatrix();
 
-	exerciseMatrixPreAnswerContainer.style.width = EmAnswerWidth + "px";
-	exerciseMatrixPreAnswerContainer.style.height = EmAnswerHeight + "px";
-	exerciseMatrixPreAnswerContainer.style.left = EmPreAnswerPosition + "px";
-
-	var exerciseMatrixPreAnswer = document.getElementById("exerciseMatrixPreAnswer");
-	var tableBody = document.createElement("tbody");
-
-	for (var i = 0; i < EmFirstX; i++) {
-		var row = document.createElement("tr");
-
-		for (var j = 0; j < EmSecondY; j++) {
-			var rowId = i + 1;
-			var colId = j + 1;
-			var cell = document.createElement("input");
-			cell.setAttribute("id", "Ed" + rowId + colId);
-			cell.setAttribute("class", "matrixAnswerInput");
-			cell.setAttribute("type", "text");
-			//cell.setAttribute("onkeypress", "validate(event)");
-			//cell.setAttribute("onkeypress", "return validate( event)");
-			//cell.setAttribute("oninput", "checkLength(2,this)");
-			row.appendChild(cell);
-		}
-		tableBody.appendChild(row);
-	}
-	exerciseMatrixPreAnswer.appendChild(tableBody);
+        MathJax.Hub.Queue(["Text", math, k + "\\ järku\\ ruutmaatriksi\\ A_" + i + " = \\begin{pmatrix}" + l + "\\end{pmatrix}" + k + "\\ järku\\ determinandiks\\ nimetatakse\\ reaalarvu \\begin{vmatrix}A_" + i + "\\end{vmatrix} = \\begin{vmatrix}" + l + "\\end{vmatrix} = " + j])
+        MathJax.Hub.Queue(function() {
+            displayDiv.innerHTML = mathDiv.innerHTML;
+            mathDiv.innerHTML;
+        })
+    })
 }
 
-// **** FUNKTSIOON, MIS GENEREERIB VASTUSEMAATRIKSI ****
-function createExerciseMatrixAnswer() {
-	//VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
-	var exerciseMatrixAnswerContainer = document.getElementById("exerciseMatrixAnswerContainer");
-	var EmAnswerWidth = 42 * EmSecondY;
-	var EmAnswerHeight = 28 * EmFirstX;
-
-	var EmFirstWidth = 42 * EmFirstY;
-	var EmSecondWidth = 42 * EmSecondY;
-	var EmPreAnswerWidth = 42 * EmSecondY * 3;
-	var EmAnswerPosition = EmFirstWidth + EmSecondWidth + EmPreAnswerWidth + 40;
-
-	exerciseMatrixAnswerContainer.style.width = EmAnswerWidth + "px";
-	exerciseMatrixAnswerContainer.style.height = EmAnswerHeight + "px";
-	exerciseMatrixAnswerContainer.style.left = EmAnswerPosition + "px";
-
-	var exerciseMatrixAnswer = document.getElementById("exerciseMatrixAnswer");
-	var tableBody = document.createElement("tbody");
-
-	for (var rowId = 1; rowId <= EmFirstX; rowId++) {
-		var row = document.createElement("tr");
-
-		for (var colId = 1; colId <= EmSecondY; colId++) {
-			var cell = document.createElement("input");
-			cell.setAttribute("id", "Ec" + rowId + colId);
-			cell.setAttribute("type", "text");
-			cell.setAttribute("onkeypress", "validate(event)");
-			row.appendChild(cell);
-		}
-		tableBody.appendChild(row);
-	}
-	exerciseMatrixAnswer.appendChild(tableBody);
-}
-
-// **** KÄIVITAB ARVUDE GENEREERIMISE MAATRIKSISSE ****
-function generateValuesForMatrices() {
-	generateValuesForMatrixFirst();
-	generateValuesForMatrixSecond();
-}
-
-// **** GENEREERIB VÄÄRTUSED ESIMESSE MAATRIKSISSE JA MASSIIVI ****
-function generateValuesForMatrixFirst() {
-
-	for (var rowId = 1; rowId <= EmFirstX; rowId++) {
-
-		var matrixRow = [null];
-
-		for (var colId = 1; colId <= EmFirstY; colId++) {
-			var randomValue = Math.floor((Math.random() * 10) + 1);
-			matrixRow.push(randomValue);
-			var matrixCell = document.getElementById("Ea" + rowId + colId);
-			matrixCell.value = randomValue;
-		}
-		a.push(matrixRow);
-		matrixRow = [null];
-	}
-}
-
-// **** GENEREERIB VÄÄRTUSED TEISE MAATRIKSISSE JA MASSIIVI ****
-function generateValuesForMatrixSecond() {
-
-	for (var rowId = 1; rowId <= EmSecondX; rowId++) {
-
-		var matrixRow = [null];
-
-		for (var colId = 1; colId <= EmSecondY; colId++) {
-			var randomValue = Math.floor((Math.random() * 10) + 1);
-			matrixRow.push(randomValue);
-			var matrixCell = document.getElementById("Eb" + rowId + colId);
-			matrixCell.value = randomValue;
-		}
-		b.push(matrixRow);
-		matrixRow = [null];
-	}
-}
-
-// **** KONTROLLIB MAATRIKSITE VASTUSEID ****
-function checkMatrixFinalAnswers() {
-
-	var c = 1;
-
-	for (var rowId = 1; rowId <= EmFirstX; rowId++) {
-		for (var colId = 1; colId <= EmSecondY; colId++) {
-
-			var matrixAnswer = document.getElementById("Ec" + rowId + colId);
-			var matrixAnswerString = "";
-
-			for (var i = 0; i < EmFirstY; i++) {
-				var Ea = document.getElementById("Ea" + rowId + c).value;
-				var Eb = document.getElementById("Eb" + c + colId).value;
-				matrixAnswerString += Ea + "*" + Eb + " + ";
-				c++;
-			}
-			var strLength = matrixAnswerString.length;
-			var matrixCellValue = math.eval(matrixAnswerString.slice(0, strLength - 3));
-			var matrixInputCell = parseInt(matrixAnswer.value);
-			c = 1;
-
-			if (matrixInputCell == matrixCellValue) {
-				matrixAnswer.style.color = "green";
-			} else {
-				matrixAnswer.style.color = "red";
-				//errorCount += 1;
-				matrixFinalAnswerErrors++;
-			}
-		}
-	}
-}
-
-// **** KONTROLLIB VAHEMAATRIKSITE VASTUSEID ****
-function checkMatrixPreAnswers() {
-	var c = 1;
-	for (var rowId = 1; rowId <= EmFirstX; rowId++) {
-		for (var colId = 1; colId <= EmSecondY; colId++) {
-			var matrixAnswer = document.getElementById("Ed" + rowId + colId);
-			var matrixAnswerString = "";
-
-			for (var i = 0; i < EmFirstY; i++) {
-				var Ea = document.getElementById("Ea" + rowId + c).value;
-				var Eb = document.getElementById("Eb" + c + colId).value;
-				matrixAnswerString += Ea + "*" + Eb + " + ";
-				c++;
-			}
-			var strLength = matrixAnswerString.length;
-			matrixCellValuePreAnswers = matrixAnswerString.slice(0, strLength - 3);
-			console.log("matrixCellValuePreAnswers: "+matrixCellValuePreAnswers);
-			
-			var test = eval(matrixCellValuePreAnswers);
-			console.log("test: " +test);
-			//console.log("matrixCellValue: "+matrixCellValue);
-			var matrixInputCell = eval(matrixAnswer.value);
-			//console.log("matrixInputCell: "+matrixInputCell);
-			c = 1;
-
-			if (matrixInputCell === test) {
-				matrixAnswer.style.color = "green";
-				//answerCounter += 1
-				//score += 1
-			} else {
-				matrixAnswer.style.color = "red";
-				//errorCount += 1;
-				matrixPreAnswerErrors++;
-			}
-		}
-	}
+// ||||| ----- ----- ----- ----- DETERMINANTIDE KALKULAATORI OSA ----- ----- ----- ----- |||||
+function reduce(numerator, denominator) {
+    var gcd = function gcd(a, b) {
+        return b ? gcd(b, a % b) : a;
+    };
+    gcd = gcd(numerator, denominator);
+    return [numerator / gcd, denominator / gcd];
 }
 
 
+function fractionAnswer() {
+    var detValue = calculateDeterminant();
+    var finalString = ""
+    var abc = math.fraction(detValue);
+    abc = math.fraction({
+        n: abc.n,
+        d: abc.d
+    });
+    var num = detValue;
+    var n = num.toString();
+    var pos = n.indexOf("-");
+    if (abc.d === 1 && n.charAt(pos) !== "-") {
+        finalString += abc.n;
+    }
+    if (abc.d === 1 && n.charAt(pos) === "-") {
+        abc.n = "-" + abc.n;
+        finalString += abc.n;
+    }
+    if (n.charAt(pos) === "-" && abc.d !== 1) {
+        reduction = reduce(abc.n, abc.d);
+        start = "\\frac {" + abc.n + "}";
+        var end = "{" + abc.d + "}"
+        var fractionbracketstart = "-";
+        var fractionbracketend = "";
+        var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
+        finalString += fractionbracket;
+    } else if (abc.d !== 1) {
+        reduction = reduce(abc.n, abc.d);
+        var numerator = "\\frac {" + abc.n + "}";
+        var denominator = "{" + abc.d + "}";
+        answerString = numerator + denominator;
+        finalString += answerString;
+    }
+    return finalString;
+}
+// **** FUNKTSIOON �IGE PERMUTATSIOONIDE FUNKTSIOONI K�IVITAMISEKS ****
 
-// **** KÄIVITAB MAATRIKSITE VASTUSTE KONTROLLI (mitte random suurustega kuvatud maatriksid) ****
-function checkMatrixAnswers() {
+function calculateDeterminant() {
 
-	checkMatrixFinalAnswers();
-	checkMatrixPreAnswers();
 
-	if (matrixFinalAnswerErrors === 0 && matrixPreAnswerErrors === 0) {
-		updateScore();
-		generateExerciseMatrix();
-	} else {
-		updateScore();
-	}
-	matrixFinalAnswerErrors = 0;
-	matrixPreAnswerErrors = 0;
+    if (mistakes === false) {
+        document.getElementById("mistakeNotification").style.display = "inline";
+    } else {
+        document.getElementById("mistakeNotification").style.display = "none";
+        var determinant = document.getElementById("determinant").value;
+
+        if (determinant === "4") {
+            determinantForFour();
+            generateDetMatrix();
+            a = determinantForFour();
+        }
+
+        if (determinant === "5") {
+            determinantForFive();
+            generateDetMatrix();
+            a = determinantForFive();
+        }
+
+        if (determinant === "3") {
+            determinantForThree();
+            generateDetMatrix();
+            a = determinantForThree();
+        }
+
+        if (determinant === "2") {
+            determinantForTwo();
+            generateDetMatrix();
+            a = determinantForTwo();
+        }
+
+        mistakes = false;
+
+        document.getElementById("showCalculations").style.display = "inline-block";
+    }
+    return a;
 }
 
-// **** KÄIVITAB MAATRIKSITE VASTUSTE KONTROLLI (random suurustega kuvatud maatriksid) ****
-function checkMatrixAnswersRandom() {
+// **** FUNKTSIOONID PERMUTATSIOONIDE GENEREERIMISEKS ****
 
-	checkMatrixFinalAnswers();
-	checkMatrixPreAnswers();
+function determinantForTwo() {
 
-	if (matrixFinalAnswerErrors === 0 && matrixPreAnswerErrors === 0) {
-		var matrixScore = EmFirstX * EmFirstY * EmSecondX * EmSecondY;
-		console.log("");
-		console.log("Maatriks suurusega " + EmFirstX + "x" + EmFirstY + " x " + EmSecondX + "x" + EmSecondY);
-		console.log("Skoori arvutamine " + EmFirstX + "*" + EmFirstY + "*" + EmSecondX + "*" + EmSecondY + " = " + (EmFirstX * EmFirstY * EmSecondX * EmSecondY));
+    var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+    var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
+    var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
+    var matrixPermutationTableString = permutationTableHead;
 
-		sumOfExercises++;
-		updateScore();
-		generateRandomExerciseMatrix();
-	} else {
-		var matrixErrorScore = parseInt((EmFirstX * EmFirstY * EmSecondX * EmSecondY) / 2, 10);
-		console.log("");
-		console.log("Maatriks suurusega " + EmFirstX + "x" + EmFirstY + " x " + EmSecondX + "x" + EmSecondY);
-		console.log("Vea skoori arvutamine " + "(" + EmFirstX + "*" + EmFirstY + "*" + EmSecondX + "*" + EmSecondY + ")/2" + " = " + ((EmFirstX * EmFirstY * EmSecondX * EmSecondY) / 2));
+    // esimene ts�kkel, mis m��rab �ra esimese numbri
+    for (var i = 0; i < 2; i++) {
 
-		console.log("");
-		errorCount++;
-		updateScore();
-	}
-	matrixFinalAnswerErrors = 0;
-	matrixPreAnswerErrors = 0;
+        var detNumbersTwo = [1, 2];
+        var detNumbersTemp = [];
+        var detValuesTemp = "";
+        // teine ts�kkel, mis m��rab �ra teise numbri
+        for (var j = 0; j < 1; j++) {
+
+            var detNumbersOne = [];
+            for (var n1 = 0; n1 < 2; n1++) {
+                detNumbersOne[n1] = detNumbersTwo[n1];
+            }
+            detNumbersOne.splice(i, 1);
+            detNumbersTemp = [detNumbersTwo[i], detNumbersOne[j]];
+        }
+
+        // siia inversioonid
+        for (var i1 = 0; i1 < 2; i1++) {
+            if (detNumbersTemp[i1] > detNumbersTemp[i1 + 1]) {
+                inversionCount++;
+            }
+        }
+
+        var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
+        var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
+
+        if (cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
+            cellValueOne = "(" + cellValueOne + ")";
+        }
+        if (cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
+            cellValueTwo = "(" + cellValueTwo + ")";
+        }
+
+        if (inversionCount % 2 === 0) {
+            detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo;
+            detValues += detValuesTemp;
+        } else {
+            detValuesTemp += " - " + cellValueOne + "*" + cellValueTwo;
+            detValues += detValuesTemp;
+        }
+
+        var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
+        matrixPermutationTableString += permutationTableRow;
+
+
+        detNumbers.push(detNumbersTemp);
+        detNumbersTemp = [];
+        detValuesTemp = "";
+        inversionCount = 0;
+    }
+    detValues = detValues.slice(3, detValues.length);
+
+    var matrixDetAnswer = math.eval(detValues);
+    detValues = "";
+    matrixPermutationTable.innerHTML = matrixPermutationTableString;
+    matrixPermutationTableString = "";
+    return matrixDetAnswer;
+}
+
+function determinantForThree() {
+
+    var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+    var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
+    var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
+    var matrixPermutationTableString = permutationTableHead;
+
+    // esimene ts�kkel, mis m��rab �ra esimese numbri
+    for (var i = 0; i < 3; i++) {
+
+        var detNumbersThree = [1, 2, 3];
+        var detNumbersTemp = [];
+        var detValuesTemp = "";
+
+        // teine ts�kkel, mis m��rab �ra teise numbri
+        for (var j = 0; j < 2; j++) {
+            var detNumbersTwo = [];
+            for (var n2 = 0; n2 < 3; n2++) {
+                detNumbersTwo[n2] = detNumbersThree[n2];
+            }
+            detNumbersTwo.splice(i, 1);
+
+            // kolmas ts�kkel, mis m��rab �ra kolmanda numbri
+            for (var k = 0; k < 1; k++) {
+
+
+                var detNumbersOne = [];
+                for (var n1 = 0; n1 < 2; n1++) {
+                    detNumbersOne[n1] = detNumbersTwo[n1];
+                }
+                detNumbersOne.splice(j, 1);
+                detNumbersTemp = [detNumbersThree[i], detNumbersTwo[j], detNumbersOne[k]];
+            }
+
+            // siia inversioonid
+            for (var i1 = 0; i1 < 2; i1++) {
+                if (detNumbersTemp[i1] > detNumbersTemp[i1 + 1]) {
+                    inversionCount++;
+                }
+            }
+
+            for (var i2 = 0; i2 < 1; i2++) {
+                if (detNumbersTemp[i2] > detNumbersTemp[i2 + 2]) {
+                    inversionCount++;
+                }
+            }
+
+            var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
+            var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
+            var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
+
+            if (cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
+                cellValueOne = "(" + cellValueOne + ")";
+            }
+            if (cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
+                cellValueTwo = "(" + cellValueTwo + ")";
+            }
+            if (cellValueThree < 0 || cellValueThree.indexOf("/") > -1) {
+                cellValueThree = "(" + cellValueThree + ")";
+            }
+
+
+            if (inversionCount % 2 === 0) {
+                detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree;
+                detValues += detValuesTemp;
+            } else {
+                detValuesTemp += " - " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree;
+                detValues += detValuesTemp;
+            }
+
+            var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
+            matrixPermutationTableString += permutationTableRow;
+
+
+            detNumbers.push(detNumbersTemp);
+            detNumbersTemp = [];
+            detValuesTemp = "";
+            inversionCount = 0;
+        }
+    }
+    detValues = detValues.slice(3, detValues.length);
+
+    var matrixDetAnswer = math.eval(detValues);
+    detValues = "";
+    matrixPermutationTable.innerHTML = matrixPermutationTableString;
+    matrixPermutationTableString = "";
+    return matrixDetAnswer;
+}
+
+function determinantForFour() {
+
+    var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+    var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
+    var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
+    var matrixPermutationTableString = permutationTableHead;
+
+    // esimene ts�kkel, mis m��rab �ra esimese numbri
+    for (var i = 0; i < 4; i++) {
+
+
+        var detNumbersFour = [1, 2, 3, 4];
+        var detNumbersTemp = [];
+        var detValuesTemp = "";
+
+
+        // teine ts�kkel, mis m��rab �ra teise numbri
+        for (var j = 0; j < 3; j++) {
+
+            var detNumbersThree = [];
+            for (var n3 = 0; n3 < 4; n3++) {
+                detNumbersThree[n3] = detNumbersFour[n3];
+            }
+            detNumbersThree.splice(i, 1);
+
+            // kolmas ts�kkel, mis m��rab �ra kolmanda numbri
+            for (var k = 0; k < 2; k++) {
+
+                var detNumbersTwo = [];
+                for (var n2 = 0; n2 < 3; n2++) {
+                    detNumbersTwo[n2] = detNumbersThree[n2];
+                }
+                detNumbersTwo.splice(j, 1);
+
+                // neljas ts�kkel, mis m��rab �ra neljanda numbri
+                for (var l = 0; l < 1; l++) {
+                    var detNumbersOne = [];
+                    for (n1 = 0; n1 < 2; n1++) {
+                        detNumbersOne[n1] = detNumbersTwo[n1];
+                    }
+                    detNumbersOne.splice(k, 1);
+                    detNumbersTemp = [detNumbersFour[i], detNumbersThree[j], detNumbersTwo[k], detNumbersOne[l]];
+                }
+
+                // siia inversioonid
+                for (var i1 = 0; i1 < 3; i1++) {
+                    if (detNumbersTemp[i1] > detNumbersTemp[i1 + 1]) {
+                        inversionCount++;
+                    }
+                }
+
+                for (var i2 = 0; i2 < 2; i2++) {
+                    if (detNumbersTemp[i2] > detNumbersTemp[i2 + 2]) {
+                        inversionCount++;
+                    }
+                }
+
+                for (var i3 = 0; i3 < 1; i3++) {
+                    if (detNumbersTemp[i3] > detNumbersTemp[i3 + 3]) {
+                        inversionCount++;
+                    }
+                }
+
+                var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
+                var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
+                var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
+                var cellValueFour = document.getElementById("a4" + detNumbersTemp[3]).value;
+
+                if (cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
+                    cellValueOne = "(" + cellValueOne + ")";
+                }
+                if (cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
+                    cellValueTwo = "(" + cellValueTwo + ")";
+                }
+                if (cellValueThree < 0 || cellValueThree.indexOf("/") > -1) {
+                    cellValueThree = "(" + cellValueThree + ")";
+                }
+                if (cellValueFour < 0 || cellValueFour.indexOf("/") > -1) {
+                    cellValueFour = "(" + cellValueFour + ")";
+                }
+
+                if (inversionCount % 2 === 0) {
+                    detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour;
+                    detValues += detValuesTemp;
+                } else {
+                    detValuesTemp += " - " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour;
+                    detValues += detValuesTemp;
+                }
+
+                var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
+                matrixPermutationTableString += permutationTableRow;
+
+
+                detNumbers.push(detNumbersTemp);
+                detNumbersTemp = [];
+                detValuesTemp = "";
+                inversionCount = 0;
+            }
+        }
+    }
+
+    detValues = detValues.slice(3, detValues.length);
+
+    var matrixDetAnswer = math.eval(detValues);
+    detValues = "";
+    matrixPermutationTable.innerHTML = matrixPermutationTableString;
+    matrixPermutationTableString = "";
+    return matrixDetAnswer;
+}
+
+function determinantForFive() {
+
+    var matrixPermutationTable = document.getElementById("matrixPermutationTable");
+    var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
+    var matrixPermutationTableString = permutationTableHead;
+
+    // esimene ts�kkel, mis m��rab �ra esimese numbri
+    for (var i = 0; i < 5; i++) {
+
+
+        var detNumbersFive = [1, 2, 3, 4, 5];
+        var detNumbersTemp = [];
+        var detValuesTemp = "";
+
+        // teine ts�kkel, mis m��rab �ra teise numbri
+        for (var j = 0; j < 4; j++) {
+
+            var detNumbersFour = [];
+            for (var n4 = 0; n4 < 5; n4++) {
+                detNumbersFour[n4] = detNumbersFive[n4];
+            }
+            detNumbersFour.splice(i, 1);
+
+            // kolmas ts�kkel, mis m��rab �ra kolmanda numbri
+            for (var k = 0; k < 3; k++) {
+
+                var detNumbersThree = [];
+                for (var n3 = 0; n3 < 4; n3++) {
+                    detNumbersThree[n3] = detNumbersFour[n3];
+                }
+                detNumbersThree.splice(j, 1);
+
+                // neljas ts�kkel, mis m��rab �ra neljanda numbri
+                for (var l = 0; l < 2; l++) {
+
+                    var detNumbersTwo = [];
+                    for (n2 = 0; n2 < 3; n2++) {
+                        detNumbersTwo[n2] = detNumbersThree[n2];
+                    }
+                    detNumbersTwo.splice(k, 1);
+
+                    // viies ts�kkel, mis m��rab �ra viienda numbri
+                    for (var m = 0; m < 1; m++) {
+
+                        var detNumbersOne = [];
+                        for (n1 = 0; n1 < 2; n1++) {
+                            detNumbersOne[n1] = detNumbersTwo[n1];
+                        }
+                        detNumbersOne.splice(l, 1);
+                        detNumbersTemp = [detNumbersFive[i], detNumbersFour[j], detNumbersThree[k], detNumbersTwo[l], detNumbersOne[m]];
+
+                        // siia inversioonid
+                        for (var i1 = 0; i1 < 4; i1++) {
+                            if (detNumbersTemp[i1] > detNumbersTemp[i1 + 1]) {
+                                inversionCount++;
+                            }
+                        }
+
+                        for (var i2 = 0; i2 < 3; i2++) {
+                            if (detNumbersTemp[i2] > detNumbersTemp[i2 + 2]) {
+                                inversionCount++;
+                            }
+                        }
+
+                        for (var i3 = 0; i3 < 2; i3++) {
+                            if (detNumbersTemp[i3] > detNumbersTemp[i3 + 3]) {
+                                inversionCount++;
+                            }
+                        }
+
+                        for (var i4 = 0; i4 < 1; i4++) {
+                            if (detNumbersTemp[i4] > detNumbersTemp[i4 + 4]) {
+                                inversionCount++;
+                            }
+                        }
+
+                        var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
+                        var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
+                        var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
+                        var cellValueFour = document.getElementById("a4" + detNumbersTemp[3]).value;
+                        var cellValueFive = document.getElementById("a5" + detNumbersTemp[4]).value;
+
+                        if (cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
+                            cellValueOne = "(" + cellValueOne + ")";
+                        }
+                        if (cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
+                            cellValueTwo = "(" + cellValueTwo + ")";
+                        }
+                        if (cellValueThree < 0 || cellValueThree.indexOf("/") > -1) {
+                            cellValueThree = "(" + cellValueThree + ")";
+                        }
+                        if (cellValueFour < 0 || cellValueFour.indexOf("/") > -1) {
+                            cellValueFour = "(" + cellValueFour + ")";
+                        }
+                        if (cellValueFive < 0 || cellValueFive.indexOf("/") > -1) {
+                            cellValueFive = "(" + cellValueFive + ")";
+                        }
+
+                        if (inversionCount % 2 === 0) {
+                            detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour + "*" + cellValueFive;
+                            detValues += detValuesTemp;
+                        } else {
+                            detValuesTemp += " - " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour + "*" + cellValueFive;
+                            detValues += detValuesTemp;
+                        }
+
+                        var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
+                        matrixPermutationTableString += permutationTableRow;
+
+
+                        detNumbers.push(detNumbersTemp);
+                        detNumbersTemp = [];
+                        detValuesTemp = "";
+                        inversionCount = 0;
+                    }
+                }
+            }
+        }
+    }
+    detValues = detValues.slice(3, detValues.length);
+
+    var matrixDetAnswer = math.eval(detValues);
+    detValues = "";
+    matrixPermutationTable.innerHTML = matrixPermutationTableString;
+    matrixPermutationTableString = "";
+    return matrixDetAnswer;
+}
+
+function displayTable() {
+
+
+    var x = document.getElementById('determinantTable');
+    if (x.style.display === 'none') {
+        document.getElementById("showCalculations").innerHTML = "peida tabel";
+        x.style.display = 'block';
+    } else {
+        document.getElementById("showCalculations").innerHTML = "kuva vahetulemused";
+        x.style.display = 'none';
+    }
+
+
 }
 
 
+function checkInputSequence() {
+    checkInput: for (var i = 0; i < matrixSize; i++) {
+        for (var j = 0; j < matrixSize; j++) {
+            var rowId = i + 1;
+            var colId = j + 1;
+            var number = document.getElementById("a" + rowId + colId).value;
+            if (number == "") {
+                var inputColor = document.getElementById("a" + rowId + colId);
+                inputColor.style.backgroundColor = "";
+                mistakes = false
+                break checkInput;
+            } else {
+                var regex = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
+                var found = regex.test(number);
+                if (found === false) {
+                    var inputColor = document.getElementById("a" + rowId + colId);
+                    inputColor.style.backgroundColor = "red";
+                    mistakes = false;
+                    document.getElementById("mistakeNotification").style.display = "inline";
+                    break checkInput;
+                } else {
+                    var inputColor = document.getElementById("a" + rowId + colId);
+                    inputColor.style.backgroundColor = "";
+                    document.getElementById("mistakeNotification").style.display = "none";
+                    mistakes = true
+                }
+            }
+        }
+    }
 
-// MÄNGU SKOORI FUNKTSIOONID
-function resetScore() {
-	document.getElementById("checkAndRestartRandom").style.visibility = "hidden";
-	document.getElementById("beginGame").style.visibility = "visible";
-
-	document.getElementById("exerciseMatrixFirstContainer").style.visibility = "hidden";
-	document.getElementById("exerciseMatrixSecondContainer").style.visibility = "hidden";
-	document.getElementById("exerciseMatrixAnswerContainer").style.visibility = "hidden";
-	document.getElementById("exerciseMatrixPreAnswerContainer").style.visibility = "hidden";
-
-	alert("MÄNG LÄBI! Vigu tegid kokku " + errorCount + ", maatrikseid kokku: " + sumOfExercises);
-
-	sumOfExercises = 0;
-	errorCount = 0;
-	updateScore();
-
+        if (mistakes === true) {
+        mistakes = true;
+        calculateDeterminant();
+        document.getElementById("mistakeNotification").style.display = "none";
+        document.getElementById("math").style.display = "block"
+    } else {}
 }
 
-function updateScore() {
-	document.getElementById("TotalSum").innerHTML = "MAATRIKSEID KOKKU: " + sumOfExercises;
-	document.getElementById("wrongAnswers").innerHTML = "VIGU: " + errorCount;
-	document.getElementById("playerName").innerHTML = "NIMI: " + playerName;
-}
+function validate(evt) {
+    key = evt.key;
+    var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
+    if (allowed.indexOf(evt.key) == -1) {
+        evt.preventDefault();
+    }
+    // PRAEGUNE
+    if (evt.key === "/" && evt.target.value.indexOf('/') != -1) {
+        evt.preventDefault();
+    }
 
-//UUE MÄNGU ALUSTAMINE
-function startNewGame() {
-
-	document.getElementById("generateExerciseMatrix").style.visibility = "visible";
-	document.getElementById("generateRandomExerciseMatrix").style.visibility = "visible";
-	document.getElementById("startNewGame").style.visibility = "hidden";
-
-	window.location.reload(false);
-	generateExerciseMatrix();
-}
-
-//TAIMER
-function startTimer(secs) {
-	timeInSecs = parseInt(secs) - 1;
-	ticker = setInterval("tick()", 1000); // every second
-}
-
-function tick() {
-	var secs = timeInSecs;
-	if (secs >= 0) {
-		timeInSecs--;
-	} else {
-		clearInterval(ticker); // stop counting at zero
-		resetScore();
-		// startTimer(60);  // remove forward slashes in front of startTimer to repeat if required
-	}
-	if (secs == -1) {
-		document.getElementById("stopper").innerHTML = "AEG: " + 0;
-	} else {
-		document.getElementById("stopper").innerHTML = "AEG: " + secs;
-	}
-	if (secs = 0) {
-		resetScore();
-		clearInterval(ticker)
-	}
 }
