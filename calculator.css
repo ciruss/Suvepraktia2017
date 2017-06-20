@@ -16,6 +16,7 @@ html, body {
     position: relative;
     min-height: 100%;
     background-color: rgba(0, 77, 255, 0.03);
+	font-family: 'Overpass', "Trebuchet MS", Helvetica, sans-serif;
 }
 
 #header {
@@ -29,7 +30,7 @@ html, body {
     background-color: #FFFFFF;
     font-size: 45px;
     line-height: 60px;
-    font-family: 'Francois One', sans-serif;
+    font-family: 'Francois One', Impact, Charcoal, sans-serif;
 }
 
 img {
@@ -44,7 +45,7 @@ img {
     color: #FFFFFF;
     height: 60px;
     border-radius: 10px 10px 0px 0px;
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Open Sans Condensed', "Trebuchet MS", Helvetica, sans-serif;
 }
 
 .topnav a {
@@ -79,7 +80,6 @@ img {
     margin: 0 auto;
     padding-top: 20px;
     width: 50%;
-    font-family: 'Overpass', sans-serif;
     color: #666666;
 }
 h3{
@@ -146,7 +146,9 @@ table,
     overflow: auto;
     overflow-y: hidden;
     margin:10px 15px;
-    height:160px;
+	padding:20px;
+	height:250px;
+    
 }
 
 #footer {
