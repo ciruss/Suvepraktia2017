@@ -18,8 +18,8 @@ var mistakes = false;
 function generateMatrixForDeterminant() {
 
   document.getElementById("mistakeNotification").style.display = "none";
-	document.getElementById("math").style.display = "none"
-	document.getElementById("determinantTable").style.display="none"
+  document.getElementById("determinantTable").style.display="none";
+  document.getElementById("math").style.display="none";
 
     matrixSize = document.getElementById("determinant").value;
 	//console.log("matrixSize: "+matrixSize);
@@ -729,6 +729,7 @@ function checkInputSequence() {
 		mistakes = true;
 		calculateDeterminant();
 		document.getElementById("mistakeNotification").style.display = "none";
+		document.getElementById("math").style.display="block";
     } else {
         ////console.log("vigu on");
     }
