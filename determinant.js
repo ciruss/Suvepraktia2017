@@ -702,17 +702,3 @@ function validate(evt) {
     }
 
 }
-
-//täidab testimiseks väljad
-document.addEventListener("keypress", function(e) {
-    if (e.key === "f") {
-        fill()
-    }
-})
-
-function fill() {
-    mistakes = true;
-    document.querySelectorAll("tr > *").forEach(function(element) {
-        element.value = Math.floor(Math.random() * 300)
-    })
-}
