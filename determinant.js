@@ -1,3 +1,16 @@
+//Copyright 2017 Ryhm13
+//Licensed under the Apache License, Version 2.0 (the "License");
+//you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
+
+//   http://www.apache.org/licenses/LICENSE-2.0
+
+//Unless required by applicable law or agreed to in writing, software
+//distributed under the License is distributed on an "AS IS" BASIS,
+//WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//See the License for the specific language governing permissions and
+//limitations under the License.
+
 // **** GLOBAALSED MUUTUJAD ****
 
 // muutujad maatriksi suuruste jaoks
@@ -17,7 +30,8 @@ var mistakes = false;
 
 function generateMatrixForDeterminant() {
 
-    document.getElementById("mistakeNotification").style.display = "none";
+  document.getElementById("mistakeNotification").style.display = "none";
+	document.getElementById("math").style.display = "none";
 	document.getElementById("determinantTable").style.display="none";
 
     matrixSize = document.getElementById("determinant").value;
@@ -222,6 +236,7 @@ function calculateDeterminant() {
         //document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
     } else {
         document.getElementById("mistakeNotification").style.display = "none";
+		document.getElementById("math").style.display = "block";
         var determinant = document.getElementById("determinant").value;
 
         if (determinant === "4") {
@@ -737,6 +752,7 @@ function checkInputSequence() {
         //document.getElementById("newDeterminant").style.display = "block"
         //document.getElementById("mistakeNotification").style.display = "block",
 		mistakes = true;
+		document.getElementById("math").style.display = "relative";
 		calculateDeterminant();
 		document.getElementById("mistakeNotification").style.display = "none";
     } else {
