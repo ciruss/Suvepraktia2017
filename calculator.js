@@ -25,8 +25,8 @@ var timer;
 
 // **** ÜLDINE FUNKTSIOON MAATRIKSITE GENEREERIMISEKS ****
 
-//123
 function generateMatrix() {
+	//VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
     mistakeA = false;
     mistakeB = false;
 
@@ -50,11 +50,12 @@ function generateMatrix() {
             mFA.innerHTML = "";
 
             createMatrix();
+			document.getElementById("highlight").style.display= "inline";
             //creatematrixSecond();
             //calculateMatrixSum();
            // calculateMatrixFinalSum();
         } else {
-            createMatrix();
+            //createMatrix();
             //creatematrixSecond();
            // calculateMatrixSum();
             //calculateMatrixFinalSum();
@@ -114,10 +115,6 @@ function createMatrix() {
 }
 
 function generateMatrixFirstSecond() {
-	document.getElementById("highlight").style.display= "inline";
-	
-
-	document.getElementById("highlight").style.display = "inline";
 	generateMatrix();
 	matrixFirstValues();
 	matrixSecondValues();
