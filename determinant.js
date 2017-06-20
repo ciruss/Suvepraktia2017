@@ -729,7 +729,11 @@ function checkInputSequence() {
 		mistakes = true;
 		calculateDeterminant();
 		document.getElementById("mistakeNotification").style.display = "none";
+<<<<<<< HEAD
 		document.getElementById("math").style.display = "block"
+=======
+		document.getElementById("math").style.display="block";
+>>>>>>> 85319d26288e089acc404507ea4f38c86353b225
     } else {
         ////console.log("vigu on");
     }

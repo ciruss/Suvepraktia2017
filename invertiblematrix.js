@@ -513,7 +513,8 @@ function calculateInvertibleMatrix() {
 		var determinant = determinantFor2();
 		console.log(determinant);
 		if(determinant === 0) {
-			console.log("ei saa arvutada, 0-ga jagamine")
+			console.log("ei saa arvutada, 0-ga jagamine");
+			alert("Ei saa arvutada, 0-ga jagamine");
 		} else {
 			invertibleMatrix(determinant);
 		}
@@ -577,6 +578,7 @@ function generateArrayForMatrix() {
 var finalMatrix = [null];
 var finalMatrixRow = [null];
 var finalMatrixDetAnswers = [null];
+var arrayMultiplier = "";
 
 function invertibleMatrix(determinant) {
 	
@@ -591,6 +593,7 @@ function invertibleMatrix(determinant) {
 	
 	// arv millega korrutada igat maatriksi kasti
 	var matrixMultiplier = "1 / " + determinant;
+	arrayMultiplier = matrixMultiplier;
 	// console.log("matrixmultiplier: " + matrixMultiplier);
 	//var tempMatrix = mainMatrixArray.slice(); 
 	
@@ -693,12 +696,12 @@ function invertibleMatrix(determinant) {
 
 
 
-var invMatrixPreAnswerArray = [null];
+var invMatrixPreAnswerArray = [];
 
 function invMatrixPreAnswer() {
 	
-	invMatrixPreAnswerArray = [null];
-	var secondPreAnswerRow = [null];
+	invMatrixPreAnswerArray = [];
+	var secondPreAnswerRow = [];
 	var counter = 0;
 	
 	for(var x = 1; x <= invertibleMatrixSize; x++) {
@@ -708,7 +711,7 @@ function invMatrixPreAnswer() {
 			secondPreAnswerRow.push(matrixCell);
 		}
 		invMatrixPreAnswerArray.push(secondPreAnswerRow);
-		secondPreAnswerRow = [null];
+		secondPreAnswerRow = [];
 	}
 	return invMatrixPreAnswerArray;
 }
@@ -801,6 +804,7 @@ function checkInputSequence() {
 		mistakes = true;
 		//calculateDeterminant();
 		calculateInvertibleMatrix();
+		createMatrix3();
 		document.getElementById("mistakeNotification").style.display = "none";
     } else {
         ////console.log("vigu on");
@@ -818,6 +822,267 @@ function validate(evt) {
     if (evt.key === "/" && evt.target.value.indexOf('/') != -1) {
         evt.preventDefault();
     }
+}
+
+function matrix1MathJax(){
+	var a = invMatrixPreAnswer();
+	var answerString = "";
+	var finalString = "";
+	var b;
+	for(var x = 0; x < invertibleMatrixSize; x++) {
+
+		for(var y = 0; y < invertibleMatrixSize; y++) {
+			b = a[x][y];
+			var str = b;
+			var String = str.toString();
+			var minuspos = String.indexOf("-");
+			var pos = String.indexOf("/");
+			if(String.charAt(minuspos)==="-"){	
+				b = "("+ b + ")&";
+				answerString += b;
+			}
+			
+			else{
+				answerString += b;
+				answerString += "&";
+			}
+		}
+		str = answerString.length;
+		answerString = (answerString.slice(0,str-1));
+		answerString += "\\\\";
+		
+	}
+finalString += answerString;
+str = finalString.length;
+finalstring = (finalString.slice(0,str-2));
+return finalString;
+
+}
+
+function createMatrix3() {
+	var mathDiv = document.getElementById('math');
+    var displayDiv = document.getElementById('display');
+
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"math"]);
+    MathJax.Hub.Queue(function() {
+		var math = MathJax.Hub.getAllJax("MathDiv")[0];
+		var l = finalMatrixTexFormat();
+		var i = matrix1MathJax();
+		var j = matrix2MathJax();
+		var f = matrix3MathJax();
+		var m = determinantForArray();
+		MathJax.Hub.Queue(["Text", math, m+"\\begin{bmatrix}"+ l +"\\end{bmatrix}^T ="+m+"\\begin{bmatrix}"+i+"\\end{bmatrix}^T = "+m+"\\begin{bmatrix}"+j+"\\end{bmatrix} = \\begin{bmatrix}"+f+"\\end{bmatrix}"]);// = \\being{bmatrix}"+f+"\\end{bmatrix}"
+        //\\begin{bmatrix} {"+i+"}&{"+j+"}&0\\\\0&{"+i+"}&{"+j+"}\\\\{"+j+"}&0&{"+i+"}\\\end{bmatrix}
+		MathJax.Hub.Queue(function() {
+		displayDiv.innerHTML = mathDiv.innerHTML;
+		});
+	});
+}
+
+function matrix2MathJax(){
+	var a = invMatrixTransposed();
+	var answerString = "";
+	var finalString = "";
+	var b;
+	for(var x = 0; x < invertibleMatrixSize; x++) {
+
+		for(var y = 0; y < invertibleMatrixSize; y++) {
+			b = a[x][y];
+			var str = b;
+			var String = str.toString();
+			var minuspos = String.indexOf("-");
+			var pos = String.indexOf("/");
+			if(String.charAt(minuspos)==="-"){	
+				b = "("+ b + ")&";
+				answerString += b;
+			}
+			
+			else{
+				answerString += b;
+				answerString += "&";
+			}
+		}
+		str = answerString.length;
+		answerString = (answerString.slice(0,str-1));
+		answerString += "\\\\";
+		
+	}
+finalString += answerString;
+str = finalString.length;
+finalstring = (finalString.slice(0,str-2));
+return finalString;
+
+}
+
+function matrix3MathJax(){
+	var a = invMatrixFinalAnswerArray;
+	var answerString = "";
+	var finalString = "";
+	var b;
+	var str;
+	for(var x = 0; x < invertibleMatrixSize; x++) {
+
+		for(var y = 0; y < invertibleMatrixSize; y++) {
+			b = a[x][y];
+			var abc = math.fraction(b);
+			abc = math.fraction({
+				n: abc.n,
+				d: abc.d
+			});
+			var num = b;
+			var n = num.toString();
+			var minuspos1 = n.indexOf("-");
+			if(abc.d ===1 && n.charAt(minuspos1)==="-"){
+				abc.n = "(-" + abc.n+")&";
+				finalString += abc.n;
+			}
+			if(abc.d === 1 && n.charAt(minuspos1)!=="-") {
+				finalString += abc.n + "&";
+			}
+
+			if(n.charAt(minuspos1)==="-" && abc.d !== 1){
+					reduction = reduce(abc.n,abc.d);
+					start = "\\frac {" + abc.n + "}";
+					var end = "{" + abc.d + "}"
+					var fractionbracketstart = "(-";
+					var fractionbracketend = ")";
+					var fractionbracket = fractionbracketstart + start + end + fractionbracketend+"&";
+					finalString += fractionbracket;
+			}
+			
+			else if(abc.d !==1) {
+				reduction = reduce(abc.n, abc.d);
+				var numerator = "\\frac {" + abc.n + "}";
+				var denominator = "{" + abc.d + "}";
+				var method = numerator + denominator + "&";
+				finalString += method;
+			}
+
+	
+
+		}
+		str = finalString.length;
+		finalString = (finalString.slice(0,str-1));
+		finalString += "\\\\";
+		
+	}
+
+str = finalString.length;
+finalString += answerString;
+finalString = (finalString.slice(0,str-2));
+return finalString;
+
+}
+
+function reduce(numerator, denominator) {
+	var gcd = function gcd(a, b) {
+		return b ? gcd(b, a % b) : a;
+	};
+	gcd = gcd(numerator, denominator);
+	return [numerator / gcd, denominator / gcd];
+}
+
+function determinantForArray(){
+	a = arrayMultiplier;
+	var answerString = "";
+	var finalString = "";
+	var str = a;
+	var pos = str.indexOf("/");
+	var minuspos = str.indexOf("-");
+	if(a.charAt(minuspos)=== "-" && a.charAt(pos)==="/"){
+		var str2 = str.replace("-","");
+		var start = str2.slice(0,pos-1);
+		start = "\\frac {" + start + "}";
+		var end = a;
+		var afterSlash = str2.substr(str.indexOf("/")+1);
+		end = "{" + afterSlash + "}";
+		var fractionBracketStart = "(-";
+		var fractionBracketEnd = ")";
+		var fractionBracket = fractionBracketStart + start + end + fractionBracketEnd;
+		answerString += fractionBracket;
+	}
+finalString += answerString;
+return finalString;
+}
+
+function finalMatrixTexFormat(){
+	var finalString = "";
+	var answerString = "";
+	var answerStringStart = "";
+	var answerStringEnd = "";
+	var strLength = answerString.length;
+	var finalStrLength;
+
+	for(var x = 1; x <= invertibleMatrixSize; x++) {
+		
+		for(var y = 1; y <= invertibleMatrixSize; y++) {
+			//answerStringStart += "\begin{vmatrix}";
+			strLength = answerString.length;
+			answerString = (answerString.slice(0, strLength-2));
+			answerStringStart = "(-1)" + "^{"+x+"+"+y+"}"+"\\begin{vmatrix}";
+			// muutuja i jäljendab x-i, et eemaldada iga mingit elementi 
+			for(i = 1; i <= invertibleMatrixSize-1; i++) {
+
+				for(l = 1; l <=invertibleMatrixSize-1; l++){
+					var a = finalMatrix[x][y][i][l];
+					var str = a;
+					var String = str.toString();
+					var pos = String.indexOf("/");
+					var minuspos = String.indexOf("-");
+					if(String.charAt(minuspos)=== "-" && String.charAt(pos)==="/"){
+						var str2 = String.replace("-","");
+						var start = str2.slice(0,pos-1);
+						start = "\\frac {" + start + "}";
+						var end = a;
+						var afterSlash = str.substr(str.indexOf("/")+1);
+						end = "{" + afterSlash + "}";
+						var fractionBracketStart = "(-";
+						var fractionBracketEnd = ")" + "&";
+						var fractionBracket = fractionBracketStart + start + end + fractionBracketEnd;
+						answerString += fractionBracket;
+					} else if (String.charAt(pos)==="/"){
+						var stringLength = a.length;
+						var String1 = a;
+						var start = String.slice(0,pos);
+						start = "\\frac {" + start + "}";
+						var end = a;
+						var afterSlash = str.substr(str.indexOf("/") + 1);
+						end = "{" + afterSlash + "}&";
+						a = start + end;
+						answerString += a;
+					}else{
+						answerString += a;
+						answerString += "&";
+					}
+
+
+				}
+			strLength = answerString.length;
+			answerString = (answerString.slice(0, strLength - 1));
+			answerString += "\\\\";
+
+		}
+		answerStringEnd = "\\end{vmatrix}";
+		strLength = answerString.length;
+		answerString = (answerString.slice(0, strLength - 2));
+		finalString += answerStringStart + answerString + answerStringEnd;
+		finalString += "~~~~~~";
+
+		answerString = "";
+
+
+	}
+	finalStrLength = finalString.length;
+	finalString = (finalString.slice(0, finalStrLength - 6));
+	finalString += "\\\\";
+	
+
+}
+finalStrLength = finalString.length;
+finalString = (finalString.slice(0, finalStrLength - 2));
+finalString += answerString;
+return finalString;
+
 }
 
 

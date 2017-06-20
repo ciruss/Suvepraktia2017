@@ -101,7 +101,8 @@ function createMatrix() {
 
 function generateMatrixFirstSecond() {
 	document.getElementById("highlight").style.display= "inline";
-	
+	document.getElementById("math").style.display="none";
+	document.getElementById("highlighterText").style.display="none";
 
 	document.getElementById("highlight").style.display = "inline";
 	generateMatrix();
@@ -624,6 +625,8 @@ function checkInputSequence() {
     // console.log("Lõpus mistakeA: " + mistakeA);
     if (mistakeB === true && mistakeA === true) {
         document.getElementById("mistakeNotification").style.display = "none";
+		document.getElementById("math").style.display="block";
+		document.getElementById("highlighterText").style.display="block";
     }
 }
 
