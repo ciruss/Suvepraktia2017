@@ -7,6 +7,7 @@ Kliendi soov oli saada mugav ja lihtne maatriksite kalkulaator, mida saaks meies
 Johan Laas, Heleri Mändla, Sten-Erik Tool, Karl-Erik Borkmann ja Mattias Blehner.
 
 ## Kasutatud tehnoloogiad
+MathJax raamistik.
 
 ## Litsents
 Copyright 2017 Ryhm13
