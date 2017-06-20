@@ -32,16 +32,18 @@ var b = [
 function setPlayerName() {
 	playerName = prompt("Sisesta mängija nimi");
 	if (playerName === null) {
+		document.getElementById("checkAndRestartRandom").style.display = "none";
 		return;
 	} else if (playerName === "") {
 		playerName = "Nimetu";
+		document.getElementById("checkAndRestartRandom").style.display = "none";
 	} else {
 		document.getElementById("playerName").innerHTML = "NIMI: " + playerName;
 		startTimer(600);
 		//generateExerciseMatrix();
 		generateRandomExerciseMatrix();
+		document.getElementById("checkAndRestartRandom").style.display = "inline";
 	}
-	document.getElementById("checkAndRestartRandom").style.display = "inline";
 }
 
 // **** ÜLDINE FUNKTSIOON MAATRIKSITE GENEREERIMISEKS ****
