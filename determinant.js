@@ -17,12 +17,11 @@ var mistakes = false;
 
 function generateMatrixForDeterminant() {
 
-	document.getElementById("mistakeNotification").style.display = "none";
-	document.getElementById("math").style.display = "none"
-	document.getElementById("determinantTable").style.display="none"
+    document.getElementById("mistakeNotification").style.display = "none";
+    document.getElementById("math").style.display = "none"
+    document.getElementById("determinantTable").style.display = "none"
 
     matrixSize = document.getElementById("determinant").value;
-	//console.log("matrixSize: "+matrixSize);
     var matrixForDeterminant = document.getElementById("matrixForDeterminant");
     var matrixPermutationTable = document.getElementById("matrixPermutationTable");
     var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
@@ -39,20 +38,13 @@ function generateMatrixForDeterminant() {
 
 // **** FUNKTSIOON, MIS GENEREERIB ESIMESE MAATRIKSI ****
 
-function generateMatrix(){
-	generateMatrixForDeterminant();
-	//generateDetMatrix();
-} 
+function generateMatrix() {
+    generateMatrixForDeterminant();
+}
 
 function createMatrixForDeterminant() {
-	//VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
+    //VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
     var matrixDeterminantContainer = document.getElementById("matrixDeterminantContainer");
-    /*
-	var mWidth = 42 * matrixSize;
-	var mHeight = 28 * matrixSize;
-	matrixDeterminantContainer.style.width = mWidth + "px";
-	matrixDeterminantContainer.style.height = mHeight + "px";
-	*/
     var matrixForDeterminant = document.getElementById("matrixForDeterminant");
     var tableBody = document.createElement("tbody");
 
@@ -89,36 +81,35 @@ function createDetMatrix() {
         for (var c = 0, n = table.rows.length; c < n; c++) {
             var rowId = r + 1;
             var colId = c + 1;
-            var  Cell = document.getElementById("a" + rowId + colId).value;
+            var Cell = document.getElementById("a" + rowId + colId).value;
             var str = Cell;
             var pos = str.indexOf("/");
             var minuspos = Cell.indexOf("-")
             if (Cell.charAt(minuspos) === "-" && Cell.charAt(pos) === "/") {
- 				var str2 = str.replace("-", "");
- 				var start = str2.slice(0, pos - 1);
- 				start = "\\frac {" + start + "}";
- 				var end = Cell;
- 				var afterSlash = str.substr(str.indexOf("/") + 1);
- 				end = "{" + afterSlash + "}";
- 				var fractionbracketstart = "(-";
- 				var fractionbracketend = ")" + "&";
- 				var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
- 				answerString += fractionbracket;
- 			} else if (Cell.charAt(pos) === "/") {
- 				var stringLength = Cell.length;
- 				var String1 = Cell;
- 				var start = str.slice(0, pos);
- 				start = "\\frac {" + start + "}";
- 				var end = Cell;
- 				var afterSlash = str.substr(str.indexOf("/") + 1);
- 				end = "{" + afterSlash + "}&";
- 				Cell = start + end;
- 				answerString += Cell;
- 			} else if (Cell.charAt(0) === "-") {
- 				Cell = "(" + Cell + ")" + "&";
- 				answerString += Cell;
-  			}
-            else {
+                var str2 = str.replace("-", "");
+                var start = str2.slice(0, pos - 1);
+                start = "\\frac {" + start + "}";
+                var end = Cell;
+                var afterSlash = str.substr(str.indexOf("/") + 1);
+                end = "{" + afterSlash + "}";
+                var fractionbracketstart = "(-";
+                var fractionbracketend = ")" + "&";
+                var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
+                answerString += fractionbracket;
+            } else if (Cell.charAt(pos) === "/") {
+                var stringLength = Cell.length;
+                var String1 = Cell;
+                var start = str.slice(0, pos);
+                start = "\\frac {" + start + "}";
+                var end = Cell;
+                var afterSlash = str.substr(str.indexOf("/") + 1);
+                end = "{" + afterSlash + "}&";
+                Cell = start + end;
+                answerString += Cell;
+            } else if (Cell.charAt(0) === "-") {
+                Cell = "(" + Cell + ")" + "&";
+                answerString += Cell;
+            } else {
                 var Cell = document.getElementById("a" + rowId + colId).value + "&";
                 answerString += Cell;
             }
@@ -126,42 +117,40 @@ function createDetMatrix() {
     }
     var strLength = answerString.length;
     answerString = (answerString.slice(0, strLength - 1));
-    //answerString = answerString.concat(Cell);
     return answerString;
 }
-////console.log(createDetMatrix());
 
-function determinantPhase(){
-	var p = document.getElementById("determinant").value;
-	if(p==2){
-		return "Teist";
-	}else if(p==3){
-		return "Kolmandat";
-	}else if(p==4){
-		return "Neljandat";
-	}else if(p==5){
-		return "Viiendat"
-	}
+function determinantPhase() {
+    var p = document.getElementById("determinant").value;
+    if (p == 2) {
+        return "Teist";
+    } else if (p == 3) {
+        return "Kolmandat";
+    } else if (p == 4) {
+        return "Neljandat";
+    } else if (p == 5) {
+        return "Viiendat"
+    }
 }
 
-function generateDetMatrix(){
-	var mathDiv = document.getElementById("math");
-	var displayDiv = document.getElementById("display");
+function generateDetMatrix() {
+    var mathDiv = document.getElementById("math");
+    var displayDiv = document.getElementById("display");
 
-	MathJax.Hub.Queue(["Typeset", MathJax.Hub, "math"]);
-	MathJax.Hub.Queue(function(){
-		var math = MathJax.Hub.getAllJax("MathDiv")[0];
-		var i = document.getElementById("determinant").value;
-		var j = fractionAnswer();
-		var k = determinantPhase();
-		var l = createDetMatrix();
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "math"]);
+    MathJax.Hub.Queue(function () {
+        var math = MathJax.Hub.getAllJax("MathDiv")[0];
+        var i = document.getElementById("determinant").value;
+        var j = fractionAnswer();
+        var k = determinantPhase();
+        var l = createDetMatrix();
 
-		MathJax.Hub.Queue(["Text", math, k + "\\ järku\\ ruutmaatriksi\\ A_" + i + " = \\begin{pmatrix}" + l + "\\end{pmatrix}" + k + "\\ järku\\ determinandiks\\ nimetatakse\\ reaalarvu \\begin{vmatrix}A_" + i + "\\end{vmatrix} = \\begin{vmatrix}" + l + "\\end{vmatrix} = " + j])
-		MathJax.Hub.Queue(function(){
-			displayDiv.innerHTML = mathDiv.innerHTML;
-			mathDiv.innerHTML;
-		})
-	})
+        MathJax.Hub.Queue(["Text", math, k + "\\ järku\\ ruutmaatriksi\\ A_" + i + " = \\begin{pmatrix}" + l + "\\end{pmatrix}" + k + "\\ järku\\ determinandiks\\ nimetatakse\\ reaalarvu \\begin{vmatrix}A_" + i + "\\end{vmatrix} = \\begin{vmatrix}" + l + "\\end{vmatrix} = " + j])
+        MathJax.Hub.Queue(function () {
+            displayDiv.innerHTML = mathDiv.innerHTML;
+            mathDiv.innerHTML;
+        })
+    })
 }
 
 // ||||| ----- ----- ----- ----- DETERMINANTIDE KALKULAATORI OSA ----- ----- ----- ----- |||||
@@ -174,10 +163,9 @@ function reduce(numerator, denominator) {
 }
 
 
-function fractionAnswer(){
+function fractionAnswer() {
     var detValue = calculateDeterminant();
     var finalString = ""
-    console.log(detValue)
     var abc = math.fraction(detValue);
     abc = math.fraction({
         n: abc.n,
@@ -186,41 +174,37 @@ function fractionAnswer(){
     var num = detValue;
     var n = num.toString();
     var pos = n.indexOf("-");
-    if (abc.d === 1 && n.charAt(pos)!=="-") {
-				finalString += abc.n;
-			} 
-			if(abc.d ===1 && n.charAt(pos)==="-"){
-				abc.n = "-" + abc.n;
-				finalString += abc.n;
-			}
-			if(n.charAt(pos)==="-" && abc.d !== 1){
-					reduction = reduce(abc.n,abc.d);
-					start = "\\frac {" + abc.n + "}";
-					var end = "{" + abc.d + "}"
-					var fractionbracketstart = "-";
-					var fractionbracketend = "";
-					var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
-					finalString += fractionbracket;
-			}
-			
-			else if(abc.d !==1) {
-				reduction = reduce(abc.n, abc.d);
-				var numerator = "\\frac {" + abc.n + "}";
-				var denominator = "{" + abc.d + "}";
-				answerString = numerator + denominator;
-				finalString += answerString;
-			}
+    if (abc.d === 1 && n.charAt(pos) !== "-") {
+        finalString += abc.n;
+    }
+    if (abc.d === 1 && n.charAt(pos) === "-") {
+        abc.n = "-" + abc.n;
+        finalString += abc.n;
+    }
+    if (n.charAt(pos) === "-" && abc.d !== 1) {
+        reduction = reduce(abc.n, abc.d);
+        start = "\\frac {" + abc.n + "}";
+        var end = "{" + abc.d + "}"
+        var fractionbracketstart = "-";
+        var fractionbracketend = "";
+        var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
+        finalString += fractionbracket;
+    } else if (abc.d !== 1) {
+        reduction = reduce(abc.n, abc.d);
+        var numerator = "\\frac {" + abc.n + "}";
+        var denominator = "{" + abc.d + "}";
+        answerString = numerator + denominator;
+        finalString += answerString;
+    }
     return finalString;
 }
 // **** FUNKTSIOON �IGE PERMUTATSIOONIDE FUNKTSIOONI K�IVITAMISEKS ****
 
 function calculateDeterminant() {
-	
-	//console.log(mistakes);
-	
+
+
     if (mistakes === false) {
         document.getElementById("mistakeNotification").style.display = "inline";
-        //document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
     } else {
         document.getElementById("mistakeNotification").style.display = "none";
         var determinant = document.getElementById("determinant").value;
@@ -228,25 +212,25 @@ function calculateDeterminant() {
         if (determinant === "4") {
             determinantForFour();
             generateDetMatrix();
-			a = determinantForFour();
+            a = determinantForFour();
         }
 
         if (determinant === "5") {
             determinantForFive();
             generateDetMatrix();
-			a = determinantForFive();
+            a = determinantForFive();
         }
 
         if (determinant === "3") {
             determinantForThree();
             generateDetMatrix();
-			a = determinantForThree();
+            a = determinantForThree();
         }
 
         if (determinant === "2") {
             determinantForTwo();
             generateDetMatrix();
-			a = determinantForTwo();
+            a = determinantForTwo();
         }
 
         mistakes = false;
@@ -268,14 +252,12 @@ function determinantForTwo() {
     // esimene ts�kkel, mis m��rab �ra esimese numbri
     for (var i = 0; i < 2; i++) {
 
-        ////console.log("tsykkel 1 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
         var detNumbersTwo = [1, 2];
         var detNumbersTemp = [];
         var detValuesTemp = "";
         // teine ts�kkel, mis m��rab �ra teise numbri
         for (var j = 0; j < 1; j++) {
 
-            ////console.log("tsykkel 2 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
             var detNumbersOne = [];
             for (var n1 = 0; n1 < 2; n1++) {
                 detNumbersOne[n1] = detNumbersTwo[n1];
@@ -293,14 +275,14 @@ function determinantForTwo() {
 
         var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
         var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
-		
-		if(cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
-			cellValueOne = "(" + cellValueOne + ")";
-		}
-		if(cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
-			cellValueTwo = "(" + cellValueTwo + ")";
-		}
-		
+
+        if (cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
+            cellValueOne = "(" + cellValueOne + ")";
+        }
+        if (cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
+            cellValueTwo = "(" + cellValueTwo + ")";
+        }
+
         if (inversionCount % 2 === 0) {
             detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo;
             detValues += detValuesTemp;
@@ -312,7 +294,6 @@ function determinantForTwo() {
         var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
         matrixPermutationTableString += permutationTableRow;
 
-        //console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
 
         detNumbers.push(detNumbersTemp);
         detNumbersTemp = [];
@@ -320,7 +301,6 @@ function determinantForTwo() {
         inversionCount = 0;
     }
     detValues = detValues.slice(3, detValues.length);
-    //console.log("vahetulemus: " + detValues);
 
     var matrixDetAnswer = math.eval(detValues);
     detValues = "";
@@ -339,14 +319,12 @@ function determinantForThree() {
     // esimene ts�kkel, mis m��rab �ra esimese numbri
     for (var i = 0; i < 3; i++) {
 
-        ////console.log("tsykkel 1 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
         var detNumbersThree = [1, 2, 3];
         var detNumbersTemp = [];
         var detValuesTemp = "";
 
         // teine ts�kkel, mis m��rab �ra teise numbri
         for (var j = 0; j < 2; j++) {
-            ////console.log("tsykkel 2 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
             var detNumbersTwo = [];
             for (var n2 = 0; n2 < 3; n2++) {
                 detNumbersTwo[n2] = detNumbersThree[n2];
@@ -356,7 +334,6 @@ function determinantForThree() {
             // kolmas ts�kkel, mis m��rab �ra kolmanda numbri
             for (var k = 0; k < 1; k++) {
 
-                ////console.log("tsykkel 3 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
 
                 var detNumbersOne = [];
                 for (var n1 = 0; n1 < 2; n1++) {
@@ -382,18 +359,18 @@ function determinantForThree() {
             var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
             var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
             var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
-			
-			if(cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
-				cellValueOne = "(" + cellValueOne + ")";
-			}
-			if(cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
-				cellValueTwo = "(" + cellValueTwo + ")";
-			}
-			if(cellValueThree < 0 || cellValueThree.indexOf("/") > -1) {
-				cellValueThree = "(" + cellValueThree + ")";
-			}
-			
-			
+
+            if (cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
+                cellValueOne = "(" + cellValueOne + ")";
+            }
+            if (cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
+                cellValueTwo = "(" + cellValueTwo + ")";
+            }
+            if (cellValueThree < 0 || cellValueThree.indexOf("/") > -1) {
+                cellValueThree = "(" + cellValueThree + ")";
+            }
+
+
             if (inversionCount % 2 === 0) {
                 detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree;
                 detValues += detValuesTemp;
@@ -405,7 +382,6 @@ function determinantForThree() {
             var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
             matrixPermutationTableString += permutationTableRow;
 
-            //console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
 
             detNumbers.push(detNumbersTemp);
             detNumbersTemp = [];
@@ -414,7 +390,6 @@ function determinantForThree() {
         }
     }
     detValues = detValues.slice(3, detValues.length);
-    //console.log("vahetulemus: " + detValues);
 
     var matrixDetAnswer = math.eval(detValues);
     detValues = "";
@@ -433,7 +408,6 @@ function determinantForFour() {
     // esimene ts�kkel, mis m��rab �ra esimese numbri
     for (var i = 0; i < 4; i++) {
 
-        ////console.log("tsykkel 1 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
 
         var detNumbersFour = [1, 2, 3, 4];
         var detNumbersTemp = [];
@@ -443,7 +417,6 @@ function determinantForFour() {
         // teine ts�kkel, mis m��rab �ra teise numbri
         for (var j = 0; j < 3; j++) {
 
-            ////console.log("tsykkel 2 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
             var detNumbersThree = [];
             for (var n3 = 0; n3 < 4; n3++) {
                 detNumbersThree[n3] = detNumbersFour[n3];
@@ -453,7 +426,6 @@ function determinantForFour() {
             // kolmas ts�kkel, mis m��rab �ra kolmanda numbri
             for (var k = 0; k < 2; k++) {
 
-                ////console.log("tsykkel 3 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
                 var detNumbersTwo = [];
                 for (var n2 = 0; n2 < 3; n2++) {
                     detNumbersTwo[n2] = detNumbersThree[n2];
@@ -462,7 +434,6 @@ function determinantForFour() {
 
                 // neljas ts�kkel, mis m��rab �ra neljanda numbri
                 for (var l = 0; l < 1; l++) {
-                    ////console.log("tsykkel 4 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
                     var detNumbersOne = [];
                     for (n1 = 0; n1 < 2; n1++) {
                         detNumbersOne[n1] = detNumbersTwo[n1];
@@ -470,7 +441,7 @@ function determinantForFour() {
                     detNumbersOne.splice(k, 1);
                     detNumbersTemp = [detNumbersFour[i], detNumbersThree[j], detNumbersTwo[k], detNumbersOne[l]];
                 }
-				
+
                 // siia inversioonid
                 for (var i1 = 0; i1 < 3; i1++) {
                     if (detNumbersTemp[i1] > detNumbersTemp[i1 + 1]) {
@@ -494,20 +465,20 @@ function determinantForFour() {
                 var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
                 var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
                 var cellValueFour = document.getElementById("a4" + detNumbersTemp[3]).value;
-				
-				if(cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
-					cellValueOne = "(" + cellValueOne + ")";
-				}
-				if(cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
-					cellValueTwo = "(" + cellValueTwo + ")";
-				}
-				if(cellValueThree < 0 || cellValueThree.indexOf("/") > -1) {
-					cellValueThree = "(" + cellValueThree + ")";
-				}
-				if(cellValueFour < 0 || cellValueFour.indexOf("/") > -1) {
-					cellValueFour = "(" + cellValueFour + ")";
-				}
-				
+
+                if (cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
+                    cellValueOne = "(" + cellValueOne + ")";
+                }
+                if (cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
+                    cellValueTwo = "(" + cellValueTwo + ")";
+                }
+                if (cellValueThree < 0 || cellValueThree.indexOf("/") > -1) {
+                    cellValueThree = "(" + cellValueThree + ")";
+                }
+                if (cellValueFour < 0 || cellValueFour.indexOf("/") > -1) {
+                    cellValueFour = "(" + cellValueFour + ")";
+                }
+
                 if (inversionCount % 2 === 0) {
                     detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour;
                     detValues += detValuesTemp;
@@ -519,7 +490,6 @@ function determinantForFour() {
                 var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
                 matrixPermutationTableString += permutationTableRow;
 
-                //console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
 
                 detNumbers.push(detNumbersTemp);
                 detNumbersTemp = [];
@@ -528,9 +498,8 @@ function determinantForFour() {
             }
         }
     }
-	
+
     detValues = detValues.slice(3, detValues.length);
-    //console.log("vahetulemus: " + detValues);
 
     var matrixDetAnswer = math.eval(detValues);
     detValues = "";
@@ -542,14 +511,12 @@ function determinantForFour() {
 function determinantForFive() {
 
     var matrixPermutationTable = document.getElementById("matrixPermutationTable");
-    // var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
     var permutationTableHead = "<tr><th>" + "Permutatsioonid" + "</th><th>" + "Inversioonid" + "</th><th>" + "Arvutus" + "</th></tr>";
     var matrixPermutationTableString = permutationTableHead;
 
     // esimene ts�kkel, mis m��rab �ra esimese numbri
     for (var i = 0; i < 5; i++) {
 
-        ////console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
 
         var detNumbersFive = [1, 2, 3, 4, 5];
         var detNumbersTemp = [];
@@ -558,7 +525,6 @@ function determinantForFive() {
         // teine ts�kkel, mis m��rab �ra teise numbri
         for (var j = 0; j < 4; j++) {
 
-            ////console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
             var detNumbersFour = [];
             for (var n4 = 0; n4 < 5; n4++) {
                 detNumbersFour[n4] = detNumbersFive[n4];
@@ -568,7 +534,6 @@ function determinantForFive() {
             // kolmas ts�kkel, mis m��rab �ra kolmanda numbri
             for (var k = 0; k < 3; k++) {
 
-                ////console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
                 var detNumbersThree = [];
                 for (var n3 = 0; n3 < 4; n3++) {
                     detNumbersThree[n3] = detNumbersFour[n3];
@@ -578,7 +543,6 @@ function determinantForFive() {
                 // neljas ts�kkel, mis m��rab �ra neljanda numbri
                 for (var l = 0; l < 2; l++) {
 
-                    ////console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
                     var detNumbersTwo = [];
                     for (n2 = 0; n2 < 3; n2++) {
                         detNumbersTwo[n2] = detNumbersThree[n2];
@@ -588,7 +552,6 @@ function determinantForFive() {
                     // viies ts�kkel, mis m��rab �ra viienda numbri
                     for (var m = 0; m < 1; m++) {
 
-                        ////console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
                         var detNumbersOne = [];
                         for (n1 = 0; n1 < 2; n1++) {
                             detNumbersOne[n1] = detNumbersTwo[n1];
@@ -626,23 +589,23 @@ function determinantForFive() {
                         var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
                         var cellValueFour = document.getElementById("a4" + detNumbersTemp[3]).value;
                         var cellValueFive = document.getElementById("a5" + detNumbersTemp[4]).value;
-						
-						if(cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
-							cellValueOne = "(" + cellValueOne + ")";
-						}
-						if(cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
-							cellValueTwo = "(" + cellValueTwo + ")";
-						}
-						if(cellValueThree < 0 || cellValueThree.indexOf("/") > -1) {
-							cellValueThree = "(" + cellValueThree + ")";
-						}
-						if(cellValueFour < 0 || cellValueFour.indexOf("/") > -1) {
-							cellValueFour = "(" + cellValueFour + ")";
-						}
-						if(cellValueFive < 0 || cellValueFive.indexOf("/") > -1) {
-							cellValueFive = "(" + cellValueFive + ")";
-						}
-						
+
+                        if (cellValueOne < 0 || cellValueOne.indexOf("/") > -1) {
+                            cellValueOne = "(" + cellValueOne + ")";
+                        }
+                        if (cellValueTwo < 0 || cellValueTwo.indexOf("/") > -1) {
+                            cellValueTwo = "(" + cellValueTwo + ")";
+                        }
+                        if (cellValueThree < 0 || cellValueThree.indexOf("/") > -1) {
+                            cellValueThree = "(" + cellValueThree + ")";
+                        }
+                        if (cellValueFour < 0 || cellValueFour.indexOf("/") > -1) {
+                            cellValueFour = "(" + cellValueFour + ")";
+                        }
+                        if (cellValueFive < 0 || cellValueFive.indexOf("/") > -1) {
+                            cellValueFive = "(" + cellValueFive + ")";
+                        }
+
                         if (inversionCount % 2 === 0) {
                             detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour + "*" + cellValueFive;
                             detValues += detValuesTemp;
@@ -654,7 +617,6 @@ function determinantForFive() {
                         var permutationTableRow = "<tr><td>" + detNumbersTemp + "</td><td>" + inversionCount + "</td><td>" + detValuesTemp + "</td></tr>";
                         matrixPermutationTableString += permutationTableRow;
 
-                        //console.log("detNumbersTemp: " + detNumbersTemp + ", inversioonid: " + inversionCount + ", arvud: " + detValuesTemp);
 
                         detNumbers.push(detNumbersTemp);
                         detNumbersTemp = [];
@@ -666,7 +628,6 @@ function determinantForFive() {
         }
     }
     detValues = detValues.slice(3, detValues.length);
-    //console.log("vahetulemus: " + detValues);
 
     var matrixDetAnswer = math.eval(detValues);
     detValues = "";
@@ -677,15 +638,8 @@ function determinantForFive() {
 
 function displayTable() {
     document.getElementById("determinantTable").style.display = "block";
-    //document.getElementById("checkAnswerDeterminant").style.display="none";
-    //document.getElementById("showCalculations").style.display="none";
 }
 
-/*
-function newCalculation() {
-    window.location.reload(false);
-}
-*/
 
 function checkInputSequence() {
     checkInput: for (var i = 0; i < matrixSize; i++) {
@@ -693,9 +647,7 @@ function checkInputSequence() {
             var rowId = i + 1;
             var colId = j + 1;
             var number = document.getElementById("a" + rowId + colId).value;
-			//console.log(number);
             if (number == "") {
-                //console.log("See kast on tühi");
                 var inputColor = document.getElementById("a" + rowId + colId);
                 inputColor.style.backgroundColor = "";
                 mistakes = false
@@ -703,14 +655,12 @@ function checkInputSequence() {
             } else {
                 var regex = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
                 var found = regex.test(number);
-                //console.log(found);
                 if (found === false) {
                     var inputColor = document.getElementById("a" + rowId + colId);
                     inputColor.style.backgroundColor = "red";
                     mistakes = false;
                     document.getElementById("mistakeNotification").style.display = "inline";
-                    //document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
-					break checkInput;
+                    break checkInput;
                 } else {
                     var inputColor = document.getElementById("a" + rowId + colId);
                     inputColor.style.backgroundColor = "";
@@ -720,23 +670,13 @@ function checkInputSequence() {
             }
         }
     }
-	
+
     if (mistakes === true) {
-        ////console.log("Vigu ei olnud");
-        //document.getElementById("checkAnswerDeterminant").style.display = "block"
-        //document.getElementById("newDeterminant").style.display = "block"
-        //document.getElementById("mistakeNotification").style.display = "block",
-		mistakes = true;
-		calculateDeterminant();
-		document.getElementById("mistakeNotification").style.display = "none";
-<<<<<<< HEAD
-		document.getElementById("math").style.display = "block"
-=======
-		document.getElementById("math").style.display="block";
->>>>>>> 85319d26288e089acc404507ea4f38c86353b225
-    } else {
-        ////console.log("vigu on");
-    }
+        mistakes = true;
+        calculateDeterminant();
+        document.getElementById("mistakeNotification").style.display = "none";
+        document.getElementById("math").style.display = "block"
+    } else {}
 }
 
 function validate(evt) {
@@ -744,7 +684,6 @@ function validate(evt) {
     var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
     if (allowed.indexOf(evt.key) == -1) {
         evt.preventDefault();
-        ////console.log("EI LUBA");
     }
     // PRAEGUNE
     if (evt.key === "/" && evt.target.value.indexOf('/') != -1) {
@@ -754,11 +693,15 @@ function validate(evt) {
 }
 
 //täidab testimiseks väljad
-document.addEventListener("keypress", function(e) {
-    if (e.key === "f") { fill() }
+document.addEventListener("keypress", function (e) {
+    if (e.key === "f") {
+        fill()
+    }
 })
 
 function fill() {
     mistakes = true;
-    document.querySelectorAll("tr > *").forEach(function(element) { element.value = Math.floor(Math.random() * 300) })
+    document.querySelectorAll("tr > *").forEach(function (element) {
+        element.value = Math.floor(Math.random() * 300)
+    })
 }

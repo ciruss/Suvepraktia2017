@@ -13,122 +13,63 @@ var timer;
 
 //123
 function generateMatrix() {
-    mistakeA = false;
-    mistakeB = false;
+	mistakeA = false;
+	mistakeB = false;
 
-    document.getElementById("mistakeNotification").style.display = "none";
+	document.getElementById("mistakeNotification").style.display = "none";
 
-    mFirstX = parseInt(document.getElementById("mFirstX").value);
-    mFirstY = parseInt(document.getElementById("mFirstY").value);
-    mSecondX = parseInt(document.getElementById("mSecondX").value);
-    mSecondY = parseInt(document.getElementById("mSecondY").value);
+	mFirstX = parseInt(document.getElementById("mFirstX").value);
+	mFirstY = parseInt(document.getElementById("mFirstY").value);
+	mSecondX = parseInt(document.getElementById("mSecondX").value);
+	mSecondY = parseInt(document.getElementById("mSecondY").value);
 
-    var mFirst = document.getElementById("matrixFirst");
-    var mSecond = document.getElementById("matrixSecond");
-    var mA = document.getElementById("matrixAnswer");
-    var mFA = document.getElementById("matrixFinalAnswer");
+	var mFirst = document.getElementById("matrixFirst");
+	var mSecond = document.getElementById("matrixSecond");
+	var mA = document.getElementById("matrixAnswer");
+	var mFA = document.getElementById("matrixFinalAnswer");
 
-    if (mFirstY === mSecondX) {
-        if (mFirst && mSecond && mA && mFA) {
-            mFirst.innerHTML = "";
-            mSecond.innerHTML = "";
-            mA.innerHTML = "";
-            mFA.innerHTML = "";
+	if (mFirstY === mSecondX) {
+		if (mFirst && mSecond && mA && mFA) {
+			mFirst.innerHTML = "";
+			mSecond.innerHTML = "";
+			mA.innerHTML = "";
+			mFA.innerHTML = "";
 
-            createMatrix();
-            //creatematrixSecond();
-            //calculateMatrixSum();
-           // calculateMatrixFinalSum();
-        } else {
-            createMatrix();
-            //creatematrixSecond();
-           // calculateMatrixSum();
-            //calculateMatrixFinalSum();
-        }
-    } else {
-        // console.log("Ei saa arvutada");
-        alert("Ei saa genereerida, muuda maatriksite suuruseid!");
-    }
+			createMatrix();
+		} else {
+			createMatrix();
+		}
+	} else {
+		alert("Ei saa genereerida, muuda maatriksite suuruseid!");
+	}
 }
 
 // **** FUNKTSIOON, MIS GENEREERIB ESIMESE MAATRIKSI ****
 function createMatrix() {
-//VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
-    var matrixFirstContainer = document.getElementById("matrixFirstContainer");
-    var matrixFirst = document.getElementById("matrixFirst");
-    var tableBody = document.createElement("tbody");
+	//VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
+	var matrixFirstContainer = document.getElementById("matrixFirstContainer");
+	var matrixFirst = document.getElementById("matrixFirst");
+	var tableBody = document.createElement("tbody");
 
-    for (var i = 0; i < mFirstX; i++) {
-        var row = document.createElement("tr");
+	for (var i = 0; i < mFirstX; i++) {
+		var row = document.createElement("tr");
 
-        for (var j = 0; j < mFirstY; j++) {
-            var rowId = i + 1;
-            var colId = j + 1;
-            var cell = document.createElement("input");
-            cell.setAttribute("id", "a" + rowId + colId);
-            cell.setAttribute("type", "text");
-            cell.setAttribute("onkeypress", "validate(event)");
-            cell.setAttribute("oninput", "checkInputSequence()");
-            cell.setAttribute("maxlength", "10");
-            row.appendChild(cell);
-        }
-        tableBody.appendChild(row);
-    }
-    matrixFirst.appendChild(tableBody);
-
-    var matrixSecondContainer = document.getElementById("matrixSecondContainer");
-    var matrixSecond = document.getElementById("matrixSecond");
-    var tableBody = document.createElement("tbody");
-
-    for (var i = 0; i < mSecondX; i++) {
-        var row = document.createElement("tr");
-
-        for (var j = 0; j < mSecondY; j++) {
-            var rowId = i + 1;
-            var colId = j + 1;
-            var cell = document.createElement("input");
-            cell.setAttribute("id", "b" + rowId + colId);
-            cell.setAttribute("type", "text");
-            cell.setAttribute("onkeypress", "validate(event)");
-            cell.setAttribute("oninput", "checkInputSequence()");
-            cell.setAttribute("maxlength", "10");
-            row.appendChild(cell);
-        }
-        tableBody.appendChild(row);
-    }
-    matrixSecond.appendChild(tableBody);
-}
-
-function generateMatrixFirstSecond() {
-	document.getElementById("highlight").style.display= "inline";
-	document.getElementById("math").style.display="none";
-	document.getElementById("highlighterText").style.display="none";
-
-	document.getElementById("highlight").style.display = "inline";
-	generateMatrix();
-	matrixFirstValues();
-	matrixSecondValues();
-	calculateMatrixSum();
-	calculateMatrixFinalSum();
-	// console.log('siin');
-	createValues();
-}
-
-function generateValues() {
-	matrixFirstValues();
-	matrixSecondValues();
-	calculateMatrixSum();
-	calculateMatrixFinalSum();
-	// console.log('siin');
-	createValues();
-	
-}
-
-// **** FUNKTSIOON, MIS GENEREERIB TEISE MAATRIKSI ****
-/*function creatematrixSecond() {
+		for (var j = 0; j < mFirstY; j++) {
+			var rowId = i + 1;
+			var colId = j + 1;
+			var cell = document.createElement("input");
+			cell.setAttribute("id", "a" + rowId + colId);
+			cell.setAttribute("type", "text");
+			cell.setAttribute("onkeypress", "validate(event)");
+			cell.setAttribute("oninput", "checkInputSequence()");
+			cell.setAttribute("maxlength", "10");
+			row.appendChild(cell);
+		}
+		tableBody.appendChild(row);
+	}
+	matrixFirst.appendChild(tableBody);
 
 	var matrixSecondContainer = document.getElementById("matrixSecondContainer");
-
 	var matrixSecond = document.getElementById("matrixSecond");
 	var tableBody = document.createElement("tbody");
 
@@ -142,16 +83,40 @@ function generateValues() {
 			cell.setAttribute("id", "b" + rowId + colId);
 			cell.setAttribute("type", "text");
 			cell.setAttribute("onkeypress", "validate(event)");
-			cell.setAttribute("onblur", "checkInputSequenceB()");
-			//cell.setAttribute("onkeypress", "return validate(this, event)");//<--TÖÖTAB
+			cell.setAttribute("oninput", "checkInputSequence()");
 			cell.setAttribute("maxlength", "10");
 			row.appendChild(cell);
 		}
 		tableBody.appendChild(row);
 	}
 	matrixSecond.appendChild(tableBody);
+}
 
-}*/
+function generateMatrixFirstSecond() {
+	document.getElementById("highlight").style.display = "inline";
+	document.getElementById("math").style.display = "none";
+	document.getElementById("highlighterText").style.display = "none";
+
+	document.getElementById("highlight").style.display = "inline";
+	generateMatrix();
+	matrixFirstValues();
+	matrixSecondValues();
+	calculateMatrixSum();
+	calculateMatrixFinalSum();
+	createValues();
+}
+
+function generateValues() {
+	matrixFirstValues();
+	matrixSecondValues();
+	calculateMatrixSum();
+	calculateMatrixFinalSum();
+	createValues();
+
+}
+
+// **** FUNKTSIOON, MIS GENEREERIB TEISE MAATRIKSI ****
+
 
 function createValues() {
 	var mathDiv = document.getElementById('math');
@@ -164,7 +129,6 @@ function createValues() {
 		var j = matrixSecondValues();
 		var k = calculateMatrixSum();
 		var l = calculateMatrixFinalSum();
-		// console.log(l);
 
 		MathJax.Hub.Queue(["Text", math, "\\begin{bmatrix}" + i + "\\end{bmatrix} \\times \\begin{bmatrix}" + j + "\\end{bmatrix} = \\begin{bmatrix}" + k + "\\end{bmatrix} = \\begin{bmatrix}" + l + "\\end{bmatrix}"]);
 		MathJax.Hub.Queue(function () {
@@ -173,30 +137,11 @@ function createValues() {
 	});
 };
 
-/*
-function createMatrixThird() {
-    var mathDiv = document.getElementById('math');
-    var displayDiv = document.getElementById('display');
 
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "math"]);
-    MathJax.Hub.Queue(function() {
-        var math = MathJax.Hub.getAllJax("MathDiv")[0];
-        var i = matrixFirstValues();
-        var j = matrixSecondValues();
-        var k = calculateMatrixSum();
-        var l = calculateMatrixFinalSum();
-        MathJax.Hub.Queue(["Text", math, "\\begin{bmatrix}" + i + "\\end{bmatrix} \\times \\begin{bmatrix}" + j + "\\end{bmatrix} = \\begin{bmatrix}" + k + "\\end{bmatrix} = \\begin{bmatrix}" + l + "\\end{bmatrix}"]);
-        //\\begin{bmatrix} {"+i+"}&{"+j+"}&0\\\\0&{"+i+"}&{"+j+"}\\\\{"+j+"}&0&{"+i+"}\\\end{bmatrix}
-        MathJax.Hub.Queue(function() {
-            displayDiv.innerHTML = mathDiv.innerHTML;
-        });
-    });
-}
-*/
 
 //Loendab esimeses maatriksis olevad arvud kokku, ning viib mathJax kujule
 function matrixFirstValues() {
-var answerString = "";
+	var answerString = "";
 	var table = document.getElementById('matrixFirst');
 	for (var r = 0, n = table.rows.length; r < n; r++) {
 		if (r >= 1) {
@@ -236,8 +181,7 @@ var answerString = "";
 			} else if (Cell.charAt(0) === "-") {
 				Cell = "(" + Cell + ")" + "&";
 				answerString += Cell;
-			}
-			else {
+			} else {
 				var Cell = document.getElementById("a" + rowId + colId).value + "&";
 				answerString += Cell;
 			}
@@ -254,7 +198,7 @@ var answerString = "";
 
 //Viib teises maatriksis olevad arvud MatJax kujule
 function matrixSecondValues() {
-    var answerString = "";
+	var answerString = "";
 	var table = document.getElementById('matrixSecond');
 	for (var r = 0, n = table.rows.length; r < n; r++) {
 		if (r >= 1) {
@@ -295,9 +239,7 @@ function matrixSecondValues() {
 			} else if (Cell.charAt(0) === "-") {
 				Cell = "(" + Cell + ")" + "&";
 				answerString += Cell;
-			}
-			//if (Cell.charAt(0)!== "-" && Cell.charAt(pos)!=="/")
-			else {
+			} else {
 				var Cell = document.getElementById("b" + rowId + colId).value + "&";
 				answerString += Cell;
 			}
@@ -313,37 +255,19 @@ function matrixSecondValues() {
 }
 
 // **** KÄIVITAB ARVUTAMISE ****
-/*
-function calculateMatrix() {
-    if (mistakeA === false || mistakeB === false) {
-        document.getElementById("mistakeNotification").style.display = "inline";
-        //document.getElementById("mistakeNotification").innerHTML = "Kõik lahtrid ei ole korralikult täidetud";
-        // console.log("calculateMatrix IF mistakeA: " + mistakeA);
-        // console.log("calculateMatrix IF mistakeB: " + mistakeB);
-    } else {
-        calculateMatrixSum();
-        calculateMatrixFinalSum();
-        createMatrixThird();
-
-        document.getElementById("matrixAnswerContainer").style.display = "none"
-        document.getElementById("matrixFinalAnswerContainer").style.display = "none";
-        //document.getElementById("checkAnswer").style.display = "none";
-    }
-}
-*/
 
 //sama mis eelmine, aga peidab eelmise lahenduse ja  nupud
 function calculateNextMatrix() {
-    calculateMatrixSum();
-    calculateMatrixFinalSum();
-    createMatrixThird();
+	calculateMatrixSum();
+	calculateMatrixFinalSum();
+	createMatrixThird();
 
-    document.getElementById("matrixAnswerContainer").style.display = "none"
-    document.getElementById("matrixFinalAnswerContainer").style.display = "none";
-    document.getElementById("matrixFirstContainer").style.display = "none";
-    document.getElementById("matrixSecondContainer").style.display = "none";
-    document.getElementById("checkAnswer").style.display = "none";
-    document.getElementById("calculateNext").style.display = "none";
+	document.getElementById("matrixAnswerContainer").style.display = "none"
+	document.getElementById("matrixFinalAnswerContainer").style.display = "none";
+	document.getElementById("matrixFirstContainer").style.display = "none";
+	document.getElementById("matrixSecondContainer").style.display = "none";
+	document.getElementById("checkAnswer").style.display = "none";
+	document.getElementById("calculateNext").style.display = "none";
 }
 
 // **** GENEREERIB VAHETULEMUSE ****
@@ -385,18 +309,18 @@ function calculateMatrixSum() {
 					var fractionbracketstart = "(-";
 					var fractionbracketend = ")";
 					var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
-					a = a.replace("/","");
+					a = a.replace("/", "");
 					a = fractionbracket;
 
 				}
-				if (a.charAt(pos) === "/"){
+				if (a.charAt(pos) === "/") {
 					start = str.slice(0, pos);
 					start = "\\frac {" + start + "}";
 					var end;
 					var afterSlash = str.substr(str.indexOf("/") + 1);
 					end = "{" + afterSlash + "}";
 					a = start + end;
-					a = a.replace("/","");
+					a = a.replace("/", "");
 				}
 
 				if (a.charAt(0) === "-") {
@@ -419,7 +343,7 @@ function calculateMatrixSum() {
 					var fractionbracketstart = "(-";
 					var fractionbracketend = ")";
 					var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
-					fractionbracket = fractionbracket.replace("/","");
+					fractionbracket = fractionbracket.replace("/", "");
 					b = fractionbracket;
 				}
 				if (b.charAt(pos1) === "/") {
@@ -429,7 +353,7 @@ function calculateMatrixSum() {
 					var afterSlash = str.substr(str.indexOf("/") + 1);
 					end = "{" + afterSlash + "}";
 					b = start + end;
-					b = b.replace("/","");
+					b = b.replace("/", "");
 				}
 				if (b.charAt(0) === "-") {
 					b = "(" + b + ")";
@@ -482,7 +406,8 @@ function calculateMatrixFinalSum() {
 
 				var a = document.getElementById("a" + x + c).value;
 
-				var b = document.getElementById("b" + c + y).value;(b);
+				var b = document.getElementById("b" + c + y).value;
+				(b);
 				matrixAnswerString += a + "*" + b + " + ";
 				c++;
 			}
@@ -499,24 +424,22 @@ function calculateMatrixFinalSum() {
 			var n = num.toString();
 			var pos = n.indexOf("-");
 
-			if (abc.d === 1 && n.charAt(pos)!=="-") {
+			if (abc.d === 1 && n.charAt(pos) !== "-") {
 				finalString += abc.n;
-			} 
-			if(abc.d ===1 && n.charAt(pos)==="-"){
+			}
+			if (abc.d === 1 && n.charAt(pos) === "-") {
 				abc.n = "-" + abc.n;
 				finalString += abc.n;
 			}
-			if(n.charAt(pos)==="-" && abc.d !== 1){
-					reduction = reduce(abc.n,abc.d);
-					start = "\\frac {" + abc.n + "}";
-					var end = "{" + abc.d + "}"
-					var fractionbracketstart = "(-";
-					var fractionbracketend = ")";
-					var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
-					finalString += fractionbracket;
-			}
-			
-			else if(abc.d !==1) {
+			if (n.charAt(pos) === "-" && abc.d !== 1) {
+				reduction = reduce(abc.n, abc.d);
+				start = "\\frac {" + abc.n + "}";
+				var end = "{" + abc.d + "}"
+				var fractionbracketstart = "(-";
+				var fractionbracketend = ")";
+				var fractionbracket = fractionbracketstart + start + end + fractionbracketend;
+				finalString += fractionbracket;
+			} else if (abc.d !== 1) {
 				reduction = reduce(abc.n, abc.d);
 				var numerator = "\\frac {" + abc.n + "}";
 				var denominator = "{" + abc.d + "}";
@@ -543,74 +466,64 @@ $(document).ready(function () {
 		timer = window.setTimeout(function () {
 			generateValues();
 		}, 500);
-		// console.log("midagi toimub");
 	});
 });
 
 function reduce(numerator, denominator) {
-    var gcd = function gcd(a, b) {
-        return b ? gcd(b, a % b) : a;
-    };
-    gcd = gcd(numerator, denominator);
-    return [numerator / gcd, denominator / gcd];
+	var gcd = function gcd(a, b) {
+		return b ? gcd(b, a % b) : a;
+	};
+	gcd = gcd(numerator, denominator);
+	return [numerator / gcd, denominator / gcd];
 }
 
 function checkInputSequence() {
-    checkA: for (var i = 0; i < mFirstX; i++) {
-        for (var j = 0; j < mFirstY; j++) {
-            var rowId = i + 1;
-            var colId = j + 1;
-            var numberA = document.getElementById("a" + rowId + colId).value;
-            //console.log(numberA);
-            if (numberA == "") {
-                // console.log("Kast A on tühi");
-                var inputColorA = document.getElementById("a" + rowId + colId);
-                inputColorA.style.backgroundColor = "";
-                mistakeA = false;
-                break checkA;
-            } else {
-                var regexA = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
-                var foundA = regexA.test(numberA);
-                // console.log("Kast A: " + foundA);
-                if (foundA === false) {
-                    var inputColorA = document.getElementById("a" + rowId + colId);
-                    inputColorA.style.backgroundColor = "red";
-                    mistakeA = false;
-                    document.getElementById("mistakeNotification").style.display = "inline";
-                    //document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
-                } else {
-                    var inputColorA = document.getElementById("a" + rowId + colId);
-                    inputColorA.style.backgroundColor = "";
-                    mistakeA = true;
-                    document.getElementById("mistakeNotification").style.display = "none";
-                }
-            }
-        }
-    }
+	checkA: for (var i = 0; i < mFirstX; i++) {
+		for (var j = 0; j < mFirstY; j++) {
+			var rowId = i + 1;
+			var colId = j + 1;
+			var numberA = document.getElementById("a" + rowId + colId).value;
+			if (numberA == "") {
+				var inputColorA = document.getElementById("a" + rowId + colId);
+				inputColorA.style.backgroundColor = "";
+				mistakeA = false;
+				break checkA;
+			} else {
+				var regexA = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
+				var foundA = regexA.test(numberA);
+				if (foundA === false) {
+					var inputColorA = document.getElementById("a" + rowId + colId);
+					inputColorA.style.backgroundColor = "red";
+					mistakeA = false;
+					document.getElementById("mistakeNotification").style.display = "inline";
+				} else {
+					var inputColorA = document.getElementById("a" + rowId + colId);
+					inputColorA.style.backgroundColor = "";
+					mistakeA = true;
+					document.getElementById("mistakeNotification").style.display = "none";
+				}
+			}
+		}
+	}
 
 	checkB: for (var i = 0; i < mSecondX; i++) {
 		for (var j = 0; j < mSecondY; j++) {
 			var rowId = i + 1;
 			var colId = j + 1;
 			var numberB = document.getElementById("b" + rowId + colId).value;
-			// console.log(numberB);
 			if (numberB == "") {
-				// console.log("Kast B on tühi");
 				mistakeB = false;
-				// console.log("checkInputSequenceB Tühi kast: " + mistakeB);
 				var inputColorB = document.getElementById("b" + rowId + colId);
 				inputColorB.style.backgroundColor = "";
 				break checkB;
 			} else {
 				var regexB = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
 				var foundB = regexB.test(numberB);
-				// console.log("Kast B: " + foundB);
 				if (foundB === false) {
 					var inputColorB = document.getElementById("b" + rowId + colId);
 					inputColorB.style.backgroundColor = "red";
 					mistakeB = false;
 					document.getElementById("mistakeNotification").style.display = "inline";
-					//document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
 				} else {
 					var inputColorB = document.getElementById("b" + rowId + colId);
 					inputColorB.style.backgroundColor = "";
@@ -621,90 +534,51 @@ function checkInputSequence() {
 		}
 	}
 
-	// console.log("Lõpus mistakeB: " + mistakeB);
-    // console.log("Lõpus mistakeA: " + mistakeA);
-    if (mistakeB === true && mistakeA === true) {
-        document.getElementById("mistakeNotification").style.display = "none";
-		document.getElementById("math").style.display="block";
-		document.getElementById("highlighterText").style.display="block";
-    }
+	if (mistakeB === true && mistakeA === true) {
+		document.getElementById("mistakeNotification").style.display = "none";
+		document.getElementById("math").style.display = "block";
+		document.getElementById("highlighterText").style.display = "block";
+	}
 }
 
-/*function checkInputSequenceB() {
-    for (var i = 0; i < mSecondX; i++) {
-        for (var j = 0; j < mSecondY; j++) {
-            var rowId = i + 1;
-            var colId = j + 1;
-            var numberB = document.getElementById("b" + rowId + colId).value;
-            console.log(numberB);
-            if (numberB == "") {
-                console.log("Kast B on tühi");
-                var inputColorB = document.getElementById("b" + rowId + colId);
-                inputColorB.style.backgroundColor = "";
-                mistakeB = false;
-            } else {
-                var regexB = /^(\-\d+\/\-\d+)$|^(\d+\/\-\d+)$|^(\-\d+\/\d+)$|^(\d+\/\d+)$|^(\d+)$|^(\-\d+)$/
-                var foundB = regexB.test(numberB);
-                console.log("Kast B: " + foundB);
-                if (foundB === false) {
-                    var inputColorB = document.getElementById("b" + rowId + colId);
-                    inputColorB.style.backgroundColor = "red";
-                    mistakeB = false;
-                    document.getElementById("mistakeNotification").style.display = "inline";
-                    document.getElementById("mistakeNotification").innerHTML = "Kusagil on viga";
-                } else {
-                    var inputColorB = document.getElementById("b" + rowId + colId);
-                    inputColorB.style.backgroundColor = "";
-                    mistakeB = true;
-                    document.getElementById("mistakeNotification").style.display = "none";
-                }
-            }
-
-        }
-    }
-    if (mistakeB === true && mistakeA === true) {
-        //console.log("Vigu ei ole");
-        document.getElementById("mistakeNotification").style.display = "none";
-    } else {
-        //console.log("Vigu on")
-    }
-}
-
-*/
 
 // **** LASEB SISESTADA AINULT NUMBREID JA ÜHE KALDKRIIPSU, ET SAAKS SISESTADA MURDE ****
 function validate(evt) {
-    key = evt.key;
-    var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
-    if (allowed.indexOf(evt.key) == -1) {
-        evt.preventDefault();
-        // console.log("EI LUBA");
-    }
-    // PRAEGUNE
-    if (evt.key === "/" && evt.target.value.indexOf('/') != -1) {
-        evt.preventDefault();
-    }
+	key = evt.key;
+	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "Tab", "Backspace"];
+	if (allowed.indexOf(evt.key) == -1) {
+		evt.preventDefault();
+	}
+	// PRAEGUNE
+	if (evt.key === "/" && evt.target.value.indexOf('/') != -1) {
+		evt.preventDefault();
+	}
 }
 
 
 var matrixFirstArray = [
-    [null]
+	[null]
 ];
 var matrixSecondArray = [
-    [null]
+	[null]
 ];
 var matrixPreAnswerArray = [
-    [null]
+	[null]
 ];
 
 function highlighter() {
-	document.getElementById("highlighterText").style.display= "inline";
-	matrixFirstArray = [[null]];
-	matrixSecondArray = [[null]];
-	matrixPreAnswerArray = [[null]];
+	document.getElementById("highlighterText").style.display = "inline";
+	matrixFirstArray = [
+		[null]
+	];
+	matrixSecondArray = [
+		[null]
+	];
+	matrixPreAnswerArray = [
+		[null]
+	];
 
 	var tableCells = document.getElementsByClassName("mjx-mtd");
-	//var startpoint = tableCells.length / 2;
 	var answerStartpoint = mFirstX * mFirstY + mSecondX * mSecondY;
 	var matrixPreAnswerSize = mFirstX * mSecondY;
 	var matrixFirstColumn = mFirstX;
@@ -743,32 +617,16 @@ function highlighter() {
 		matrixRow = [null];
 	}
 
-	/*
-	console.log("startpoint: " + startpoint);
-	console.log("rowStartpoint: " + rowStartpoint);
-	console.log("answerStartpoint: " + answerStartpoint);
-	console.log(matrixFirstArray);
-	console.log(matrixSecondArray);
-	console.log(matrixPreAnswerArray);
-	 */
-
 	var c = 1;
 	for (var x = 1; x <= mFirstX; x++) {
 		for (var y = 1; y <= mSecondY; y++) {
 			for (var i = 0; i < mFirstY; i++) {
-				(function() {
-						//console.log("1 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-						//console.log("c: " + c + " , x: " + x + " , y: " + y);
+				(function () {
 						var aID = matrixFirstArray[x][c];
-						//console.log("2 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-						//console.log("c: " + c + " , x: " + x + " , y: " + y);
 						var bID = matrixSecondArray[c][y];
-						//console.log("3 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
-						// console.log("c: " + c + " , x: " + x + " , y: " + y);
 						var cID = matrixPreAnswerArray[x][y];
 
 						highlight(aID, bID, cID);
-						// console.log("4 - " + "aID: " + aID + " , bID: " + bID + " , cID: " + cID);
 						c++;
 					}
 					());
@@ -780,28 +638,32 @@ function highlighter() {
 
 function highlight(aID, bID, cID) {
 
-    var tableCells = document.getElementsByClassName("mjx-mtd");
+	var tableCells = document.getElementsByClassName("mjx-mtd");
 
-    tableCells[cID].addEventListener("mouseover", function() {
-        tableCells[aID].style.color = "#f2cc10";
-        tableCells[bID].style.color = "#f2cc10";
-    });
+	tableCells[cID].addEventListener("mouseover", function () {
+		tableCells[aID].style.color = "#f2cc10";
+		tableCells[bID].style.color = "#f2cc10";
+	});
 
-    tableCells[cID].addEventListener("mouseleave", function() {
-        tableCells[aID].style.color = "black";
-        tableCells[bID].style.color = "black";
-    });
+	tableCells[cID].addEventListener("mouseleave", function () {
+		tableCells[aID].style.color = "black";
+		tableCells[bID].style.color = "black";
+	});
 
 }
 
 //PÄRAST KINDLASTI VÄLJA KOMENTEERIDA
 //täidab testimiseks väljad
-document.addEventListener("keypress", function(e) {
-    if (e.key === "f") { fill() }
+document.addEventListener("keypress", function (e) {
+	if (e.key === "f") {
+		fill()
+	}
 })
 
 function fill() {
-    mistakeA = true;
-    mistakeB = true;
-    document.querySelectorAll("tr > *").forEach(function(element) { element.value = Math.floor(Math.random() * 300) })
+	mistakeA = true;
+	mistakeB = true;
+	document.querySelectorAll("tr > *").forEach(function (element) {
+		element.value = Math.floor(Math.random() * 300)
+	})
 }
