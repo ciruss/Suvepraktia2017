@@ -26,7 +26,6 @@ var timer;
 // **** ÜLDINE FUNKTSIOON MAATRIKSITE GENEREERIMISEKS ****
 
 function generateMatrix() {
-	//VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
     mistakeA = false;
     mistakeB = false;
 
@@ -68,7 +67,7 @@ function generateMatrix() {
 
 // **** FUNKTSIOON, MIS GENEREERIB ESIMESE MAATRIKSI ****
 function createMatrix() {
-
+//VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
     var matrixFirstContainer = document.getElementById("matrixFirstContainer");
     var matrixFirst = document.getElementById("matrixFirst");
     var tableBody = document.createElement("tbody");
