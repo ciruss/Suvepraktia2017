@@ -154,10 +154,6 @@ table {
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
-.tooltip span {
-    display: none;
-}
-
 #display {
     display: none;
 }
