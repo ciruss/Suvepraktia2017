@@ -169,7 +169,7 @@ button:hover {
     color: white;
 }
 
-@media only screen and (max-width: 1566px) {
+@media only screen and (max-width: 1666px) {
     .topnav a {
         font-size: 25px;
     }
