@@ -206,7 +206,7 @@ button:hover {
 #highlight {
 	display: none;
 }
-@media only screen and (max-width: 1366px) {
+@media only screen and (max-width: 1466px) {
     .topnav a {
         font-size:25px;
     }

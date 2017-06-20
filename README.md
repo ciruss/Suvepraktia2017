@@ -7,6 +7,7 @@ Kliendi soov oli saada mugav ja lihtne maatriksite kalkulaator, mida saaks meies
 Johan Laas, Heleri Mändla, Sten-Erik Tool, Karl-Erik Borkmann ja Mattias Blehner.
 
 ## Kasutatud tehnoloogiad
+MathJax, jQuery raamistik.
 
 ## Litsents
 Copyright 2017 Ryhm13
@@ -26,3 +27,8 @@ limitations under the License.
 ## Ekraanitõmmis
 
 ![Ekraanitõmmis1](screenshots/Capture0.PNG "Ekraanitõmmis1")
+
+## Paigaldusjuhend
+
+https://github.com/ciruss/Suvepraktia2017 - 
+Sellelt lehelt on võimalik alla laadida kood maatriksite arvutamise veebilehe jaoks. Selleks vajutada nuppu "Clone or download", sellepeale tekib eraldi menüü, kust tuleb vajutada "Download ZIP". Siis tõmbab alla kokkupakitud failid koodist. Edasi tuleks see .zip fail lahti pakkida ning tõsta need failid enda poolt valitud veebiserverisse.
