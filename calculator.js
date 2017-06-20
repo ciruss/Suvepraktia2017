@@ -41,7 +41,6 @@ function generateMatrix() {
         }
     } else {
         alert("Ei saa genereerida, muuda maatriksite suuruseid!");
-        document.getElementById("highlight").style.display = "none";
     }
 }
 
@@ -650,4 +649,20 @@ function highlight(aID, bID, cID) {
         tableCells[bID].style.color = "#666666";
     });
 
+}
+
+//PÄRAST KINDLASTI VÄLJA KOMENTEERIDA
+//täidab testimiseks väljad
+document.addEventListener("keypress", function(e) {
+    if (e.key === "f") {
+        fill()
+    }
+})
+
+function fill() {
+    mistakeA = true;
+    mistakeB = true;
+    document.querySelectorAll("tr > *").forEach(function(element) {
+        element.value = Math.floor(Math.random() * 300)
+    })
 }
