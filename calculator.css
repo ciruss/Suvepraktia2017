@@ -146,7 +146,9 @@ table,
     overflow: auto;
     overflow-y: hidden;
     margin:10px 15px;
-    height:160px;
+	padding:20px;
+	height:250px;
+    
 }
 
 #footer {
