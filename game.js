@@ -33,7 +33,7 @@ function setPlayerName() {
 		playerName = "Nimetu";
 	} else {
 		document.getElementById("playerName").innerHTML = "NIMI: " + playerName;
-		startTimer(60);
+		startTimer(600);
 		//generateExerciseMatrix();
 		generateRandomExerciseMatrix();
 	}	
