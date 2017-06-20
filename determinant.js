@@ -18,6 +18,7 @@ var mistakes = false;
 function generateMatrixForDeterminant() {
 
     document.getElementById("mistakeNotification").style.display = "none";
+	document.getElementById("determinantTable").style.display="none";
 
     matrixSize = document.getElementById("determinant").value;
 	//console.log("matrixSize: "+matrixSize);
@@ -673,10 +674,21 @@ function determinantForFive() {
     return matrixDetAnswer;
 }
 
+
+
 function displayTable() {
-    document.getElementById("determinantTable").style.display = "block";
-    //document.getElementById("checkAnswerDeterminant").style.display="none";
-    //document.getElementById("showCalculations").style.display="none";
+   
+ 
+    var x = document.getElementById('determinantTable');
+    if (x.style.display === 'none') {
+		document.getElementById("showCalculations").innerHTML="peida tabel";
+        x.style.display = 'block';
+    } else {
+		document.getElementById("showCalculations").innerHTML="kuva vahetulemused";
+        x.style.display = 'none';
+    }
+
+
 }
 
 /*
