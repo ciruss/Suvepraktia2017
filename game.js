@@ -154,7 +154,7 @@ function generateRandomExerciseMatrix() {
 // **** FUNKTSIOON, MIS GENEREERIB ESIMESE HARJUTUSMAATRIKSI ****
 
 function createExerciseMatrixFirst() {
-
+//VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
 	var exerciseMatrixFirstContainer = document.getElementById("exerciseMatrixFirstContainer");
 	var EmFirstWidth = 42 * EmFirstY;
 	var EmFirstHeight = 28 * EmFirstX;
@@ -211,7 +211,7 @@ function createexerciseMatrixSecond() {
 
 // **** FUNKTSIOON, MIS GENEREERIB VAHETULEMUSTE MAATRIKSI ****
 function createExerciseMatrixPreAnswer() {
-
+//VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
 	var exerciseMatrixPreAnswerContainer = document.getElementById("exerciseMatrixPreAnswerContainer");
 	var EmAnswerWidth = 42 * EmSecondY * 3;
 	var EmAnswerHeight = 28 * EmFirstX;
@@ -249,7 +249,7 @@ function createExerciseMatrixPreAnswer() {
 
 // **** FUNKTSIOON, MIS GENEREERIB VASTUSEMAATRIKSI ****
 function createExerciseMatrixAnswer() {
-
+//VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
 	var exerciseMatrixAnswerContainer = document.getElementById("exerciseMatrixAnswerContainer");
 	var EmAnswerWidth = 42 * EmSecondY;
 	var EmAnswerHeight = 28 * EmFirstX;

@@ -17,8 +17,9 @@ var mistakes = false;
 
 function generateMatrixForDeterminant() {
 
-    document.getElementById("mistakeNotification").style.display = "none";
-	document.getElementById("determinantTable").style.display="none";
+  document.getElementById("mistakeNotification").style.display = "none";
+	document.getElementById("math").style.display = "none"
+	document.getElementById("determinantTable").style.display="none"
 
     matrixSize = document.getElementById("determinant").value;
 	//console.log("matrixSize: "+matrixSize);
@@ -44,7 +45,7 @@ function generateMatrix(){
 } 
 
 function createMatrixForDeterminant() {
-
+	//VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
     var matrixDeterminantContainer = document.getElementById("matrixDeterminantContainer");
     /*
 	var mWidth = 42 * matrixSize;
@@ -674,21 +675,10 @@ function determinantForFive() {
     return matrixDetAnswer;
 }
 
-
-
 function displayTable() {
-   
- 
-    var x = document.getElementById('determinantTable');
-    if (x.style.display === 'none') {
-		document.getElementById("showCalculations").innerHTML="peida tabel";
-        x.style.display = 'block';
-    } else {
-		document.getElementById("showCalculations").innerHTML="kuva vahetulemused";
-        x.style.display = 'none';
-    }
-
-
+    document.getElementById("determinantTable").style.display = "block";
+    //document.getElementById("checkAnswerDeterminant").style.display="none";
+    //document.getElementById("showCalculations").style.display="none";
 }
 
 /*
