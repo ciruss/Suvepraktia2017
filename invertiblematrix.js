@@ -506,54 +506,61 @@ function determinantFor5() {
 	detValues = "";
 	return matrixDetAnswer;
 }
-
+/*
 function calculateInvertibleMatrix() {
-	
+	/*
 	if(invertibleMatrixSize === 2) {
 		var determinant = determinantFor2();
 		console.log(determinant);
 		if(determinant === 0) {
 			console.log("ei saa arvutada, 0-ga jagamine");
-			alert("Ei saa arvutada, 0-ga jagamine");
+			//var test = alert("Ei saa arvutada, 0-ga jagamine");
+			//console.log("test: "+test)
+			//if (test === true){
+				//location.reload();
+			//}
 		} else {
 			invertibleMatrix(determinant);
 		}
-	}
-	
-	if(invertibleMatrixSize === 3) {
+	} 
+	else if(invertibleMatrixSize === 3) {
 		var determinant = determinantFor3();
 		console.log(determinant);
 		if(determinant === 0) {
-			console.log("ei saa arvutada, 0-ga jagamine")
+			console.log("ei saa arvutada, 0-ga jagamine");
+			alert("Ei saa arvutada, 0-ga jagamine");
+			location.reload();
 		} else {
 			invertibleMatrix(determinant);
 		}
-	}
-	
-	if(invertibleMatrixSize === 4) {
+	} else if(invertibleMatrixSize === 4) {
 		var determinant = determinantFor4();
 		console.log(determinant);
 		if(determinant === 0) {
-			console.log("ei saa arvutada, 0-ga jagamine")
+			console.log("ei saa arvutada, 0-ga jagamine");
+			alert("Ei saa arvutada, 0-ga jagamine");
+			location.reload();
 		} else {
 			invertibleMatrix(determinant);
 		}
-	}
-	
-	if(invertibleMatrixSize === 5) {
+	} else if(invertibleMatrixSize === 5) {
 		var determinant = determinantFor5();
 		console.log(determinant);
 		if(determinant === 0) {
-			console.log("ei saa arvutada, 0-ga jagamine")
+			console.log("ei saa arvutada, 0-ga jagamine");
+			alert("Ei saa arvutada, 0-ga jagamine");
+			location.reload();
 		} else {
 			invertibleMatrix(determinant);
 		}
 	}
+	*/
 	
-	document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
-	document.getElementById("answerHeadline").style.display="inline-block";
+	//document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
+	//document.getElementById("answerHeadline").style.display="inline-block";
 	
-}
+//}
+
 
 var mainMatrixArray = [null];
 
@@ -803,9 +810,64 @@ function checkInputSequence() {
         //document.getElementById("mistakeNotification").style.display = "block",
 		mistakes = true;
 		//calculateDeterminant();
-		calculateInvertibleMatrix();
-		createMatrix3();
+		
+		if(invertibleMatrixSize === 2) {
+			var determinant = determinantFor2();
+			console.log(determinant);
+			if(determinant === 0) {
+				console.log("ei saa arvutada, 0-ga jagamine");
+				alert("Ei saa arvutada, 0-ga jagamine");
+			} else {
+				invertibleMatrix(determinant);
+				createMatrix3();
+				document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
+				document.getElementById("answerHeadline").style.display="inline-block";
+			}
+		} 
+		else if(invertibleMatrixSize === 3) {
+			var determinant = determinantFor3();
+			console.log(determinant);
+			if(determinant === 0) {
+				console.log("ei saa arvutada, 0-ga jagamine");
+				alert("Ei saa arvutada, 0-ga jagamine");
+			} else {
+				invertibleMatrix(determinant);
+				createMatrix3();
+				document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
+				document.getElementById("answerHeadline").style.display="inline-block";
+			}
+		} else if(invertibleMatrixSize === 4) {
+			var determinant = determinantFor4();
+			console.log(determinant);
+			if(determinant === 0) {
+				console.log("ei saa arvutada, 0-ga jagamine");
+				alert("Ei saa arvutada, 0-ga jagamine");
+			} else {
+				invertibleMatrix(determinant);
+				createMatrix3();
+				document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
+				document.getElementById("answerHeadline").style.display="inline-block";
+			}
+		} else if(invertibleMatrixSize === 5) {
+			var determinant = determinantFor5();
+			console.log(determinant);
+			if(determinant === 0) {
+				console.log("ei saa arvutada, 0-ga jagamine");
+				alert("Ei saa arvutada, 0-ga jagamine");
+			} else {
+				invertibleMatrix(determinant);
+				createMatrix3();
+				document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
+				document.getElementById("answerHeadline").style.display="inline-block";
+			}
+		}	
+		//calculateInvertibleMatrix();
+		//createMatrix3();
+		
 		document.getElementById("mistakeNotification").style.display = "none";
+		document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
+		document.getElementById("answerHeadline").style.display="inline-block";
+		
     } else {
         ////console.log("vigu on");
     }
@@ -871,7 +933,6 @@ function createMatrix3() {
 		var j = matrix2MathJax();
 		var f = matrix3MathJax();
 		var m = determinantForArray();
-		console.log(m)
 		MathJax.Hub.Queue(["Text", math, m+"\\begin{bmatrix}"+ l +"\\end{bmatrix}^T ="+m+"\\begin{bmatrix}"+i+"\\end{bmatrix}^T = "+m+"\\begin{bmatrix}"+j+"\\end{bmatrix} = \\begin{bmatrix}"+f+"\\end{bmatrix}"]);// = \\being{bmatrix}"+f+"\\end{bmatrix}"
         //\\begin{bmatrix} {"+i+"}&{"+j+"}&0\\\\0&{"+i+"}&{"+j+"}\\\\{"+j+"}&0&{"+i+"}\\\end{bmatrix}
 		MathJax.Hub.Queue(function() {
@@ -990,6 +1051,7 @@ function determinantForArray(){
 	var str = a;
 	var pos = str.indexOf("/");
 	var minuspos = str.indexOf("-");
+	if(a.charAt(minuspos)=== "-" && a.charAt(pos)==="/"){
 		var str2 = str.replace("-","");
 		var start = str2.slice(0,pos-1);
 		start = "\\frac {" + start + "}";
@@ -1000,6 +1062,7 @@ function determinantForArray(){
 		var fractionBracketEnd = ")";
 		var fractionBracket = fractionBracketStart + start + end + fractionBracketEnd;
 		answerString += fractionBracket;
+	}
 finalString += answerString;
 return finalString;
 }
@@ -1049,12 +1112,10 @@ function finalMatrixTexFormat(){
 						end = "{" + afterSlash + "}&";
 						a = start + end;
 						answerString += a;
-					}else{
+					} else {
 						answerString += a;
 						answerString += "&";
 					}
-
-
 				}
 			strLength = answerString.length;
 			answerString = (answerString.slice(0, strLength - 1));
@@ -1068,14 +1129,10 @@ function finalMatrixTexFormat(){
 		finalString += "~~~~~~";
 
 		answerString = "";
-
-
 	}
 	finalStrLength = finalString.length;
 	finalString = (finalString.slice(0, finalStrLength - 6));
 	finalString += "\\\\";
-	
-
 }
 finalStrLength = finalString.length;
 finalString = (finalString.slice(0, finalStrLength - 2));
