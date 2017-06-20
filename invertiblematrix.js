@@ -867,7 +867,6 @@ function determinantForArray() {
 	var str = a;
 	var pos = str.indexOf("/");
 	var minuspos = str.indexOf("-");
-	if (a.charAt(minuspos) === "-" && a.charAt(pos) === "/") {
 		var strTwo = str.replace("-", "");
 		var start = strTwo.slice(0, pos - 1);
 		start = "\\frac {" + start + "}";
@@ -878,7 +877,7 @@ function determinantForArray() {
 		var fractionBracketEnd = ")";
 		var fractionBracket = fractionBracketStart + start + end + fractionBracketEnd;
 		answerString += fractionBracket;
-	}
+	
 	finalString += answerString;
 	return finalString;
 }
