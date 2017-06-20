@@ -28,6 +28,7 @@ function generateMatrixForInvertibleM() {
 function createMatrixForInvertibleM() {
 	//VIIDE: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
 	document.getElementById("answerHeadline").style.display="inline";
+	document.getElementById("display").style.display="none";
 
 	var matrixInvertibleMContainer = document.getElementById("matrixInvertibleMContainer");
 	/*
@@ -72,19 +73,19 @@ function calculateDeterminant() {
 		var determinant = document.getElementById("determinant").value; 
 		
 		if(invertibleMatrixSize === 2) {
-			determinantFor2();
+			determinantForSecond();
 		}
 		
 		if(invertibleMatrixSize === 3) {
-			determinantFor3();
+			determinantForThird();
 		}
 		
 		if(invertibleMatrixSize === 4) {
-			determinantFor4();
+			determinantForFourth();
 		}
 		
 		if(invertibleMatrixSize === 5) {
-			determinantFor5();
+			determinantForFifth();
 		}
 		
 		//mistakes = false;
@@ -99,7 +100,7 @@ function calculateDeterminant() {
 */
 // **** FUNKTSIOONID PERMUTATSIOONIDE GENEREERIMISEKS ****
 
-function determinantFor2(smallMatrix) {
+function determinantForSecond(smallMatrix) {
 	
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 	
@@ -108,7 +109,7 @@ function determinantFor2(smallMatrix) {
 		
 		//console.log("tsykkel 1 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
 		
-		var detNumbers2 = [1, 2];
+		var detNumbersTwo = [1, 2];
 		var detNumbersTemp = [];
 		var detValuesTemp = "";
 		
@@ -117,12 +118,12 @@ function determinantFor2(smallMatrix) {
 			
 			//console.log("tsykkel 2 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
 			
-			var detNumbers1 = [];
+			var detNumbersOne = [];
 			for(var n1 = 0; n1 < 2; n1++) {
-				detNumbers1[n1] = detNumbers2[n1];
+				detNumbersOne[n1] = detNumbersTwo[n1];
 			}
-			detNumbers1.splice(i, 1);
-			detNumbersTemp = [detNumbers2[i], detNumbers1[j]];
+			detNumbersOne.splice(i, 1);
+			detNumbersTemp = [detNumbersTwo[i], detNumbersOne[j]];
 		}
 		
 		// siia inversioonid
@@ -134,23 +135,22 @@ function determinantFor2(smallMatrix) {
 		
 		if(smallMatrix) {
 			// console.log("maatriks");
-			var cellValue1 = smallMatrix[1][detNumbersTemp[0]];
-			var cellValue2 = smallMatrix[2][detNumbersTemp[1]];
+			var cellValueOne = smallMatrix[1][detNumbersTemp[0]];
+			var cellValueTwo = smallMatrix[2][detNumbersTemp[1]];
 			
 		} else {
 			
 			// console.log("input");
-			var cellValue1 = document.getElementById("a1" + detNumbersTemp[0]).value;
-			var cellValue2 = document.getElementById("a2" + detNumbersTemp[1]).value;
+			var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
+			var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
 			
 		}
 		
-		
 		if(inversionCount % 2 === 0) {
-			detValuesTemp += " + " + cellValue1 + "*" + cellValue2;
+			detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo;
 			detValues += detValuesTemp;
 		} else {
-			detValuesTemp += " - " + cellValue1 + "*" + cellValue2;
+			detValuesTemp += " - " + cellValueOne + "*" + cellValueTwo;
 			detValues += detValuesTemp;
 		}
 		
@@ -175,7 +175,7 @@ function determinantFor2(smallMatrix) {
 	return matrixDetAnswer;
 }
 
-function determinantFor3(smallMatrix) {
+function determinantForThird(smallMatrix) {
 	
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 	
@@ -184,7 +184,7 @@ function determinantFor3(smallMatrix) {
 		
 		//console.log("tsykkel 1 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
 		
-		var detNumbers3 = [1, 2, 3];
+		var detNumbersThree = [1, 2, 3];
 		var detNumbersTemp = [];
 		var detValuesTemp = "";
 		
@@ -194,11 +194,11 @@ function determinantFor3(smallMatrix) {
 			
 			//console.log("tsykkel 2 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
 			
-			var detNumbers2 = [];
+			var detNumbersTwo = [];
 			for(var n2 = 0; n2 < 3; n2++) {
-				detNumbers2[n2] = detNumbers3[n2];
+				detNumbersTwo[n2] = detNumbersThree[n2];
 			}
-			detNumbers2.splice(i, 1);
+			detNumbersTwo.splice(i, 1);
 			
 			
 			// kolmas tsükkel, mis määrab ära kolmanda numbri
@@ -206,12 +206,12 @@ function determinantFor3(smallMatrix) {
 				
 				//console.log("tsykkel 3 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
 				
-				var detNumbers1 = [];
+				var detNumbersOne = [];
 				for(var n1 = 0; n1 < 2; n1++) {
-					detNumbers1[n1] = detNumbers2[n1];
+					detNumbersOne[n1] = detNumbersTwo[n1];
 				}
-				detNumbers1.splice(j, 1);
-				detNumbersTemp = [detNumbers3[i], detNumbers2[j], detNumbers1[k]];
+				detNumbersOne.splice(j, 1);
+				detNumbersTemp = [detNumbersThree[i], detNumbersTwo[j], detNumbersOne[k]];
 			}
 			
 			// siia inversioonid
@@ -230,23 +230,23 @@ function determinantFor3(smallMatrix) {
 			if(smallMatrix) {
 				
 				// console.log("maatriks");
-				var cellValue1 = smallMatrix[1][detNumbersTemp[0]];
-				var cellValue2 = smallMatrix[2][detNumbersTemp[1]];
-				var cellValue3 = smallMatrix[3][detNumbersTemp[2]];
+				var cellValueOne = smallMatrix[1][detNumbersTemp[0]];
+				var cellValueTwo = smallMatrix[2][detNumbersTemp[1]];
+				var cellValueThree = smallMatrix[3][detNumbersTemp[2]];
 				
 			} else {
 				
 				// console.log("input");
-				var cellValue1 = document.getElementById("a1" + detNumbersTemp[0]).value;
-				var cellValue2 = document.getElementById("a2" + detNumbersTemp[1]).value;
-				var cellValue3 = document.getElementById("a3" + detNumbersTemp[2]).value;
+				var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
+				var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
+				var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
 			}
 			
 			if(inversionCount % 2 === 0) {
-				detValuesTemp += " + " + cellValue1 + "*" + cellValue2 + "*" + cellValue3;
+				detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree;
 				detValues += detValuesTemp;
 			} else {
-				detValuesTemp += " - " + cellValue1 + "*" + cellValue2 + "*" + cellValue3;
+				detValuesTemp += " - " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree;
 				detValues += detValuesTemp;
 			}
 			
@@ -272,7 +272,7 @@ function determinantFor3(smallMatrix) {
 	return matrixDetAnswer;
 }
 
-function determinantFor4(smallMatrix) {
+function determinantForFourth(smallMatrix) {
 	
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 	
@@ -281,7 +281,7 @@ function determinantFor4(smallMatrix) {
 		
 		//console.log("tsykkel 1 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
 		
-		var detNumbers4 = [1, 2, 3, 4];
+		var detNumbersFour = [1, 2, 3, 4];
 		var detNumbersTemp = [];
 		var detValuesTemp = "";
 		
@@ -290,34 +290,34 @@ function determinantFor4(smallMatrix) {
 			
 			//console.log("tsykkel 2 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
 			
-			var detNumbers3 = [];
+			var detNumbersThree = [];
 			for(var n3 = 0; n3 < 4; n3++) {
-				detNumbers3[n3] = detNumbers4[n3];
+				detNumbersThree[n3] = detNumbersFour[n3];
 			}
-			detNumbers3.splice(i, 1);
+			detNumbersThree.splice(i, 1);
 			
 			// kolmas tsükkel, mis määrab ära kolmanda numbri
 			for(var k = 0; k < 2; k++) {
 				
 				//console.log("tsykkel 3 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
 				
-				var detNumbers2 = [];
+				var detNumbersTwo = [];
 				for(var n2 = 0; n2 < 3; n2++) {
-					detNumbers2[n2] = detNumbers3[n2];
+					detNumbersTwo[n2] = detNumbersThree[n2];
 				}
-				detNumbers2.splice(j, 1);
+				detNumbersTwo.splice(j, 1);
 				
 				// neljas tsükkel, mis määrab ära neljanda numbri
 				for(var l = 0; l < 1; l++) {
 					
 					//console.log("tsykkel 4 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l);
 					
-					var detNumbers1 = [];
+					var detNumbersOne = [];
 					for(n1 = 0; n1 < 2; n1++) {
-						detNumbers1[n1] = detNumbers2[n1];
+						detNumbersOne[n1] = detNumbersTwo[n1];
 					}
-					detNumbers1.splice(k, 1);
-					detNumbersTemp = [detNumbers4[i], detNumbers3[j], detNumbers2[k], detNumbers1[l]];
+					detNumbersOne.splice(k, 1);
+					detNumbersTemp = [detNumbersFour[i], detNumbersThree[j], detNumbersTwo[k], detNumbersOne[l]];
 				}
 				
 				// siia inversioonid
@@ -342,25 +342,25 @@ function determinantFor4(smallMatrix) {
 				if(smallMatrix) {
 				
 					// console.log("maatriks");
-					var cellValue1 = smallMatrix[1][detNumbersTemp[0]];
-					var cellValue2 = smallMatrix[2][detNumbersTemp[1]];
-					var cellValue3 = smallMatrix[3][detNumbersTemp[2]];
-					var cellValue4 = smallMatrix[4][detNumbersTemp[3]];
+					var cellValueOne = smallMatrix[1][detNumbersTemp[0]];
+					var cellValueTwo = smallMatrix[2][detNumbersTemp[1]];
+					var cellValueThree = smallMatrix[3][detNumbersTemp[2]];
+					var cellValueFour = smallMatrix[4][detNumbersTemp[3]];
 					
 				} else {
 					
 					// console.log("input");
-					var cellValue1 = document.getElementById("a1" + detNumbersTemp[0]).value;
-					var cellValue2 = document.getElementById("a2" + detNumbersTemp[1]).value;
-					var cellValue3 = document.getElementById("a3" + detNumbersTemp[2]).value;
-					var cellValue4 = document.getElementById("a4" + detNumbersTemp[3]).value;
+					var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
+					var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
+					var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
+					var cellValueFour = document.getElementById("a4" + detNumbersTemp[3]).value;
 				}
 				
 				if(inversionCount % 2 === 0) {
-					detValuesTemp += " + " + cellValue1 + "*" + cellValue2 + "*" + cellValue3 + "*" + cellValue4;
+					detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour;
 					detValues += detValuesTemp;
 				} else {
-					detValuesTemp += " - " + cellValue1 + "*" + cellValue2 + "*" + cellValue3 + "*" + cellValue4;
+					detValuesTemp += " - " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour;
 					detValues += detValuesTemp;
 				}
 				
@@ -386,7 +386,7 @@ function determinantFor4(smallMatrix) {
 	return matrixDetAnswer;
 }
 
-function determinantFor5() {
+function determinantForFifth() {
 	
 	var matrixDeterminantAnswer = document.getElementById("matrixDeterminantAnswer");
 	
@@ -395,7 +395,7 @@ function determinantFor5() {
 		
 		//console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
 		
-		var detNumbers5 = [1, 2, 3, 4, 5];
+		var detNumbersFive = [1, 2, 3, 4, 5];
 		var detNumbersTemp = [];
 		var detValuesTemp = "";
 		
@@ -405,45 +405,45 @@ function determinantFor5() {
 			
 			//console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
 			
-			var detNumbers4 = [];
+			var detNumbersFour = [];
 			for(var n4 = 0; n4 < 5; n4++) {
-				detNumbers4[n4] = detNumbers5[n4];
+				detNumbersFour[n4] = detNumbersFive[n4];
 			}
-			detNumbers4.splice(i, 1);
+			detNumbersFour.splice(i, 1);
 			
 			// kolmas tsükkel, mis määrab ära kolmanda numbri
 			for(var k = 0; k < 3; k++) {
 				
 				//console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
 				
-				var detNumbers3 = [];
+				var detNumbersThree = [];
 				for(var n3 = 0; n3 < 4; n3++) {
-					detNumbers3[n3] = detNumbers4[n3];
+					detNumbersThree[n3] = detNumbersFour[n3];
 				}
-				detNumbers3.splice(j, 1);
+				detNumbersThree.splice(j, 1);
 				
 				// neljas tsükkel, mis määrab ära neljanda numbri
 				for(var l = 0; l < 2; l++) {
 					
 					//console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
 					
-					var detNumbers2 = [];
+					var detNumbersTwo = [];
 					for(n2 = 0; n2 < 3; n2++) {
-						detNumbers2[n2] = detNumbers3[n2];
+						detNumbersTwo[n2] = detNumbersThree[n2];
 					}
-					detNumbers2.splice(k, 1);
+					detNumbersTwo.splice(k, 1);
 					
 					// viies tsükkel, mis määrab ära viienda numbri
 					for(var m = 0; m < 1; m++) {
 					
 					//console.log("tsykkel 5 -> i: " + i + ", j: " + j + ", k: " + k + ", l: " + l + ", m: " + m);
 					
-					var detNumbers1 = [];
+					var detNumbersOne = [];
 					for(n1 = 0; n1 < 2; n1++) {
-						detNumbers1[n1] = detNumbers2[n1];
+						detNumbersOne[n1] = detNumbersTwo[n1];
 					}
-					detNumbers1.splice(l, 1);
-					detNumbersTemp = [detNumbers5[i], detNumbers4[j], detNumbers3[k], detNumbers2[l], detNumbers1[m]];
+					detNumbersOne.splice(l, 1);
+					detNumbersTemp = [detNumbersFive[i], detNumbersFour[j], detNumbersThree[k], detNumbersTwo[l], detNumbersOne[m]];
 					
 					
 					// siia inversioonid
@@ -471,17 +471,17 @@ function determinantFor5() {
 						}
 					}
 					
-					var cellValue1 = document.getElementById("a1" + detNumbersTemp[0]).value;
-					var cellValue2 = document.getElementById("a2" + detNumbersTemp[1]).value;
-					var cellValue3 = document.getElementById("a3" + detNumbersTemp[2]).value;
-					var cellValue4 = document.getElementById("a4" + detNumbersTemp[3]).value;
-					var cellValue5 = document.getElementById("a5" + detNumbersTemp[4]).value;
+					var cellValueOne = document.getElementById("a1" + detNumbersTemp[0]).value;
+					var cellValueTwo = document.getElementById("a2" + detNumbersTemp[1]).value;
+					var cellValueThree = document.getElementById("a3" + detNumbersTemp[2]).value;
+					var cellValueFour = document.getElementById("a4" + detNumbersTemp[3]).value;
+					var cellValueFive = document.getElementById("a5" + detNumbersTemp[4]).value;
 					
 					if(inversionCount % 2 === 0) {
-						detValuesTemp += " + " + cellValue1 + "*" + cellValue2 + "*" + cellValue3 + "*" + cellValue4 + "*" + cellValue5;
+						detValuesTemp += " + " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour + "*" + cellValueFive;
 						detValues += detValuesTemp;
 					} else {
-						detValuesTemp += " - " + cellValue1 + "*" + cellValue2 + "*" + cellValue3 + "*" + cellValue4 + "*" + cellValue5;
+						detValuesTemp += " - " + cellValueOne + "*" + cellValueTwo + "*" + cellValueThree + "*" + cellValueFour + "*" + cellValueFive;
 						detValues += detValuesTemp;
 					}
 					
@@ -510,7 +510,7 @@ function determinantFor5() {
 function calculateInvertibleMatrix() {
 	/*
 	if(invertibleMatrixSize === 2) {
-		var determinant = determinantFor2();
+		var determinant = determinantForSecond();
 		console.log(determinant);
 		if(determinant === 0) {
 			console.log("ei saa arvutada, 0-ga jagamine");
@@ -524,7 +524,7 @@ function calculateInvertibleMatrix() {
 		}
 	} 
 	else if(invertibleMatrixSize === 3) {
-		var determinant = determinantFor3();
+		var determinant = determinantForThird();
 		console.log(determinant);
 		if(determinant === 0) {
 			console.log("ei saa arvutada, 0-ga jagamine");
@@ -534,7 +534,7 @@ function calculateInvertibleMatrix() {
 			invertibleMatrix(determinant);
 		}
 	} else if(invertibleMatrixSize === 4) {
-		var determinant = determinantFor4();
+		var determinant = determinantForFourth();
 		console.log(determinant);
 		if(determinant === 0) {
 			console.log("ei saa arvutada, 0-ga jagamine");
@@ -544,7 +544,7 @@ function calculateInvertibleMatrix() {
 			invertibleMatrix(determinant);
 		}
 	} else if(invertibleMatrixSize === 5) {
-		var determinant = determinantFor5();
+		var determinant = determinantForFifth();
 		console.log(determinant);
 		if(determinant === 0) {
 			console.log("ei saa arvutada, 0-ga jagamine");
@@ -657,7 +657,7 @@ function invertibleMatrix(determinant) {
 			if(invertibleMatrixSize === 3) {
 				// console.log("kolmandat jarku");
 				var smallMatrix = tempMatrix.slice();
-				var smallMatrixDetAnswer = determinantFor2(smallMatrix);
+				var smallMatrixDetAnswer = determinantForSecond(smallMatrix);
 				var smallMatrixAnswer = cellMultiplier * smallMatrixDetAnswer;
 				finalMatrixDetAnswers.push(smallMatrixAnswer);
 				// console.log("matrix answer: " + smallMatrixAnswer);
@@ -666,7 +666,7 @@ function invertibleMatrix(determinant) {
 			if(invertibleMatrixSize === 4) {
 				// console.log("neljandat jarku");
 				var smallMatrix = tempMatrix.slice();
-				var smallMatrixDetAnswer = determinantFor3(smallMatrix);
+				var smallMatrixDetAnswer = determinantForThird(smallMatrix);
 				var smallMatrixAnswer = cellMultiplier * smallMatrixDetAnswer;
 				finalMatrixDetAnswers.push(smallMatrixAnswer);
 				// console.log("matrix answer: " + smallMatrixAnswer);
@@ -675,7 +675,7 @@ function invertibleMatrix(determinant) {
 			if(invertibleMatrixSize === 5) {
 				// console.log("neljandat jarku");
 				var smallMatrix = tempMatrix.slice();
-				var smallMatrixDetAnswer = determinantFor4(smallMatrix);
+				var smallMatrixDetAnswer = determinantForFourth(smallMatrix);
 				var smallMatrixAnswer = cellMultiplier * smallMatrixDetAnswer;
 				finalMatrixDetAnswers.push(smallMatrixAnswer);
 				// console.log("matrix answer: " + smallMatrixAnswer);
@@ -700,8 +700,6 @@ function invertibleMatrix(determinant) {
 	var finalAnswerArray = invMatrixFinalAnswer(matrixMultiplier);
 	
 }
-
-
 
 var invMatrixPreAnswerArray = [];
 
@@ -812,57 +810,61 @@ function checkInputSequence() {
 		//calculateDeterminant();
 		
 		if(invertibleMatrixSize === 2) {
-			var determinant = determinantFor2();
+			var determinant = determinantForSecond();
 			console.log(determinant);
 			if(determinant === 0) {
 				console.log("ei saa arvutada, 0-ga jagamine");
 				alert("Ei saa arvutada, 0-ga jagamine");
 			} else {
 				invertibleMatrix(determinant);
-				createMatrix3();
+				createMatrixThird();
 				document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
 				document.getElementById("answerHeadline").style.display="inline-block";
+				document.getElementById("display").style.display="inline-block";
 			}
 		} 
 		else if(invertibleMatrixSize === 3) {
-			var determinant = determinantFor3();
+			var determinant = determinantForThird();
 			console.log(determinant);
 			if(determinant === 0) {
 				console.log("ei saa arvutada, 0-ga jagamine");
 				alert("Ei saa arvutada, 0-ga jagamine");
 			} else {
 				invertibleMatrix(determinant);
-				createMatrix3();
+				createMatrixThird();
 				document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
 				document.getElementById("answerHeadline").style.display="inline-block";
+				document.getElementById("display").style.display="inline-block";
 			}
 		} else if(invertibleMatrixSize === 4) {
-			var determinant = determinantFor4();
+			var determinant = determinantForFourth();
 			console.log(determinant);
 			if(determinant === 0) {
 				console.log("ei saa arvutada, 0-ga jagamine");
 				alert("Ei saa arvutada, 0-ga jagamine");
 			} else {
 				invertibleMatrix(determinant);
-				createMatrix3();
+				createMatrixThird();
 				document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
 				document.getElementById("answerHeadline").style.display="inline-block";
+				document.getElementById("display").style.display="inline-block";
 			}
 		} else if(invertibleMatrixSize === 5) {
-			var determinant = determinantFor5();
+			var determinant = determinantForFifth();
 			console.log(determinant);
 			if(determinant === 0) {
 				console.log("ei saa arvutada, 0-ga jagamine");
 				alert("Ei saa arvutada, 0-ga jagamine");
 			} else {
 				invertibleMatrix(determinant);
-				createMatrix3();
+				createMatrixThird();
 				document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
 				document.getElementById("answerHeadline").style.display="inline-block";
+				document.getElementById("display").style.display="inline-block";
 			}
 		}	
 		//calculateInvertibleMatrix();
-		//createMatrix3();
+		//createMatrixThird();
 		
 		document.getElementById("mistakeNotification").style.display = "none";
 		document.getElementById("matrixDeterminantAnswer").style.display="inline-block";
@@ -886,7 +888,7 @@ function validate(evt) {
     }
 }
 
-function matrix1MathJax(){
+function matrixFirstMathJax(){
 	var a = invMatrixPreAnswer();
 	var answerString = "";
 	var finalString = "";
@@ -921,7 +923,7 @@ return finalString;
 
 }
 
-function createMatrix3() {
+function createMatrixThird() {
 	var mathDiv = document.getElementById('math');
     var displayDiv = document.getElementById('display');
 
@@ -929,19 +931,19 @@ function createMatrix3() {
     MathJax.Hub.Queue(function() {
 		var math = MathJax.Hub.getAllJax("MathDiv")[0];
 		var l = finalMatrixTexFormat();
-		var i = matrix1MathJax();
-		var j = matrix2MathJax();
-		var f = matrix3MathJax();
+		var i = matrixFirstMathJax();
+		var j = matrixSecondMathJax();
+		var f = matrixThreeMathJax();
 		var m = determinantForArray();
 		MathJax.Hub.Queue(["Text", math, m+"\\begin{bmatrix}"+ l +"\\end{bmatrix}^T ="+m+"\\begin{bmatrix}"+i+"\\end{bmatrix}^T = "+m+"\\begin{bmatrix}"+j+"\\end{bmatrix} = \\begin{bmatrix}"+f+"\\end{bmatrix}"]);// = \\being{bmatrix}"+f+"\\end{bmatrix}"
         //\\begin{bmatrix} {"+i+"}&{"+j+"}&0\\\\0&{"+i+"}&{"+j+"}\\\\{"+j+"}&0&{"+i+"}\\\end{bmatrix}
 		MathJax.Hub.Queue(function() {
-		displayDiv.innerHTML = mathDiv.innerHTML;
+			displayDiv.innerHTML = mathDiv.innerHTML;
 		});
 	});
 }
 
-function matrix2MathJax(){
+function matrixSecondMathJax(){
 	var a = invMatrixTransposed();
 	var answerString = "";
 	var finalString = "";
@@ -957,9 +959,7 @@ function matrix2MathJax(){
 			if(String.charAt(minuspos)==="-"){	
 				b = "("+ b + ")&";
 				answerString += b;
-			}
-			
-			else{
+			} else{
 				answerString += b;
 				answerString += "&";
 			}
@@ -976,7 +976,7 @@ return finalString;
 
 }
 
-function matrix3MathJax(){
+function matrixThreeMathJax(){
 	var a = invMatrixFinalAnswerArray;
 	var answerString = "";
 	var finalString = "";
@@ -993,16 +993,16 @@ function matrix3MathJax(){
 			});
 			var num = b;
 			var n = num.toString();
-			var minuspos1 = n.indexOf("-");
-			if(abc.d ===1 && n.charAt(minuspos1)==="-"){
+			var minusposOne = n.indexOf("-");
+			if(abc.d ===1 && n.charAt(minusposOne)==="-"){
 				abc.n = "(-" + abc.n+")&";
 				finalString += abc.n;
 			}
-			if(abc.d === 1 && n.charAt(minuspos1)!=="-") {
+			if(abc.d === 1 && n.charAt(minusposOne)!=="-") {
 				finalString += abc.n + "&";
 			}
 
-			if(n.charAt(minuspos1)==="-" && abc.d !== 1){
+			if(n.charAt(minusposOne)==="-" && abc.d !== 1){
 					reduction = reduce(abc.n,abc.d);
 					start = "\\frac {" + abc.n + "}";
 					var end = "{" + abc.d + "}"
@@ -1019,9 +1019,6 @@ function matrix3MathJax(){
 				var method = numerator + denominator + "&";
 				finalString += method;
 			}
-
-	
-
 		}
 		str = finalString.length;
 		finalString = (finalString.slice(0,str-1));
@@ -1052,11 +1049,11 @@ function determinantForArray(){
 	var pos = str.indexOf("/");
 	var minuspos = str.indexOf("-");
 	if(a.charAt(minuspos)=== "-" && a.charAt(pos)==="/"){
-		var str2 = str.replace("-","");
-		var start = str2.slice(0,pos-1);
+		var strTwo = str.replace("-","");
+		var start = strTwo.slice(0,pos-1);
 		start = "\\frac {" + start + "}";
 		var end = a;
-		var afterSlash = str2.substr(str.indexOf("/")+1);
+		var afterSlash = strTwo.substr(str.indexOf("/")+1);
 		end = "{" + afterSlash + "}";
 		var fractionBracketStart = "(-";
 		var fractionBracketEnd = ")";
@@ -1092,8 +1089,8 @@ function finalMatrixTexFormat(){
 					var pos = String.indexOf("/");
 					var minuspos = String.indexOf("-");
 					if(String.charAt(minuspos)=== "-" && String.charAt(pos)==="/"){
-						var str2 = String.replace("-","");
-						var start = str2.slice(0,pos-1);
+						var strTwo = String.replace("-","");
+						var start = strTwo.slice(0,pos-1);
 						start = "\\frac {" + start + "}";
 						var end = a;
 						var afterSlash = str.substr(str.indexOf("/")+1);
