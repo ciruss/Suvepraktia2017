@@ -870,6 +870,7 @@ function createMatrix3() {
 		var j = matrix2MathJax();
 		var f = matrix3MathJax();
 		var m = determinantForArray();
+		console.log(m)
 		MathJax.Hub.Queue(["Text", math, m+"\\begin{bmatrix}"+ l +"\\end{bmatrix}^T ="+m+"\\begin{bmatrix}"+i+"\\end{bmatrix}^T = "+m+"\\begin{bmatrix}"+j+"\\end{bmatrix} = \\begin{bmatrix}"+f+"\\end{bmatrix}"]);// = \\being{bmatrix}"+f+"\\end{bmatrix}"
         //\\begin{bmatrix} {"+i+"}&{"+j+"}&0\\\\0&{"+i+"}&{"+j+"}\\\\{"+j+"}&0&{"+i+"}\\\end{bmatrix}
 		MathJax.Hub.Queue(function() {
@@ -988,7 +989,6 @@ function determinantForArray(){
 	var str = a;
 	var pos = str.indexOf("/");
 	var minuspos = str.indexOf("-");
-	if(a.charAt(minuspos)=== "-" && a.charAt(pos)==="/"){
 		var str2 = str.replace("-","");
 		var start = str2.slice(0,pos-1);
 		start = "\\frac {" + start + "}";
@@ -999,7 +999,6 @@ function determinantForArray(){
 		var fractionBracketEnd = ")";
 		var fractionBracket = fractionBracketStart + start + end + fractionBracketEnd;
 		answerString += fractionBracket;
-	}
 finalString += answerString;
 return finalString;
 }
