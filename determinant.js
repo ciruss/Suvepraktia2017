@@ -20,6 +20,7 @@ function generateMatrixForDeterminant() {
     document.getElementById("mistakeNotification").style.display = "none";
     document.getElementById("math").style.display = "none"
     document.getElementById("determinantTable").style.display = "none"
+	document.getElementById("showCalculations").style.display = "none";
 
     matrixSize = document.getElementById("determinant").value;
     var matrixForDeterminant = document.getElementById("matrixForDeterminant");
@@ -641,10 +642,10 @@ function displayTable() {
 
     var x = document.getElementById('determinantTable');
     if (x.style.display === 'none') {
-        document.getElementById("showCalculations").innerHTML = "peida tabel";
+        document.getElementById("showCalculations").innerHTML = "Peida tabel";
         x.style.display = 'block';
     } else {
-        document.getElementById("showCalculations").innerHTML = "kuva vahetulemused";
+        document.getElementById("showCalculations").innerHTML = "Kuva vahetulemused";
         x.style.display = 'none';
     }
 
