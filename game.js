@@ -32,16 +32,18 @@ var b = [
 function setPlayerName() {
 	playerName = prompt("Sisesta mängija nimi");
 	if (playerName === null) {
+		document.getElementById("checkAndRestartRandom").style.display = "none";
 		return;
 	} else if (playerName === "") {
 		playerName = "Nimetu";
+		document.getElementById("checkAndRestartRandom").style.display = "none";
 	} else {
 		document.getElementById("playerName").innerHTML = "NIMI: " + playerName;
 		startTimer(600);
 		//generateExerciseMatrix();
 		generateRandomExerciseMatrix();
+		document.getElementById("checkAndRestartRandom").style.display = "inline";
 	}
-	document.getElementById("checkAndRestartRandom").style.display = "inline";
 }
 
 // **** ÜLDINE FUNKTSIOON MAATRIKSITE GENEREERIMISEKS ****
@@ -233,8 +235,8 @@ function createExerciseMatrixPreAnswer() {
 			cell.setAttribute("id", "Ed" + rowId + colId);
 			cell.setAttribute("class", "matrixAnswerInput");
 			cell.setAttribute("type", "text");
-			cell.setAttribute("onkeypress", "validate(event)");
-			cell.setAttribute("onkeypress", "return validate( event)");
+			//cell.setAttribute("onkeypress", "validate(event)");
+			//cell.setAttribute("onkeypress", "return validate( event)");
 			//cell.setAttribute("oninput", "checkLength(2,this)");
 			row.appendChild(cell);
 		}
@@ -354,12 +356,9 @@ function checkMatrixFinalAnswers() {
 
 // **** KONTROLLIB VAHEMAATRIKSITE VASTUSEID ****
 function checkMatrixPreAnswers() {
-
 	var c = 1;
-
 	for (var rowId = 1; rowId <= EmFirstX; rowId++) {
 		for (var colId = 1; colId <= EmSecondY; colId++) {
-
 			var matrixAnswer = document.getElementById("Ed" + rowId + colId);
 			var matrixAnswerString = "";
 
@@ -370,14 +369,23 @@ function checkMatrixPreAnswers() {
 				c++;
 			}
 			var strLength = matrixAnswerString.length;
-			var matrixCellValue = matrixAnswerString.slice(0, strLength - 3);
-			var matrixInputCell = matrixAnswer.value;
+			matrixCellValuePreAnswers = matrixAnswerString.slice(0, strLength - 3);
+			console.log("matrixCellValuePreAnswers: "+matrixCellValuePreAnswers);
+			
+			var test = eval(matrixCellValuePreAnswers);
+			console.log("test: " +test);
+			//console.log("matrixCellValue: "+matrixCellValue);
+			var matrixInputCell = eval(matrixAnswer.value);
+			//console.log("matrixInputCell: "+matrixInputCell);
 			c = 1;
 
-			if (matrixInputCell === matrixCellValue) {
+			if (matrixInputCell === test) {
 				matrixAnswer.style.color = "green";
+				//answerCounter += 1
+				//score += 1
 			} else {
 				matrixAnswer.style.color = "red";
+				//errorCount += 1;
 				matrixPreAnswerErrors++;
 			}
 		}
