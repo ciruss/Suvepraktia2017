@@ -664,19 +664,3 @@ function highlight(aID, bID, cID) {
     });
 
 }
-
-//PÄRAST KINDLASTI VÄLJA KOMENTEERIDA
-//täidab testimiseks väljad
-document.addEventListener("keypress", function(e) {
-    if (e.key === "f") {
-        fill()
-    }
-})
-
-function fill() {
-    mistakeA = true;
-    mistakeB = true;
-    document.querySelectorAll("tr > *").forEach(function(element) {
-        element.value = Math.floor(Math.random() * 300)
-    })
-}
