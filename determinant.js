@@ -33,6 +33,7 @@ function generateMatrixForDeterminant() {
 
     document.getElementById("mistakeNotification").style.display = "none";
     document.getElementById("math").style.display = "none"
+	document.getElementById("showCalculations").innerHTML = "Kuva vahetulemused";
     document.getElementById("determinantTable").style.display = "none"
 	document.getElementById("showCalculations").style.display = "none";
 
