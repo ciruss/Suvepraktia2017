@@ -493,16 +493,3 @@ function tick() {
 		clearInterval(ticker)
 	}
 }
-
-// **** KONTROLLIB SISESTUST *****
-function validate(evt) {
-	key = evt.key;
-	var allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "-", "*", "+", "Tab", "Backspace"];
-	if (allowed.indexOf(evt.key) == -1) {
-		evt.preventDefault();
-	}
-	// PRAEGUNE
-	if (evt.key === "/" && evt.target.value.indexOf('/') != -1) {
-		evt.preventDefault();
-	}
-}
