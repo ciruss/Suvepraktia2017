@@ -1,0 +1,233 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: #FFFFFF;
+}
+
+#wrapper {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    min-height: 100%;
+    background-color: #f3f3f3;
+    font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif;
+}
+
+#header {
+    color: #222221;
+    background-color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+#textAndIcon {
+    text-align: left;
+    background-color: #FFFFFF;
+    font-size: 45px;
+    line-height: 60px;
+    font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif;
+    font-variant: normal;
+}
+
+img {
+    height: 50px;
+    width: 50px;
+    float: left;
+    margin: 5px;
+}
+
+.topnav {
+    background-color: #b71234;
+    color: #FFFFFF;
+    height: 60px;
+    border-radius: 10px 10px 0px 0px;
+    font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif;
+    font-style: italic;
+}
+
+div.topnav>::after {
+    position: absolute;
+    margin: 11px;
+    content: url(bg02.png);
+}
+
+div.topnav>:last-child::after {
+    display: none;
+}
+
+.topnav a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 30px;
+    line-height: 60px;
+    display: inline-block;
+    height: 60px;
+    margin-left: 10px;
+    padding: 0px 10px;
+}
+
+.topnav a:hover {
+    color: #222221;
+}
+
+.topnav a:active {
+    background-color: #b71234;
+    color: white;
+}
+
+#content {
+    border-radius: 0px 0px 10px 10px;
+    padding-bottom: 50px;
+}
+
+#selectFormSize {
+    color: #222221;
+    font-size: 20px;
+}
+
+#matrixForInvertibleM tbody tr>* {
+    border: 2px solid #222221;
+    margin: 2px;
+}
+
+#content #instructions {
+    padding: 10px;
+    font-size: 20px;
+    text-align: left;
+    margin: 0 auto;
+    padding-top: 20px;
+    width: 50%;
+    color: #222221;
+}
+
+#left {
+    margin: auto 0;
+    text-align: center;
+    padding: 0 10px;
+}
+
+#right {
+    margin: auto 0;
+    text-align: center;
+    padding: 0 10px;
+    font-size: 30px;
+}
+
+th,
+td {
+    text-align: left;
+}
+
+th {
+    background-color: #222221;
+    color: #ffffff;
+    border-radius: 6px;
+    padding: 8px;
+}
+
+#matrixDeterminantAnswer {
+    color: #222221;
+}
+
+input {
+    height: 30px;
+    width: 30px;
+}
+
+#answerHeadline {
+    color: #222221;
+    font-size: 20px;
+    display: none;
+}
+
+table {
+    display: inline;
+}
+
+#display {
+    color: #222221;
+    overflow: auto;
+    margin: 10px 15px;
+    padding: 20px;
+}
+
+#mathContainer {
+    color: #222221;
+    overflow: auto;
+    margin: 10px 15px;
+    padding: 20px;
+}
+
+#math {
+    display: none;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-color: #b71234;
+    color: #FFFFFF;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+}
+
+.btn {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.20), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+    background-color: #b71234;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    display: inline-block;
+    font-size: 15px;
+    margin: 10px;
+    overflow-wrap: break-word;
+    white-space: normal;
+    height: 40px;
+    font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.btn:hover,
+button:hover {
+    background-color: #980a27;
+    color: white;
+}
+
+@media only screen and (max-width: 1365px) {
+    .topnav a {
+        font-size: 25px;
+    }
+    #content #instructions {
+        width: 70%;
+    }
+    #wrapper {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 1919px) {
+    #content #instructions {
+        width: 70%;
+    }
+    #wrapper {
+        width: 80%;
+    }
+}
+
+@media (max-width: 1364px) {
+    #wrapper {
+        width: 99%;
+    }
+}

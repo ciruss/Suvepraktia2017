@@ -1,0 +1,245 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: #FFFFFF;
+}
+
+#wrapper {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 40px;
+    position: relative;
+    min-height: 100%;
+    background-color: #f3f3f3;
+    font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif;
+}
+
+#header {
+    color: #222221;
+    background-color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+#textAndIcon {
+    text-align: left;
+    background-color: #FFFFFF;
+    font-size: 45px;
+    line-height: 60px;
+    font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif;
+    font-variant: normal;
+}
+
+img {
+    height: 50px;
+    width: 50px;
+    float: left;
+    margin: 5px;
+}
+
+.topnav {
+    background-color: #b71234;
+    color: #FFFFFF;
+    height: 60px;
+    border-radius: 10px 10px 0px 0px;
+    font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif;
+    font-style: italic;
+}
+
+div.topnav>::after {
+    position: absolute;
+    margin: 11px;
+    content: url(bg02.png);
+}
+
+div.topnav>:last-child::after {
+    display: none;
+}
+
+.topnav a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 30px;
+    line-height: 60px;
+    display: inline-block;
+    height: 60px;
+    margin-left: 10px;
+    padding: 0px 10px;
+}
+
+.topnav a:hover {
+    color: #222221;
+}
+
+.topnav a:active {
+    background-color: #b71234;
+    color: white;
+}
+
+#content {
+    border-radius: 0px 0px 10px 10px;
+}
+
+#content #instructions {
+    padding: 10px;
+    font-size: 20px;
+    text-align: left;
+    margin: 0 auto;
+    padding-top: 20px;
+    width: 50%;
+    color: #222221;
+}
+
+#content #select {
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+#content #select #selectors {
+    display: flex;
+    justify-content: center;
+}
+
+#content #select #selectors select {
+    display: flex;
+    justify-content: column;
+    margin: 2px;
+}
+
+#left {
+    margin: auto 0;
+    text-align: center;
+    padding: 0 10px;
+}
+
+#right {
+    margin: auto 0;
+    text-align: center;
+    padding: 0 10px;
+}
+
+input {
+    height: 30px;
+    width: 30px;
+}
+
+table,
+#matrixFirstContainer,
+#matrixSecondContainer {
+    display: inline;
+}
+
+#matrixFirst tbody tr>* {
+    margin: 2px;
+    border: 2px solid #222221;
+}
+
+#matrixSecond tbody tr>* {
+    margin: 2px;
+    border: 2px solid #222221;
+}
+
+#highlight {
+    display: none;
+}
+
+#highlighterText {
+    display: none;
+    color: #222221;
+    font-size: 20px;
+}
+
+#math {
+    overflow: auto;
+    overflow-y: hidden;
+    margin: 10px 15px;
+    padding: 20px;
+    color: #222221;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-color: #b71234;
+    color: #FFFFFF;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+}
+
+#display {
+    display: none;
+}
+
+#buttons>* {
+    min-width: 90px;
+    ;
+}
+
+.btn {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.20), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+    background-color: #b71234;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    display: inline-block;
+    font-size: 15px;
+    margin: 10px;
+    overflow-wrap: break-word;
+    white-space: normal;
+    height: 40px;
+    font-family: TimesNewRoman, Times New Roman, Times, Baskerville, Georgia, serif;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+#selectMatrices .btn {
+    margin: 30px;
+}
+
+.btn:hover,
+button:hover {
+    background-color: #980a27;
+    color: white;
+}
+
+#highlight {
+    display: none;
+}
+
+@media only screen and (max-width: 1365px) {
+    .topnav a {
+        font-size: 25px;
+    }
+    #content #instructions {
+        width: 70%;
+    }
+    #wrapper {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 1919px) {
+    #content #instructions {
+        width: 70%;
+    }
+    #wrapper {
+        width: 80%;
+    }
+}
+
+@media (max-width: 1364px) {
+    #wrapper {
+        width: 99%;
+    }
+}

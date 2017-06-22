@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>harjutusmäng</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="game.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/3.13.2/math.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="game.js"></script>
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <div id="textAndIcon">
+                <div id="icon"> <img src="icon.png"> </div>
+                <div id="text">MATEMAATIKA</div>
+
+            </div>
+            <div class="topnav">
+                <!--VIIDE: https://www.w3schools.com/howto/howto_js_topnav.asp -->
+                <a class="active" href="game.html">Harjutusmäng</a>
+                <a href="index.html">Korrutamine</a>
+                <a href="determinant.html">Determinandid</a>
+                <a href="invertiblematrix.html">Pöördmaatriks</a>
+            </div>
+        </div>
+        <!-- MAATRIKSITE MÄNG -->
+        <div id="content">
+            <div id="instructions">
+                <p>
+                    <h3>Maatriksite harjutamine</h3>
+                    Proovi 10 minuti jooksul õigesti lahendada nii palju maatrikseid kui võimalik.Vajuta "Alusta", sisesta oma nimi, ning asu lahtreid täitma.
+                    <br>Õigeks lahenduseks tuleb täita nii vahearvutuste kastid kui ka lõppvastuse kast.
+                </p>
+            </div>
+
+            <div id="gameBtns">
+                <button id="beginGame" class="btn" type="button" onclick="setPlayerName()">Alusta</button>
+                <button id="checkAndRestartRandom" class="btn" type="button" onclick="checkMatrixAnswersRandom()">Kontrolli vastust</button>
+                <!-- <button id="justForDevs" type="button" class="btn" onclick="justForDevsMatrixAnswers()">Täida vastused</button> -->
+            </div>
+            <div id="main">
+                <div class="input">
+                    <div id="exerciseMatrixFirstContainer" class="resp">
+                        <table id="exerciseMatrixFirst"></table>
+                    </div>
+                    <div id="exerciseMatrixSecondContainer" class="resp">
+                        <table id="exerciseMatrixSecond"></table>
+                    </div>
+
+                    <div id="exerciseMatrixPreAnswerContainer" class="resp">
+                        <table id="exerciseMatrixPreAnswer"></table>
+                    </div>
+                    <div id="exerciseMatrixAnswerContainer" class="resp">
+                        <table id="exerciseMatrixAnswer"></table>
+                    </div>
+                </div>
+            </div>
+            <!--RANDOMI VASTUSE KONTROLLIMINE-->
+        </div>
+        <div id="footer">
+            <div id="gameStats">
+                <div id="playerName">NIMI:</div>
+                <div id="stopper">AEG: 600</div>
+                <div id="wrongAnswers">VIGU: 0</div>
+                <div id="TotalSum">MAATRIKSEID KOKKU: 0</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
